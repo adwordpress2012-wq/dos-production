@@ -8,20 +8,20 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "DirectiveOS — AI-Powered Real Estate Platform",
+  title: "DirectiveOS — Done-For-You AI Business Systems",
   description:
-    "DirectiveOS is being rebuilt. The AI-powered lead intelligence and team command center for real estate professionals is back soon.",
+    "DirectiveOS delivers done-for-you AI business systems including website rebuilds, Micah AI Receptionist, COS, BOS, automation, and managed hosting.",
   openGraph: {
-    title: "DirectiveOS — Coming Back Soon",
+    title: "DirectiveOS — Done-For-You AI Business Systems",
     description:
-      "We're upgrading our infrastructure. The AI real estate platform you rely on is back soon, better than ever.",
+      "Website rebuilds, Micah AI Receptionist, COS, BOS, automation, and hosting delivered through the DOS ecosystem.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DirectiveOS — Coming Back Soon",
+    title: "DirectiveOS — Done-For-You AI Business Systems",
     description:
-      "We're upgrading our infrastructure. The AI real estate platform you rely on is back soon, better than ever.",
+      "Done-for-you AI business systems by DOS for communication, bookings, automation, and managed growth.",
   },
 };
 
