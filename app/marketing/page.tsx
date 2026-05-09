@@ -27,6 +27,14 @@ const TILES = [
     tone: "fuchsia" as const,
   },
   {
+    href: "/marketing/saas-quote-builder",
+    title: "Website SaaS Quote Builder",
+    description:
+      "Interactive internal builder for client-ready Website + SaaS proposals, recurring plans, overages, and hosting.",
+    icon: <ArrowRight className="h-5 w-5" />,
+    tone: "violet" as const,
+  },
+  {
     href: "/micah",
     title: "Meet Micah",
     description: "Your AI receptionist. Answers calls 24/7, books jobs, and routes urgent enquiries.",

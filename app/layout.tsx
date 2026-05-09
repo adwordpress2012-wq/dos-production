@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import BackgroundFx from "./components/BackgroundFx";
+import ChromeGate from "./components/ChromeGate";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -60,10 +61,14 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${geist.variable} h-full antialiased`}>
       <body className="min-h-full text-ink">
-        <BackgroundFx />
-        <Nav />
+        <ChromeGate>
+          <BackgroundFx />
+          <Nav />
+        </ChromeGate>
         {children}
-        <Footer />
+        <ChromeGate>
+          <Footer />
+        </ChromeGate>
       </body>
     </html>
   );
