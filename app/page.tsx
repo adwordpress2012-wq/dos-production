@@ -17,6 +17,9 @@ import Hero from "./components/Hero";
 import GlowCard, { GlowIcon } from "./components/GlowCard";
 import SectionHeader from "./components/SectionHeader";
 
+const MICAH_PHONE_DISPLAY = "02 5950 6382";
+const MICAH_PHONE_LINK = "tel:0259506382";
+
 const PRODUCT_PILLARS = [
   {
     icon: <Globe className="h-5 w-5" />,
@@ -56,6 +59,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TryMicahVoice />
       <WhatDosDoes />
       <WebsiteRebuildsSection />
       <MicahSection />
@@ -66,6 +70,137 @@ export default function Home() {
       <CommandCentrePreview />
       <ContactSection />
     </>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────── */
+
+function TryMicahVoice() {
+  return (
+    <section id="try-micah-voice" className="relative py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="relative overflow-hidden rounded-3xl glass-strong p-8 sm:p-12 ring-glow">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-24 -left-16 h-72 w-[480px] rounded-full bg-fuchsia-500/25 blur-[120px]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-[480px] rounded-full bg-cyan-400/20 blur-[120px]"
+          />
+
+          <div className="relative grid items-center gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-400/10 px-3 py-1 text-[10px] font-semibold tracking-[0.28em] uppercase text-fuchsia-200">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                </span>
+                Live AI Voice Demo
+              </div>
+
+              <h2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
+                Try <span className="text-gradient-neon">Micah Voice</span> right now.
+              </h2>
+
+              <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
+                Pick up your phone, dial the number below, and hear your future AI receptionist
+                answer the way she would for your business. No signup, no setup &mdash; just a real
+                Australian phone number connected to a live Micah agent.
+              </p>
+
+              <ul className="mt-7 grid gap-x-6 gap-y-3 text-sm text-ink-muted sm:grid-cols-2">
+                {[
+                  "Real Australian phone number",
+                  "Picks up on the first ring",
+                  "Books, qualifies, hands over",
+                  "Speaks like a real person",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                <a
+                  href={MICAH_PHONE_LINK}
+                  className="btn-neon inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+                  aria-label={`Call Micah now on ${MICAH_PHONE_DISPLAY}`}
+                >
+                  <PhoneCall className="h-4 w-4" />
+                  Call Micah Now
+                  <span className="font-mono tracking-wider">{MICAH_PHONE_DISPLAY}</span>
+                </a>
+                <Link
+                  href="/micah"
+                  className="btn-ghost inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium text-white"
+                >
+                  How Micah works
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <DialerCard />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DialerCard() {
+  const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"];
+  return (
+    <div className="relative mx-auto max-w-sm">
+      <div
+        aria-hidden
+        className="absolute -inset-8 rounded-[36px] bg-gradient-to-br from-fuchsia-500/30 via-violet-500/15 to-cyan-400/20 blur-2xl opacity-70"
+      />
+      <div className="relative glass-strong rounded-[28px] p-3 ring-glow">
+        <div className="rounded-2xl bg-[#06080f] border border-white/5 p-5">
+          <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-ink-dim">
+            <span>Dial</span>
+            <span className="inline-flex items-center gap-1 text-emerald-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              live
+            </span>
+          </div>
+          <div className="mt-5 text-center">
+            <div className="font-mono text-2xl tracking-[0.18em] text-white">
+              {MICAH_PHONE_DISPLAY}
+            </div>
+            <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-ink-muted">
+              Micah · AI Receptionist
+            </div>
+          </div>
+
+          <div className="mt-5 grid grid-cols-3 gap-2">
+            {keys.map((k) => (
+              <div
+                key={k}
+                className="flex h-12 items-center justify-center rounded-xl border border-white/5 bg-white/[0.03] text-base font-medium text-white/90"
+              >
+                {k}
+              </div>
+            ))}
+          </div>
+
+          <a
+            href={MICAH_PHONE_LINK}
+            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-emerald-400 via-emerald-500 to-cyan-500 px-5 py-3 text-sm font-semibold text-[#04060c] shadow-[0_0_30px_-6px_rgba(52,247,193,0.7)] transition hover:brightness-110"
+            aria-label={`Call Micah now on ${MICAH_PHONE_DISPLAY}`}
+          >
+            <PhoneCall className="h-4 w-4" />
+            Call Micah
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, PhoneCall, ShieldCheck, Sparkles, Zap } from "lucide-react";
+
+const MICAH_PHONE_DISPLAY = "02 5950 6382";
+const MICAH_PHONE_LINK = "tel:0259506382";
 
 export default function Hero() {
   return (
@@ -46,6 +49,35 @@ export default function Hero() {
                 Start Onboarding
               </Link>
             </div>
+
+            <a
+              href={MICAH_PHONE_LINK}
+              className="group relative mt-8 inline-flex items-center gap-4 rounded-2xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-500/10 via-violet-500/10 to-cyan-400/10 px-5 py-4 text-left ring-glow-soft transition hover:border-fuchsia-400/60 hover:from-fuchsia-500/20 hover:via-violet-500/20 hover:to-cyan-400/20"
+              aria-label={`Call Micah now on ${MICAH_PHONE_DISPLAY}`}
+            >
+              <span
+                aria-hidden
+                className="absolute -inset-px rounded-2xl bg-gradient-to-r from-fuchsia-500/30 via-violet-500/30 to-cyan-400/30 opacity-0 blur-md transition group-hover:opacity-60"
+              />
+              <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 text-white shadow-[0_0_20px_-4px_rgba(168,85,247,0.7)]">
+                <PhoneCall className="h-5 w-5" />
+                <span className="absolute -right-1 -top-1 flex h-3 w-3">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-3 w-3 rounded-full border-2 border-[#04060c] bg-emerald-400" />
+                </span>
+              </span>
+              <span className="relative flex flex-col">
+                <span className="text-[10px] font-semibold tracking-[0.28em] uppercase text-fuchsia-300">
+                  Live AI Voice Demo
+                </span>
+                <span className="text-base sm:text-lg font-semibold text-white">
+                  Call Micah Now
+                </span>
+                <span className="font-mono text-sm tracking-wider text-cyan-200">
+                  {MICAH_PHONE_DISPLAY}
+                </span>
+              </span>
+            </a>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-ink-muted">
               <span className="inline-flex items-center gap-1.5">
