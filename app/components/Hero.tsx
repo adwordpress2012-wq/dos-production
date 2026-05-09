@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, PhoneCall, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, MessageSquare, PhoneCall, ShieldCheck, Sparkles, Zap } from "lucide-react";
 
 const MICAH_PHONE_DISPLAY = "02 5950 6382";
 const MICAH_PHONE_LINK = "tel:0259506382";
+const COS_DEMO_URL = "https://chatos.com.au";
 
 export default function Hero() {
   return (
@@ -15,12 +16,12 @@ export default function Hero() {
           />
 
           <div className="relative flex flex-col items-center text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 backdrop-blur px-3.5 py-1.5 text-xs font-medium text-ink-muted">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 backdrop-blur px-3.5 py-1.5 text-xs font-semibold text-emerald-200 shadow-[0_0_28px_-10px_rgba(52,247,193,0.85)]">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="tracking-[0.16em] uppercase">Done-For-You AI Business Systems</span>
+              <span className="tracking-[0.16em] uppercase">LIVE AI VOICE + CHAT DEMO</span>
             </div>
 
             <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
@@ -30,54 +31,69 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-2xl leading-relaxed">
-              Websites, AI receptionists, booking systems, automation and managed business
-              infrastructure for modern Australian businesses.
+              Experience Micah live — call our AI receptionist or try the website chat demo powered by COS.
             </p>
 
-            <div className="mt-9 flex flex-col sm:flex-row items-center gap-3">
+            <div className="mt-9 grid w-full max-w-2xl gap-3 sm:grid-cols-2">
+              <a
+                href={MICAH_PHONE_LINK}
+                className="group relative overflow-hidden rounded-2xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-500/20 via-violet-500/20 to-cyan-400/20 px-5 py-4 text-left ring-glow-soft transition hover:border-fuchsia-400/60 hover:from-fuchsia-500/30 hover:via-violet-500/30 hover:to-cyan-400/30"
+                aria-label={`Call Micah now on ${MICAH_PHONE_DISPLAY}`}
+              >
+                <span
+                  aria-hidden
+                  className="absolute -inset-px rounded-2xl bg-gradient-to-r from-fuchsia-500/30 via-violet-500/30 to-cyan-400/30 opacity-0 blur-md transition group-hover:opacity-70"
+                />
+                <span className="relative flex items-center gap-3">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 text-white shadow-[0_0_20px_-4px_rgba(168,85,247,0.7)]">
+                    <PhoneCall className="h-5 w-5" />
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="text-base font-semibold text-white">Call Micah Now</span>
+                    <span className="font-mono text-sm tracking-wider text-cyan-200">
+                      {MICAH_PHONE_DISPLAY}
+                    </span>
+                  </span>
+                </span>
+              </a>
+              <a
+                href={COS_DEMO_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="group relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/15 via-emerald-400/10 to-violet-500/15 px-5 py-4 text-left ring-glow-soft transition hover:border-cyan-300/70 hover:from-cyan-400/25 hover:via-emerald-400/20 hover:to-violet-500/25"
+              >
+                <span
+                  aria-hidden
+                  className="absolute -inset-px rounded-2xl bg-gradient-to-r from-cyan-400/30 via-emerald-400/20 to-violet-500/30 opacity-0 blur-md transition group-hover:opacity-70"
+                />
+                <span className="relative flex items-center gap-3">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 via-emerald-400 to-violet-500 text-white shadow-[0_0_20px_-4px_rgba(34,211,238,0.75)]">
+                    <MessageSquare className="h-5 w-5" />
+                  </span>
+                  <span className="flex flex-col">
+                    <span className="inline-flex items-center gap-1.5 text-base font-semibold text-white">
+                      Try Micah Chat Demo <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                    </span>
+                    <span className="text-sm font-medium text-emerald-200">Powered by COS</span>
+                  </span>
+                </span>
+              </a>
+            </div>
+
+            <div className="mt-5 flex flex-col sm:flex-row items-center gap-3">
               <Link
                 href="/pricing"
-                className="btn-neon inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+                className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
               >
                 See Pricing
-                <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/onboarding"
-                className="btn-ghost inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white"
+                className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
               >
                 Start Onboarding
               </Link>
             </div>
-
-            <a
-              href={MICAH_PHONE_LINK}
-              className="group relative mt-8 inline-flex items-center gap-4 rounded-2xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-500/10 via-violet-500/10 to-cyan-400/10 px-5 py-4 text-left ring-glow-soft transition hover:border-fuchsia-400/60 hover:from-fuchsia-500/20 hover:via-violet-500/20 hover:to-cyan-400/20"
-              aria-label={`Call Micah now on ${MICAH_PHONE_DISPLAY}`}
-            >
-              <span
-                aria-hidden
-                className="absolute -inset-px rounded-2xl bg-gradient-to-r from-fuchsia-500/30 via-violet-500/30 to-cyan-400/30 opacity-0 blur-md transition group-hover:opacity-60"
-              />
-              <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 text-white shadow-[0_0_20px_-4px_rgba(168,85,247,0.7)]">
-                <PhoneCall className="h-5 w-5" />
-                <span className="absolute -right-1 -top-1 flex h-3 w-3">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-3 w-3 rounded-full border-2 border-[#04060c] bg-emerald-400" />
-                </span>
-              </span>
-              <span className="relative flex flex-col">
-                <span className="text-[10px] font-semibold tracking-[0.28em] uppercase text-fuchsia-300">
-                  Live AI Voice Demo
-                </span>
-                <span className="text-base sm:text-lg font-semibold text-white">
-                  Call Micah Now
-                </span>
-                <span className="font-mono text-sm tracking-wider text-cyan-200">
-                  {MICAH_PHONE_DISPLAY}
-                </span>
-              </span>
-            </a>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs text-ink-muted">
               <span className="inline-flex items-center gap-1.5">
