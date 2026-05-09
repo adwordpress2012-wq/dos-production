@@ -12,6 +12,7 @@ import {
   RefreshCcw,
   Sparkles,
   TrendingUp,
+  Users,
 } from "lucide-react";
 import {
   getSupabaseAdmin,
@@ -120,6 +121,12 @@ export default async function Page() {
             </p>
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              href="/admin/clients"
+              className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white"
+            >
+              <Users className="h-3.5 w-3.5" /> Clients
+            </Link>
             <Link
               href="/onboarding"
               className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white"

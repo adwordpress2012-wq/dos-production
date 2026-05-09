@@ -61,12 +61,41 @@ create trigger leads_set_updated_at
   before update on public.leads
   for each row execute function public.set_updated_at();
 
+-- ── business_profiles ────────────────────────────────────────────────────────
+-- Client directory for Command Centre admin (/admin/clients). Distinct from tenants
+-- (billing/subdomain) — link manually if needed.
+create table if not exists public.business_profiles (
+  id              uuid primary key default gen_random_uuid(),
+  client_id       text not null unique,
+  business_name   text not null,
+  email           text not null,
+  phone           text,
+  status          text not null default 'active'
+                    check (status in ('active', 'inactive', 'pending', 'archived')),
+  created_at      timestamptz not null default now(),
+  updated_at      timestamptz not null default now()
+);
+
+create index if not exists business_profiles_email_idx on public.business_profiles (lower(email));
+create index if not exists business_profiles_created_idx on public.business_profiles (created_at desc);
+
+drop trigger if exists business_profiles_set_updated_at on public.business_profiles;
+create trigger business_profiles_set_updated_at
+  before update on public.business_profiles
+  for each row execute function public.set_updated_at();
+
 -- ── Row-Level Security ────────────────────────────────────────────────────────
 alter table public.tenants enable row level security;
 alter table public.leads    enable row level security;
+alter table public.business_profiles enable row level security;
 
 -- Service role bypasses RLS (used server-side with SUPABASE_SERVICE_ROLE_KEY).
 -- Add user-facing policies here when you wire up auth.
+
+-- Example: allow authenticated dashboard users to read their profile (adjust to your auth model):
+-- create policy "read own business profile"
+--   on public.business_profiles for select
+--   using (auth.uid() is not null);
 
 -- Example tenant isolation policy (uncomment when auth is ready):
 -- create policy "Tenants can read own row"
