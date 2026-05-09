@@ -77,7 +77,7 @@ export default function Page() {
               </Link>
 
               <Link
-                href="/marketing/web-quote"
+                href="/quote-builder"
                 className="group rounded-2xl glass p-5 hover:bg-white/[0.06] transition"
               >
                 <div className="flex items-start justify-between gap-3">

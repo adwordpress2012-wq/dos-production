@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const TILES = [
   {
-    href: "/marketing/web-quote",
+    href: "/quote-builder",
     title: "Get a website quote",
     description:
       "Tell us about your business and we'll send a fixed-price quote for a modern DOS-managed rebuild.",
