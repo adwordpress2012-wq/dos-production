@@ -25,7 +25,7 @@ export default function ThanksPage() {
               Thanks — your website onboarding has been received.
             </h1>
             <p className="mt-4 text-ink-muted leading-relaxed">
-              DOS will review your details and contact you if anything else is needed.
+              DOS will review the details and contact you if anything else is needed.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
