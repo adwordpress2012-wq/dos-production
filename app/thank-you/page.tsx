@@ -3,12 +3,11 @@ import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Website onboarding received",
-  description:
-    "Your website onboarding details have been submitted to Directive Operating Systems.",
+  title: "Thank you",
+  description: "Your website onboarding submission was received by Directive Operating Systems.",
 };
 
-export default function ThanksPage() {
+export default function ThankYouPage() {
   return (
     <main className="relative pt-32 sm:pt-40 pb-16">
       <section className="mx-auto max-w-2xl px-6">
@@ -25,7 +24,7 @@ export default function ThanksPage() {
               Thanks — your website onboarding has been received.
             </h1>
             <p className="mt-4 text-ink-muted leading-relaxed">
-              DOS will review the details and contact you if anything else is needed.
+              DOS will review your details and contact you if anything else is needed.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
