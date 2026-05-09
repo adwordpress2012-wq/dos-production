@@ -1,5 +1,6 @@
 import "server-only";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { CrmLeadSource, CrmLeadStatus } from "./crm";
 
 let cachedAdmin: SupabaseClient | null = null;
 
@@ -55,7 +56,8 @@ export type TenantRow = {
   updated_at: string;
 };
 
-export type LeadRow = {
+/** Onboarding / Micah pipeline — table public.tenant_leads */
+export type TenantPipelineLeadRow = {
   id: string;
   tenant_id: string;
   name: string;
@@ -63,6 +65,28 @@ export type LeadRow = {
   property_address: string | null;
   summary: string | null;
   status: "new" | "contacted" | "qualified" | "disqualified" | "closed";
+  created_at: string;
+  updated_at: string;
+};
+
+/** @deprecated Use TenantPipelineLeadRow — alias for Command Centre demo typing */
+export type LeadRow = TenantPipelineLeadRow;
+
+/** DOS CRM — table public.leads */
+export type CrmLeadRow = {
+  id: string;
+  business_name: string;
+  contact_person: string;
+  phone: string | null;
+  email: string;
+  website_url: string | null;
+  business_type: string | null;
+  source: CrmLeadSource;
+  interested_in: string[];
+  status: CrmLeadStatus;
+  next_follow_up_date: string | null;
+  notes: string | null;
+  converted_client_id: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -76,4 +100,5 @@ export type BusinessProfileRow = {
   phone: string | null;
   status: string;
   created_at: string;
+  is_paying_customer: boolean;
 };

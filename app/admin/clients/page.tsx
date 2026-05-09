@@ -30,7 +30,8 @@ async function loadProfiles(): Promise<{
 
   const { data, error } = await supabase
     .from("business_profiles")
-    .select("id, client_id, business_name, email, phone, status, created_at")
+    .select("id, client_id, business_name, email, phone, status, created_at, is_paying_customer")
+    .eq("is_paying_customer", true)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -72,9 +73,12 @@ export default async function AdminClientsPage() {
               Clients
             </h1>
             <p className="mt-3 text-ink-muted max-w-xl">
-              Add client records to the <code className="text-xs font-mono text-violet-200/90">business_profiles</code>{" "}
-              table. Inserts use the Supabase service role on the server so Row Level Security does not block API
-              writes.
+              Paying customers only — typically created when you{" "}
+              <Link href="/admin/leads" className="text-violet-300 hover:underline">
+                convert a lead
+              </Link>
+              . Manual adds appear here only if you mark them as paying. Uses{" "}
+              <code className="text-xs font-mono text-violet-200/90">business_profiles.is_paying_customer</code>.
             </p>
           </div>
         </div>

@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  await supabase.from("leads").insert({
+  await supabase.from("tenant_leads").insert({
     tenant_id: tenant.id,
     name: body.contactName ?? businessName,
     phone: body.phone ?? null,

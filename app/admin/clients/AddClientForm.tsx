@@ -10,6 +10,8 @@ export default function AddClientForm() {
   const [businessName, setBusinessName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  /** Paying customers appear in the Clients list */
+  const [payingCustomer, setPayingCustomer] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
@@ -31,6 +33,7 @@ export default function AddClientForm() {
           email: email.trim(),
           phone: phone.trim() || undefined,
           status: "active",
+          is_paying_customer: payingCustomer,
         }),
       });
 
@@ -50,6 +53,7 @@ export default function AddClientForm() {
       setBusinessName("");
       setEmail("");
       setPhone("");
+      setPayingCustomer(false);
       router.refresh();
     } catch {
       toast.error("Failed to create client", {
@@ -100,6 +104,18 @@ export default function AddClientForm() {
           autoComplete="tel"
           className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
         />
+      </label>
+      <label className="flex items-start gap-3 sm:col-span-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 cursor-pointer">
+        <input
+          type="checkbox"
+          checked={payingCustomer}
+          onChange={(e) => setPayingCustomer(e.target.checked)}
+          className="mt-1 h-4 w-4 rounded border-white/20 bg-white/5"
+        />
+        <span className="text-sm text-ink-muted">
+          <span className="font-medium text-white">Paying customer</span> — show this profile in the Clients list
+          below. Leave off for drafts or non-paying records.
+        </span>
       </label>
       <div className="sm:col-span-2 flex justify-end pt-1">
         <button

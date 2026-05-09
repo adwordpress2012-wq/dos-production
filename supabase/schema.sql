@@ -36,9 +36,9 @@ create trigger tenants_set_updated_at
   before update on public.tenants
   for each row execute function public.set_updated_at();
 
--- ── leads ────────────────────────────────────────────────────────────────────
--- Inbound leads captured by Sarah AI or manually entered.
-create table if not exists public.leads (
+-- ── tenant_leads ─────────────────────────────────────────────────────────────
+-- Per-tenant pipeline (onboarding, Micah, etc.). Renamed from legacy "leads".
+create table if not exists public.tenant_leads (
   id                uuid primary key default gen_random_uuid(),
   tenant_id         uuid not null references public.tenants (id) on delete cascade,
   name              text not null,
@@ -51,57 +51,82 @@ create table if not exists public.leads (
   updated_at        timestamptz not null default now()
 );
 
--- Indexes for the most common query patterns
-create index if not exists leads_tenant_id_idx    on public.leads (tenant_id);
-create index if not exists leads_status_idx       on public.leads (tenant_id, status);
-create index if not exists leads_created_at_idx   on public.leads (created_at desc);
+create index if not exists tenant_leads_tenant_id_idx    on public.tenant_leads (tenant_id);
+create index if not exists tenant_leads_status_idx       on public.tenant_leads (tenant_id, status);
+create index if not exists tenant_leads_created_at_idx   on public.tenant_leads (created_at desc);
 
-drop trigger if exists leads_set_updated_at on public.leads;
-create trigger leads_set_updated_at
-  before update on public.leads
+drop trigger if exists tenant_leads_set_updated_at on public.tenant_leads;
+create trigger tenant_leads_set_updated_at
+  before update on public.tenant_leads
   for each row execute function public.set_updated_at();
 
 -- ── business_profiles ────────────────────────────────────────────────────────
--- Client directory for Command Centre admin (/admin/clients). Distinct from tenants
--- (billing/subdomain) — link manually if needed.
+-- Paying clients (/admin/clients). Rows with is_paying_customer = false are hidden there.
 create table if not exists public.business_profiles (
-  id              uuid primary key default gen_random_uuid(),
-  client_id       text not null unique,
-  business_name   text not null,
-  email           text not null,
-  phone           text,
-  status          text not null default 'active'
-                    check (status in ('active', 'inactive', 'pending', 'archived')),
-  created_at      timestamptz not null default now(),
-  updated_at      timestamptz not null default now()
+  id                   uuid primary key default gen_random_uuid(),
+  client_id            text not null unique,
+  business_name        text not null,
+  email                text not null,
+  phone                text,
+  status               text not null default 'active'
+                         check (status in ('active', 'inactive', 'pending', 'archived')),
+  is_paying_customer   boolean not null default true,
+  created_at           timestamptz not null default now(),
+  updated_at           timestamptz not null default now()
 );
 
 create index if not exists business_profiles_email_idx on public.business_profiles (lower(email));
 create index if not exists business_profiles_created_idx on public.business_profiles (created_at desc);
+create index if not exists business_profiles_paying_idx on public.business_profiles (is_paying_customer);
 
 drop trigger if exists business_profiles_set_updated_at on public.business_profiles;
 create trigger business_profiles_set_updated_at
   before update on public.business_profiles
   for each row execute function public.set_updated_at();
 
+-- ── leads (DOS CRM) ────────────────────────────────────────────────────────────
+-- Sales pipeline for Command Centre /admin/leads. Distinct from tenant_leads.
+create table if not exists public.leads (
+  id                    uuid primary key default gen_random_uuid(),
+  business_name         text not null,
+  contact_person        text not null,
+  phone                 text,
+  email                 text not null,
+  website_url           text,
+  business_type         text,
+  source                text not null
+                          check (source in ('walk_in', 'cold_call', 'flyer', 'referral', 'website', 'other')),
+  interested_in         text[] not null default '{}',
+  status                text not null default 'new'
+                          check (status in (
+                            'new', 'contacted', 'demo_booked', 'proposal_sent',
+                            'won', 'lost', 'follow_up_later'
+                          )),
+  next_follow_up_date   date,
+  notes                 text,
+  converted_client_id   uuid references public.business_profiles (id) on delete set null,
+  created_at            timestamptz not null default now(),
+  updated_at            timestamptz not null default now()
+);
+
+create index if not exists leads_crm_status_idx on public.leads (status);
+create index if not exists leads_crm_created_idx on public.leads (created_at desc);
+create index if not exists leads_crm_email_idx on public.leads (lower(email));
+create index if not exists leads_crm_converted_idx on public.leads (converted_client_id);
+
+drop trigger if exists leads_set_updated_at on public.leads;
+create trigger leads_set_updated_at
+  before update on public.leads
+  for each row execute function public.set_updated_at();
+
 -- ── Row-Level Security ────────────────────────────────────────────────────────
-alter table public.tenants enable row level security;
-alter table public.leads    enable row level security;
+alter table public.tenants           enable row level security;
+alter table public.tenant_leads      enable row level security;
 alter table public.business_profiles enable row level security;
+alter table public.leads             enable row level security;
 
--- Service role bypasses RLS (used server-side with SUPABASE_SERVICE_ROLE_KEY).
--- Add user-facing policies here when you wire up auth.
+-- Server-side admin routes use the Supabase service role key, which bypasses RLS.
 
--- Example: allow authenticated dashboard users to read their profile (adjust to your auth model):
--- create policy "read own business profile"
---   on public.business_profiles for select
---   using (auth.uid() is not null);
-
--- Example tenant isolation policy (uncomment when auth is ready):
--- create policy "Tenants can read own row"
---   on public.tenants for select
---   using (id = (current_setting('app.tenant_id', true))::uuid);
-
--- create policy "Leads belong to tenant"
---   on public.leads for all
---   using (tenant_id = (current_setting('app.tenant_id', true))::uuid);
+-- Optional: when you add Supabase Auth for /admin, attach policies such as:
+-- create policy "crm_leads_auth_all"
+--   on public.leads for all to authenticated using (true) with check (true);

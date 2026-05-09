@@ -1,12 +1,5 @@
-"use client";
-
-import { Toaster } from "sonner";
+import AdminShell from "./AdminShell";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-      <Toaster richColors closeButton position="top-center" />
-    </>
-  );
+  return <AdminShell>{children}</AdminShell>;
 }

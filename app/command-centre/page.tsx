@@ -12,12 +12,13 @@ import {
   RefreshCcw,
   Sparkles,
   TrendingUp,
+  UserPlus,
   Users,
 } from "lucide-react";
 import {
   getSupabaseAdmin,
   isSupabaseConfigured,
-  type LeadRow,
+  type TenantPipelineLeadRow,
   type TenantRow,
 } from "../lib/supabase";
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const STATUS_LABELS: Record<LeadRow["status"], string> = {
+const STATUS_LABELS: Record<TenantPipelineLeadRow["status"], string> = {
   new: "New",
   contacted: "Contacted",
   qualified: "Qualified",
@@ -37,7 +38,7 @@ const STATUS_LABELS: Record<LeadRow["status"], string> = {
   closed: "Closed (won)",
 };
 
-const STATUS_TONE: Record<LeadRow["status"], string> = {
+const STATUS_TONE: Record<TenantPipelineLeadRow["status"], string> = {
   new: "text-cyan-200 bg-cyan-400/10 border-cyan-400/20",
   contacted: "text-violet-200 bg-violet-400/10 border-violet-400/20",
   qualified: "text-emerald-200 bg-emerald-400/10 border-emerald-400/20",
@@ -48,7 +49,7 @@ const STATUS_TONE: Record<LeadRow["status"], string> = {
 type DashboardData = {
   configured: boolean;
   tenants: TenantRow[];
-  leads: LeadRow[];
+  leads: TenantPipelineLeadRow[];
   error?: string;
 };
 
@@ -68,7 +69,7 @@ async function loadDashboard(): Promise<DashboardData> {
         .order("created_at", { ascending: false })
         .limit(8),
       supabase
-        .from("leads")
+        .from("tenant_leads")
         .select("id, tenant_id, name, phone, property_address, summary, status, created_at, updated_at")
         .order("created_at", { ascending: false })
         .limit(12),
@@ -80,7 +81,7 @@ async function loadDashboard(): Promise<DashboardData> {
     return {
       configured: true,
       tenants: (tenantsRes.data ?? []) as TenantRow[],
-      leads: (leadsRes.data ?? []) as LeadRow[],
+      leads: (leadsRes.data ?? []) as TenantPipelineLeadRow[],
     };
   } catch (err) {
     return {
@@ -120,7 +121,13 @@ export default async function Page() {
               into Supabase.
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href="/admin/leads"
+              className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white"
+            >
+              <UserPlus className="h-3.5 w-3.5" /> Leads
+            </Link>
             <Link
               href="/admin/clients"
               className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium text-white"
@@ -382,7 +389,7 @@ function TenantsTable({ tenants }: { tenants: TenantRow[] }) {
   );
 }
 
-function LeadsTable({ leads }: { leads: LeadRow[] }) {
+function LeadsTable({ leads }: { leads: TenantPipelineLeadRow[] }) {
   if (leads.length === 0) {
     return <div className="px-5 py-8 text-center text-sm text-ink-muted">No leads yet.</div>;
   }
@@ -501,7 +508,7 @@ const DEMO_TENANTS: TenantRow[] = [
   },
 ];
 
-const DEMO_LEADS: LeadRow[] = [
+const DEMO_LEADS: TenantPipelineLeadRow[] = [
   {
     id: "l1",
     tenant_id: "1",

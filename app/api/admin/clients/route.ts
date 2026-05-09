@@ -12,6 +12,8 @@ type Body = {
   email?: string;
   phone?: string;
   status?: string;
+  /** When true, profile appears on /admin/clients (paying customers). Default false. */
+  is_paying_customer?: boolean;
 };
 
 function slugify(s: string): string {
@@ -37,6 +39,7 @@ export async function POST(req: NextRequest) {
   const phone = body.phone?.trim() || null;
   const rawStatus = body.status?.trim() ?? "active";
   const status = ALLOWED_STATUS.has(rawStatus) ? rawStatus : "active";
+  const is_paying_customer = body.is_paying_customer === true;
 
   if (!business_name || !email) {
     return NextResponse.json(
@@ -71,8 +74,9 @@ export async function POST(req: NextRequest) {
         email,
         phone,
         status,
+        is_paying_customer,
       })
-      .select("id, client_id, business_name, email, phone, status, created_at")
+      .select("id, client_id, business_name, email, phone, status, created_at, is_paying_customer")
       .single();
 
     if (!error && data) {
