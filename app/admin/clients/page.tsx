@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Users } from "lucide-react";
+import CommandCentreQuickLinks from "@/app/admin/CommandCentreQuickLinks";
 import { getSupabaseAdmin, type BusinessProfileRow } from "@/app/lib/supabase";
 import AddClientForm from "./AddClientForm";
 
@@ -56,14 +57,16 @@ export default async function AdminClientsPage() {
     <main className="relative pt-32 sm:pt-40 pb-16">
       <section className="mx-auto max-w-4xl px-6">
         <Link
-          href="/command-centre"
+          href="/"
           className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-white transition mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Command Centre
+          Back to DOS Website
         </Link>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <CommandCentreQuickLinks active="clients" />
+
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-violet-200">
               <Users className="h-3.5 w-3.5 text-violet-300" />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Target } from "lucide-react";
+import CommandCentreQuickLinks from "@/app/admin/CommandCentreQuickLinks";
 import { getSupabaseAdmin, type CrmLeadRow } from "@/app/lib/supabase";
 import AddLeadForm from "./AddLeadForm";
 import CrmLeadsTable from "./CrmLeadsTable";
@@ -58,14 +59,16 @@ export default async function AdminLeadsPage() {
     <main className="relative pt-28 sm:pt-36 pb-16">
       <section className="mx-auto max-w-7xl px-6">
         <Link
-          href="/command-centre"
+          href="/"
           className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-white transition mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Command Centre
+          Back to DOS Website
         </Link>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <CommandCentreQuickLinks active="leads" />
+
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-cyan-200">
               <Target className="h-3.5 w-3.5 text-cyan-300" />

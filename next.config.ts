@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  async redirects() {
+    return [
+      {
+        source: "/command-centre",
+        destination: "/admin/leads",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
