@@ -7,10 +7,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Canonical dashboard is /command-centre (app/command-centre/page.tsx); /admin alone is legacy.
       {
-        source: "/command-centre",
-        destination: "/admin",
-        permanent: false,
+        source: "/admin",
+        destination: "/command-centre",
+        permanent: true,
       },
     ];
   },

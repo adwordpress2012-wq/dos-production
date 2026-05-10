@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminOverviewPage() {
+export default async function CommandCentreOverviewPage() {
   const dash = await loadCommandCentreDashboard();
 
   return (

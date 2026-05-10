@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { ExternalLink, LayoutDashboard, Menu, X } from "lucide-react";
+import { LayoutDashboard, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 
 import { ADMIN_SIDEBAR_NAV } from "./admin-nav";
-
-const COMMAND_CENTRE_ENTRY = "https://directiveos.com.au/command-centre";
 
 function navActive(pathname: string, href: string, exact?: boolean): boolean {
   if (exact) return pathname === href || pathname === `${href}/`;
@@ -44,7 +42,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         >
           <div className="p-4 border-b border-white/10 flex items-start justify-between gap-2">
             <Link
-              href="/admin"
+              href="/command-centre"
               className="inline-flex items-center gap-2 min-w-0 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-semibold text-white hover:border-violet-400/35 hover:bg-violet-500/10 transition"
             >
               <LayoutDashboard className="h-4 w-4 text-violet-300 shrink-0" />
@@ -80,16 +78,13 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           </nav>
 
           <div className="p-3 border-t border-white/10 space-y-2">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-ink-dim px-1">Production</p>
-            <a
-              href={COMMAND_CENTRE_ENTRY}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 rounded-lg px-2 py-2 text-[11px] font-mono text-cyan-200/90 hover:text-cyan-100 hover:bg-white/[0.04] transition break-all"
+            <p className="text-[10px] font-mono uppercase tracking-widest text-ink-dim px-1">Official URL</p>
+            <Link
+              href="/command-centre"
+              className="flex items-center rounded-lg px-2 py-2 text-[11px] font-mono text-cyan-200/90 hover:text-cyan-100 hover:bg-white/[0.04] transition break-all"
             >
-              <span className="truncate">{COMMAND_CENTRE_ENTRY.replace(/^https:\/\//, "")}</span>
-              <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-80" aria-hidden />
-            </a>
+              <span className="truncate">directiveos.com.au/command-centre</span>
+            </Link>
           </div>
         </aside>
 
