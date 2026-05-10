@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import AdminShell from "@/app/admin/AdminShell";
+
 export const metadata: Metadata = {
   title: {
     absolute: "Website + SaaS Quote Builder · DOS",
@@ -15,5 +17,5 @@ export default function QuoteBuilderLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <AdminShell>{children}</AdminShell>;
 }

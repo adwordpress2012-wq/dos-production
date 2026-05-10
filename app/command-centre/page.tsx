@@ -30,29 +30,7 @@ export default async function CommandCentreOverviewPage() {
   return (
     <main className="relative px-4 sm:px-6 py-8 sm:py-10 pb-20">
       <section className="mx-auto max-w-7xl space-y-10">
-        <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/25 bg-violet-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-violet-200">
-              <LayoutDashboard className="h-3.5 w-3.5 text-violet-300" />
-              Overview
-            </span>
-            <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.05]">
-              Command Centre
-            </h1>
-            <p className="mt-3 text-ink-muted max-w-2xl leading-relaxed">
-              Real-time snapshot of your CRM pipeline and paying clients — wired to Supabase.
-            </p>
-          </div>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-white transition shrink-0"
-          >
-            Back to DOS Website
-            <ExternalLink className="h-4 w-4 opacity-70" />
-          </Link>
-        </header>
-
-        {/* Quick actions */}
+        {/* Quick actions — first so the dashboard opens with CRM shortcuts */}
         <div>
           <h2 className="text-[11px] font-mono uppercase tracking-widest text-ink-dim mb-3">Quick actions</h2>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -83,6 +61,28 @@ export default async function CommandCentreOverviewPage() {
           </div>
         </div>
 
+        <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/25 bg-violet-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-violet-200">
+              <LayoutDashboard className="h-3.5 w-3.5 text-violet-300" />
+              Overview
+            </span>
+            <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.05]">
+              Command Centre
+            </h1>
+            <p className="mt-3 text-ink-muted max-w-2xl leading-relaxed">
+              Real-time snapshot of your CRM pipeline and paying clients — wired to Supabase.
+            </p>
+          </div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-white transition shrink-0"
+          >
+            Back to DOS Website
+            <ExternalLink className="h-4 w-4 opacity-70" />
+          </Link>
+        </header>
+
         {!dash.configured && dash.error && (
           <div className="rounded-2xl border border-violet-400/30 bg-violet-500/10 px-5 py-4 text-violet-100">
             <p className="text-sm font-semibold">Supabase not configured</p>
@@ -99,7 +99,16 @@ export default async function CommandCentreOverviewPage() {
 
         {/* Stats */}
         <div>
-          <h2 className="text-[11px] font-mono uppercase tracking-widest text-ink-dim mb-3">At a glance</h2>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-3">
+            <h2 className="text-[11px] font-mono uppercase tracking-widest text-ink-dim">At a glance</h2>
+            <Link
+              href="/admin/leads#add-lead"
+              className="btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold text-white shrink-0 self-start sm:self-auto"
+            >
+              <UserPlus className="h-4 w-4" />
+              Add lead
+            </Link>
+          </div>
           <div className="grid gap-4 sm:grid-cols-3">
             <StatCard label="TOTAL LEADS" value={dash.leadsTotal} tone="violet" href="/admin/leads" />
             <StatCard label="ACTIVE CLIENTS" value={dash.clientsTotal} tone="emerald" href="/admin/clients" />

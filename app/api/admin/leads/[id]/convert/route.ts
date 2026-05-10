@@ -116,6 +116,7 @@ export async function POST(_req: NextRequest, context: Params) {
 
   revalidatePath("/admin/leads");
   revalidatePath("/admin/clients");
+  revalidatePath("/command-centre");
 
   return NextResponse.json({
     ok: true,

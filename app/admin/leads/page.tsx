@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Target } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Target } from "lucide-react";
 import { getSupabaseAdmin, type CrmLeadRow } from "@/app/lib/supabase";
 import AddLeadForm from "./AddLeadForm";
 import CrmLeadsTable from "./CrmLeadsTable";
@@ -24,8 +24,8 @@ async function loadLeads(): Promise<{
       configured: false,
       leads: [],
       error: url
-        ? "Set SUPABASE_SERVICE_ROLE_KEY (server) for admin API access."
-        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
+        ? "Set SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY (server) for admin API access."
+        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY).",
     };
   }
 
@@ -55,17 +55,26 @@ export default async function AdminLeadsPage() {
   const { configured, leads, error } = await loadLeads();
 
   return (
-    <main className="relative pt-6 sm:pt-8 pb-16">
-      <section className="mx-auto max-w-7xl px-6">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-white transition mb-8"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to DOS Website
-        </Link>
+    <main className="relative px-4 sm:px-6 py-8 sm:py-10 pb-20">
+      <section className="mx-auto max-w-7xl space-y-10">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Link
+            href="/command-centre"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-violet-300 hover:text-violet-200 transition"
+          >
+            <LayoutDashboard className="h-4 w-4 shrink-0" />
+            Command Centre overview
+          </Link>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-xs text-ink-muted hover:text-white transition"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            DOS marketing site
+          </Link>
+        </div>
 
-        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-cyan-200">
               <Target className="h-3.5 w-3.5 text-cyan-300" />

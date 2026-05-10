@@ -6,10 +6,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 
-import { ADMIN_SIDEBAR_NAV } from "./admin-nav";
+import { ADMIN_SIDEBAR_NAV, type AdminNavItem } from "./admin-nav";
 
-function navActive(pathname: string, href: string, exact?: boolean): boolean {
-  if (exact) return pathname === href || pathname === `${href}/`;
+function navActive(pathname: string, item: AdminNavItem): boolean {
+  const href = item.href;
+  if (item.exact) return pathname === href || pathname === `${href}/`;
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -60,7 +61,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
           <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5" aria-label="Command Centre">
             {ADMIN_SIDEBAR_NAV.map((item) => {
-              const active = navActive(pathname, item.href, "exact" in item ? item.exact : undefined);
+              const active = navActive(pathname, item);
               return (
                 <Link
                   key={item.href}

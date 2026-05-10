@@ -50,8 +50,8 @@ export async function loadCommandCentreDashboard(): Promise<CommandCentreDashboa
     return {
       ...empty(),
       error: url
-        ? "Set SUPABASE_SERVICE_ROLE_KEY for Command Centre stats."
-        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
+        ? "Set SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY for Command Centre stats."
+        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY).",
     };
   }
 

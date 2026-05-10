@@ -30,6 +30,38 @@ type Body = {
   notes?: string;
 };
 
+const LEAD_COLUMNS =
+  "id, business_name, contact_person, phone, email, website_url, business_type, source, interested_in, status, next_follow_up_date, notes, converted_client_id, created_at, updated_at" as const;
+
+export async function GET() {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) {
+    return NextResponse.json(
+      {
+        error:
+          "Supabase admin client not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY.",
+      },
+      { status: 503 }
+    );
+  }
+
+  const { data, error } = await supabase.from("leads").select(LEAD_COLUMNS).order("created_at", { ascending: false });
+
+  if (error) {
+    return NextResponse.json(
+      {
+        error: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint,
+      },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ leads: data ?? [] });
+}
+
 export async function POST(req: NextRequest) {
   let body: Body = {};
   try {
@@ -101,9 +133,7 @@ export async function POST(req: NextRequest) {
       next_follow_up_date,
       notes,
     })
-    .select(
-      "id, business_name, contact_person, phone, email, website_url, business_type, source, interested_in, status, next_follow_up_date, notes, converted_client_id, created_at, updated_at"
-    )
+    .select(LEAD_COLUMNS)
     .single();
 
   if (error) {
@@ -119,6 +149,7 @@ export async function POST(req: NextRequest) {
   }
 
   revalidatePath("/admin/leads");
+  revalidatePath("/command-centre");
 
   return NextResponse.json({ ok: true, lead: data });
 }

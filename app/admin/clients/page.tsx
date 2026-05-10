@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Users } from "lucide-react";
+import { ArrowLeft, LayoutDashboard, Users } from "lucide-react";
 import { getSupabaseAdmin, type BusinessProfileRow } from "@/app/lib/supabase";
 import AddClientForm from "./AddClientForm";
 
@@ -23,8 +23,8 @@ async function loadProfiles(): Promise<{
       configured: false,
       profiles: [],
       error: url
-        ? "Set SUPABASE_SERVICE_ROLE_KEY (server) so admin routes can read/write business_profiles (service role bypasses RLS)."
-        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
+        ? "Set SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY (server) so admin routes can read/write business_profiles (service role bypasses RLS)."
+        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY).",
     };
   }
 
@@ -53,17 +53,26 @@ export default async function AdminClientsPage() {
   const { configured, profiles, error } = await loadProfiles();
 
   return (
-    <main className="relative pt-6 sm:pt-8 pb-16">
-      <section className="mx-auto max-w-4xl px-6">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm text-ink-muted hover:text-white transition mb-8"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to DOS Website
-        </Link>
+    <main className="relative px-4 sm:px-6 py-8 sm:py-10 pb-20">
+      <section className="mx-auto max-w-4xl space-y-10">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Link
+            href="/command-centre"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-violet-300 hover:text-violet-200 transition"
+          >
+            <LayoutDashboard className="h-4 w-4 shrink-0" />
+            Command Centre overview
+          </Link>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-xs text-ink-muted hover:text-white transition"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" />
+            DOS marketing site
+          </Link>
+        </div>
 
-        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-violet-200">
               <Users className="h-3.5 w-3.5 text-violet-300" />
