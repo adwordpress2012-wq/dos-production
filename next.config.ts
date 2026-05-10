@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/command-centre",
-        destination: "/admin/leads",
+        destination: "/admin",
         permanent: false,
       },
     ];

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Target } from "lucide-react";
-import CommandCentreQuickLinks from "@/app/admin/CommandCentreQuickLinks";
 import { getSupabaseAdmin, type CrmLeadRow } from "@/app/lib/supabase";
 import AddLeadForm from "./AddLeadForm";
 import CrmLeadsTable from "./CrmLeadsTable";
@@ -56,7 +55,7 @@ export default async function AdminLeadsPage() {
   const { configured, leads, error } = await loadLeads();
 
   return (
-    <main className="relative pt-28 sm:pt-36 pb-16">
+    <main className="relative pt-6 sm:pt-8 pb-16">
       <section className="mx-auto max-w-7xl px-6">
         <Link
           href="/"
@@ -66,9 +65,7 @@ export default async function AdminLeadsPage() {
           Back to DOS Website
         </Link>
 
-        <CommandCentreQuickLinks active="leads" />
-
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-cyan-200">
               <Target className="h-3.5 w-3.5 text-cyan-300" />
@@ -107,7 +104,7 @@ export default async function AdminLeadsPage() {
           </div>
         )}
 
-        <div className="mt-10 glass-strong rounded-2xl p-6 sm:p-8">
+        <div id="add-lead" className="mt-10 glass-strong rounded-2xl p-6 sm:p-8 scroll-mt-24">
           <h2 className="text-lg font-semibold tracking-tight mb-6">Add lead</h2>
           <AddLeadForm />
         </div>

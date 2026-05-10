@@ -15,7 +15,7 @@ export function proxy(req: NextRequest) {
   if (host && host === configured) {
     const url = req.nextUrl.clone();
     if (url.pathname === "/") {
-      url.pathname = "/command-centre";
+      url.pathname = "/admin";
       return NextResponse.redirect(url);
     }
   }
