@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import CalendlyPopupLink from "./CalendlyPopupLink";
 import Logo from "./Logo";
 
 const NAV_LINKS = [
@@ -43,12 +44,11 @@ export default function Nav() {
             >
               Onboarding
             </Link>
-            <Link
-              href="/pricing"
+            <CalendlyPopupLink
               className="hidden sm:inline-flex btn-neon text-[13px] font-semibold text-white px-4 py-2 rounded-xl"
             >
               Get Started
-            </Link>
+            </CalendlyPopupLink>
             <button
               onClick={() => setOpen((v) => !v)}
               className="lg:hidden btn-ghost rounded-xl p-2"
@@ -81,13 +81,12 @@ export default function Nav() {
               >
                 Onboarding
               </Link>
-              <Link
-                href="/pricing"
+              <CalendlyPopupLink
                 onClick={() => setOpen(false)}
                 className="btn-neon text-center text-sm font-semibold text-white px-3 py-2.5 rounded-xl"
               >
                 Get Started
-              </Link>
+              </CalendlyPopupLink>
             </div>
           </div>
         )}

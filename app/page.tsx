@@ -14,6 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import Hero from "./components/Hero";
+import CalendlyPopupLink from "./components/CalendlyPopupLink";
 import GlowCard, { GlowIcon } from "./components/GlowCard";
 import SectionHeader from "./components/SectionHeader";
 
@@ -962,13 +963,12 @@ function ContactSection() {
                   placeholder="What are you trying to fix or automate?"
                   className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition resize-none"
                 />
-                <button
-                  type="submit"
+                <CalendlyPopupLink
                   className="btn-neon mt-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white"
                 >
                   Request a demo
                   <ArrowRight className="h-4 w-4" />
-                </button>
+                </CalendlyPopupLink>
               </form>
             </GlowCard>
           </div>

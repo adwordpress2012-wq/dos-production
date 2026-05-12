@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 import type { PLAN_CATALOG, PlanId } from "../lib/stripe";
+import CalendlyPopupLink from "../components/CalendlyPopupLink";
 
 type Plan = (typeof PLAN_CATALOG)[number];
 
@@ -143,6 +144,15 @@ export default function PricingPlans({ plans }: Props) {
                   >
                     {plan.cta.label} <ArrowRight className="h-4 w-4 shrink-0" />
                   </a>
+                ) : plan.cta.label.toLowerCase().includes("demo") ||
+                  plan.cta.label.toLowerCase().includes("strategy call") ? (
+                  <CalendlyPopupLink
+                    className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition ${
+                      isHighlight ? "btn-neon text-white" : "btn-ghost text-white"
+                    }`}
+                  >
+                    {plan.cta.label} <ArrowRight className="h-4 w-4 shrink-0" />
+                  </CalendlyPopupLink>
                 ) : (
                   <Link
                     href={plan.cta.href}
