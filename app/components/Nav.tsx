@@ -7,11 +7,10 @@ import CalendlyPopupLink from "./CalendlyPopupLink";
 import Logo from "./Logo";
 
 const NAV_LINKS = [
-  { href: "/website-rebuilds", label: "Websites" },
-  { href: "/micah", label: "Micah" },
-  { href: "/cos", label: "COS" },
-  { href: "/bos", label: "BOS" },
+  { href: "/", label: "Home" },
+  { href: "/#solutions", label: "Solutions" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function Nav() {
@@ -38,16 +37,8 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link
-              href="/onboarding"
-              className="hidden sm:inline-flex btn-ghost text-[13px] font-medium px-3.5 py-2 rounded-xl"
-            >
-              Onboarding
-            </Link>
-            <CalendlyPopupLink
-              className="hidden sm:inline-flex btn-neon text-[13px] font-semibold text-white px-4 py-2 rounded-xl"
-            >
-              Get Started
+            <CalendlyPopupLink className="hidden sm:inline-flex btn-neon text-[13px] font-semibold text-white px-4 py-2 rounded-xl">
+              Book Demo
             </CalendlyPopupLink>
             <button
               onClick={() => setOpen((v) => !v)}
@@ -73,19 +64,12 @@ export default function Nav() {
                 </Link>
               ))}
             </div>
-            <div className="mt-2 grid grid-cols-2 gap-2">
-              <Link
-                href="/onboarding"
-                onClick={() => setOpen(false)}
-                className="btn-ghost text-center text-sm font-medium px-3 py-2.5 rounded-xl"
-              >
-                Onboarding
-              </Link>
+            <div className="mt-2 grid grid-cols-1 gap-2">
               <CalendlyPopupLink
                 onClick={() => setOpen(false)}
                 className="btn-neon text-center text-sm font-semibold text-white px-3 py-2.5 rounded-xl"
               >
-                Get Started
+                Book Demo
               </CalendlyPopupLink>
             </div>
           </div>
