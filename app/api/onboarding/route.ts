@@ -14,6 +14,7 @@ type Body = {
   goals?: string;
   planId?: string;
   stripeSessionId?: string;
+  domainInfrastructureAck?: boolean;
 };
 
 function slugify(s: string): string {
@@ -83,6 +84,7 @@ export async function POST(req: NextRequest) {
       body.goals ? `Goals: ${body.goals}` : null,
       body.planId ? `Plan: ${body.planId}` : null,
       body.stripeSessionId ? `Stripe session: ${body.stripeSessionId}` : null,
+      body.domainInfrastructureAck ? "Domain management acknowledgement: accepted" : null,
     ]
       .filter(Boolean)
       .join("\n"),

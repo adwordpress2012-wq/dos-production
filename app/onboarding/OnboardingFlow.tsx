@@ -33,6 +33,13 @@ const CHANNELS = [
   { id: "command", label: "Command Centre dashboard" },
 ];
 
+const WEBSITE_POLICY_SUMMARY = [
+  "DOS may manage domains, DNS, SSL, hosting and deployment infrastructure for website rebuilds.",
+  "Existing client-owned domains can remain with the current registrar while DOS manages technical configuration.",
+  "Annual hosting or maintenance plans may include domain renewal costs unless otherwise stated.",
+  "Managed domain transfers are subject to verification, settled invoices and any applicable migration or administration fees.",
+];
+
 type Form = {
   businessName: string;
   contactName: string;
@@ -42,6 +49,7 @@ type Form = {
   channels: string[];
   goals: string;
   goLive: string;
+  domainInfrastructureAck: boolean;
 };
 
 export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
@@ -55,6 +63,7 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
     channels: planId === "starter" ? ["website", "micah"] : ["website", "micah", "cos", "bos"],
     goals: "",
     goLive: "ASAP",
+    domainInfrastructureAck: false,
   });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState<{
@@ -83,6 +92,8 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
     }
     return true;
   }
+
+  const canSubmit = form.domainInfrastructureAck && !submitting;
 
   async function submit() {
     setSubmitting(true);
@@ -266,6 +277,39 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
               <Review label="Go live" value={form.goLive} />
               <Review label="Goals" value={form.goals || "—"} className="sm:col-span-2" />
               {planId && <Review label="Plan" value={planId} />}
+              {form.channels.includes("website") && (
+                <div className="sm:col-span-2 rounded-xl border border-violet-400/20 bg-violet-500/10 px-4 py-4">
+                  <div className="text-[11px] font-mono uppercase tracking-widest text-violet-200">
+                    Website rebuild policy summary
+                  </div>
+                  <ul className="mt-3 grid gap-2 text-sm leading-relaxed text-ink-muted">
+                    {WEBSITE_POLICY_SUMMARY.map((item) => (
+                      <li key={item} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-300" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href="/domain-management-policy"
+                    className="mt-3 inline-flex text-xs font-medium text-violet-200 hover:text-violet-100"
+                  >
+                    Read the Domain Management & Ownership Policy
+                  </a>
+                </div>
+              )}
+              <label className="sm:col-span-2 flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/90">
+                <input
+                  type="checkbox"
+                  checked={form.domainInfrastructureAck}
+                  onChange={(e) => update("domainInfrastructureAck", e.target.checked)}
+                  className="mt-1 accent-violet-500"
+                />
+                <span>
+                  I understand DOS may manage domains, DNS, hosting, and related infrastructure as
+                  part of the service.
+                </span>
+              </label>
             </div>
           </Section>
         )}
@@ -299,7 +343,7 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
             <button
               type="button"
               onClick={submit}
-              disabled={submitting}
+              disabled={!canSubmit}
               className="btn-neon inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white cursor-pointer disabled:opacity-50"
             >
               {submitting ? (

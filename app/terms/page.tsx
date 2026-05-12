@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import DomainManagementPolicyContent from "../components/DomainManagementPolicyContent";
 import LegalShell from "../components/LegalShell";
 
 export const metadata: Metadata = {
@@ -53,7 +54,12 @@ export default function Page() {
         for AI services, with planned maintenance windows announced in advance.
       </p>
 
-      <h2>5. Intellectual property</h2>
+      <DomainManagementPolicyContent
+        heading="5. Domain Management & Ownership Policy"
+        headingAs="h2"
+      />
+
+      <h2>6. Intellectual property</h2>
       <p>
         You retain ownership of your business content, customer data and brand assets. We retain
         ownership of the DOS platform, codebase, AI models, integrations and any reusable
@@ -61,13 +67,13 @@ export default function Page() {
         for you for as long as your subscription is active.
       </p>
 
-      <h2>6. Confidentiality</h2>
+      <h2>7. Confidentiality</h2>
       <p>
         Each party agrees to keep the other&apos;s confidential information confidential and to use
         it only for the purpose of providing or receiving the Services.
       </p>
 
-      <h2>7. Liability</h2>
+      <h2>8. Liability</h2>
       <p>
         To the maximum extent permitted by law, our total liability for any claim arising under or
         in connection with these Terms is limited to the fees paid by you in the 12 months
@@ -75,20 +81,20 @@ export default function Page() {
         excluded under the Australian Consumer Law.
       </p>
 
-      <h2>8. Suspension and termination</h2>
+      <h2>9. Suspension and termination</h2>
       <p>
         We may suspend or terminate the Services for non-payment, breach of these Terms, our
         Acceptable Use Policy, or applicable laws. See our Cancellation Policy for cancellation by
         you.
       </p>
 
-      <h2>9. Governing law</h2>
+      <h2>10. Governing law</h2>
       <p>
         These Terms are governed by the laws of Queensland, Australia. The parties submit to the
         exclusive jurisdiction of the courts of Queensland.
       </p>
 
-      <h2>10. Contact</h2>
+      <h2>11. Contact</h2>
       <p>
         Questions: <a href="mailto:legal@directiveos.com">legal@directiveos.com</a>.
       </p>

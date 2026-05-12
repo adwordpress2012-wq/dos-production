@@ -24,6 +24,21 @@ const MICAH_PHONE_DISPLAY = "02 5950 6382";
 const MICAH_PHONE_LINK = "tel:0259506382";
 const DOS_SITE = "https://directiveos.com.au";
 
+const DOMAIN_POLICY_SUMMARY = [
+  "DOS may purchase, configure and manage domains as part of the Done-For-You service model.",
+  "Existing client-owned domains can remain with the current registrar while DOS manages DNS and hosting configuration.",
+  "DOS may manage SSL, Vercel deployment, email records and related infrastructure for domains under management.",
+  "Managed domain transfers are subject to verification, settled invoices and any applicable migration or administration fees.",
+];
+
+const TECH_ADMIN_FEES = [
+  "domain transfer processing",
+  "DNS migration",
+  "email migration",
+  "hosting reconfiguration",
+  "infrastructure migration support",
+];
+
 function Field({
   label,
   htmlFor,
@@ -205,6 +220,71 @@ export default async function WebsiteRebuildOnboardingPage() {
             <Field label="Domain renewal date" htmlFor="domain_renewal_date">
               <input id="domain_renewal_date" name="domain_renewal_date" type="date" className={INPUT} />
             </Field>
+            <div className="rounded-2xl border border-violet-400/20 bg-violet-500/10 p-4">
+              <h3 className="text-sm font-semibold tracking-tight text-white">
+                Domain Management & Ownership Policy
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                Existing domains can stay with the client&apos;s registrar. If DOS purchases or
+                manages a domain, DOS may continue managing the domain while active hosting,
+                support, subscription or maintenance services remain active.
+              </p>
+              <Link
+                href="/domain-management-policy"
+                className="mt-3 inline-flex text-xs font-medium text-violet-200 hover:text-violet-100"
+              >
+                Read the full domain policy
+              </Link>
+            </div>
+          </div>
+
+          <div className="glass-strong rounded-2xl p-6 sm:p-8 space-y-5">
+            <h2 className="text-xl font-semibold tracking-tight text-white">Hosting / maintenance</h2>
+            <p className="text-sm text-ink-muted -mt-2">
+              This helps DOS plan managed hosting, renewals, deployment and infrastructure support.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <Field label="Preferred hosting / maintenance plan" htmlFor="hosting_maintenance_plan">
+                <select id="hosting_maintenance_plan" name="hosting_maintenance_plan" className={INPUT}>
+                  <option value="">Select...</option>
+                  <option value="DOS managed annual hosting">DOS managed annual hosting</option>
+                  <option value="DOS monthly maintenance">DOS monthly maintenance</option>
+                  <option value="Client managed hosting">Client managed hosting</option>
+                  <option value="Discuss with DOS">Discuss with DOS</option>
+                </select>
+              </Field>
+              <Field label="Email provider" htmlFor="email_provider">
+                <input id="email_provider" name="email_provider" className={INPUT} placeholder="Google Workspace, Neo Email..." />
+              </Field>
+            </div>
+            <Field label="Hosting / maintenance notes" htmlFor="hosting_maintenance_notes">
+              <textarea id="hosting_maintenance_notes" name="hosting_maintenance_notes" rows={3} className={TEXTAREA} />
+            </Field>
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+              <h3 className="text-sm font-semibold tracking-tight text-white">Rebuild client summary</h3>
+              <ul className="mt-3 grid gap-2 text-sm leading-relaxed text-ink-muted">
+                {DOMAIN_POLICY_SUMMARY.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet-300" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">
+                Annual hosting or maintenance plans may include domain renewal costs unless
+                otherwise stated. Reasonable technical administration fees may apply for:
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {TECH_ADMIN_FEES.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-medium text-ink-muted"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="glass-strong rounded-2xl p-6 sm:p-8 space-y-5">
@@ -281,6 +361,13 @@ export default async function WebsiteRebuildOnboardingPage() {
             <label className={CHECK_WRAP}>
               <input type="checkbox" name="confirm_dns_timing" value="Yes" required className="mt-1 accent-violet-500" />
               <span className="text-sm text-white/90">I understand DNS changes may take time.</span>
+            </label>
+            <label className={CHECK_WRAP}>
+              <input type="checkbox" name="confirm_domain_infrastructure_management" value="Yes" required className="mt-1 accent-violet-500" />
+              <span className="text-sm text-white/90">
+                I understand DOS may manage domains, DNS, hosting, and related infrastructure as
+                part of the service.
+              </span>
             </label>
             <label className={CHECK_WRAP}>
               <input type="checkbox" name="confirm_launch_payment" value="Yes" required className="mt-1 accent-violet-500" />

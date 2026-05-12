@@ -11,6 +11,7 @@ const LEGAL_NAV = [
   { href: "/terms", label: "Terms" },
   { href: "/privacy", label: "Privacy" },
   { href: "/acceptable-use", label: "Acceptable Use" },
+  { href: "/domain-management-policy", label: "Domain Policy" },
   { href: "/number-policy", label: "Number Policy" },
   { href: "/cancellation-policy", label: "Cancellation" },
 ];
