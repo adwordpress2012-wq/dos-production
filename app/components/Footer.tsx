@@ -30,11 +30,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-2.5">
-              <Logo className="h-8 w-8" />
-              <span className="text-base font-semibold">
-                <span className="text-white">DOS</span>
-              </span>
+            <div className="flex items-center">
+              <Logo className="h-14 w-auto" />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted max-w-sm">
               Done-For-You AI Business Systems. Websites, AI receptionists, booking systems,
