@@ -31,7 +31,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className="flex items-center">
-              <Logo className="h-14 w-auto" />
+              <Logo className="h-20 w-auto" />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted max-w-sm">
               Done-For-You AI Business Systems. Websites, AI receptionists, booking systems,

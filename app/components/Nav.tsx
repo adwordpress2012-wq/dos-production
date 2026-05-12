@@ -22,7 +22,7 @@ export default function Nav() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-4">
         <div className="glass rounded-2xl px-4 sm:px-5 py-2.5 flex items-center justify-between">
           <Link href="/" className="flex items-center shrink-0" onClick={() => setOpen(false)}>
-            <Logo className="h-11 w-auto sm:h-12" priority />
+            <Logo className="h-14 w-auto sm:h-16" priority />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
