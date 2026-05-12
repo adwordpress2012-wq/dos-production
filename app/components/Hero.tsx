@@ -25,9 +25,9 @@ export default function Hero() {
             </div>
 
             <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
-              <span className="text-white">Modernise and</span>{" "}
-              <span className="text-gradient-purple">automate</span>{" "}
-              <span className="text-white">your business.</span>
+            <span className="text-white">Never Miss Another</span>{" "}
+<span className="text-gradient-purple">Booking</span>{" "}
+<span className="text-white">Again.</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-2xl leading-relaxed">
