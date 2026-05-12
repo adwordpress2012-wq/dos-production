@@ -137,12 +137,6 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
             )}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
-                href="/command-centre"
-                className="btn-neon inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
-              >
-                <Sparkles className="h-4 w-4" /> Open Command Centre
-              </a>
-              <a
                 href="/"
                 className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
               >

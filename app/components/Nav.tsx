@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { href: "/micah", label: "Micah" },
   { href: "/cos", label: "COS" },
   { href: "/bos", label: "BOS" },
-  { href: "/command-centre", label: "Command Centre" },
   { href: "/pricing", label: "Pricing" },
 ];
 

@@ -792,15 +792,6 @@ function CommandCentrePreview() {
                 </li>
               ))}
             </ul>
-            <div className="mt-8">
-              <Link
-                href="/command-centre"
-                className="btn-neon inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
-              >
-                Open Command Centre
-                <LayoutDashboard className="h-4 w-4" />
-              </Link>
-            </div>
           </div>
 
           <div className="lg:col-span-7">
