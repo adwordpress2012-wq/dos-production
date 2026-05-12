@@ -16,17 +16,19 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://directiveos.com.au";
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: "DOS — Done-For-You AI Business Systems",
-    template: "%s · DOS",
+    default: "DOS",
+    template: "DOS",
   },
   description:
     "Modernise and automate your business. DOS delivers websites, AI receptionists, booking systems, automation and managed business infrastructure for modern Australian businesses.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/icon.png", sizes: "512x512", type: "image/png" },
-      { url: "/dos-favicon-v3.png", sizes: "512x512", type: "image/png" },
+      { url: "/dos-favicon-v2.png", sizes: "512x512", type: "image/png" },
+      { url: "/dos-icon-v2.png", sizes: "512x512", type: "image/png" },
     ],
     shortcut: [{ url: "/favicon.ico" }],
     apple: [
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
     "DirectiveOS",
   ],
   openGraph: {
-    title: "DOS — Done-For-You AI Business Systems",
+    title: "DOS",
     description:
       "Websites, AI receptionists, booking systems, automation and managed business infrastructure for modern Australian businesses.",
     url: APP_URL,
@@ -55,7 +57,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DOS — Done-For-You AI Business Systems",
+    title: "DOS",
     description:
       "Modernise and automate your business with DOS. Websites, AI receptionists, booking systems and Command Centre — done for you.",
   },
