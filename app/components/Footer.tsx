@@ -83,7 +83,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-ink-dim">
-          <span>© {new Date().getFullYear()} DOS — Directive Operating Systems Pty Ltd. All rights reserved.</span>
+          <span>© 2026 DOS — Directive Operating Systems Pty Ltd. All rights reserved.</span>
           <span className="font-mono tracking-widest uppercase text-ink-dim/80">
             ABN 87 754 544 171
           </span>

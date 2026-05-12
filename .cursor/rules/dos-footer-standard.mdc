@@ -1,0 +1,17 @@
+---
+description: DOS footer branding standard
+alwaysApply: true
+---
+
+# DOS Footer Standard
+
+For DOS, COS, BOS, Micah, and client website builds:
+
+- Do not use "AI Powered", "Powered by AI", or "Built with AI" in footer branding.
+- If powered-by branding is needed, use exactly "Powered by DOS".
+- Use this footer copyright format exactly:
+  `© 2026 DOS — Directive Operating Systems Pty Ltd. All rights reserved.`
+- Keep footer typography subtle, clean, professional, and premium.
+- Keep spacing tight near "All rights reserved."
+- Do not make footer text oversized or add glowing effects to footer text.
+- Do not change footer layout unless required, and preserve mobile responsiveness.
