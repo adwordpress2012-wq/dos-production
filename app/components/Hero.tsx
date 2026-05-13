@@ -88,7 +88,7 @@ export default function Hero() {
             </div>
 
             <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              <CalendlyPopupLink className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-white">
+              <CalendlyPopupLink className="btn-book-demo inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white">
                 Book Demo
               </CalendlyPopupLink>
               <a

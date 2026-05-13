@@ -52,9 +52,7 @@ export default function Nav() {
 
           <div className="flex items-center justify-end gap-2">
             <TryDosWorkspaceCta variant="nav" showSupportingText={false} className="hidden md:inline-flex" />
-            <CalendlyPopupLink
-              className="hidden sm:inline-flex btn-ghost text-sm font-semibold text-white px-4 py-2 rounded-xl border border-white/10"
-            >
+            <CalendlyPopupLink className="btn-book-demo hidden sm:inline-flex items-center justify-center text-sm font-semibold text-white px-4 py-2 rounded-xl">
               Book Demo
             </CalendlyPopupLink>
             <button
@@ -109,7 +107,7 @@ export default function Nav() {
                 />
                 <CalendlyPopupLink
                   onClick={() => setOpen(false)}
-                  className="btn-neon flex w-full min-h-[48px] items-center justify-center rounded-xl px-4 py-3.5 text-center text-sm font-semibold text-white"
+                  className="btn-book-demo flex w-full min-h-[48px] items-center justify-center rounded-xl px-4 py-3.5 text-center text-sm font-semibold text-white"
                 >
                   Book Demo
                 </CalendlyPopupLink>

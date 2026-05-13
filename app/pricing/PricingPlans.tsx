@@ -160,11 +160,7 @@ export default function PricingPlans({ plans }: Props) {
                   </a>
                 ) : plan.cta.label.toLowerCase().includes("demo") ||
                   plan.cta.label.toLowerCase().includes("strategy call") ? (
-                  <CalendlyPopupLink
-                    className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition ${
-                      isHighlight ? "btn-ghost text-white border border-white/15" : "btn-ghost text-white"
-                    }`}
-                  >
+                  <CalendlyPopupLink className="btn-book-demo w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition">
                     {plan.cta.label} <ArrowRight className="h-4 w-4 shrink-0" />
                   </CalendlyPopupLink>
                 ) : (

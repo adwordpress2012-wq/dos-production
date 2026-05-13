@@ -212,6 +212,36 @@ body {
     0 0 80px -10px rgba(34, 211, 238, 0.45);
 }
 
+/* Primary Book Demo — violet → rose gradient, premium glow (not gaming/crypto) */
+.btn-book-demo {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 38%, #a855f7 68%, #ec4899 100%);
+  background-size: 140% 140%;
+  background-position: 0% 50%;
+  border: 1px solid rgba(236, 72, 153, 0.38);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 0 24px rgba(236, 72, 153, 0.35),
+    0 0 40px rgba(124, 58, 237, 0.25),
+    0 0 0 1px rgba(124, 58, 237, 0.22);
+  transition:
+    background-position 420ms ease,
+    box-shadow 240ms ease,
+    filter 200ms ease,
+    border-color 200ms ease;
+}
+
+.btn-book-demo:hover {
+  background-position: 100% 50%;
+  border-color: rgba(244, 114, 182, 0.55);
+  filter: brightness(1.06);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14) inset,
+    0 0 32px rgba(236, 72, 153, 0.48),
+    0 0 52px rgba(124, 58, 237, 0.38),
+    0 0 0 1px rgba(167, 139, 250, 0.35);
+}
+
 @keyframes workspace-cta-pulse {
   0%,
   100% {

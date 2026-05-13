@@ -1,54 +1,61 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowRight, Globe, MessageSquare, PhoneCall, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "DOS Insights",
   description:
-    "Business growth, AI receptionists, website rebuilds, customer automation, and modern systems for small businesses.",
+    "Practical ideas for small businesses wanting better websites, faster customer replies, booking automation, and modern customer communication systems.",
 };
 
 const ARTICLES = [
   {
-    title: "Why Small Businesses Miss Customer Enquiries",
+    title: "Why Small Businesses Miss Bookings — And How To Fix It",
     excerpt:
-      "Many businesses lose customers from missed calls, slow replies, outdated websites, and lack of automated follow-up systems.",
+      "Many small businesses lose enquiries because customers call after hours, messages get missed, or websites do not guide people to take action. DOS helps solve this with Smart Chat Widgets, booking automation, SMS, WhatsApp, and done-for-you setup.",
+    category: "Customer Enquiries",
     icon: PhoneCall,
     tone: "violet",
   },
   {
-    title: "How AI Receptionists Help Restaurants Capture More Bookings",
+    title: "Your Website Should Do More Than Look Good",
     excerpt:
-      "AI receptionists can help restaurants respond faster, reduce missed bookings, and improve customer experience across website chat, SMS, and WhatsApp.",
-    icon: MessageSquare,
-    tone: "fuchsia",
-  },
-  {
-    title: "Signs Your Business Website Needs a Rebuild",
-    excerpt:
-      "Slow websites, outdated designs, poor mobile experience, and missing booking systems can reduce customer trust and enquiries.",
+      "A modern business website should build trust, load fast, capture enquiries, and make it easy for customers to book or contact you. DOS rebuilds websites around real business outcomes, not just design.",
+    category: "Website Rebuilds",
     icon: Globe,
     tone: "cyan",
+  },
+  {
+    title: "Smart Chat Widgets vs Basic Contact Forms",
+    excerpt:
+      "Basic contact forms rely on customers waiting for a reply. Smart Chat Widgets help guide customers instantly, capture details, answer common questions, and improve enquiry flow across website chat, SMS, and WhatsApp.",
+    category: "Smart Chat Widgets",
+    icon: MessageSquare,
+    tone: "rose",
   },
 ] as const;
 
 const TONE_STYLES = {
   violet: {
     glow: "from-violet-500/35 via-violet-500/0 to-violet-500/0",
-    icon: "from-violet-500 to-fuchsia-500",
+    icon: "from-violet-600 via-fuchsia-500 to-pink-500",
     text: "text-violet-200",
     border: "group-hover:border-violet-300/50",
-  },
-  fuchsia: {
-    glow: "from-fuchsia-500/35 via-fuchsia-500/0 to-fuchsia-500/0",
-    icon: "from-fuchsia-500 to-violet-500",
-    text: "text-fuchsia-200",
-    border: "group-hover:border-fuchsia-300/50",
+    category: "text-violet-200/90 border-violet-400/25 bg-violet-500/10",
   },
   cyan: {
     glow: "from-cyan-400/30 via-cyan-400/0 to-cyan-400/0",
-    icon: "from-cyan-400 to-violet-500",
+    icon: "from-violet-600 via-fuchsia-500 to-cyan-400",
     text: "text-cyan-200",
     border: "group-hover:border-cyan-300/50",
+    category: "text-cyan-200/90 border-cyan-400/25 bg-cyan-500/10",
+  },
+  rose: {
+    glow: "from-fuchsia-500/30 via-pink-500/15 to-violet-500/0",
+    icon: "from-[#7C3AED] via-[#A855F7] to-[#EC4899]",
+    text: "text-pink-200",
+    border: "group-hover:border-pink-300/45",
+    category: "text-pink-200/90 border-pink-400/25 bg-fuchsia-500/10",
   },
 } as const;
 
@@ -63,14 +70,14 @@ export default function BlogPage() {
         />
         <div
           aria-hidden
-          className="absolute right-[-12rem] top-56 h-72 w-72 rounded-full bg-cyan-400/15 blur-[110px]"
+          className="absolute right-[-12rem] top-56 h-72 w-72 rounded-full bg-fuchsia-500/12 blur-[110px]"
         />
 
         <div className="relative mx-auto max-w-7xl px-6">
           <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-violet-200 backdrop-blur">
               <Sparkles className="h-3.5 w-3.5 text-violet-300" />
-              DOS Blog
+              DOS Insights
             </span>
 
             <h1 className="mt-7 text-4xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-[76px]">
@@ -78,8 +85,8 @@ export default function BlogPage() {
             </h1>
 
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg lg:text-xl">
-              Business growth, AI receptionists, website rebuilds, customer automation, and modern
-              systems for small businesses.
+              Practical ideas for small businesses wanting better websites, faster customer replies, booking
+              automation, and modern customer communication systems.
             </p>
           </div>
         </div>
@@ -93,11 +100,12 @@ export default function BlogPage() {
                 Featured articles
               </span>
               <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl">
-                Practical systems thinking for modern small businesses.
+                Clear thinking for busy small-business owners.
               </h2>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-ink-muted">
-              Short, useful reads on the operational gaps DOS helps remove.
+              No fluff — practical angles on customer enquiries, websites, booking automation, and Smart Business
+              Assistants.
             </p>
           </div>
 
@@ -107,10 +115,27 @@ export default function BlogPage() {
             ))}
           </div>
 
-          <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-8 text-center backdrop-blur sm:px-10">
-            <p className="text-sm font-medium uppercase tracking-[0.22em] text-ink-dim">
-              More articles coming soon.
-            </p>
+          <div className="relative mt-16 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] px-6 py-12 text-center backdrop-blur sm:px-12 sm:py-14">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-24 left-1/2 h-64 w-[min(100%,520px)] -translate-x-1/2 rounded-full bg-gradient-to-br from-violet-600/25 via-fuchsia-500/15 to-pink-500/20 blur-[100px]"
+            />
+            <div className="relative mx-auto max-w-2xl">
+              <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                Ready to modernise your customer enquiries?
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
+                Book a free DOS demo and see how your business could capture more bookings, respond faster, and reduce
+                missed opportunities.
+              </p>
+              <Link
+                href="/book-demo"
+                className="btn-book-demo mt-8 inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
+              >
+                Book Demo
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -137,14 +162,18 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
         />
         <div className="relative">
           <span
-            className={`inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${tone.icon} text-white shadow-[0_0_30px_-8px_rgba(168,85,247,0.7)]`}
+            className={`inline-flex w-fit rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-wider ${tone.category}`}
+          >
+            {article.category}
+          </span>
+
+          <span
+            className={`mt-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${tone.icon} text-white shadow-[0_0_30px_-8px_rgba(236,72,153,0.45)]`}
           >
             <Icon className="h-5 w-5" />
           </span>
 
-          <h3 className="mt-6 text-xl font-semibold leading-tight tracking-tight text-white">
-            {article.title}
-          </h3>
+          <h3 className="mt-5 text-xl font-semibold leading-tight tracking-tight text-white">{article.title}</h3>
           <p className="mt-4 text-sm leading-relaxed text-ink-muted">{article.excerpt}</p>
         </div>
 

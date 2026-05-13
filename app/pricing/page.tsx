@@ -93,7 +93,7 @@ function PricingSecondaryActions() {
     <div className="mt-14 flex flex-col items-center gap-4">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">Next steps</p>
       <div className="flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-3 w-full max-w-3xl">
-        <CalendlyPopupLink className="btn-ghost flex-1 min-w-[160px] inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white border border-white/12 text-center">
+        <CalendlyPopupLink className="btn-book-demo flex-1 min-w-[160px] inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white text-center">
           Book Demo
         </CalendlyPopupLink>
         <a
