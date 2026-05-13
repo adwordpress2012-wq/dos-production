@@ -26,17 +26,17 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="tracking-[0.12em] uppercase">Done-For-You AI Business Systems</span>
+              <span className="tracking-[0.12em] uppercase">Done-For-You Customer Communication Systems</span>
             </div>
 
             <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[76px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
-              <span className="text-white">Stop Missing </span>
-              <span className="text-gradient-purple">Customers.</span>
+              <span className="text-white">Never Miss Another </span>
+              <span className="text-gradient-purple">Booking Again.</span>
             </h1>
 
-            <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-2xl leading-relaxed">
-              We build and manage modern websites, AI receptionists, bookings, SMS, WhatsApp, and customer enquiry
-              systems for Australian small businesses.
+            <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-4xl leading-relaxed">
+              Modern customer communication systems for small businesses — including Smart Chat Widgets, booking
+              automation, SMS, WhatsApp, and Smart Business Assistants.
             </p>
 
             <div className="mt-8 w-full max-w-lg">
@@ -79,9 +79,9 @@ export default function Hero() {
                   </span>
                   <span className="flex flex-col">
                     <span className="inline-flex items-center gap-1.5 text-base font-semibold text-white">
-                      Try website chat demo <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                      Try Smart Chat Widget demo <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                     </span>
-                    <span className="text-sm font-medium text-emerald-200">See Micah on your site</span>
+                    <span className="text-sm font-medium text-emerald-200">See the Smart Chat Widget on your site</span>
                   </span>
                 </span>
               </a>

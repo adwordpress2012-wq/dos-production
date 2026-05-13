@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  CalendarRange,
   CheckCircle2,
   Globe,
   HeadphonesIcon,
@@ -8,6 +9,7 @@ import {
   MessageSquare,
   PhoneCall,
   ShieldCheck,
+  Smartphone,
   Sparkles,
   Workflow,
   Zap,
@@ -22,27 +24,48 @@ const MICAH_PHONE_DISPLAY = "02 5950 6382";
 const MICAH_PHONE_LINK = "tel:0259506382";
 const CHAT_DEMO_URL = "https://chatos.com.au";
 
-const PRODUCT_PILLARS = [
+const WHAT_DOS_HANDLES = [
   {
-    icon: <Globe className="h-5 w-5" />,
-    title: "Website Rebuilds",
-    description: "Modern websites built properly for Australian small businesses.",
-    href: "/website-rebuilds",
-    tone: "violet" as const,
+    icon: <MessageSquare className="h-5 w-5" />,
+    title: "Smart Chat Widgets (SCW)",
+    description: "Capture customer enquiries and booking requests directly from your website.",
+    href: "/workspace-demo",
+    tone: "cyan" as const,
   },
   {
-    icon: <PhoneCall className="h-5 w-5" />,
-    title: "Micah AI Receptionist",
-    description: "Handles customer enquiries, chats, SMS and bookings 24/7.",
+    icon: <HeadphonesIcon className="h-5 w-5" />,
+    title: "Smart Business Assistants (SBA)",
+    description: "Help respond to customer enquiries across website chat, SMS, and WhatsApp.",
     href: "/micah",
     tone: "fuchsia" as const,
   },
   {
-    icon: <LayoutDashboard className="h-5 w-5" />,
-    title: "DOS Workspace",
-    description: "Manage enquiries, bookings and customer conversations in one simple place.",
-    href: "/workspace-demo",
+    icon: <Globe className="h-5 w-5" />,
+    title: "Website Rebuilds",
+    description: "Modern websites designed to improve customer trust, speed, and conversions.",
+    href: "/website-rebuilds",
+    tone: "violet" as const,
+  },
+  {
+    icon: <CalendarRange className="h-5 w-5" />,
+    title: "Booking Automation",
+    description: "Reduce missed bookings and simplify customer enquiry flow.",
+    href: "/bos",
+    tone: "emerald" as const,
+  },
+  {
+    icon: <Smartphone className="h-5 w-5" />,
+    title: "SMS & WhatsApp",
+    description: "Respond faster and keep customer communication organised.",
+    href: "/cos",
     tone: "cyan" as const,
+  },
+  {
+    icon: <Sparkles className="h-5 w-5" />,
+    title: "Done-For-You Setup",
+    description: "DOS builds, configures, and manages the system for your business.",
+    href: "/onboarding",
+    tone: "violet" as const,
   },
 ];
 
@@ -87,7 +110,7 @@ function TryMicahLive() {
               Try <span className="text-gradient-neon">Micah Live</span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-ink-muted">
-              Call the live AI receptionist, or open the working website chat demo — the same experience your customers see.
+              Call Micah live on the phone, or open the Smart Chat Widget demo — the same experience your customers see.
             </p>
           </div>
 
@@ -135,14 +158,14 @@ function TryMicahLive() {
                   Chat Demo
                 </p>
                 <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white">
-                  Try website chat demo
+                  Try Smart Chat Widget demo
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-                  Open the live Micah chat experience in a new tab — ideal for seeing how enquiries feel from a
+                  Open the live Smart Chat Widget in a new tab — ideal for seeing how customer enquiries feel from a
                   customer&apos;s perspective.
                 </p>
                 <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-emerald-200">
-                  Open chat demo <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  Open Smart Chat Widget demo <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                 </span>
               </div>
             </a>
@@ -163,14 +186,14 @@ function WhatDosDoes() {
           eyebrow="Directive Operating Systems"
           title={
             <>
-              <span className="text-gradient-purple">Done-For-You AI</span> business systems
+              What DOS <span className="text-gradient-purple">Handles For You</span>
             </>
           }
-          description="DOS is a premium, managed platform for Australian small businesses — modern websites, Micah AI receptionist, bookings, SMS, WhatsApp and enquiry workflows without the tech overwhelm."
+          description="DOS is a premium, managed customer communication system for Australian small businesses — Smart Chat Widgets, Smart Business Assistants, website rebuilds, booking automation, SMS, WhatsApp, and enquiry workflows without the tech overwhelm."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {PRODUCT_PILLARS.map((p) => (
+          {WHAT_DOS_HANDLES.map((p) => (
             <GlowCard key={p.title} tone={p.tone} className="h-full">
               <GlowIcon tone={p.tone}>{p.icon}</GlowIcon>
               <h3 className="mt-5 text-lg font-semibold tracking-tight">{p.title}</h3>
@@ -311,7 +334,7 @@ function MicahSection() {
               <span className="text-gradient-neon">Micah</span> answers every call.
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              Micah is your AI receptionist. She picks up on the first ring, qualifies leads, books
+              Micah is your Smart Business Assistant for voice. She picks up on the first ring, qualifies leads, books
               jobs and routes urgent calls — 24/7. Trained on your business. Sounds like a real
               person.
             </p>
@@ -366,7 +389,7 @@ function PhoneMock() {
               </div>
             </div>
             <p className="mt-4 text-base font-semibold">Micah</p>
-            <p className="text-xs text-ink-muted">AI Receptionist · 02:48</p>
+            <p className="text-xs text-ink-muted">Smart Business Assistant · 02:48</p>
           </div>
           <div className="mt-6 space-y-2.5 text-[12px]">
             <Bubble who="caller">
@@ -426,7 +449,7 @@ function DosWorkspaceSection() {
               Your <span className="text-gradient-purple">business hub</span> for enquiries and bookings.
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              Manage enquiries, bookings, customer conversations and automation tools in one place — a premium client
+              Manage enquiries, bookings, customer conversations, and booking automation in one place — a premium client
               portal built for Australian small businesses, not developers.
             </p>
             <ul className="mt-7 space-y-3 text-sm text-ink-muted">
@@ -550,7 +573,7 @@ function WhyDoneForYou() {
     {
       icon: <Zap className="h-5 w-5" />,
       title: "Faster customer response",
-      description: "Micah and automated follow-ups help you reply quickly — even when you are on the tools or with clients.",
+      description: "Micah and booking automation help you reply quickly — even when you are on the tools or with clients.",
       tone: "cyan" as const,
     },
     {
@@ -751,7 +774,7 @@ function ContactSection() {
                 <textarea
                   name="message"
                   rows={3}
-                  placeholder="What are you trying to fix or automate?"
+                  placeholder="What customer communication or booking challenges can we help with?"
                   className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition resize-none"
                 />
                 <CalendlyPopupLink
