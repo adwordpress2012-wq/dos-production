@@ -1,9 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, MessageSquare, PhoneCall, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import TryDosWorkspaceCta from "./TryDosWorkspaceCta";
+import CalendlyPopupLink from "./CalendlyPopupLink";
 
 const MICAH_PHONE_DISPLAY = "02 5950 6382";
 const MICAH_PHONE_LINK = "tel:0259506382";
-const COS_DEMO_URL = "https://chatos.com.au";
+const CHAT_DEMO_URL = "https://chatos.com.au";
+const MAIL_WEBSITE_AUDIT =
+  "mailto:hello@directiveos.com?subject=Request%20Website%20Audit%20—%20DOS";
+const MAIL_JAYSON = "mailto:jayson@directiveos.com.au?subject=Talk%20With%20Jayson%20—%20DOS";
 
 export default function Hero() {
   return (
@@ -21,18 +26,22 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="tracking-[0.16em] uppercase">LIVE AI VOICE + CHAT DEMO</span>
+              <span className="tracking-[0.12em] uppercase">Done-For-You AI Business Systems</span>
             </div>
 
-            <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
-            <span className="text-white">Never Miss Another</span>{" "}
-<span className="text-gradient-purple">Booking</span>{" "}
-<span className="text-white">Again.</span>
+            <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[76px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
+              <span className="text-white">Stop Missing </span>
+              <span className="text-gradient-purple">Customers.</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-2xl leading-relaxed">
-              Experience Micah live — call our AI receptionist or try the website chat demo powered by COS.
+              We build and manage modern websites, AI receptionists, bookings, SMS, WhatsApp, and customer enquiry
+              systems for Australian small businesses.
             </p>
+
+            <div className="mt-8 w-full max-w-lg">
+              <TryDosWorkspaceCta variant="hero" />
+            </div>
 
             <div className="mt-9 grid w-full max-w-2xl gap-3 sm:grid-cols-2">
               <a
@@ -50,14 +59,12 @@ export default function Hero() {
                   </span>
                   <span className="flex flex-col">
                     <span className="text-base font-semibold text-white">Call Micah Now</span>
-                    <span className="font-mono text-sm tracking-wider text-cyan-200">
-                      {MICAH_PHONE_DISPLAY}
-                    </span>
+                    <span className="font-mono text-sm tracking-wider text-cyan-200">{MICAH_PHONE_DISPLAY}</span>
                   </span>
                 </span>
               </a>
               <a
-                href={COS_DEMO_URL}
+                href={CHAT_DEMO_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="group relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/15 via-emerald-400/10 to-violet-500/15 px-5 py-4 text-left ring-glow-soft transition hover:border-cyan-300/70 hover:from-cyan-400/25 hover:via-emerald-400/20 hover:to-violet-500/25"
@@ -72,15 +79,33 @@ export default function Hero() {
                   </span>
                   <span className="flex flex-col">
                     <span className="inline-flex items-center gap-1.5 text-base font-semibold text-white">
-                      Try Micah Chat Demo <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+                      Try website chat demo <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                     </span>
-                    <span className="text-sm font-medium text-emerald-200">Powered by COS</span>
+                    <span className="text-sm font-medium text-emerald-200">See Micah on your site</span>
                   </span>
                 </span>
               </a>
             </div>
 
-            <div className="mt-5 flex flex-col sm:flex-row items-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              <CalendlyPopupLink className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-white">
+                Book Demo
+              </CalendlyPopupLink>
+              <a
+                href={MAIL_WEBSITE_AUDIT}
+                className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-white"
+              >
+                Request Website Audit
+              </a>
+              <a
+                href={MAIL_JAYSON}
+                className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-white"
+              >
+                Talk With Jayson
+              </a>
+            </div>
+
+            <div className="mt-4 flex flex-col sm:flex-row items-center gap-3">
               <Link
                 href="/pricing"
                 className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
@@ -103,12 +128,12 @@ export default function Hero() {
                 <Zap className="h-3.5 w-3.5 text-cyan-400" /> Live in 7–14 days
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-violet-300" /> Managed end-to-end
+                <Sparkles className="h-3.5 w-3.5 text-violet-300" /> Managed for you
               </span>
             </div>
           </div>
 
-          {/* Hero dashboard mock */}
+          {/* Hero workspace mock */}
           <div className="relative mt-16 sm:mt-20">
             <div
               aria-hidden
@@ -123,7 +148,7 @@ export default function Hero() {
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/60" />
                   </div>
                   <div className="flex-1 text-center text-[11px] font-mono tracking-widest uppercase text-ink-dim">
-                    dos · command centre
+                    dos · workspace
                   </div>
                   <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300 border border-emerald-400/20">
                     <span className="h-1 w-1 rounded-full bg-emerald-400" />
@@ -132,24 +157,24 @@ export default function Hero() {
                 </div>
 
                 <div className="grid grid-cols-12 gap-3 p-4">
-                  <DashStat label="Calls handled by Micah" value="1,284" delta="+18%" tone="violet" />
-                  <DashStat label="Bookings via BOS" value="312" delta="+9%" tone="emerald" />
-                  <DashStat label="COS conversations" value="4,902" delta="+24%" tone="cyan" />
+                  <DashStat label="Calls answered by Micah" value="1,284" delta="+18%" tone="violet" />
+                  <DashStat label="Bookings confirmed" value="312" delta="+9%" tone="emerald" />
+                  <DashStat label="New enquiries captured" value="4,902" delta="+24%" tone="cyan" />
 
                   <div className="col-span-12 lg:col-span-7 rounded-xl border border-white/5 bg-white/[0.02] p-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium text-ink-muted">Lead pipeline</span>
+                      <span className="text-xs font-medium text-ink-muted">Enquiry pipeline</span>
                       <span className="text-[10px] font-mono uppercase tracking-widest text-ink-dim">last 30d</span>
                     </div>
                     <Sparkline />
                   </div>
 
                   <div className="col-span-12 lg:col-span-5 rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                    <span className="text-xs font-medium text-ink-muted">Live activity</span>
+                    <span className="text-xs font-medium text-ink-muted">Recent activity</span>
                     <ul className="mt-3 space-y-2.5 text-[12px]">
                       <ActivityRow tone="violet" who="Micah" what="Booked 9:30am with Sarah W." when="just now" />
-                      <ActivityRow tone="cyan" who="COS" what="Replied to SMS lead — Toowoomba" when="2m" />
-                      <ActivityRow tone="emerald" who="BOS" what="Reminder sent · 14 attendees" when="6m" />
+                      <ActivityRow tone="cyan" who="Inbox" what="SMS reply sent — Toowoomba lead" when="2m" />
+                      <ActivityRow tone="emerald" who="Bookings" what="Reminders sent · 14 customers" when="6m" />
                       <ActivityRow tone="violet" who="Micah" what="Qualified inbound call · 3:48" when="11m" />
                     </ul>
                   </div>
@@ -195,7 +220,6 @@ function DashStat({
 }
 
 function Sparkline() {
-  // Simple inline SVG sparkline.
   const points = [10, 14, 12, 18, 22, 19, 26, 30, 28, 34, 38, 36, 44, 42, 50, 56];
   const w = 320;
   const h = 80;
@@ -247,7 +271,9 @@ function ActivityRow({
   return (
     <li className="flex items-center justify-between gap-2">
       <div className="flex items-center gap-2 min-w-0">
-        <span className={`shrink-0 rounded-md border px-1.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase ${chip}`}>
+        <span
+          className={`shrink-0 rounded-md border px-1.5 py-0.5 text-[10px] font-semibold tracking-wider uppercase ${chip}`}
+        >
           {who}
         </span>
         <span className="truncate text-ink-muted">{what}</span>

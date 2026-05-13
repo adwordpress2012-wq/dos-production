@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
-
-const CALENDLY_URL = "https://calendly.com/adwordpress2012/dos-ai-business-system-demo";
+import TryDosWorkspaceCta from "./TryDosWorkspaceCta";
+import CalendlyPopupLink from "./CalendlyPopupLink";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
@@ -39,14 +39,12 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center justify-end gap-2">
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="hidden sm:inline-flex btn-neon text-sm font-semibold text-white px-4 py-2 rounded-xl"
+            <TryDosWorkspaceCta variant="nav" showSupportingText={false} className="hidden md:inline-flex" />
+            <CalendlyPopupLink
+              className="hidden sm:inline-flex btn-ghost text-sm font-semibold text-white px-4 py-2 rounded-xl border border-white/10"
             >
               Book Demo
-            </a>
+            </CalendlyPopupLink>
             <button
               onClick={() => setOpen((v) => !v)}
               className="lg:hidden btn-ghost rounded-xl p-2"
@@ -72,15 +70,12 @@ export default function Nav() {
               ))}
             </div>
             <div className="mt-2 grid grid-cols-1 gap-2">
-              <a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setOpen(false)}
+              <TryDosWorkspaceCta variant="nav" showSupportingText={false} className="w-full text-center justify-center" />
+              <CalendlyPopupLink
                 className="btn-neon text-center text-sm font-semibold text-white px-3 py-2.5 rounded-xl"
               >
                 Book Demo
-              </a>
+              </CalendlyPopupLink>
             </div>
           </div>
         )}

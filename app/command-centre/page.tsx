@@ -18,8 +18,8 @@ import {
 } from "@/app/lib/admin-dashboard";
 
 export const metadata: Metadata = {
-  title: "Overview · Command Centre",
-  description: "DOS Command Centre — leads, clients, and pipeline at a glance.",
+  title: "Overview · DOS Workspace",
+  description: "DOS Workspace — leads, clients and pipeline at a glance.",
 };
 
 export const dynamic = "force-dynamic";
@@ -68,7 +68,7 @@ export default async function CommandCentreOverviewPage() {
               Overview
             </span>
             <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.05]">
-              Command Centre
+              DOS Workspace
             </h1>
             <p className="mt-3 text-ink-muted max-w-2xl leading-relaxed">
               Real-time snapshot of your CRM pipeline and paying clients — wired to Supabase.

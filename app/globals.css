@@ -140,6 +140,39 @@ body {
     0 0 80px -10px rgba(34, 211, 238, 0.45);
 }
 
+@keyframes workspace-cta-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+      0 0 32px -8px rgba(124, 58, 237, 0.75),
+      0 0 64px -16px rgba(34, 211, 238, 0.38);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+      0 0 48px -6px rgba(168, 85, 247, 0.9),
+      0 0 88px -12px rgba(34, 211, 238, 0.52);
+  }
+}
+
+.btn-workspace-glow {
+  background: linear-gradient(135deg, #6d28d9 0%, #6366f1 42%, #0891b2 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  animation: workspace-cta-pulse 2.8s ease-in-out infinite;
+  transition:
+    transform 200ms ease,
+    filter 200ms ease,
+    background-position 600ms ease;
+}
+
+.btn-workspace-glow:hover {
+  background-position: 100% 50%;
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+}
+
 .btn-ghost {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);

@@ -25,8 +25,8 @@ export default function Page() {
       bullets={[
         "Answers in under 2 seconds",
         "24/7 — including weekends and after hours",
-        "Books directly into BOS",
-        "Sends SMS follow-ups via COS",
+        "Books appointments into your calendar",
+        "Sends SMS follow-ups automatically",
         "Multilingual (EN, simplified Mandarin, more)",
         "Full transcripts + recordings",
       ]}
@@ -47,7 +47,7 @@ export default function Page() {
           icon: <Workflow className="h-5 w-5" />,
           title: "Books and routes",
           description:
-            "She books into BOS, sends confirmations via COS, and routes urgent calls to your on-call number.",
+            "She books jobs, sends confirmations by SMS, and routes urgent calls to your on-call number.",
         },
         {
           icon: <Languages className="h-5 w-5" />,
@@ -59,7 +59,7 @@ export default function Page() {
           icon: <FileText className="h-5 w-5" />,
           title: "Transcripts + recordings",
           description:
-            "Every call is logged with a clean transcript and audio. Reviewable in Command Centre.",
+            "Every call is logged with a clean transcript and audio — reviewable in DOS Workspace.",
         },
         {
           icon: <PhoneCall className="h-5 w-5" />,
@@ -79,11 +79,11 @@ export default function Page() {
         },
         {
           q: "What if Micah doesn't know an answer?",
-          a: "She gracefully defers — captures contact details, sends a follow-up via COS, and flags the call for human review in Command Centre.",
+          a: "She gracefully defers — captures contact details, sends a follow-up message, and flags the call for your team in DOS Workspace.",
         },
         {
           q: "How is this priced?",
-          a: "Included in Growth and Scale plans. See pricing for monthly call volume tiers.",
+          a: "Included in DOS Nexus and DOS Titan. See pricing for details.",
         },
       ]}
       illustration={

@@ -4,8 +4,7 @@ import Logo from "./Logo";
 const PRODUCTS = [
   { href: "/website-rebuilds", label: "Website Rebuilds" },
   { href: "/micah", label: "Micah AI Receptionist" },
-  { href: "/cos", label: "COS Communication" },
-  { href: "/bos", label: "BOS Booking" },
+  { href: "/workspace-demo", label: "DOS Workspace" },
 ];
 
 const COMPANY = [
@@ -34,8 +33,8 @@ export default function Footer() {
               <Logo className="h-20 w-auto" />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted max-w-sm">
-              Done-For-You AI Business Systems. Websites, AI receptionists, booking systems,
-              automation and managed business infrastructure for modern Australian businesses.
+              Done-For-You AI Business Systems — modern websites, Micah AI receptionist, bookings, messaging and DOS
+              Workspace for Australian small businesses.
             </p>
             <p className="mt-6 text-xs text-ink-dim">
               Operated in Australia · ABN supplied on invoice · Built on Vercel + Supabase

@@ -30,7 +30,7 @@ const CHANNELS = [
   { id: "micah", label: "Micah AI receptionist" },
   { id: "cos", label: "COS communication system" },
   { id: "bos", label: "BOS booking system" },
-  { id: "command", label: "Command Centre dashboard" },
+  { id: "command", label: "DOS Workspace" },
 ];
 
 const WEBSITE_POLICY_SUMMARY = [

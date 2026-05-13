@@ -5,6 +5,7 @@ import { useState } from "react";
 import { CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 import type { PLAN_CATALOG, PlanId } from "../lib/stripe";
 import CalendlyPopupLink from "../components/CalendlyPopupLink";
+import TryDosWorkspaceCta from "../components/TryDosWorkspaceCta";
 
 type Plan = (typeof PLAN_CATALOG)[number];
 
@@ -38,10 +39,13 @@ export default function PricingPlans({ plans }: Props) {
 
   return (
     <>
-      <div className="mt-12 sm:mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4 items-stretch">
+      <div className="mt-12 sm:mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3 items-stretch">
         {plans.map((plan) => {
           const isHighlight = plan.highlight;
           const title = plan.headline ?? plan.name;
+          const showMessaging = Boolean(plan.messagingTitle && plan.messagingLines.length > 0);
+          const showUsage = plan.usageRateLines.length > 0;
+          const showDisclaimer = plan.disclaimer.trim().length > 0;
           return (
             <div
               key={plan.id}
@@ -61,6 +65,7 @@ export default function PricingPlans({ plans }: Props) {
               )}
               <div className={plan.badge || isHighlight ? "mt-3 sm:mt-4" : ""}>
                 <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
+                <p className="mt-2 text-sm text-violet-200/85 leading-snug">{plan.positioning}</p>
                 <div className="mt-3 flex items-baseline gap-2 flex-wrap">
                   <span className="text-3xl sm:text-4xl font-semibold tracking-tight break-words">
                     {plan.priceLabel}
@@ -76,7 +81,7 @@ export default function PricingPlans({ plans }: Props) {
               </div>
 
               <p className="mt-5 text-[11px] font-semibold tracking-wide text-ink-muted">Includes</p>
-              <ul className="mt-2 space-y-2 text-sm text-ink-muted flex-1 min-h-[7rem] sm:min-h-[7.5rem]">
+              <ul className="mt-2 space-y-2 text-sm text-ink-muted flex-1 min-h-0">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
@@ -85,44 +90,53 @@ export default function PricingPlans({ plans }: Props) {
                 ))}
               </ul>
 
-              <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.02] px-3.5 py-3">
-                <p className="text-[11px] font-semibold tracking-wide text-violet-200/90">
-                  {plan.messagingTitle}
-                </p>
-                <ul className="mt-2 space-y-1.5 text-sm text-ink-muted">
-                  {plan.messagingLines.map((line) => (
-                    <li key={line} className="flex items-start gap-2">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-cyan-400/80" />
-                      <span className="leading-snug">{line}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {showMessaging ? (
+                <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.02] px-3.5 py-3">
+                  <p className="text-[11px] font-semibold tracking-wide text-violet-200/90">
+                    {plan.messagingTitle}
+                  </p>
+                  <ul className="mt-2 space-y-1.5 text-sm text-ink-muted">
+                    {plan.messagingLines.map((line) => (
+                      <li key={line} className="flex items-start gap-2">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-cyan-400/80" />
+                        <span className="leading-snug">{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
 
-              <div className="mt-3">
-                <p className="text-[11px] font-semibold tracking-wide text-ink-muted">
-                  Additional usage
-                </p>
-                <ul className="mt-2 space-y-1.5 text-sm text-ink-muted">
-                  {plan.usageRateLines.map((line) => (
-                    <li key={line} className="flex items-start gap-2">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/30" />
-                      <span className="leading-snug">{line}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {showUsage ? (
+                <div className="mt-3">
+                  <p className="text-[11px] font-semibold tracking-wide text-ink-muted">Additional usage</p>
+                  <ul className="mt-2 space-y-1.5 text-sm text-ink-muted">
+                    {plan.usageRateLines.map((line) => (
+                      <li key={line} className="flex items-start gap-2">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/30" />
+                        <span className="leading-snug">{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
 
-              <p className="mt-4 text-[11px] sm:text-xs text-ink-dim leading-relaxed">{plan.disclaimer}</p>
+              {showDisclaimer ? (
+                <p className="mt-4 text-[11px] sm:text-xs text-ink-dim leading-relaxed">{plan.disclaimer}</p>
+              ) : null}
 
-              <div className="mt-5 pt-1 mt-auto">
+              <div className="mt-5 pt-1 mt-auto space-y-3">
+                <TryDosWorkspaceCta
+                  variant="card"
+                  supportingText="See how DOS manages enquiries, bookings & customer conversations."
+                />
+
                 {plan.cta.kind === "stripe" ? (
                   <button
                     type="button"
                     onClick={() => startCheckout(plan.id)}
                     disabled={loadingId !== null}
                     className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition cursor-pointer disabled:opacity-60 ${
-                      isHighlight ? "btn-neon text-white" : "btn-ghost text-white"
+                      isHighlight ? "btn-ghost text-white border border-white/15" : "btn-ghost text-white"
                     }`}
                   >
                     {loadingId === plan.id ? (
@@ -139,7 +153,7 @@ export default function PricingPlans({ plans }: Props) {
                   <a
                     href={plan.cta.href}
                     className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition ${
-                      isHighlight ? "btn-neon text-white" : "btn-ghost text-white"
+                      isHighlight ? "btn-ghost text-white border border-white/15" : "btn-ghost text-white"
                     }`}
                   >
                     {plan.cta.label} <ArrowRight className="h-4 w-4 shrink-0" />
@@ -148,7 +162,7 @@ export default function PricingPlans({ plans }: Props) {
                   plan.cta.label.toLowerCase().includes("strategy call") ? (
                   <CalendlyPopupLink
                     className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition ${
-                      isHighlight ? "btn-neon text-white" : "btn-ghost text-white"
+                      isHighlight ? "btn-ghost text-white border border-white/15" : "btn-ghost text-white"
                     }`}
                   >
                     {plan.cta.label} <ArrowRight className="h-4 w-4 shrink-0" />
@@ -157,7 +171,7 @@ export default function PricingPlans({ plans }: Props) {
                   <Link
                     href={plan.cta.href}
                     className={`w-full inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition ${
-                      isHighlight ? "btn-neon text-white" : "btn-ghost text-white"
+                      isHighlight ? "btn-ghost text-white border border-white/15" : "btn-ghost text-white"
                     }`}
                   >
                     {plan.cta.label} <ArrowRight className="h-4 w-4 shrink-0" />

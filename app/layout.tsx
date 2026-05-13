@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "DOS",
   },
   description:
-    "Modernise and automate your business. DOS delivers websites, AI receptionists, booking systems, automation and managed business infrastructure for modern Australian businesses.",
+    "Stop missing customers. DOS delivers modern websites, Micah AI receptionist, bookings, SMS, WhatsApp and DOS Workspace — managed for Australian small businesses.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -42,8 +42,7 @@ export const metadata: Metadata = {
     "website rebuilds",
     "done for you SaaS",
     "Micah AI",
-    "COS communication system",
-    "BOS booking system",
+    "DOS Workspace",
     "DirectiveOS",
   ],
   openGraph: {
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "DOS",
     description:
-      "Modernise and automate your business with DOS. Websites, AI receptionists, booking systems and Command Centre — done for you.",
+      "Modernise and automate your business with DOS. Websites, Micah AI receptionist, bookings, messaging and DOS Workspace — done for you.",
   },
   robots: {
     index: true,
