@@ -58,39 +58,65 @@ export default function Nav() {
               Book Demo
             </CalendlyPopupLink>
             <button
+              type="button"
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden btn-ghost rounded-xl p-2"
-              aria-label="Toggle menu"
+              className="lg:hidden btn-ghost inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="dos-mobile-menu"
             >
-              {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              {open ? <X className="h-5 w-5" aria-hidden /> : <Menu className="h-5 w-5" aria-hidden />}
             </button>
           </div>
         </div>
 
-        {open && (
-          <div className={`lg:hidden mt-2 ${shellClass} rounded-2xl p-3 animate-fade-up`}>
-            <div className="grid grid-cols-2 gap-1">
-              {NAV_LINKS.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
+        <div
+          id="dos-mobile-menu"
+          role="navigation"
+          aria-label="Mobile menu"
+          aria-hidden={!open}
+          className={`lg:hidden grid motion-reduce:transition-none transition-[grid-template-rows,margin-top] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+            open ? "grid-rows-[1fr] mt-2" : "grid-rows-[0fr] mt-0"
+          }`}
+        >
+          <div
+            className={`min-h-0 overflow-hidden ${!open ? "pointer-events-none" : ""}`}
+            inert={!open ? true : undefined}
+          >
+            <div
+              className={`nav-mobile-panel rounded-2xl p-4 sm:p-5 motion-reduce:transition-none transition-[opacity,transform] duration-300 ease-out ${
+                open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1.5"
+              }`}
+            >
+              <div className="flex flex-col gap-3">
+                {NAV_LINKS.map((l) => (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className="nav-mobile-link rounded-xl px-4 py-3.5 text-base font-medium leading-snug"
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
+
+              <div className="mt-5 border-t border-white/[0.07] pt-5 flex flex-col gap-3">
+                <TryDosWorkspaceCta
+                  variant="nav"
+                  showSupportingText={false}
+                  className="w-full min-h-[48px] !py-3.5 !px-4 justify-center text-sm"
+                />
+                <CalendlyPopupLink
                   onClick={() => setOpen(false)}
-                  className="nav-link px-3 py-2.5 text-sm font-medium rounded-lg hover:bg-white/[0.07] transition"
+                  className="btn-neon flex w-full min-h-[48px] items-center justify-center rounded-xl px-4 py-3.5 text-center text-sm font-semibold text-white"
                 >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-            <div className="mt-2 grid grid-cols-1 gap-2">
-              <TryDosWorkspaceCta variant="nav" showSupportingText={false} className="w-full text-center justify-center" />
-              <CalendlyPopupLink
-                className="btn-neon text-center text-sm font-semibold text-white px-3 py-2.5 rounded-xl"
-              >
-                Book Demo
-              </CalendlyPopupLink>
+                  Book Demo
+                </CalendlyPopupLink>
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
