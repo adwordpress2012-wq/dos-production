@@ -114,7 +114,7 @@ export default function BlogPage() {
 
           <div className="mt-12 grid gap-5 lg:grid-cols-3">
             {ARTICLES.map((article) => (
-              <ArticleCard key={article.title} article={article} />
+              <ArticleCard key={article.slug} article={article} />
             ))}
           </div>
 
