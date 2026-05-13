@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 const ARTICLES = [
   {
+    slug: "why-small-businesses-miss-bookings",
     title: "Why Small Businesses Miss Bookings — And How To Fix It",
     excerpt:
       "Many small businesses lose enquiries because customers call after hours, messages get missed, or websites do not guide people to take action. DOS helps solve this with Smart Chat Widgets, booking automation, SMS, WhatsApp, and done-for-you setup.",
@@ -18,6 +19,7 @@ const ARTICLES = [
     tone: "violet",
   },
   {
+    slug: "your-website-should-do-more-than-look-good",
     title: "Your Website Should Do More Than Look Good",
     excerpt:
       "A modern business website should build trust, load fast, capture enquiries, and make it easy for customers to book or contact you. DOS rebuilds websites around real business outcomes, not just design.",
@@ -26,6 +28,7 @@ const ARTICLES = [
     tone: "cyan",
   },
   {
+    slug: "smart-chat-widgets-vs-basic-contact-forms",
     title: "Smart Chat Widgets vs Basic Contact Forms",
     excerpt:
       "Basic contact forms rely on customers waiting for a reply. Smart Chat Widgets help guide customers instantly, capture details, answer common questions, and improve enquiry flow across website chat, SMS, and WhatsApp.",
@@ -146,6 +149,7 @@ export default function BlogPage() {
 function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
   const tone = TONE_STYLES[article.tone];
   const Icon = article.icon;
+  const href = `/blog/${article.slug}`;
 
   return (
     <article className="group relative h-full">
@@ -153,8 +157,9 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
         aria-hidden
         className={`absolute -inset-px rounded-3xl bg-gradient-to-br ${tone.glow} opacity-70 blur-md transition duration-500 group-hover:opacity-100`}
       />
-      <div
-        className={`relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-7 backdrop-blur transition duration-300 ${tone.border} group-hover:bg-white/[0.055]`}
+      <Link
+        href={href}
+        className={`relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-7 text-left backdrop-blur transition duration-300 outline-none focus-visible:ring-2 focus-visible:ring-violet-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#04060c] ${tone.border} group-hover:bg-white/[0.055]`}
       >
         <div
           aria-hidden
@@ -181,9 +186,9 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
           className={`relative mt-8 inline-flex w-fit items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-semibold ${tone.text} transition group-hover:border-white/20 group-hover:bg-white/[0.07]`}
         >
           Read More
-          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+          <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
         </span>
-      </div>
+      </Link>
     </article>
   );
 }
