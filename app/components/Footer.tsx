@@ -66,7 +66,7 @@ export default function Footer() {
               ))}
             </ul>
             <p className="mt-5 text-xs text-ink-dim font-mono tracking-wide break-all">
-              hellow@directiveos.com.au
+              hello@directiveos.com.au
             </p>
           </div>
 
