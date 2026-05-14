@@ -68,7 +68,7 @@ export default function Page() {
                 </span>
                 <div>
                   <div className="text-[11px] font-mono uppercase tracking-widest text-ink-dim">Email</div>
-                  <div className="text-sm font-medium">hello@directiveos.com.au</div>
+                  <div className="text-sm font-medium">hellow@directiveos.com.au</div>
                 </div>
               </div>
               <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">

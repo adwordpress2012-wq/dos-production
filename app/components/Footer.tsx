@@ -10,7 +10,7 @@ const PRODUCTS = [
 const COMPANY = [
   { href: "/pricing", label: "Pricing" },
   { href: "/onboarding", label: "Onboarding" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Contact Us" },
 ];
 
 const LEGAL = [
@@ -66,7 +66,7 @@ export default function Footer() {
               ))}
             </ul>
             <p className="mt-5 text-xs text-ink-dim font-mono tracking-wide break-all">
-              hello@directiveos.com.au
+              hellow@directiveos.com.au
             </p>
           </div>
 

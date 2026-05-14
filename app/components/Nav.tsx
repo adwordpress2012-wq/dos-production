@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: "/website-rebuilds", label: "Websites" },
   { href: "/pricing", label: "Pricing" },
   { href: "/blog", label: "Blog" },
+  { href: "/contact", label: "Contact Us" },
 ];
 
 export default function Nav() {
