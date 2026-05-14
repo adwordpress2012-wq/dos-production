@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -68,6 +69,7 @@ export default function Home() {
       <TryMicahLive />
       <WhatDosDoes />
       <WebsiteRebuildsSection />
+      <ModernSystemsInActionSection />
       <SmartCommunicationSystemsSection />
       <MicahSection />
       <DoneForYouInfrastructureSection />
@@ -306,6 +308,181 @@ function BrowserMock() {
         </div>
       </div>
     </div>
+  );
+}
+
+const CAPITAL_CASE_STUDY_HREF = "/case-studies/capital-recruitment";
+
+const CAPITAL_PROOF_TAGS = [
+  "Modern Smart Website",
+  "Recruitment Portal",
+  "Resume Uploads",
+  "Admin Workflow",
+  "Secure Backend",
+  "DOS HUB Ready",
+] as const;
+
+function RecruitmentPortalMock() {
+  return (
+    <div className="relative">
+      <div
+        aria-hidden
+        className="absolute -inset-5 rounded-[26px] bg-gradient-to-br from-emerald-500/20 via-violet-500/15 to-transparent blur-2xl opacity-70"
+      />
+      <div className="relative glass-strong rounded-2xl p-2 ring-glow-soft">
+        <div className="rounded-xl bg-[#06080f] border border-white/5 overflow-hidden">
+          <div className="flex items-center gap-2 px-3 py-2 border-b border-white/5">
+            <div className="flex gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-red-400/60" />
+              <span className="h-2 w-2 rounded-full bg-amber-300/60" />
+              <span className="h-2 w-2 rounded-full bg-emerald-400/60" />
+            </div>
+            <div className="ml-2 flex-1 truncate rounded-md bg-white/[0.03] border border-white/5 px-3 py-1 text-[10px] text-ink-dim font-mono">
+              recruitment portal preview
+            </div>
+          </div>
+          <div className="p-4 sm:p-5">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-200/90">Open roles</span>
+              <span className="hidden sm:inline rounded-md border border-white/10 bg-white/[0.03] px-2 py-1 text-[10px] text-ink-dim">
+                Apply + resume
+              </span>
+            </div>
+            <div className="mt-4 space-y-2">
+              {[
+                ["Senior Consultant", "Sydney · Full-time"],
+                ["Healthcare Recruiter", "Melbourne · Contract"],
+                ["Office Coordinator", "Brisbane · Part-time"],
+              ].map(([title, meta]) => (
+                <div
+                  key={title}
+                  className="flex items-center justify-between gap-2 rounded-lg border border-white/6 bg-white/[0.02] px-3 py-2.5"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate text-[12px] font-medium text-white/90">{title}</p>
+                    <p className="truncate text-[10px] text-ink-dim">{meta}</p>
+                  </div>
+                  <span className="shrink-0 rounded-md border border-emerald-400/25 bg-emerald-400/10 px-2 py-1 text-[9px] font-semibold uppercase tracking-wider text-emerald-200">
+                    View
+                  </span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 rounded-lg border border-dashed border-white/10 bg-white/[0.02] px-3 py-3 text-center">
+              <p className="text-[10px] font-medium uppercase tracking-wider text-ink-dim">Résumé upload</p>
+              <p className="mt-1 text-[10px] text-ink-muted">PDF / DOC · secure handoff</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ModernSystemsInActionSection() {
+  return (
+    <section id="modern-systems-in-action" className="relative py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <SectionHeader
+          title={
+            <>
+              Modern Systems In <span className="text-gradient-purple">Action</span>
+            </>
+          }
+          description="Featured client spotlight — real systems in production, told in plain language without inflated metrics."
+        />
+
+        <div className="relative mt-12 lg:mt-14">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-px rounded-[28px] bg-gradient-to-br from-violet-500/20 via-transparent to-emerald-400/15 opacity-80 blur-xl"
+          />
+          <div className="relative overflow-hidden rounded-[26px] glass-strong p-6 sm:p-8 lg:p-10 ring-glow">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -top-24 right-0 h-64 w-64 rounded-full bg-violet-500/20 blur-[100px]"
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-emerald-400/15 blur-[90px]"
+            />
+
+            <div className="relative grid gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
+              <div className="lg:col-span-12 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-2 border-b border-white/[0.06]">
+                <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5 self-start sm:self-auto">
+                  <Image
+                    src="/clients/capital-recruitment-logo.png"
+                    alt="Capital Recruitment Agency Aust"
+                    width={220}
+                    height={131}
+                    className="h-8 sm:h-9 w-auto max-w-[160px] sm:max-w-[180px] object-contain object-left opacity-[0.92]"
+                    sizes="(max-width: 640px) 160px, 180px"
+                  />
+                </div>
+                <span className="inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-emerald-200">
+                  Featured case study
+                </span>
+              </div>
+
+              <div className="lg:col-span-5 order-2 lg:order-1">
+                <p className="text-[10px] font-mono uppercase tracking-[0.28em] text-ink-dim">Interface preview</p>
+                <div className="mt-3">
+                  <RecruitmentPortalMock />
+                </div>
+              </div>
+
+              <div className="lg:col-span-7 order-1 lg:order-2">
+                <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Capital Recruitment</h3>
+                <p className="mt-2 text-sm sm:text-base font-medium text-violet-200/90">Modern Smart Recruitment Platform</p>
+                <p className="mt-4 text-sm sm:text-base text-ink-muted leading-relaxed max-w-2xl">
+                  A full recruitment website rebuild with live job listings, resume uploads, applicant management, admin
+                  workflows, and secure backend infrastructure.
+                </p>
+
+                <figure className="mt-6 sm:mt-7">
+                  <blockquote className="border-l-2 border-emerald-400/35 pl-4 sm:pl-5">
+                    <p className="text-sm sm:text-[15px] leading-relaxed text-white/85">
+                      &ldquo;Jaze and DOS completely modernised our online presence and recruitment workflow. The new
+                      platform looks professional, works great on mobile, and makes job applications much easier to
+                      manage. The admin system and resume uploads have already improved how we handle applicants. Highly
+                      recommend DOS for businesses wanting a modern smart system — not just a basic website.&rdquo;
+                    </p>
+                  </blockquote>
+                  <figcaption className="mt-3 pl-4 sm:pl-5 text-sm text-ink-muted">
+                    <span className="text-white/70">&mdash; Paul,</span> Capital Recruitment
+                  </figcaption>
+                </figure>
+
+                <ul className="mt-6 flex flex-wrap gap-2" aria-label="Project highlights">
+                  {CAPITAL_PROOF_TAGS.map((tag) => (
+                    <li key={tag}>
+                      <span className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-ink-muted">
+                        {tag}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-7 flex flex-col sm:flex-row flex-wrap gap-3">
+                  <Link
+                    href={CAPITAL_CASE_STUDY_HREF}
+                    className="btn-neon inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
+                  >
+                    View Case Study <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    href="/website-rebuilds"
+                    className="btn-ghost inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
+                  >
+                    Explore Recruitment Systems
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
