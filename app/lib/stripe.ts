@@ -70,7 +70,7 @@ export const PLAN_CATALOG: readonly PublicPlan[] = [
     cta: {
       kind: "link",
       label: "Apply Now",
-      href: "mailto:hello@directiveos.com?subject=Apply%20for%20Founding%20Member%20Access",
+      href: "/contact",
     },
   },
   {

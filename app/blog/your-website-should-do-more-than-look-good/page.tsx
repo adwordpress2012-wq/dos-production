@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import BlogArticleLayout, { BlogSection } from "../_components/BlogArticleLayout";
-import { MAIL_WEBSITE_AUDIT } from "../constants";
+import { CONTACT_PAGE_PATH } from "../constants";
 
 export const metadata: Metadata = {
   title: "Your Website Should Do More Than Look Good | DOS Insights",
@@ -15,9 +15,9 @@ export default function YourWebsiteShouldDoMorePage() {
       category="Website Rebuilds"
       intro="Design matters — but your website’s real job is to turn attention into enquiries and bookings. Here is what “more than look good” means in practice, and how DOS approaches website rebuilds."
       cta={{
-        kind: "mailto",
+        kind: "page",
         label: "Request a website rebuild audit",
-        href: MAIL_WEBSITE_AUDIT,
+        href: CONTACT_PAGE_PATH,
         buttonStyle: "neon",
       }}
     >

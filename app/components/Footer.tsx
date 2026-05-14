@@ -10,7 +10,7 @@ const PRODUCTS = [
 const COMPANY = [
   { href: "/pricing", label: "Pricing" },
   { href: "/onboarding", label: "Onboarding" },
-  { href: "mailto:hello@directiveos.com", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const LEGAL = [

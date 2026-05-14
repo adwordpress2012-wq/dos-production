@@ -108,10 +108,10 @@ export default function Page() {
             </div>
 
             <p className="mt-6 text-xs text-ink-dim">
-              Questions? Email{" "}
-              <a href="mailto:hello@directiveos.com" className="text-violet-300 hover:text-violet-200">
-                hello@directiveos.com
-              </a>
+              Questions?{" "}
+              <Link href="/contact" className="text-violet-300 hover:text-violet-200">
+                Contact us
+              </Link>
               .
             </p>
           </div>

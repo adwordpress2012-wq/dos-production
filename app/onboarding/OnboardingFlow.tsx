@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, ArrowLeft, CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import { readJsonOrNull } from "@/app/lib/safe-response-json";
 
 type Props = {
   planId?: string;
@@ -104,12 +105,19 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, planId, stripeSessionId }),
       });
-      const data = (await res.json()) as {
+      const data = await readJsonOrNull<{
         ok?: boolean;
         mode?: "saved" | "queued";
         tenant?: { name: string; subdomain: string };
         error?: string;
-      };
+      }>(res);
+      if (data == null) {
+        throw new Error(
+          res.ok
+            ? "We could not read the server response (empty or invalid). Please try again, or use the contact page if this keeps happening."
+            : `Request failed (${res.status}). Please try again or reach us via the contact page.`
+        );
+      }
       if (!res.ok || !data.ok) {
         throw new Error(data.error ?? "Could not submit onboarding.");
       }

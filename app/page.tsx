@@ -1102,9 +1102,9 @@ function ContactSection() {
             <div className="mt-8 grid gap-3">
               <ContactRow
                 icon={<MessageSquare className="h-4 w-4 text-cyan-300" />}
-                label="Email"
-                value="hello@directiveos.com"
-                href="mailto:hello@directiveos.com"
+                label="Contact"
+                value="Send a message"
+                href="/contact"
               />
               <ContactRow
                 icon={<PhoneCall className="h-4 w-4 text-violet-300" />}
@@ -1129,43 +1129,19 @@ function ContactSection() {
                 </Link>
                 .
               </p>
-              <form
-                action="mailto:hello@directiveos.com"
-                method="post"
-                encType="text/plain"
-                className="mt-6 grid gap-3"
-              >
-                <input
-                  required
-                  name="name"
-                  placeholder="Your name"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
-                />
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  placeholder="you@business.com.au"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
-                />
-                <input
-                  name="business"
-                  placeholder="Business name"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
-                />
-                <textarea
-                  name="message"
-                  rows={3}
-                  placeholder="What operational or communication challenges should we prioritise?"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition resize-none"
-                />
-                <CalendlyPopupLink
-                  className="btn-neon mt-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white"
+              <div className="mt-6 grid gap-3">
+                <Link
+                  href="/contact"
+                  className="btn-neon inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white"
                 >
+                  Send a message
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <CalendlyPopupLink className="btn-ghost inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-medium text-white border border-white/12">
                   Book Strategy Call
                   <ArrowRight className="h-4 w-4" />
                 </CalendlyPopupLink>
-              </form>
+              </div>
             </GlowCard>
           </div>
         </div>
@@ -1196,6 +1172,13 @@ function ContactRow({
       </div>
     </div>
   );
+  if (href?.startsWith("/")) {
+    return (
+      <Link href={href} className="block">
+        {content}
+      </Link>
+    );
+  }
   if (href) {
     return <a href={href}>{content}</a>;
   }

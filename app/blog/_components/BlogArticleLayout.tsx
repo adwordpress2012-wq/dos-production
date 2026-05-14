@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 export type BlogArticleCta =
   | { kind: "book-demo"; label: string }
   | { kind: "mailto"; label: string; href: string; buttonStyle?: "neon" | "ghost" }
+  | { kind: "page"; label: string; href: string; buttonStyle?: "neon" | "ghost" }
   | { kind: "external"; label: string; href: string; buttonStyle?: "neon" | "ghost" };
 
 type Props = {
@@ -76,6 +77,12 @@ export default function BlogArticleLayout({ title, category, intro, children, ct
                 {cta.label}
                 <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
               </a>
+            ) : null}
+            {cta.kind === "page" ? (
+              <Link href={cta.href} className={`${ctaButtonClass(cta.buttonStyle)} w-full max-w-md sm:w-auto`}>
+                {cta.label}
+                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+              </Link>
             ) : null}
             {cta.kind === "external" ? (
               <a

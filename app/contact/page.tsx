@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  ArrowRight,
   Calendar,
   Globe,
   HeadphonesIcon,
@@ -11,6 +10,7 @@ import {
   Workflow,
 } from "lucide-react";
 import GlowCard, { GlowIcon } from "../components/GlowCard";
+import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact DOS",
@@ -62,18 +62,15 @@ export default function Page() {
             </div>
 
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              <a
-                href="mailto:hello@directiveos.com"
-                className="glass rounded-xl px-4 py-3 hover:bg-white/[0.06] transition flex items-center gap-3"
-              >
+              <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 border border-white/10">
                   <MessageSquare className="h-4 w-4 text-cyan-300" />
                 </span>
                 <div>
                   <div className="text-[11px] font-mono uppercase tracking-widest text-ink-dim">Email</div>
-                  <div className="text-sm font-medium">hello@directiveos.com</div>
+                  <div className="text-sm font-medium">hello@directiveos.com.au</div>
                 </div>
-              </a>
+              </div>
               <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
                 <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 border border-white/10">
                   <Globe className="h-4 w-4 text-emerald-300" />
@@ -96,43 +93,7 @@ export default function Page() {
                 </Link>
                 .
               </p>
-              <form
-                action="mailto:hello@directiveos.com"
-                method="post"
-                encType="text/plain"
-                className="mt-6 grid gap-3"
-              >
-                <input
-                  required
-                  name="name"
-                  placeholder="Your name"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
-                />
-                <input
-                  required
-                  type="email"
-                  name="email"
-                  placeholder="you@business.com.au"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
-                />
-                <input
-                  name="business"
-                  placeholder="Business name"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
-                />
-                <textarea
-                  name="message"
-                  rows={4}
-                  placeholder="What are you trying to fix or automate?"
-                  className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition resize-none"
-                />
-                <button
-                  type="submit"
-                  className="btn-neon mt-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white cursor-pointer"
-                >
-                  Send message <ArrowRight className="h-4 w-4" />
-                </button>
-              </form>
+              <ContactForm />
             </GlowCard>
           </div>
         </div>

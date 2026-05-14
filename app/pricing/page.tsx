@@ -4,6 +4,7 @@ import { CheckCircle2 } from "lucide-react";
 import { getFoundingPlan, getMainPricingPlans } from "../lib/stripe";
 import PricingPlans from "./PricingPlans";
 import CalendlyPopupLink from "../components/CalendlyPopupLink";
+import { CONTACT_PAGE_PATH } from "../blog/constants";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -12,8 +13,6 @@ export const metadata: Metadata = {
 };
 
 const CALENDLY_URL = "https://calendly.com/adwordpress2012/dos-ai-business-system-demo";
-const MAIL_WEBSITE_AUDIT =
-  "mailto:hello@directiveos.com?subject=Request%20Website%20Audit%20—%20DOS";
 const MAIL_JAYSON = "mailto:jayson@directiveos.com.au?subject=Talk%20With%20Jayson%20—%20DOS";
 
 const WORKSPACE_VALUE = [
@@ -77,7 +76,7 @@ function FoundingOfferCard() {
           </p>
           <p className="text-xs text-ink-dim mt-1">{founding.setupLabel}</p>
           <a
-            href={founding.cta.kind === "link" ? founding.cta.href : "/contact"}
+            href={founding.cta.kind === "link" ? founding.cta.href : CONTACT_PAGE_PATH}
             className="mt-4 inline-flex btn-neon items-center justify-center rounded-xl px-5 py-2.5 text-sm font-semibold text-white w-full sm:w-auto"
           >
             {founding.cta.label}
@@ -96,12 +95,12 @@ function PricingSecondaryActions() {
         <CalendlyPopupLink className="btn-book-demo flex-1 min-w-[160px] inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white text-center">
           Book Strategy Call
         </CalendlyPopupLink>
-        <a
-          href={MAIL_WEBSITE_AUDIT}
+        <Link
+          href={CONTACT_PAGE_PATH}
           className="btn-ghost flex-1 min-w-[160px] inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white border border-white/12 text-center"
         >
           Request Website Audit
-        </a>
+        </Link>
         <a
           href={MAIL_JAYSON}
           className="btn-ghost flex-1 min-w-[160px] inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white border border-white/12 text-center"

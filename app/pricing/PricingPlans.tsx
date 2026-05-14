@@ -182,13 +182,10 @@ export default function PricingPlans({ plans }: Props) {
       {error && (
         <div className="mx-auto mt-6 max-w-3xl rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
           <strong className="font-semibold">Heads up — </strong>
-          {error} Email{" "}
-          <a
-            href="mailto:hello@directiveos.com"
-            className="underline underline-offset-4 decoration-dashed"
-          >
-            hello@directiveos.com
-          </a>{" "}
+          {error}{" "}
+          <Link href="/contact" className="underline underline-offset-4 decoration-dashed text-violet-200 hover:text-violet-100">
+            Contact us
+          </Link>{" "}
           and we&apos;ll get you set up.
         </div>
       )}

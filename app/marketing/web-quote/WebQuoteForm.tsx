@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { readJsonOrNull } from "@/app/lib/safe-response-json";
 
 const SCOPE_OPTIONS = [
   "5–10 pages (most small businesses)",
@@ -52,7 +53,14 @@ export default function WebQuoteForm() {
           planId: "web-quote",
         }),
       });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
+      const data = await readJsonOrNull<{ ok?: boolean; error?: string }>(res);
+      if (data == null) {
+        throw new Error(
+          res.ok
+            ? "We could not read the server response. Please try again or use the contact page."
+            : `Request failed (${res.status}). Please try again.`
+        );
+      }
       if (!res.ok || !data.ok) throw new Error(data.error ?? "Could not submit quote.");
       setDone(true);
     } catch (err) {

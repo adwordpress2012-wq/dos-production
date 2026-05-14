@@ -74,13 +74,13 @@ export default function Page() {
       <p>
         Seasonal business? You can pause your subscription for up to 60 days per year at 30% of
         the regular monthly fee. Email{" "}
-        <a href="mailto:hello@directiveos.com">hello@directiveos.com</a> to arrange.
+        <a href="mailto:hello@directiveos.com.au">hello@directiveos.com.au</a> to arrange.
       </p>
 
       <h2>8. Disputes</h2>
       <p>
         We&apos;d rather sort it out. If something&apos;s wrong, talk to us first at{" "}
-        <a href="mailto:hello@directiveos.com">hello@directiveos.com</a>. We commit to a written
+        <a href="mailto:hello@directiveos.com.au">hello@directiveos.com.au</a>. We commit to a written
         response within 5 business days.
       </p>
     </LegalShell>
