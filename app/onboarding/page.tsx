@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { isSupabaseAdminPersistenceConfigured } from "@/app/lib/supabase";
 import OnboardingFlow from "./OnboardingFlow";
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ type SP = Promise<{ session_id?: string; plan?: string }>;
 
 export default async function Page({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
+  const persistenceOk = isSupabaseAdminPersistenceConfigured();
 
   return (
     <main className="relative pt-32 sm:pt-40 pb-16">
@@ -28,6 +30,20 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             new website. Most customers are live within 7–14 days.
           </p>
         </div>
+
+        {!persistenceOk ? (
+          <div
+            role="status"
+            className="mt-8 mx-auto max-w-2xl rounded-xl border border-amber-400/25 bg-amber-400/10 px-4 py-3 text-sm text-amber-100/95 text-center leading-relaxed"
+          >
+            <strong className="font-semibold text-amber-50">Configuration notice.</strong>{" "}
+            Database persistence is not fully configured on this deployment. You can still complete onboarding — your
+            submission will be accepted and our team will follow up. Operators: set a valid{" "}
+            <span className="font-mono text-[11px] text-amber-200/90">NEXT_PUBLIC_SUPABASE_URL</span> (https) and{" "}
+            <span className="font-mono text-[11px] text-amber-200/90">SUPABASE_SERVICE_ROLE_KEY</span> in Vercel
+            Production (no typos; values must not be empty).
+          </div>
+        ) : null}
 
         <OnboardingFlow planId={sp.plan} stripeSessionId={sp.session_id} />
       </section>
