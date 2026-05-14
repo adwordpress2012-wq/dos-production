@@ -135,7 +135,7 @@ export default function BlogPage() {
                 href="/book-demo"
                 className="btn-book-demo mt-8 inline-flex items-center justify-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
               >
-                Book Demo
+                Book Strategy Call
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </div>

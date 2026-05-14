@@ -85,7 +85,7 @@ create trigger business_profiles_set_updated_at
   for each row execute function public.set_updated_at();
 
 -- ── leads (DOS CRM) ────────────────────────────────────────────────────────────
--- Sales pipeline for Command Centre /admin/leads. Distinct from tenant_leads.
+-- Sales pipeline for DOS HUB /admin/leads. Distinct from tenant_leads.
 create table if not exists public.leads (
   id                    uuid primary key default gen_random_uuid(),
   business_name         text not null,

@@ -90,11 +90,11 @@ const WEBSITE_SERVICES: Record<
       "Multi-page marketing website for a SaaS, agency, or service brand with conversion-focused structure, SEO setup, and analytics.",
   },
   "command-centre": {
-    name: "Client Command Centre (Admin)",
+    name: "DOS HUB (Client Admin)",
     buildFee: 5000,
     annualHosting: 990,
     description:
-      "Custom client/admin portal or operational command centre with premium UI structure and managed annual support.",
+      "DOS HUB — custom client/admin portal with premium UI structure, lead and project views, and managed annual support.",
   },
 };
 

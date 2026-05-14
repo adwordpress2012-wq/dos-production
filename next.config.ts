@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Canonical dashboard is /command-centre (app/command-centre/page.tsx); /admin alone is legacy.
+      // Canonical dashboard is /command-centre (DOS HUB); /admin alone is legacy.
       {
         source: "/admin",
         destination: "/command-centre",

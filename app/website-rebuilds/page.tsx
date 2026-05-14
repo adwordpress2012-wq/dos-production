@@ -66,7 +66,7 @@ export default function Page() {
           icon: <Zap className="h-5 w-5" />,
           title: "Wired into your DOS",
           description:
-            "Booking, chat and lead capture all flow into BOS, COS and Command Centre — out of the box.",
+            "Booking, chat and lead capture all flow into BOS, COS and DOS HUB — out of the box.",
         },
       ]}
       faqs={[

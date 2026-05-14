@@ -1,13 +1,15 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  CalendarRange,
   CheckCircle2,
   Globe,
   HeadphonesIcon,
+  Inbox,
   LayoutDashboard,
+  Layers,
   MessageSquare,
   PhoneCall,
+  Server,
   ShieldCheck,
   Smartphone,
   Sparkles,
@@ -24,48 +26,38 @@ const MICAH_PHONE_DISPLAY = "02 5950 6382";
 const MICAH_PHONE_LINK = "tel:0259506382";
 const CHAT_DEMO_URL = "https://chatos.com.au";
 
-const WHAT_DOS_HANDLES = [
+const SYSTEM_PILLARS = [
+  {
+    icon: <Globe className="h-5 w-5" />,
+    title: "Modern Smart Websites",
+    description:
+      "Fast, responsive sites with conversion-led UX, SEO structure, and mobile-first layouts built to generate enquiries.",
+    href: "/#modern-smart-websites",
+    tone: "violet" as const,
+  },
   {
     icon: <MessageSquare className="h-5 w-5" />,
-    title: "Smart Chat Widgets (SCW)",
-    description: "Capture customer enquiries and booking requests directly from your website.",
-    href: "/workspace-demo",
+    title: "Smart Communication Systems",
+    description:
+      "SCW, WhatsApp, and SMS in one workflow so enquiry capture is consistent and fewer conversations slip through the cracks.",
+    href: "/#smart-communication-systems",
     tone: "cyan" as const,
   },
   {
     icon: <HeadphonesIcon className="h-5 w-5" />,
-    title: "Smart Business Assistants (SBA)",
-    description: "Help respond to customer enquiries across website chat, SMS, and WhatsApp.",
-    href: "/micah",
+    title: "Smart Business Assistants",
+    description:
+      "SBA systems for support, bookings, and operational assistance — clear flows that help customers get answers without the noise.",
+    href: "/#smart-business-assistants",
     tone: "fuchsia" as const,
   },
   {
-    icon: <Globe className="h-5 w-5" />,
-    title: "Website Rebuilds",
-    description: "Modern websites designed to improve customer trust, speed, and conversions.",
-    href: "/website-rebuilds",
-    tone: "violet" as const,
-  },
-  {
-    icon: <CalendarRange className="h-5 w-5" />,
-    title: "Booking Automation",
-    description: "Reduce missed bookings and simplify customer enquiry flow.",
-    href: "/bos",
+    icon: <Layers className="h-5 w-5" />,
+    title: "Done-For-You Business Infrastructure",
+    description:
+      "Hosting, integrations, deployments, support, and recurring optimisation — the managed layer that keeps your systems reliable.",
+    href: "/#done-for-you-infrastructure",
     tone: "emerald" as const,
-  },
-  {
-    icon: <Smartphone className="h-5 w-5" />,
-    title: "SMS & WhatsApp",
-    description: "Respond faster and keep customer communication organised.",
-    href: "/cos",
-    tone: "cyan" as const,
-  },
-  {
-    icon: <Sparkles className="h-5 w-5" />,
-    title: "Done-For-You Setup",
-    description: "DOS builds, configures, and manages the system for your business.",
-    href: "/onboarding",
-    tone: "violet" as const,
   },
 ];
 
@@ -76,10 +68,12 @@ export default function Home() {
       <TryMicahLive />
       <WhatDosDoes />
       <WebsiteRebuildsSection />
+      <SmartCommunicationSystemsSection />
       <MicahSection />
+      <DoneForYouInfrastructureSection />
+      <DosHubSection />
       <WhyDoneForYou />
       <PricingCta />
-      <DosWorkspaceSection />
       <ContactSection />
     </>
   );
@@ -180,20 +174,20 @@ function TryMicahLive() {
 
 function WhatDosDoes() {
   return (
-    <section id="solutions" className="relative py-20 sm:py-28">
+    <section id="systems" className="relative py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Directive Operating Systems"
           title={
             <>
-              What DOS <span className="text-gradient-purple">Handles For You</span>
+              The DOS <span className="text-gradient-purple">systems stack</span>
             </>
           }
-          description="DOS is a premium, managed customer communication system for Australian small businesses — Smart Chat Widgets, Smart Business Assistants, website rebuilds, booking automation, SMS, WhatsApp, and enquiry workflows without the tech overwhelm."
+          description="DOS is a modern systems partner for Australian businesses — websites, communication, Smart Business Assistants, and recurring infrastructure with clear support. Less noise, more operational clarity."
         />
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {WHAT_DOS_HANDLES.map((p) => (
+        <div className="mt-14 grid gap-5 md:grid-cols-2">
+          {SYSTEM_PILLARS.map((p) => (
             <GlowCard key={p.title} tone={p.tone} className="h-full">
               <GlowIcon tone={p.tone}>{p.icon}</GlowIcon>
               <h3 className="mt-5 text-lg font-semibold tracking-tight">{p.title}</h3>
@@ -202,7 +196,7 @@ function WhatDosDoes() {
                 href={p.href}
                 className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-white/90 hover:text-white"
               >
-                Learn more <ArrowRight className="h-3.5 w-3.5" />
+                View section <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </GlowCard>
           ))}
@@ -216,28 +210,27 @@ function WhatDosDoes() {
 
 function WebsiteRebuildsSection() {
   return (
-    <section className="relative py-20 sm:py-24">
+    <section id="modern-smart-websites" className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-6">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-violet-300/80">
-              01 · Foundations
+              01 · Modern Smart Websites
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
-              Modern <span className="text-gradient-purple">website rebuilds</span>{" "}
-              and managed hosting.
+              Websites built as <span className="text-gradient-purple">conversion systems</span> — not brochures.
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              Most Australian small business sites are slow, ugly and impossible to update. We
-              rebuild yours from scratch on a modern stack — then host, monitor and keep it up to
-              date as part of your monthly DOS subscription.
+              Your site should earn trust, load fast on mobile, and make it effortless to enquire. We design and build
+              Modern Smart Websites with structured SEO, clear calls-to-action, and ongoing tuning as part of your DOS
+              engagement.
             </p>
             <ul className="mt-7 space-y-3 text-sm text-ink-muted">
               {[
-                "Custom design tuned to your brand",
-                "Lightning-fast performance and SEO foundations",
-                "Hosting, SSL and uptime monitoring included",
-                "Ongoing edits and content updates handled by us",
+                "Responsive layouts with premium polish and brand consistency",
+                "Conversion-focused UX and enquiry paths that match how you sell",
+                "SEO-ready structure and performance foundations",
+                "Lead generation patterns that connect to your communication stack",
               ].map((b) => (
                 <li key={b} className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
@@ -247,7 +240,7 @@ function WebsiteRebuildsSection() {
             </ul>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/website-rebuilds" className="btn-neon px-5 py-2.5 rounded-xl text-sm font-semibold text-white">
-                Explore website rebuilds
+                Explore Modern Smart Websites
               </Link>
               <Link href="/onboarding" className="btn-ghost px-5 py-2.5 rounded-xl text-sm font-medium text-white">
                 Start onboarding
@@ -316,11 +309,108 @@ function BrowserMock() {
   );
 }
 
+function SmartCommunicationSystemsSection() {
+  return (
+    <section id="smart-communication-systems" className="relative py-20 sm:py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-6 order-2 lg:order-1">
+            <CommunicationMock />
+          </div>
+          <div className="lg:col-span-6 order-1 lg:order-2">
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-cyan-300/80">
+              02 · Smart Communication Systems
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
+              One thread for <span className="text-gradient-neon">every enquiry</span>.
+            </h2>
+            <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
+              Smart Communication Systems connect your website, SMS, and WhatsApp so customers get fast responses and
+              your team sees a single timeline. Smart Chat Widget (SCW) captures leads on-site; workflows reduce missed
+              follow-ups.
+            </p>
+            <ul className="mt-7 space-y-3 text-sm text-ink-muted">
+              {[
+                "Structured enquiry capture from your homepage and key landing pages",
+                "WhatsApp and SMS aligned to how your staff actually respond",
+                "SCW for quotes, bookings, and quick questions without form friction",
+                "Clear customer communication paths — fewer dropped conversations",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/workspace-demo" className="btn-neon px-5 py-2.5 rounded-xl text-sm font-semibold text-white">
+                Explore Smart Chat Widget
+              </Link>
+              <Link href="/cos" className="btn-ghost px-5 py-2.5 rounded-xl text-sm font-medium text-white">
+                Messaging stack (COS)
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CommunicationMock() {
+  return (
+    <div className="relative max-w-lg mx-auto lg:mx-0">
+      <div
+        aria-hidden
+        className="absolute -inset-8 rounded-[32px] bg-gradient-to-br from-cyan-500/25 via-violet-500/15 to-transparent blur-2xl opacity-70"
+      />
+      <div className="relative glass-strong rounded-2xl p-4 ring-glow-soft">
+        <div className="rounded-xl bg-[#06080f] border border-white/5 p-5">
+          <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-ink-dim">
+            <span className="inline-flex items-center gap-2 text-cyan-200/90">
+              <Inbox className="h-3.5 w-3.5" />
+              communication hub
+            </span>
+            <span className="inline-flex items-center gap-1 text-emerald-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-glow" />
+              live
+            </span>
+          </div>
+          <div className="mt-5 space-y-3 text-[12px]">
+            {[
+              ["SCW", "New enquiry — quote request (Gold Coast)", "now"],
+              ["WhatsApp", "Customer replied — booking thread", "3m"],
+              ["SMS", "Reminder delivered — tomorrow 9:30", "11m"],
+            ].map(([tag, line, when]) => (
+              <div
+                key={line}
+                className="flex items-center justify-between gap-3 rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2.5"
+              >
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="shrink-0 rounded-md border border-cyan-400/20 bg-cyan-400/10 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-200">
+                    {tag}
+                  </span>
+                  <span className="truncate text-ink-muted">{line}</span>
+                </div>
+                <span className="shrink-0 font-mono text-[10px] text-ink-dim">{when}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 flex items-center gap-2 text-[11px] text-ink-dim">
+            <Workflow className="h-3.5 w-3.5 text-violet-300/80" />
+            <span>Workflows route every message into your operating picture.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─────────────────────────────────────────────────────────── */
 
 function MicahSection() {
   return (
-    <section className="relative py-20 sm:py-24">
+    <section id="smart-business-assistants" className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-6 order-2 lg:order-1">
@@ -328,15 +418,15 @@ function MicahSection() {
           </div>
           <div className="lg:col-span-6 order-1 lg:order-2">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-fuchsia-300/80">
-              02 · Voice
+              03 · Smart Business Assistants
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
-              <span className="text-gradient-neon">Micah</span> answers every call.
+              <span className="text-gradient-neon">Micah</span> — voice SBA for serious call volume.
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              Micah is your Smart Business Assistant for voice. She picks up on the first ring, qualifies leads, books
-              jobs and routes urgent calls — 24/7. Trained on your business. Sounds like a real
-              person.
+              Smart Business Assistant (SBA) systems extend your team: Micah answers on the first ring, handles bookings
+              and common questions, and keeps summaries tidy for your staff — so support and revenue opportunities do
+              not depend on who is on the phone.
             </p>
             <ul className="mt-7 grid sm:grid-cols-2 gap-x-4 gap-y-3 text-sm text-ink-muted">
               {[
@@ -436,28 +526,30 @@ function Bubble({ who, children }: { who: "caller" | "micah"; children: React.Re
 
 /* ─────────────────────────────────────────────────────────── */
 
-function DosWorkspaceSection() {
+function DoneForYouInfrastructureSection() {
   return (
-    <section id="dos-workspace" className="relative py-24 sm:py-28">
+    <section id="done-for-you-infrastructure" className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-5">
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-violet-300/80">
-              DOS Workspace
+          <div className="lg:col-span-6">
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-emerald-300/80">
+              04 · Done-For-You Business Infrastructure
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
-              Your <span className="text-gradient-purple">business hub</span> for enquiries and bookings.
+              The recurring layer that keeps{" "}
+              <span className="text-gradient-purple">everything running.</span>
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              Manage enquiries, bookings, customer conversations, and booking automation in one place — a premium client
-              portal built for Australian small businesses, not developers.
+              Modernisation does not stop at launch. We host and deploy your stack, maintain integrations, monitor
+              performance, and stay available when your business changes — so your systems stay dependable long after
+              go-live.
             </p>
             <ul className="mt-7 space-y-3 text-sm text-ink-muted">
               {[
-                "Enquiry dashboard with clear next steps",
-                "Customer conversation threads in one timeline",
-                "Booking status without digging through inboxes",
-                "Mobile-friendly so you can run it from the ute or the shop floor",
+                "Production hosting, SSL, backups, and structured releases",
+                "Backend systems, support channels, and clear escalation when you need help",
+                "Integrations with the tools you already rely on",
+                "Ongoing maintenance and optimisation as part of the relationship",
               ].map((b) => (
                 <li key={b} className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
@@ -465,13 +557,18 @@ function DosWorkspaceSection() {
                 </li>
               ))}
             </ul>
-            <div className="mt-8">
-              <TryDosWorkspaceCta variant="hero" showSupportingText />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/onboarding" className="btn-neon px-5 py-2.5 rounded-xl text-sm font-semibold text-white">
+                Start onboarding
+              </Link>
+              <Link href="/pricing" className="btn-ghost px-5 py-2.5 rounded-xl text-sm font-medium text-white">
+                See plans
+              </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <WorkspaceMock />
+          <div className="lg:col-span-6">
+            <InfrastructureMock />
           </div>
         </div>
       </div>
@@ -479,7 +576,115 @@ function DosWorkspaceSection() {
   );
 }
 
-function WorkspaceMock() {
+function InfrastructureMock() {
+  const rows = [
+    {
+      icon: <Server className="h-5 w-5 text-emerald-300" />,
+      title: "Hosting & environments",
+      body: "Stable hosting, DNS hygiene, and safe rollout windows.",
+    },
+    {
+      icon: <ShieldCheck className="h-5 w-5 text-violet-300" />,
+      title: "Support & continuity",
+      body: "Australian-operated support when something breaks or needs tuning.",
+    },
+    {
+      icon: <Smartphone className="h-5 w-5 text-cyan-300" />,
+      title: "Integrations",
+      body: "Messaging, bookings, and analytics — wired without you wrestling the stack.",
+    },
+  ];
+  return (
+    <div className="relative max-w-lg mx-auto lg:mx-0 space-y-3">
+      <div
+        aria-hidden
+        className="absolute -inset-8 rounded-[28px] bg-gradient-to-br from-emerald-500/20 via-violet-500/20 to-cyan-400/10 blur-2xl opacity-55"
+      />
+      <div className="relative space-y-3">
+        {rows.map((row) => (
+          <div
+            key={row.title}
+            className="glass-strong rounded-xl border border-white/10 p-4 flex gap-4 items-start"
+          >
+            <div className="rounded-lg bg-white/5 border border-white/10 p-2 shrink-0">{row.icon}</div>
+            <div>
+              <p className="text-sm font-semibold text-white">{row.title}</p>
+              <p className="mt-1 text-xs text-ink-muted leading-relaxed">{row.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DosHubSection() {
+  return (
+    <section id="dos-hub" className="relative py-24 sm:py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-5">
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-violet-300/80">
+              05 · DOS HUB
+            </span>
+            <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
+              Your internal <span className="text-gradient-purple">operating system.</span>
+            </h2>
+            <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
+              DOS HUB is where we run client management, lead systems, project delivery, and backend operations — the
+              premium admin infrastructure behind every DOS engagement. Public site:{" "}
+              <a
+                href="https://doshub.com.au"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-violet-300 hover:text-violet-200 underline underline-offset-4"
+              >
+                doshub.com.au
+              </a>
+              .
+            </p>
+            <ul className="mt-7 space-y-3 text-sm text-ink-muted">
+              {[
+                "Pipeline and lead intelligence in one view",
+                "Project status, hosting renewals, and operational notes",
+                "Designed for clarity — not spreadsheet chaos",
+                "Secure access for the DOS team and authorised client admins",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
+              <a
+                href="https://doshub.com.au"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-neon inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+              >
+                Explore DOS HUB
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <Link
+                href="/workspace-demo"
+                className="btn-ghost inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white"
+              >
+                Try DOS Workspace (client view)
+              </Link>
+            </div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <DosHubMock />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DosHubMock() {
   return (
     <div className="relative">
       <div
@@ -491,31 +696,31 @@ function WorkspaceMock() {
           <div className="flex items-center justify-between border-b border-white/5 px-4 py-3">
             <div className="flex items-center gap-2">
               <LayoutDashboard className="h-4 w-4 text-violet-300" />
-              <span className="text-sm font-semibold">DOS Workspace</span>
+              <span className="text-sm font-semibold">DOS HUB</span>
             </div>
             <span className="font-mono text-[10px] uppercase tracking-widest text-ink-dim">
-              · sample business · live
+              · internal · live
             </span>
           </div>
           <div className="grid grid-cols-12 gap-3 p-4">
-            <Tile span="col-span-12 sm:col-span-4" label="Calls handled" value="287" tone="violet" />
-            <Tile span="col-span-12 sm:col-span-4" label="Bookings" value="64" tone="emerald" />
-            <Tile span="col-span-12 sm:col-span-4" label="New enquiries" value="118" tone="cyan" />
+            <Tile span="col-span-12 sm:col-span-4" label="Pipeline leads" value="42" tone="violet" />
+            <Tile span="col-span-12 sm:col-span-4" label="Active projects" value="18" tone="emerald" />
+            <Tile span="col-span-12 sm:col-span-4" label="Open ops tasks" value="9" tone="cyan" />
 
             <div className="col-span-12 rounded-xl border border-white/5 bg-white/[0.02] p-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-medium text-ink-muted">Today</span>
+                <span className="text-xs font-medium text-ink-muted">Operations feed</span>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-ink-dim">
-                  · updated moments ago
+                  · synced moments ago
                 </span>
               </div>
               <div className="mt-3 grid gap-2 text-[12px]">
                 {[
-                  ["09:42", "Micah", "Booked Mike T. — 11:00 service", "violet"],
-                  ["09:36", "Inbox", "SMS reply sent — Sarah W.", "cyan"],
-                  ["09:28", "Bookings", "Reminders dispatched · 22 customers", "emerald"],
-                  ["09:14", "Micah", "Qualified inbound — Toowoomba", "violet"],
-                  ["09:02", "Web chat", "New quote request — Gold Coast", "cyan"],
+                  ["09:42", "Projects", "Website launch checklist · signed off", "emerald"],
+                  ["09:36", "Leads", "Pipeline stage moved — qualified", "violet"],
+                  ["09:28", "Hosting", "Renewal reminder queued · 3 accounts", "cyan"],
+                  ["09:14", "Support", "Client ticket triaged — priority 2", "violet"],
+                  ["09:02", "SCW", "New tenant enquiry captured", "cyan"],
                 ].map(([t, who, what, tone], i) => (
                   <div key={i} className="flex items-center gap-3 py-1">
                     <span className="font-mono text-[10px] text-ink-dim w-12">{t}</span>
@@ -567,13 +772,13 @@ function WhyDoneForYou() {
     {
       icon: <ShieldCheck className="h-5 w-5" />,
       title: "Never miss another enquiry",
-      description: "Calls, chats and messages route into one workspace so you can see what needs attention.",
+      description: "Voice, chat, and messages surface in one workspace so nothing important hides in an inbox.",
       tone: "violet" as const,
     },
     {
       icon: <Zap className="h-5 w-5" />,
       title: "Faster customer response",
-      description: "Micah and booking automation help you reply quickly — even when you are on the tools or with clients.",
+      description: "SBA coverage and structured booking flows help you respond quickly — even when you are on the tools or with clients.",
       tone: "cyan" as const,
     },
     {
@@ -613,7 +818,7 @@ function WhyDoneForYou() {
               <span className="text-gradient-purple">real businesses.</span>
             </>
           }
-          description="Less jargon. More booked jobs, happier customers, and calmer owners — with a premium system you do not have to babysit."
+          description="Clearer operations, steadier enquiry flow, and calmer owners — with premium systems you do not have to babysit."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -663,7 +868,7 @@ function PricingCta() {
 
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">
             <Sparkles className="h-3.5 w-3.5 text-violet-300" />
-            DOS Workspace included
+            Client workspace included
           </span>
 
           <h2 className="relative mt-6 text-3xl sm:text-5xl font-semibold tracking-tight leading-[1.05]">
@@ -672,8 +877,8 @@ function PricingCta() {
           </h2>
 
           <p className="relative mt-5 text-base sm:text-lg text-ink-muted max-w-2xl mx-auto leading-relaxed">
-            Explore transparent plans for DOS Orbit, Nexus and Titan. Every tier includes DOS Workspace so you always
-            have a clear view of what is happening with your customers.
+            Explore transparent plans for DOS Orbit, Nexus and Titan. Every tier includes the DOS Workspace client view
+            so you always know what is happening with customers — backed by recurring infrastructure and support.
           </p>
 
           <div className="relative mt-9 flex flex-col items-center gap-4 w-full max-w-lg mx-auto">
@@ -712,10 +917,10 @@ function ContactSection() {
               eyebrow="Talk to us"
               title={
                 <>
-                  Book a <span className="text-gradient-purple">15-minute demo.</span>
+                  Book a <span className="text-gradient-purple">strategy call.</span>
                 </>
               }
-              description="Tell us about your business, your phones, your bookings. We'll show you a live DOS environment configured around what you actually do."
+              description="Tell us how enquiries, bookings, and day-to-day communication work today. We will map a practical systems plan around what you actually run — no theatre, no cookie-cutter pitch."
             />
             <div className="mt-8 grid gap-3">
               <ContactRow
@@ -739,7 +944,7 @@ function ContactSection() {
 
           <div className="lg:col-span-6">
             <GlowCard tone="violet" className="h-full">
-              <h3 className="text-lg font-semibold tracking-tight">Quick demo request</h3>
+              <h3 className="text-lg font-semibold tracking-tight">Strategy call request</h3>
               <p className="mt-1 text-sm text-ink-muted">
                 For a full guided onboarding,{" "}
                 <Link href="/onboarding" className="text-violet-300 hover:text-violet-200 underline underline-offset-4 decoration-dashed">
@@ -774,13 +979,13 @@ function ContactSection() {
                 <textarea
                   name="message"
                   rows={3}
-                  placeholder="What customer communication or booking challenges can we help with?"
+                  placeholder="What operational or communication challenges should we prioritise?"
                   className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition resize-none"
                 />
                 <CalendlyPopupLink
                   className="btn-neon mt-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold text-white"
                 >
-                  Request a demo
+                  Book Strategy Call
                   <ArrowRight className="h-4 w-4" />
                 </CalendlyPopupLink>
               </form>

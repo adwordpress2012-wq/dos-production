@@ -34,7 +34,7 @@ export default function Page() {
           Email <a href="mailto:cancel@directiveos.com">cancel@directiveos.com</a> from your
           account email, or
         </li>
-        <li>Use the &ldquo;Cancel subscription&rdquo; option in your Command Centre billing settings.</li>
+        <li>Use the &ldquo;Cancel subscription&rdquo; option in your DOS HUB billing settings.</li>
       </ul>
 
       <h2>4. Refunds</h2>

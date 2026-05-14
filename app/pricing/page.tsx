@@ -94,7 +94,7 @@ function PricingSecondaryActions() {
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">Next steps</p>
       <div className="flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-3 w-full max-w-3xl">
         <CalendlyPopupLink className="btn-book-demo flex-1 min-w-[160px] inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white text-center">
-          Book Demo
+          Book Strategy Call
         </CalendlyPopupLink>
         <a
           href={MAIL_WEBSITE_AUDIT}
@@ -161,14 +161,14 @@ export default function Page() {
         <div className="text-center max-w-3xl mx-auto">
           <span className="inline-flex items-center gap-2 rounded-full border border-violet-400/20 bg-violet-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-violet-200">
             <span className="h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_10px_2px_rgba(168,85,247,0.7)]" />
-            Done-For-You AI Business Systems
+            Modern Smart Business Systems
           </span>
           <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05]">
             Stop missing <span className="text-gradient-purple">customers.</span>
           </h1>
           <p className="mt-5 text-base sm:text-lg text-ink-muted leading-relaxed">
-            We build and manage modern websites, AI receptionists, bookings, SMS, WhatsApp, and customer enquiry
-            systems for Australian small businesses.
+            We build and manage Modern Smart Websites, Smart Communication Systems, Smart Business Assistants, and
+            recurring infrastructure for Australian operators — so enquiries, bookings, and messages stay under control.
           </p>
           <p className="mt-4 text-base sm:text-lg text-white/90 font-medium leading-relaxed">
             Clear plans. Premium delivery. Human support from Australia.

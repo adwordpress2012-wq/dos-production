@@ -15,7 +15,7 @@ export default function Page() {
         <strong>Directive Operating Systems Pty Ltd</strong> (&ldquo;DOS&rdquo;,
         &ldquo;we&rdquo;, &ldquo;us&rdquo;), including the DOS platform, websites we build and
         host, the Micah AI Receptionist, the COS Communication System, the BOS Booking System and
-        the DOS Command Centre (collectively, the &ldquo;Services&rdquo;).
+        the DOS HUB (collectively, the &ldquo;Services&rdquo;).
       </p>
 
       <h2>1. Acceptance</h2>

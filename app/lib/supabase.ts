@@ -69,7 +69,7 @@ export type TenantPipelineLeadRow = {
   updated_at: string;
 };
 
-/** @deprecated Use TenantPipelineLeadRow — alias for Command Centre demo typing */
+/** @deprecated Use TenantPipelineLeadRow — alias for DOS HUB demo typing */
 export type LeadRow = TenantPipelineLeadRow;
 
 /** DOS CRM — table public.leads */

@@ -9,8 +9,8 @@ import CalendlyPopupLink from "./CalendlyPopupLink";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/#solutions", label: "Solutions" },
-  { href: "/website-rebuilds", label: "Website Rebuilds" },
+  { href: "/#systems", label: "Systems" },
+  { href: "/website-rebuilds", label: "Websites" },
   { href: "/pricing", label: "Pricing" },
   { href: "/blog", label: "Blog" },
 ];
@@ -53,7 +53,7 @@ export default function Nav() {
           <div className="flex items-center justify-end gap-2">
             <TryDosWorkspaceCta variant="nav" showSupportingText={false} className="hidden md:inline-flex" />
             <CalendlyPopupLink className="btn-book-demo hidden sm:inline-flex items-center justify-center text-sm font-semibold text-white px-4 py-2 rounded-xl">
-              Book Demo
+              Book Strategy Call
             </CalendlyPopupLink>
             <button
               type="button"
@@ -109,7 +109,7 @@ export default function Nav() {
                   onClick={() => setOpen(false)}
                   className="btn-book-demo flex w-full min-h-[48px] items-center justify-center rounded-xl px-4 py-3.5 text-center text-sm font-semibold text-white"
                 >
-                  Book Demo
+                  Book Strategy Call
                 </CalendlyPopupLink>
               </div>
             </div>

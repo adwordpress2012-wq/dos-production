@@ -63,7 +63,7 @@ export default async function AdminLeadsPage() {
             className="inline-flex items-center gap-2 text-sm font-semibold text-violet-300 hover:text-violet-200 transition"
           >
             <LayoutDashboard className="h-4 w-4 shrink-0" />
-            Command Centre overview
+            DOS HUB overview
           </Link>
           <Link
             href="/"

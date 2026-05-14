@@ -4,7 +4,7 @@ import OnboardingFlow from "./OnboardingFlow";
 export const metadata: Metadata = {
   title: "Onboarding",
   description:
-    "Tell us about your business and we'll start configuring your DOS — Micah, COS, BOS, website and Command Centre — usually live within 7–14 days.",
+    "Tell us about your business and we'll start configuring your DOS — Micah, COS, BOS, website and DOS HUB — usually live within 7–14 days.",
 };
 
 type SP = Promise<{ session_id?: string; plan?: string }>;

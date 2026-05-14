@@ -11,7 +11,7 @@ export default function Page() {
     <LegalShell title="Acceptable Use Policy" effective="1 January 2026">
       <p>
         This Acceptable Use Policy (AUP) governs how you and your end users may use the DOS
-        platform — including websites we host, Micah, COS, BOS and the Command Centre. It
+        platform — including websites we host, Micah, COS, BOS and DOS HUB. It
         complements our Terms of Service.
       </p>
 

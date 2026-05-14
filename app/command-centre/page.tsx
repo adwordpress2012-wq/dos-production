@@ -18,8 +18,8 @@ import {
 } from "@/app/lib/admin-dashboard";
 
 export const metadata: Metadata = {
-  title: "Overview · DOS Workspace",
-  description: "DOS Workspace — leads, clients and pipeline at a glance.",
+  title: "Overview · DOS HUB",
+  description: "DOS HUB — leads, clients, projects, and pipeline at a glance.",
 };
 
 export const dynamic = "force-dynamic";
@@ -68,10 +68,19 @@ export default async function CommandCentreOverviewPage() {
               Overview
             </span>
             <h1 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight leading-[1.05]">
-              DOS Workspace
+              DOS HUB
             </h1>
             <p className="mt-3 text-ink-muted max-w-2xl leading-relaxed">
-              Real-time snapshot of your CRM pipeline and paying clients — wired to Supabase.
+              Real-time snapshot of your CRM pipeline and paying clients — wired to Supabase. Public hub:{" "}
+              <a
+                href="https://doshub.com.au"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-violet-300 hover:text-violet-200 underline underline-offset-2"
+              >
+                doshub.com.au
+              </a>
+              .
             </p>
           </div>
           <Link

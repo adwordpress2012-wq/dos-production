@@ -84,7 +84,7 @@ export default function Page() {
       <h2>8. Cookies</h2>
       <p>
         Our marketing site uses minimal first-party cookies for session and analytics. The
-        Command Centre uses session cookies required for authenticated features.
+        DOS HUB uses session cookies required for authenticated features.
       </p>
 
       <h2>9. Contact</h2>

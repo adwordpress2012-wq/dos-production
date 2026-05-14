@@ -95,7 +95,7 @@ export const PLAN_CATALOG: readonly PublicPlan[] = [
     usageRateLines: [],
     disclaimer: "",
     highlight: false,
-    cta: { kind: "link", label: "Book Demo", href: "/contact" },
+    cta: { kind: "link", label: "Book Strategy Call", href: "/contact" },
   },
   {
     id: "growth",
@@ -119,7 +119,7 @@ export const PLAN_CATALOG: readonly PublicPlan[] = [
     usageRateLines: [],
     disclaimer: "",
     highlight: true,
-    cta: { kind: "link", label: "Book Demo", href: "/contact" },
+    cta: { kind: "link", label: "Book Strategy Call", href: "/contact" },
   },
   {
     id: "scale",

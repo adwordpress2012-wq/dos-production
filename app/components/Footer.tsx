@@ -2,8 +2,8 @@ import Link from "next/link";
 import Logo from "./Logo";
 
 const PRODUCTS = [
-  { href: "/website-rebuilds", label: "Website Rebuilds" },
-  { href: "/micah", label: "Micah AI Receptionist" },
+  { href: "/website-rebuilds", label: "Modern Smart Websites" },
+  { href: "/micah", label: "Micah · Smart Business Assistant" },
   { href: "/workspace-demo", label: "DOS Workspace" },
 ];
 
@@ -33,8 +33,8 @@ export default function Footer() {
               <Logo className="h-20 w-auto" />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted max-w-sm">
-              Done-For-You AI Business Systems — modern websites, Micah AI receptionist, bookings, messaging and DOS
-              Workspace for Australian small businesses.
+              Modern Smart Business Systems for Australian operators — websites, Smart Communication Systems, Smart
+              Business Assistants, Done-For-You Infrastructure, and DOS Workspace.
             </p>
             <p className="mt-6 text-xs text-ink-dim">
               Operated in Australia · ABN supplied on invoice · Built on Vercel + Supabase

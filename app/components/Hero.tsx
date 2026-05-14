@@ -1,14 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, MessageSquare, PhoneCall, ShieldCheck, Sparkles, Zap } from "lucide-react";
-import TryDosWorkspaceCta from "./TryDosWorkspaceCta";
+import {
+  ArrowRight,
+  LayoutDashboard,
+  ShieldCheck,
+  Sparkles,
+  Zap,
+} from "lucide-react";
 import CalendlyPopupLink from "./CalendlyPopupLink";
-
-const MICAH_PHONE_DISPLAY = "02 5950 6382";
-const MICAH_PHONE_LINK = "tel:0259506382";
-const CHAT_DEMO_URL = "https://chatos.com.au";
-const MAIL_WEBSITE_AUDIT =
-  "mailto:hello@directiveos.com?subject=Request%20Website%20Audit%20—%20DOS";
-const MAIL_JAYSON = "mailto:jayson@directiveos.com.au?subject=Talk%20With%20Jayson%20—%20DOS";
 
 export default function Hero() {
   return (
@@ -26,97 +24,41 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="tracking-[0.12em] uppercase">Done-For-You Customer Communication Systems</span>
+              <span className="tracking-[0.12em] uppercase">Modern Smart Business Systems</span>
             </div>
 
             <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[76px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
-              <span className="text-white">Never Miss Another </span>
-              <span className="text-gradient-purple">Booking Again.</span>
+              <span className="text-white">Modern Smart </span>
+              <span className="text-gradient-purple">Business Systems</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-4xl leading-relaxed">
-              Modern customer communication systems for small businesses — including Smart Chat Widgets, booking
-              automation, SMS, WhatsApp, and Smart Business Assistants.
+              Modern Smart Websites, Smart Communication Systems, Smart Business Assistants, and Done-For-You Business
+              Infrastructure built to help businesses capture more enquiries, improve communication, and modernise
+              operations.
             </p>
 
-            <div className="mt-8 w-full max-w-lg">
-              <TryDosWorkspaceCta variant="hero" />
-            </div>
-
-            <div className="mt-9 grid w-full max-w-2xl gap-3 sm:grid-cols-2">
-              <a
-                href={MICAH_PHONE_LINK}
-                className="group relative overflow-hidden rounded-2xl border border-fuchsia-400/30 bg-gradient-to-br from-fuchsia-500/20 via-violet-500/20 to-cyan-400/20 px-5 py-4 text-left ring-glow-soft transition hover:border-fuchsia-400/60 hover:from-fuchsia-500/30 hover:via-violet-500/30 hover:to-cyan-400/30"
-                aria-label={`Call Micah now on ${MICAH_PHONE_DISPLAY}`}
-              >
-                <span
-                  aria-hidden
-                  className="absolute -inset-px rounded-2xl bg-gradient-to-r from-fuchsia-500/30 via-violet-500/30 to-cyan-400/30 opacity-0 blur-md transition group-hover:opacity-70"
-                />
-                <span className="relative flex items-center gap-3">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-fuchsia-500 via-violet-500 to-cyan-400 text-white shadow-[0_0_20px_-4px_rgba(168,85,247,0.7)]">
-                    <PhoneCall className="h-5 w-5" />
-                  </span>
-                  <span className="flex flex-col">
-                    <span className="text-base font-semibold text-white">Call Micah Now</span>
-                    <span className="font-mono text-sm tracking-wider text-cyan-200">{MICAH_PHONE_DISPLAY}</span>
-                  </span>
-                </span>
-              </a>
-              <a
-                href={CHAT_DEMO_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="group relative overflow-hidden rounded-2xl border border-cyan-400/30 bg-gradient-to-br from-cyan-400/15 via-emerald-400/10 to-violet-500/15 px-5 py-4 text-left ring-glow-soft transition hover:border-cyan-300/70 hover:from-cyan-400/25 hover:via-emerald-400/20 hover:to-violet-500/25"
-              >
-                <span
-                  aria-hidden
-                  className="absolute -inset-px rounded-2xl bg-gradient-to-r from-cyan-400/30 via-emerald-400/20 to-violet-500/30 opacity-0 blur-md transition group-hover:opacity-70"
-                />
-                <span className="relative flex items-center gap-3">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 via-emerald-400 to-violet-500 text-white shadow-[0_0_20px_-4px_rgba(34,211,238,0.75)]">
-                    <MessageSquare className="h-5 w-5" />
-                  </span>
-                  <span className="flex flex-col">
-                    <span className="inline-flex items-center gap-1.5 text-base font-semibold text-white">
-                      Try Smart Chat Widget demo <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-                    </span>
-                    <span className="text-sm font-medium text-emerald-200">See the Smart Chat Widget on your site</span>
-                  </span>
-                </span>
-              </a>
-            </div>
-
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
-              <CalendlyPopupLink className="btn-book-demo inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white">
-                Book Demo
+            <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-lg">
+              <CalendlyPopupLink className="btn-neon inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold text-white w-full sm:w-auto min-w-[200px]">
+                Book Strategy Call
               </CalendlyPopupLink>
-              <a
-                href={MAIL_WEBSITE_AUDIT}
-                className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-white"
+              <Link
+                href="/#systems"
+                className="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-medium text-white w-full sm:w-auto min-w-[200px] border border-white/15 hover:border-white/25"
               >
-                Request Website Audit
-              </a>
-              <a
-                href={MAIL_JAYSON}
-                className="btn-ghost inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-white"
-              >
-                Talk With Jayson
-              </a>
+                Explore Systems
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
 
-            <div className="mt-4 flex flex-col sm:flex-row items-center gap-3">
+            <p className="mt-6 text-sm text-ink-muted/90">Built for modern Australian businesses.</p>
+
+            <div className="mt-6">
               <Link
-                href="/pricing"
-                className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
+                href="/#try-micah-live"
+                className="text-sm font-medium text-violet-300/90 hover:text-violet-200 underline-offset-4 decoration-dashed underline"
               >
-                See Pricing
-              </Link>
-              <Link
-                href="/onboarding"
-                className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
-              >
-                Start Onboarding
+                Try live demos — Micah & Smart Chat Widget
               </Link>
             </div>
 
@@ -133,7 +75,7 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Hero workspace mock */}
+          {/* Hero systems overview mock */}
           <div className="relative mt-16 sm:mt-20">
             <div
               aria-hidden
@@ -147,8 +89,9 @@ export default function Hero() {
                     <span className="h-2.5 w-2.5 rounded-full bg-amber-300/60" />
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/60" />
                   </div>
-                  <div className="flex-1 text-center text-[11px] font-mono tracking-widest uppercase text-ink-dim">
-                    dos · workspace
+                  <div className="flex-1 flex items-center justify-center gap-2 text-[11px] font-mono tracking-widest uppercase text-ink-dim">
+                    <LayoutDashboard className="h-3.5 w-3.5 text-violet-400/80" />
+                    <span>dos · system overview</span>
                   </div>
                   <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-emerald-400/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300 border border-emerald-400/20">
                     <span className="h-1 w-1 rounded-full bg-emerald-400" />
@@ -157,25 +100,25 @@ export default function Hero() {
                 </div>
 
                 <div className="grid grid-cols-12 gap-3 p-4">
-                  <DashStat label="Calls answered by Micah" value="1,284" delta="+18%" tone="violet" />
-                  <DashStat label="Bookings confirmed" value="312" delta="+9%" tone="emerald" />
-                  <DashStat label="New enquiries captured" value="4,902" delta="+24%" tone="cyan" />
+                  <DashStat label="Enquiries captured" value="4,902" delta="+24%" tone="cyan" />
+                  <DashStat label="Workflows active" value="38" delta="+4" tone="violet" />
+                  <DashStat label="Channels connected" value="12" delta="+2 new" tone="emerald" />
 
                   <div className="col-span-12 lg:col-span-7 rounded-xl border border-white/5 bg-white/[0.02] p-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium text-ink-muted">Enquiry pipeline</span>
+                      <span className="text-xs font-medium text-ink-muted">Operational throughput</span>
                       <span className="text-[10px] font-mono uppercase tracking-widest text-ink-dim">last 30d</span>
                     </div>
                     <Sparkline />
                   </div>
 
                   <div className="col-span-12 lg:col-span-5 rounded-xl border border-white/5 bg-white/[0.02] p-4">
-                    <span className="text-xs font-medium text-ink-muted">Recent activity</span>
+                    <span className="text-xs font-medium text-ink-muted">Live activity</span>
                     <ul className="mt-3 space-y-2.5 text-[12px]">
-                      <ActivityRow tone="violet" who="Micah" what="Booked 9:30am with Sarah W." when="just now" />
-                      <ActivityRow tone="cyan" who="Inbox" what="SMS reply sent — Toowoomba lead" when="2m" />
-                      <ActivityRow tone="emerald" who="Bookings" what="Reminders sent · 14 customers" when="6m" />
-                      <ActivityRow tone="violet" who="Micah" what="Qualified inbound call · 3:48" when="11m" />
+                      <ActivityRow tone="cyan" who="SCW" what="New quote request — captured" when="just now" />
+                      <ActivityRow tone="violet" who="SBA" what="Booking confirmed · 9:30am" when="2m" />
+                      <ActivityRow tone="emerald" who="SMS" what="Customer thread replied" when="6m" />
+                      <ActivityRow tone="violet" who="Voice" what="Inbound call qualified" when="11m" />
                     </ul>
                   </div>
                 </div>

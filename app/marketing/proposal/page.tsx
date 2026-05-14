@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 export const metadata: Metadata = {
   title: "DOS proposal",
   description:
-    "Request a tailored DOS proposal — website, Micah AI receptionist, COS communications, BOS booking and Command Centre, all bundled.",
+    "Request a tailored DOS proposal — website, Micah AI receptionist, COS communications, BOS booking and DOS HUB, all bundled.",
 };
 
 const INCLUDED = [
@@ -13,7 +13,7 @@ const INCLUDED = [
   "Micah AI receptionist (24/7)",
   "COS — SMS, email and web chat",
   "BOS — booking, reminders, deposits",
-  "Command Centre dashboard",
+  "DOS HUB dashboard",
   "Australian phone numbers + opt-in flows",
   "Onboarding, training and managed support",
 ];
@@ -31,7 +31,7 @@ export default function Page() {
             The full <span className="text-gradient-purple">DOS bundle.</span>
           </h1>
           <p className="mt-5 text-base sm:text-lg text-ink-muted leading-relaxed">
-            Website, Micah, COS, BOS and Command Centre — bundled and configured to your
+            Website, Micah, COS, BOS and DOS HUB — bundled and configured to your
             business. We&apos;ll prepare a proposal with fixed pricing within 2 business days.
           </p>
         </div>
