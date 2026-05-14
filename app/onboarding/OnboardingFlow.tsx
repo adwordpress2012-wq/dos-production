@@ -100,17 +100,35 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("/api/onboarding", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, planId, stripeSessionId }),
-      });
-      const data = await readJsonOrNull<{
+      let res: Response;
+      try {
+        res = await fetch("/api/onboarding", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...form, planId, stripeSessionId }),
+        });
+      } catch (fetchErr) {
+        throw new Error(
+          fetchErr instanceof TypeError
+            ? "We could not reach the server. Check your connection and try again, or use the contact page."
+            : fetchErr instanceof Error
+              ? fetchErr.message
+              : "Network error while submitting. Please try again."
+        );
+      }
+
+      let data: {
+        ok?: boolean;
+        mode?: "saved" | "queued";
+        tenant?: { name: string; subdomain: string };
+        error?: string;
+      } | null = await readJsonOrNull<{
         ok?: boolean;
         mode?: "saved" | "queued";
         tenant?: { name: string; subdomain: string };
         error?: string;
       }>(res);
+
       if (data == null) {
         throw new Error(
           res.ok

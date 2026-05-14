@@ -33,27 +33,40 @@ export default function WebQuoteForm() {
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("/api/onboarding", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          businessName: form.businessName,
-          contactName: form.name,
-          email: form.email,
-          phone: form.phone,
-          industry: "Website rebuild quote",
-          channels: ["website"],
-          goals: [
-            form.currentSite ? `Current site: ${form.currentSite}` : null,
-            `Scope: ${form.scope}`,
-            form.notes ? `Notes: ${form.notes}` : null,
-          ]
-            .filter(Boolean)
-            .join("\n"),
-          planId: "web-quote",
-        }),
-      });
+      let res: Response;
+      try {
+        res = await fetch("/api/onboarding", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            businessName: form.businessName,
+            contactName: form.name,
+            email: form.email,
+            phone: form.phone,
+            industry: "Website rebuild quote",
+            channels: ["website"],
+            goals: [
+              form.currentSite ? `Current site: ${form.currentSite}` : null,
+              `Scope: ${form.scope}`,
+              form.notes ? `Notes: ${form.notes}` : null,
+            ]
+              .filter(Boolean)
+              .join("\n"),
+            planId: "web-quote",
+          }),
+        });
+      } catch (fetchErr) {
+        throw new Error(
+          fetchErr instanceof TypeError
+            ? "We could not reach the server. Check your connection and try again."
+            : fetchErr instanceof Error
+              ? fetchErr.message
+              : "Network error while submitting. Please try again."
+        );
+      }
+
       const data = await readJsonOrNull<{ ok?: boolean; error?: string }>(res);
+
       if (data == null) {
         throw new Error(
           res.ok

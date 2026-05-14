@@ -60,18 +60,31 @@ export default function ContactForm() {
       fd.append("business", form.businessName);
       fd.append("message", form.message);
 
-      const res = await fetch(contactFormPostUrl, {
-        method: "POST",
-        body: fd,
-        headers: { Accept: "application/json" },
-      });
-      const payload = await readJsonOrNull<{ ok?: boolean; error?: string }>(res);
-      if (res.ok && (payload === null || payload.ok !== false)) {
+      let res: Response;
+      try {
+        res = await fetch(contactFormPostUrl, {
+          method: "POST",
+          body: fd,
+          headers: { Accept: "application/json" },
+        });
+      } catch (fetchErr) {
+        throw new Error(
+          fetchErr instanceof TypeError
+            ? "We could not reach the form service. Check your connection and try again."
+            : fetchErr instanceof Error
+              ? fetchErr.message
+              : "Network error while sending. Please try again."
+        );
+      }
+      const payload = await readJsonOrNull<{ ok?: boolean; error?: string; errors?: string[] }>(res);
+      const formErrors = payload?.errors?.filter(Boolean).join(" ");
+      if (res.ok && (payload === null || payload.ok !== false) && !formErrors) {
         setDone(true);
         return;
       }
       const msg =
-        payload?.error ??
+        formErrors ||
+        payload?.error ||
         (res.status >= 400 ? `Could not send message (${res.status}).` : "Could not send message. Please try again.");
       throw new Error(msg);
     } catch (err) {
@@ -132,6 +145,7 @@ export default function ContactForm() {
       />
       <input
         name="business"
+        required
         value={form.businessName}
         onChange={(e) => update("businessName", e.target.value)}
         placeholder="Business name"

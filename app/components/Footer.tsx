@@ -65,6 +65,9 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-xs text-ink-dim font-mono tracking-wide break-all">
+              hello@directiveos.com.au
+            </p>
           </div>
 
           <div className="md:col-span-3">

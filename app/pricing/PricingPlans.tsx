@@ -6,6 +6,7 @@ import { CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 import type { PLAN_CATALOG, PlanId } from "../lib/stripe";
 import CalendlyPopupLink from "../components/CalendlyPopupLink";
 import TryDosWorkspaceCta from "../components/TryDosWorkspaceCta";
+import { readJsonOrNull } from "@/app/lib/safe-response-json";
 
 type Plan = (typeof PLAN_CATALOG)[number];
 
@@ -21,12 +22,32 @@ export default function PricingPlans({ plans }: Props) {
     setError(null);
     setLoadingId(planId);
     try {
-      const res = await fetch("/api/stripe/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ planId }),
-      });
-      const data = (await res.json()) as { url?: string; error?: string };
+      let res: Response;
+      try {
+        res = await fetch("/api/stripe/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ planId }),
+        });
+      } catch (fetchErr) {
+        throw new Error(
+          fetchErr instanceof TypeError
+            ? "We could not reach the server. Check your connection and try again."
+            : fetchErr instanceof Error
+              ? fetchErr.message
+              : "Network error while starting checkout."
+        );
+      }
+
+      const data = await readJsonOrNull<{ url?: string; error?: string }>(res);
+
+      if (data == null) {
+        throw new Error(
+          res.ok
+            ? "Checkout returned an empty or invalid response. Please try again or contact us."
+            : `Checkout failed (${res.status}). Please try again or contact us.`
+        );
+      }
       if (!res.ok || !data.url) {
         throw new Error(data.error ?? "Could not start checkout.");
       }
