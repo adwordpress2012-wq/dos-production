@@ -12,7 +12,7 @@ type SP = Promise<{ session_id?: string; plan?: string }>;
 
 export default async function Page({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
-  const persistenceOk = isSupabaseAdminPersistenceConfigured();
+  const showSupabaseConfigNotice = !isSupabaseAdminPersistenceConfigured();
 
   return (
     <main className="relative pt-32 sm:pt-40 pb-16">
@@ -31,7 +31,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </p>
         </div>
 
-        {!persistenceOk ? (
+        {showSupabaseConfigNotice ? (
           <div
             role="status"
             className="mt-8 mx-auto max-w-2xl rounded-xl border border-amber-400/25 bg-amber-400/10 px-4 py-3 text-sm text-amber-100/95 text-center leading-relaxed"
@@ -41,9 +41,10 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             submission will be accepted and our team will follow up. Operators: in Vercel Production use these exact
             names — valid <span className="font-mono text-[11px] text-amber-200/90">NEXT_PUBLIC_SUPABASE_URL</span>{" "}
             (https) and <span className="font-mono text-[11px] text-amber-200/90">SUPABASE_SERVICE_ROLE_KEY</span> are
-            required to save tenants; also set{" "}
-            <span className="font-mono text-[11px] text-amber-200/90">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> (no typos;
-            non-empty values).
+            required to save tenants. For browser-side Supabase (Command Centre and other client features), also set{" "}
+            <span className="font-mono text-[11px] text-amber-200/90">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> — see{" "}
+            <span className="font-mono text-[11px] text-amber-200/90">.env.example</span> and README (this notice only
+            reflects tenant persistence).
           </div>
         ) : null}
 
