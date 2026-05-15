@@ -28,7 +28,7 @@ export async function POST(_req: NextRequest, context: Params) {
     return NextResponse.json(
       {
         error:
-          "Supabase admin client not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY.",
+          "Supabase admin client not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
       },
       { status: 503 }
     );

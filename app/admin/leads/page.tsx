@@ -24,8 +24,8 @@ async function loadLeads(): Promise<{
       configured: false,
       leads: [],
       error: url
-        ? "Set SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY (server) for admin API access."
-        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY).",
+        ? "Set SUPABASE_SERVICE_ROLE_KEY (server) for admin API access."
+        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
     };
   }
 

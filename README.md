@@ -36,8 +36,9 @@ See `.env.example`. Key variables:
 
 | Var                              | Purpose                                |
 | -------------------------------- | -------------------------------------- |
-| `NEXT_PUBLIC_SUPABASE_URL`       | Command Centre + onboarding API        |
-| `SUPABASE_SERVICE_ROLE_KEY`      | Server-side writes (RLS bypass)        |
+| `NEXT_PUBLIC_SUPABASE_URL`       | Supabase project URL (https)           |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | Public anon key (browser-safe)         |
+| `SUPABASE_SERVICE_ROLE_KEY`      | Server-only writes (RLS bypass)        |
 | `STRIPE_SECRET_KEY`              | Checkout session creation              |
 | `STRIPE_WEBHOOK_SECRET`          | `/api/stripe/webhook` signature verify |
 | `STRIPE_PRICE_STARTER` etc.      | Plan-to-price mapping                  |

@@ -38,10 +38,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           >
             <strong className="font-semibold text-amber-50">Configuration notice.</strong>{" "}
             Database persistence is not fully configured on this deployment. You can still complete onboarding — your
-            submission will be accepted and our team will follow up. Operators: set a valid{" "}
-            <span className="font-mono text-[11px] text-amber-200/90">NEXT_PUBLIC_SUPABASE_URL</span> (https) and{" "}
-            <span className="font-mono text-[11px] text-amber-200/90">SUPABASE_SERVICE_ROLE_KEY</span> in Vercel
-            Production (no typos; values must not be empty).
+            submission will be accepted and our team will follow up. Operators: in Vercel Production use these exact
+            names — valid <span className="font-mono text-[11px] text-amber-200/90">NEXT_PUBLIC_SUPABASE_URL</span>{" "}
+            (https) and <span className="font-mono text-[11px] text-amber-200/90">SUPABASE_SERVICE_ROLE_KEY</span> are
+            required to save tenants; also set{" "}
+            <span className="font-mono text-[11px] text-amber-200/90">NEXT_PUBLIC_SUPABASE_ANON_KEY</span> (no typos;
+            non-empty values).
           </div>
         ) : null}
 

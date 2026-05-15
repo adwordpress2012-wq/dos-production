@@ -23,8 +23,8 @@ async function loadProfiles(): Promise<{
       configured: false,
       profiles: [],
       error: url
-        ? "Set SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY (server) so admin routes can read/write business_profiles (service role bypasses RLS)."
-        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY).",
+        ? "Set SUPABASE_SERVICE_ROLE_KEY (server) so admin routes can read/write business_profiles (service role bypasses RLS)."
+        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
     };
   }
 

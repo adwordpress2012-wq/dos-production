@@ -63,11 +63,11 @@ function parseSecretKey(raw: string | undefined, minLength: number): string | nu
  * only in server contexts (route handlers, server components, server actions).
  */
 function getServiceRoleKeyRaw(): string | undefined {
-  return process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SERVICE_ROLE_KEY;
+  return process.env.SUPABASE_SERVICE_ROLE_KEY;
 }
 
 function getAnonKeyRaw(): string | undefined {
-  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.PUBLIC_SUPABASE_ANON_KEY;
+  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 }
 
 export function getSupabaseAdmin(): SupabaseClient | null {
