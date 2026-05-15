@@ -33,11 +33,10 @@ const MICAH_PHONE_DISPLAY = "02 5950 6382";
 const MICAH_PHONE_LINK = "tel:0259506382";
 const CHAT_DEMO_URL = "https://chatos.com.au";
 
-/** Replace with your live Calendly when the AgentMate booking page is ready. */
-const AGENTMATE_DEMO_CALENDLY_URL = "https://calendly.com/directiveos/agentmate-demo";
+const AGENTMATE_DEMO_CALENDLY_URL =
+  "https://calendly.com/adwordpress2012/agentmate-discovery-demo";
 
-/** Replace with a production Formspree endpoint or onboarding URL for the founding program. */
-const AGENTMATE_FOUNDING_PROGRAM_URL = "https://formspree.io/f/agentmate-founding-placeholder";
+const AGENTMATE_FOUNDING_PROGRAM_URL = "https://formspree.io/f/xdabqlql";
 
 const SYSTEM_PILLARS = [
   {
