@@ -5,6 +5,15 @@ import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { readJsonOrNull } from "@/app/lib/safe-response-json";
 
+function isFormspreeHttpsFormAction(raw: string): boolean {
+  try {
+    const u = new URL(raw);
+    return u.protocol === "https:" && u.hostname === "formspree.io" && /^\/f\/[^/]+\/?$/i.test(u.pathname);
+  } catch {
+    return false;
+  }
+}
+
 type FormState = {
   name: string;
   email: string;
@@ -14,7 +23,9 @@ type FormState = {
 };
 
 export default function ContactForm() {
-  const formAction = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION?.trim();
+  const rawAction = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION?.trim();
+  const formAction = rawAction && isFormspreeHttpsFormAction(rawAction) ? rawAction : undefined;
+  const misconfiguredAction = Boolean(rawAction && !formAction);
   const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
@@ -32,15 +43,32 @@ export default function ContactForm() {
   if (!formAction) {
     return (
       <div className="mt-6 rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-4 text-sm text-amber-100">
-        <p className="font-medium text-white">Contact form unavailable</p>
+        <p className="font-medium text-white">
+          {misconfiguredAction ? "Contact form misconfigured" : "Contact form unavailable"}
+        </p>
         <p className="mt-2 text-ink-muted leading-relaxed">
-          This form is not configured in this environment. Set{" "}
-          <span className="font-mono text-xs text-amber-200/90">NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION</span> to your
-          Formspree endpoint, or use{" "}
+          {misconfiguredAction ? (
+            <>
+              <span className="font-mono text-xs text-amber-200/90">NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION</span> must be
+              a valid Formspree HTTPS URL (<span className="font-mono text-xs text-amber-200/90">https://formspree.io/f/…</span>
+              ).
+            </>
+          ) : (
+            <>
+              Set{" "}
+              <span className="font-mono text-xs text-amber-200/90">NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION</span> to your
+              Formspree form URL for this page.
+            </>
+          )}{" "}
+          Email{" "}
+          <a href="mailto:hello@directiveos.com.au" className="text-violet-300 hover:text-violet-200 underline underline-offset-4">
+            hello@directiveos.com.au
+          </a>
+          , or use{" "}
           <Link href="/onboarding" className="text-violet-300 hover:text-violet-200 underline underline-offset-4">
             onboarding
           </Link>{" "}
-          to reach the team.
+          for a guided setup flow.
         </p>
       </div>
     );

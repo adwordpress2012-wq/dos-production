@@ -13,7 +13,7 @@ import GlowCard, { GlowIcon } from "../components/GlowCard";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact DOS",
+  title: "Contact Us",
   description:
     "Talk to DOS — Done-For-You AI Business Systems. Website rebuilds, Micah AI receptionist, COS communications, BOS booking, automation and managed hosting.",
 };
@@ -37,7 +37,7 @@ export default function Page() {
             Done-For-You AI Business Systems
           </span>
           <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-[1.05]">
-            Contact <span className="text-gradient-purple">DOS.</span>
+            Contact <span className="text-gradient-purple">Us</span>
           </h1>
           <p className="mt-5 text-base sm:text-lg text-ink-muted leading-relaxed max-w-2xl">
             DOS designs, builds and manages complete AI business systems for modern Australian
@@ -68,7 +68,12 @@ export default function Page() {
                 </span>
                 <div>
                   <div className="text-[11px] font-mono uppercase tracking-widest text-ink-dim">Email</div>
-                  <div className="text-sm font-medium">hello@directiveos.com.au</div>
+                  <a
+                    href="mailto:hello@directiveos.com.au"
+                    className="text-sm font-medium text-white hover:text-violet-200 transition"
+                  >
+                    hello@directiveos.com.au
+                  </a>
                 </div>
               </div>
               <div className="glass rounded-xl px-4 py-3 flex items-center gap-3">
