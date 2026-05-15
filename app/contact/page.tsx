@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
   Calendar,
   Globe,
@@ -92,11 +91,7 @@ export default function Page() {
             <GlowCard tone="violet" className="h-full">
               <h3 className="text-lg font-semibold tracking-tight">Get in touch</h3>
               <p className="mt-1 text-sm text-ink-muted">
-                For a guided product walkthrough, head straight to{" "}
-                <Link href="/onboarding" className="text-violet-300 hover:text-violet-200 underline underline-offset-4 decoration-dashed">
-                  onboarding
-                </Link>
-                .
+                Send us a quick message and we&apos;ll get back to you shortly.
               </p>
               <ContactForm />
             </GlowCard>

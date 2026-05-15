@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
-import Link from "next/link";
 import { readJsonOrNull } from "@/app/lib/safe-response-json";
 
 function isFormspreeHttpsFormAction(raw: string): boolean {
@@ -64,11 +63,7 @@ export default function ContactForm() {
           <a href="mailto:hello@directiveos.com.au" className="text-violet-300 hover:text-violet-200 underline underline-offset-4">
             hello@directiveos.com.au
           </a>
-          , or use{" "}
-          <Link href="/onboarding" className="text-violet-300 hover:text-violet-200 underline underline-offset-4">
-            onboarding
-          </Link>{" "}
-          for a guided setup flow.
+          .
         </p>
       </div>
     );
