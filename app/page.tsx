@@ -2,18 +2,24 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  Bell,
+  CalendarClock,
   CheckCircle2,
   Globe,
   HeadphonesIcon,
+  Home as HomeIcon,
   Inbox,
   LayoutDashboard,
   Layers,
+  ListTodo,
   MessageSquare,
   PhoneCall,
   Server,
   ShieldCheck,
   Smartphone,
   Sparkles,
+  UserPlus,
+  Users,
   Workflow,
   Zap,
 } from "lucide-react";
@@ -26,6 +32,12 @@ import TryDosWorkspaceCta from "./components/TryDosWorkspaceCta";
 const MICAH_PHONE_DISPLAY = "02 5950 6382";
 const MICAH_PHONE_LINK = "tel:0259506382";
 const CHAT_DEMO_URL = "https://chatos.com.au";
+
+/** Replace with your live Calendly when the AgentMate booking page is ready. */
+const AGENTMATE_DEMO_CALENDLY_URL = "https://calendly.com/directiveos/agentmate-demo";
+
+/** Replace with a production Formspree endpoint or onboarding URL for the founding program. */
+const AGENTMATE_FOUNDING_PROGRAM_URL = "https://formspree.io/f/agentmate-founding-placeholder";
 
 const SYSTEM_PILLARS = [
   {
@@ -74,6 +86,7 @@ export default function Home() {
       <MicahSection />
       <DoneForYouInfrastructureSection />
       <DosHubSection />
+      <AgentMateSection />
       <WhyDoneForYou />
       <PricingCta />
       <ContactSection />
@@ -939,6 +952,118 @@ function Tile({ span, label, value, tone }: { span: string; label: string; value
       </div>
       <div className="mt-2 text-2xl font-semibold tracking-tight">{value}</div>
     </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────── */
+
+function AgentMateSection() {
+  const focusAreas = [
+    {
+      icon: <ListTodo className="h-5 w-5" />,
+      title: "Follow-ups",
+      description: "Structured cadence so buyer and vendor touchpoints stay on track.",
+      tone: "violet" as const,
+    },
+    {
+      icon: <Users className="h-5 w-5" />,
+      title: "Buyer management",
+      description: "Clear visibility on interest stages without spreadsheet sprawl.",
+      tone: "cyan" as const,
+    },
+    {
+      icon: <Bell className="h-5 w-5" />,
+      title: "Reminders",
+      description: "Cut-through prompts for calls, inspections, and contract milestones.",
+      tone: "emerald" as const,
+    },
+    {
+      icon: <HomeIcon className="h-5 w-5" />,
+      title: "Open-home workflow",
+      description: "Repeatable checklists from prep to register to post-open follow-through.",
+      tone: "fuchsia" as const,
+    },
+  ];
+
+  return (
+    <section id="agentmate" className="relative py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="relative overflow-hidden rounded-3xl glass-strong p-8 sm:p-12 ring-glow">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-28 -left-20 h-80 w-[520px] rounded-full bg-violet-500/30 blur-[130px]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-28 -right-16 h-80 w-[480px] rounded-full bg-emerald-400/22 blur-[120px]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-[100px]"
+          />
+
+          <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-10 lg:items-center">
+            <div className="lg:col-span-5">
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3.5 py-1.5 text-[10px] font-semibold tracking-[0.28em] uppercase text-emerald-200">
+                Real estate operations
+              </span>
+              <h2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
+                <span className="text-gradient-purple">AgentMate</span>
+              </h2>
+              <p className="mt-3 text-lg sm:text-xl font-medium text-white/90 tracking-tight">
+                Your Smart Agent Assistant
+              </p>
+              <p className="mt-5 text-base leading-relaxed text-ink-muted max-w-xl">
+                Daily operational assistant for real estate agents designed to help with follow-ups, buyer management,
+                reminders, open-home workflow, and operational organisation.
+              </p>
+
+              <div className="mt-9 flex flex-col sm:flex-row flex-wrap gap-3">
+                <a
+                  href={AGENTMATE_DEMO_CALENDLY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-neon inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+                >
+                  <CalendarClock className="h-4 w-4 shrink-0" />
+                  Book AgentMate Demo
+                  <ArrowRight className="h-4 w-4 shrink-0" />
+                </a>
+                <a
+                  href={AGENTMATE_FOUNDING_PROGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-ghost inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white border border-white/12"
+                >
+                  <UserPlus className="h-4 w-4 shrink-0" />
+                  Join Founding Agent Program
+                </a>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 grid gap-4 sm:grid-cols-2">
+              {focusAreas.map((item) => (
+                <GlowCard key={item.title} tone={item.tone} className="h-full">
+                  <GlowIcon tone={item.tone}>{item.icon}</GlowIcon>
+                  <h3 className="mt-4 text-base font-semibold tracking-tight text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm text-ink-muted leading-relaxed">{item.description}</p>
+                </GlowCard>
+              ))}
+              <GlowCard tone="violet" className="h-full sm:col-span-2">
+                <GlowIcon tone="violet">
+                  <Layers className="h-5 w-5" />
+                </GlowIcon>
+                <h3 className="mt-4 text-base font-semibold tracking-tight text-white">Operational organisation</h3>
+                <p className="mt-2 text-sm text-ink-muted leading-relaxed max-w-2xl">
+                  One dependable rhythm for the moving parts of your week — fewer dropped tasks, clearer handovers between
+                  listing and sales activity.
+                </p>
+              </GlowCard>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
