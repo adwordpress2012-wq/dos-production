@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
 import {
   ArrowRight,
   Bell,
@@ -36,7 +37,7 @@ const CHAT_DEMO_URL = "https://chatos.com.au";
 const AGENTMATE_DEMO_CALENDLY_URL =
   "https://calendly.com/adwordpress2012/agentmate-discovery-demo";
 
-const AGENTMATE_FOUNDING_PROGRAM_URL = "https://formspree.io/f/xdabqlql";
+const AGENTMATE_FOUNDING_FORM_ACTION = "https://formspree.io/f/xdabqlql";
 
 const SYSTEM_PILLARS = [
   {
@@ -73,7 +74,14 @@ const SYSTEM_PILLARS = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host");
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  const origin =
+    host && !host.includes("localhost") ? `${proto}://${host}` : "http://localhost:3000";
+  const agentMateThanksUrl = `${origin}/thank-you`;
+
   return (
     <>
       <Hero />
@@ -85,7 +93,7 @@ export default function Home() {
       <MicahSection />
       <DoneForYouInfrastructureSection />
       <DosHubSection />
-      <AgentMateSection />
+      <AgentMateSection thanksUrl={agentMateThanksUrl} />
       <WhyDoneForYou />
       <PricingCta />
       <ContactSection />
@@ -956,7 +964,12 @@ function Tile({ span, label, value, tone }: { span: string; label: string; value
 
 /* ─────────────────────────────────────────────────────────── */
 
-function AgentMateSection() {
+function AgentMateSection({ thanksUrl }: { thanksUrl: string }) {
+  const agentMateInput =
+    "w-full rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white placeholder:text-ink-dim outline-none focus:border-emerald-400/40 focus:bg-white/[0.07] transition";
+  const agentMateTextarea = `${agentMateInput} resize-y min-h-[100px]`;
+  const agentMateLabel = "text-[11px] font-medium uppercase tracking-widest text-ink-muted";
+
   const focusAreas = [
     {
       icon: <ListTodo className="h-5 w-5" />,
@@ -1017,26 +1030,105 @@ function AgentMateSection() {
                 reminders, open-home workflow, and operational organisation.
               </p>
 
-              <div className="mt-9 flex flex-col sm:flex-row flex-wrap gap-3">
+              <div className="mt-9 flex flex-col gap-4">
                 <a
                   href={AGENTMATE_DEMO_CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-neon inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+                  className="btn-neon inline-flex w-fit items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
                 >
                   <CalendarClock className="h-4 w-4 shrink-0" />
                   Book AgentMate Demo
                   <ArrowRight className="h-4 w-4 shrink-0" />
                 </a>
-                <a
-                  href={AGENTMATE_FOUNDING_PROGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ghost inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white border border-white/12"
+
+                <form
+                  method="POST"
+                  action={AGENTMATE_FOUNDING_FORM_ACTION}
+                  className="relative w-full max-w-xl space-y-3 rounded-xl border border-white/12 bg-white/[0.03] p-4 sm:p-5"
                 >
-                  <UserPlus className="h-4 w-4 shrink-0" />
-                  Join Founding Agent Program
-                </a>
+                  <input type="hidden" name="_next" value={thanksUrl} />
+                  <input type="hidden" name="_subject" value="AgentMate — Founding Agent Program" />
+                  <input
+                    type="text"
+                    name="_gotcha"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="absolute left-[-5000px]"
+                    aria-hidden
+                  />
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="grid gap-2 sm:col-span-1">
+                      <label htmlFor="agentmate_full_name" className={agentMateLabel}>
+                        Full name<span className="text-emerald-300/90"> *</span>
+                      </label>
+                      <input
+                        id="agentmate_full_name"
+                        name="full_name"
+                        type="text"
+                        required
+                        autoComplete="name"
+                        className={agentMateInput}
+                      />
+                    </div>
+                    <div className="grid gap-2 sm:col-span-1">
+                      <label htmlFor="agentmate_email" className={agentMateLabel}>
+                        Email<span className="text-emerald-300/90"> *</span>
+                      </label>
+                      <input
+                        id="agentmate_email"
+                        name="email"
+                        type="email"
+                        required
+                        autoComplete="email"
+                        className={agentMateInput}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor="agentmate_agency_name" className={agentMateLabel}>
+                      Agency name
+                    </label>
+                    <input
+                      id="agentmate_agency_name"
+                      name="agency_name"
+                      type="text"
+                      autoComplete="organization"
+                      className={agentMateInput}
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor="agentmate_current_crm" className={agentMateLabel}>
+                      Current CRM
+                    </label>
+                    <input id="agentmate_current_crm" name="current_crm" type="text" className={agentMateInput} />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <label htmlFor="agentmate_biggest_workflow_challenge" className={agentMateLabel}>
+                      Biggest workflow challenge
+                    </label>
+                    <textarea
+                      id="agentmate_biggest_workflow_challenge"
+                      name="biggest_workflow_challenge"
+                      rows={4}
+                      className={agentMateTextarea}
+                    />
+                  </div>
+
+                  <div className="pt-1">
+                    <button
+                      type="submit"
+                      className="btn-ghost inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white border border-white/12"
+                    >
+                      <UserPlus className="h-4 w-4 shrink-0" />
+                      Join Founding Agent Program
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
 
