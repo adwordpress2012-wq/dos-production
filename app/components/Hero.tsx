@@ -28,14 +28,13 @@ export default function Hero() {
             </div>
 
             <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[76px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
-              <span className="text-white">Modern Smart </span>
-              <span className="text-gradient-purple">Business Systems</span>
+              <span className="text-white">Anyone can build a website. </span>
+              <span className="text-gradient-purple">DOS builds systems that help businesses get more customers.</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-4xl leading-relaxed">
-              Modern Smart Websites, Smart Communication Systems, Smart Business Assistants, and Done-For-You Business
-              Infrastructure built to help businesses capture more enquiries, improve communication, and modernise
-              operations.
+              AI-powered customer enquiry systems designed for small business — from bookings and lead capture to
+              operational automation.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-lg">
