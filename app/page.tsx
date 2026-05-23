@@ -825,11 +825,11 @@ function DosHubSection() {
               05 · DOS HUB
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
-              Your internal <span className="text-gradient-purple">operating system.</span>
+              Your private <span className="text-gradient-purple">DOS Workspace.</span>
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              DOS HUB is where we run client management, lead systems, project delivery, and backend operations — the
-              premium admin infrastructure behind every DOS engagement. Public site:{" "}
+              Access client onboarding, quote tools, proposal builders, and secure DOS systems from one connected
+              workspace. DOS Marketplace available at{" "}
               <a
                 href="https://doshub.com.au"
                 target="_blank"
@@ -842,10 +842,10 @@ function DosHubSection() {
             </p>
             <ul className="mt-7 space-y-3 text-sm text-ink-muted">
               {[
-                "Pipeline and lead intelligence in one view",
-                "Project status, hosting renewals, and operational notes",
+                "Pipeline and lead intelligence in one workspace view",
+                "Project status, hosting renewals, and client delivery notes",
                 "Designed for clarity — not spreadsheet chaos",
-                "Secure access for the DOS team and authorised client admins",
+                "Secure workspace access for clients and authorised DOS operators",
               ].map((b) => (
                 <li key={b} className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
@@ -860,14 +860,14 @@ function DosHubSection() {
                 rel="noopener noreferrer"
                 className="btn-neon inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
               >
-                Explore DOS HUB
+                View DOS Marketplace
                 <ArrowRight className="h-4 w-4" />
               </a>
               <Link
                 href="/workspace-demo"
                 className="btn-ghost inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white"
               >
-                Try DOS Workspace (client view)
+                Open DOS Workspace
               </Link>
             </div>
           </div>
