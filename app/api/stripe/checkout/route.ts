@@ -1,5 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getStripe, PLAN_CATALOG, resolvePriceId, type PlanId } from "@/app/lib/stripe";
+import {
+  getStripe,
+  PLAN_CATALOG,
+  isStripeCheckoutPlan,
+  resolvePriceId,
+  type PlanId,
+} from "@/app/lib/stripe";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,6 +28,13 @@ export async function POST(req: NextRequest) {
 
   if (!planId || !PLAN_CATALOG.some((p) => p.id === planId)) {
     return NextResponse.json({ error: "Invalid plan." }, { status: 400 });
+  }
+
+  if (!isStripeCheckoutPlan(planId)) {
+    return NextResponse.json(
+      { error: "This plan is not available for self-serve checkout." },
+      { status: 400 }
+    );
   }
 
   const stripe = getStripe();

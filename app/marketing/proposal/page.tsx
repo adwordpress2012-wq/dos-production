@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import ProposalAcceptanceNotice from "../../components/ProposalAcceptanceNotice";
 
 export const metadata: Metadata = {
   title: "DOS proposal",
@@ -115,6 +116,10 @@ export default function Page() {
               .
             </p>
           </div>
+        </div>
+
+        <div className="mt-5">
+          <ProposalAcceptanceNotice />
         </div>
       </section>
     </main>

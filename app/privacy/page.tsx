@@ -29,6 +29,19 @@ export default function Page() {
           content.
         </li>
         <li>
+          <strong>Product data:</strong> DOSLead lead and outreach records, GuestMate guest
+          records, AgentMate contact, buyer and vendor records, QuoteOS customer and quote data,
+          DOS Calendar booking and reminder data, and related workflow history.
+        </li>
+        <li>
+          <strong>Onboarding and acceptance data:</strong> setup requests, client names, business
+          details, signatures, policy acceptance records, timestamps and policy versions.
+        </li>
+        <li>
+          <strong>Partner and referral data:</strong> referrer names, partner contacts, referral
+          source records, attribution notes and commission or handover context where applicable.
+        </li>
+        <li>
           <strong>Operational data:</strong> usage logs, error logs and performance metrics needed
           to run and improve the Services.
         </li>
@@ -45,15 +58,20 @@ export default function Page() {
 
       <h2>3. AI processing</h2>
       <p>
-        Voice, SMS and chat content may be processed by third-party AI providers (e.g. large
-        language model and speech providers) to power Micah, COS and BOS. We use providers that
-        contractually commit not to train on your content. We never sell your data.
+        Voice, SMS, email, calendar, quote, lead, guest and chat content may be processed by
+        third-party AI providers (e.g. large language model and speech providers) to power Micah,
+        Smart Chat Widget, DOSLead, DOS Calendar, GuestMate, AgentMate, QuoteOS and related
+        workflows. We use providers that contractually commit not to train on your content where
+        available. We never sell your data.
       </p>
 
       <h2>4. Sharing</h2>
       <p>We share personal information only with:</p>
       <ul>
-        <li>Sub-processors necessary to deliver the Services (hosting, AI, payments, telephony).</li>
+        <li>
+          Sub-processors necessary to deliver the Services (hosting, AI, payments, telephony,
+          email, databases, calendars, analytics and automation tools).
+        </li>
         <li>Authorities, where required by law.</li>
         <li>Successors, in the event of a merger, acquisition or restructure.</li>
       </ul>

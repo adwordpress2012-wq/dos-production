@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import OnboardingFlow from "./OnboardingFlow";
 
 export const metadata: Metadata = {
-  title: "Onboarding",
+  title: "DOS onboarding",
   description:
-    "Tell us about your business and we'll start configuring your DOS — Micah, COS, BOS, website and Command Centre — usually live within 7–14 days.",
+    "Submit a simple Step 1 setup request for DOS websites, AI operating systems and operational software.",
 };
 
-type SP = Promise<{ session_id?: string; plan?: string }>;
+type SP = Promise<{ session_id?: string; plan?: string; project?: string }>;
+
+function projectFromSearch(project?: string) {
+  if (project === "website-rebuild") return ["Website Rebuild" as const];
+  return [];
+}
 
 export default async function Page({ searchParams }: { searchParams: SP }) {
   const sp = await searchParams;
@@ -21,15 +26,19 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             Onboarding
           </span>
           <h1 className="mt-5 text-4xl sm:text-5xl font-semibold tracking-tight leading-[1.05]">
-            Welcome to <span className="text-gradient-purple">DOS.</span>
+            Start your <span className="text-gradient-purple">DOS setup.</span>
           </h1>
           <p className="mt-5 text-base sm:text-lg text-ink-muted leading-relaxed">
-            Tell us about your business and we&apos;ll start configuring Micah, COS, BOS and your
-            new website. Most customers are live within 7–14 days.
+            One page. One purpose. Tell us enough to identify the business, the project, and the
+            next action. Detailed assets come later after deposit.
           </p>
         </div>
 
-        <OnboardingFlow planId={sp.plan} stripeSessionId={sp.session_id} />
+        <OnboardingFlow
+          planId={sp.plan}
+          stripeSessionId={sp.session_id}
+          defaultProjectTypes={projectFromSearch(sp.project)}
+        />
       </section>
     </main>
   );

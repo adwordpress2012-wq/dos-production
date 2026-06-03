@@ -1,60 +1,143 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, ArrowLeft, CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import { useState, type FormEvent, type ReactNode } from "react";
+import Link from "next/link";
+import { CheckCircle2, Loader2, Sparkles } from "lucide-react";
 
 type Props = {
   planId?: string;
   stripeSessionId?: string;
+  defaultProjectTypes?: ProjectType[];
+  projectTypes?: readonly ProjectType[];
+  setupTitle?: string;
 };
 
-const STEPS = [
-  { id: "business", label: "Your business" },
-  { id: "stack", label: "What you need" },
-  { id: "goals", label: "Goals + go-live" },
-  { id: "review", label: "Review + submit" },
+const POLICY_VERSION = "2026-01-01";
+
+const PROJECT_TYPES = [
+  "Website Rebuild",
+  "New Website",
+  "Website Care Plan",
+  "Micah / Smart Chat Widget",
+  "DOS Calendar",
+  "QuoteOS",
+  "GuestMate",
+  "DOSLead",
+  "Other",
 ] as const;
 
-const INDUSTRIES = [
-  "Trades & home services",
-  "Health & beauty",
-  "Professional services",
-  "Real estate",
-  "Hospitality",
-  "Retail / ecommerce",
-  "Other",
-];
+type ProjectType = (typeof PROJECT_TYPES)[number];
 
-const CHANNELS = [
-  { id: "website", label: "Website rebuild + hosting" },
-  { id: "micah", label: "Micah AI receptionist" },
-  { id: "cos", label: "COS communication system" },
-  { id: "bos", label: "BOS booking system" },
-  { id: "command", label: "Command Centre dashboard" },
-];
+export const WEBSITE_REBUILD_PROJECT_TYPES = [
+  "Website Rebuild",
+  "New Website",
+  "Website Care Plan",
+  "Other",
+] as const satisfies readonly ProjectType[];
+
+const ACCESS_METHODS = [
+  "Invite DOS as admin",
+  "Temporary login will be provided separately",
+  "Screen-share access session",
+  "Not sure",
+] as const;
+
+const LEGAL_LINKS = [
+  { label: "Terms", href: "/terms" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Cancellation", href: "/cancellation-policy" },
+  { label: "Acceptable Use", href: "/acceptable-use" },
+  { label: "Domain Policy", href: "/domain-management-policy" },
+  { label: "Number Policy", href: "/number-policy" },
+] as const;
+
+const LEGAL_CHECKBOXES = [
+  {
+    id: "authorised",
+    label: "I confirm that I am authorised to proceed with this DOS setup on behalf of the business.",
+  },
+  {
+    id: "terms",
+    label: "I have read and agree to the DOS Terms & Conditions.",
+    href: "/terms",
+  },
+  {
+    id: "privacy",
+    label: "I have read and agree to the DOS Privacy Policy.",
+    href: "/privacy",
+  },
+  {
+    id: "cancellation",
+    label: "I have read and agree to the DOS Cancellation Policy.",
+    href: "/cancellation-policy",
+  },
+  {
+    id: "overdue",
+    label:
+      "I understand that overdue payments may result in service suspension, limitation, or paused work until the account is brought up to date.",
+  },
+  {
+    id: "ip",
+    label:
+      "I understand that Micah, Smart Chat Widget, DOSLead, DOS Calendar, GuestMate, AgentMate, QuoteOS, DOS Workspace, workflows, automations, templates, scripts, dashboards, prompts, reusable components, and related software remain the intellectual property of Directive OS / DOS unless expressly agreed otherwise in writing.",
+  },
+  {
+    id: "thirdParty",
+    label:
+      "I understand that third-party services such as domains, hosting, email, Stripe, Twilio, OpenAI, Supabase, Vercel, Google, Resend, Neo, and other connected tools may have their own terms, fees, limits, outages, or service interruptions outside DOS's direct control.",
+  },
+] as const;
+
+type LegalAcceptanceId = (typeof LEGAL_CHECKBOXES)[number]["id"];
 
 type Form = {
   businessName: string;
   contactName: string;
   email: string;
-  phone: string;
-  industry: string;
-  channels: string[];
-  goals: string;
-  goLive: string;
+  mobile: string;
+  currentWebsiteUrl: string;
+  businessSummary: string;
+  projectTypes: ProjectType[];
+  websitePlatform: string;
+  domainProvider: string;
+  hostingProvider: string;
+  dosManageHostingDns: string;
+  accessMethod: string;
+  mainGoal: string;
+  biggestIssue: string;
+  carePlanInterest: string;
+  accepted: Record<LegalAcceptanceId, boolean>;
 };
 
-export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
-  const [step, setStep] = useState(0);
+const emptyAcceptance = LEGAL_CHECKBOXES.reduce(
+  (acc, item) => ({ ...acc, [item.id]: false }),
+  {} as Record<LegalAcceptanceId, boolean>
+);
+
+export default function OnboardingFlow({
+  planId,
+  stripeSessionId,
+  defaultProjectTypes = [],
+  projectTypes = PROJECT_TYPES,
+  setupTitle = "Setup request",
+}: Props) {
   const [form, setForm] = useState<Form>({
     businessName: "",
     contactName: "",
     email: "",
-    phone: "",
-    industry: "",
-    channels: planId === "starter" ? ["website", "micah"] : ["website", "micah", "cos", "bos"],
-    goals: "",
-    goLive: "ASAP",
+    mobile: "",
+    currentWebsiteUrl: "",
+    businessSummary: "",
+    projectTypes: defaultProjectTypes.filter((type) => projectTypes.includes(type)),
+    websitePlatform: "",
+    domainProvider: "",
+    hostingProvider: "",
+    dosManageHostingDns: "Not sure",
+    accessMethod: "Not sure",
+    mainGoal: "",
+    biggestIssue: "",
+    carePlanInterest: "Not sure",
+    accepted: emptyAcceptance,
   });
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState<{
@@ -66,32 +149,48 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
   const update = <K extends keyof Form>(key: K, value: Form[K]) =>
     setForm((f) => ({ ...f, [key]: value }));
 
-  const toggleChannel = (id: string) =>
+  const toggleProjectType = (projectType: ProjectType) =>
     setForm((f) => ({
       ...f,
-      channels: f.channels.includes(id)
-        ? f.channels.filter((c) => c !== id)
-        : [...f.channels, id],
+      projectTypes: f.projectTypes.includes(projectType)
+        ? f.projectTypes.filter((type) => type !== projectType)
+        : [...f.projectTypes, projectType],
     }));
 
-  function canAdvance(): boolean {
-    if (step === 0) {
-      return Boolean(form.businessName && form.email && form.contactName);
-    }
-    if (step === 1) {
-      return form.channels.length > 0;
-    }
-    return true;
-  }
+  const setAccepted = (id: LegalAcceptanceId, value: boolean) =>
+    setForm((f) => ({ ...f, accepted: { ...f.accepted, [id]: value } }));
 
-  async function submit() {
+  const allLegalAccepted = LEGAL_CHECKBOXES.every((item) => form.accepted[item.id]);
+  const canSubmit = Boolean(
+    form.businessName &&
+      form.contactName &&
+      form.email &&
+      form.mobile &&
+      form.businessSummary &&
+      form.projectTypes.length > 0 &&
+      form.mainGoal &&
+      allLegalAccepted
+  );
+
+  async function submit(e: FormEvent) {
+    e.preventDefault();
+    if (!canSubmit) return;
     setSubmitting(true);
     setError(null);
     try {
       const res = await fetch("/api/onboarding", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, planId, stripeSessionId }),
+        body: JSON.stringify({
+          ...form,
+          submittedAt: new Date().toISOString(),
+          acceptedCheckboxes: LEGAL_CHECKBOXES.filter((item) => form.accepted[item.id]).map(
+            (item) => item.id
+          ),
+          policyVersion: POLICY_VERSION,
+          planId,
+          stripeSessionId,
+        }),
       });
       const data = (await res.json()) as {
         ok?: boolean;
@@ -123,12 +222,12 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
               <CheckCircle2 className="h-7 w-7 text-white" />
             </div>
             <h2 className="mt-6 text-3xl sm:text-4xl font-semibold tracking-tight">
-              You&apos;re in. <span className="text-gradient-neon">Welcome to DOS.</span>
+              Setup request received.
             </h2>
             <p className="mt-3 text-ink-muted max-w-xl mx-auto">
               {done.mode === "saved"
-                ? `We've spun up your tenant${done.tenant ? ` (${done.tenant.subdomain})` : ""}. Our team will reach out within 1 business day to schedule kickoff.`
-                : "We've received your details. Our team will reach out within 1 business day to schedule kickoff."}
+                ? `We've logged your setup request${done.tenant ? ` (${done.tenant.subdomain})` : ""}. Our team will review it and confirm the next action.`
+                : "We've received your setup request. Our team will review it and confirm the next action."}
             </p>
             {planId && (
               <p className="mt-2 text-xs font-mono uppercase tracking-widest text-ink-dim">
@@ -137,10 +236,10 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
             )}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
-                href="/command-centre"
+                href="/book-demo"
                 className="btn-neon inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
               >
-                <Sparkles className="h-4 w-4" /> Open Command Centre
+                <Sparkles className="h-4 w-4" /> Book a kickoff call
               </a>
               <a
                 href="/"
@@ -156,212 +255,202 @@ export default function OnboardingFlow({ planId, stripeSessionId }: Props) {
   }
 
   return (
-    <div className="mt-12">
-      <Stepper step={step} />
-
-      <div className="mt-8 glass-strong rounded-2xl p-6 sm:p-8">
-        {step === 0 && (
-          <Section title="Your business">
-            <Field label="Business name" required>
-              <Input value={form.businessName} onChange={(v) => update("businessName", v)} placeholder="Acme Plumbing" />
-            </Field>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <Field label="Your name" required>
-                <Input value={form.contactName} onChange={(v) => update("contactName", v)} placeholder="Jordan" />
-              </Field>
-              <Field label="Email" required>
-                <Input type="email" value={form.email} onChange={(v) => update("email", v)} placeholder="you@business.com.au" />
-              </Field>
-            </div>
-            <Field label="Phone (optional)">
-              <Input value={form.phone} onChange={(v) => update("phone", v)} placeholder="+61 …" />
-            </Field>
-            <Field label="Industry">
-              <div className="grid sm:grid-cols-2 gap-2">
-                {INDUSTRIES.map((i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => update("industry", i)}
-                    className={`text-left rounded-xl px-4 py-2.5 text-sm transition border cursor-pointer ${
-                      form.industry === i
-                        ? "border-violet-400/40 bg-violet-500/10 text-white"
-                        : "border-white/10 bg-white/[0.03] text-ink-muted hover:bg-white/[0.06]"
-                    }`}
-                  >
-                    {i}
-                  </button>
-                ))}
-              </div>
-            </Field>
-          </Section>
-        )}
-
-        {step === 1 && (
-          <Section title="What you need">
-            <p className="text-sm text-ink-muted -mt-2">Pick everything that applies — we'll quote and configure.</p>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {CHANNELS.map((c) => {
-                const active = form.channels.includes(c.id);
-                return (
-                  <button
-                    key={c.id}
-                    type="button"
-                    onClick={() => toggleChannel(c.id)}
-                    className={`group relative rounded-xl px-4 py-3.5 text-left transition border cursor-pointer ${
-                      active
-                        ? "border-emerald-400/40 bg-emerald-400/10"
-                        : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06]"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <span className={`text-sm font-medium ${active ? "text-white" : "text-ink-muted"}`}>{c.label}</span>
-                      <span
-                        className={`mt-0.5 h-4 w-4 rounded-md border ${
-                          active
-                            ? "border-emerald-400 bg-emerald-400/30 shadow-[0_0_10px_rgba(52,247,193,0.7)]"
-                            : "border-white/20 bg-white/5"
-                        }`}
-                      />
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </Section>
-        )}
-
-        {step === 2 && (
-          <Section title="Goals + go-live">
-            <Field label="What are you trying to fix or automate?">
-              <Textarea
-                value={form.goals}
-                onChange={(v) => update("goals", v)}
-                placeholder="Example: We're missing too many calls after hours, and our website looks like 2014."
-              />
-            </Field>
-            <Field label="When do you want to go live?">
-              <div className="grid grid-cols-3 gap-2">
-                {["ASAP", "1–3 months", "Just exploring"].map((g) => (
-                  <button
-                    key={g}
-                    type="button"
-                    onClick={() => update("goLive", g)}
-                    className={`rounded-xl px-4 py-2.5 text-sm transition border cursor-pointer ${
-                      form.goLive === g
-                        ? "border-violet-400/40 bg-violet-500/10 text-white"
-                        : "border-white/10 bg-white/[0.03] text-ink-muted hover:bg-white/[0.06]"
-                    }`}
-                  >
-                    {g}
-                  </button>
-                ))}
-              </div>
-            </Field>
-          </Section>
-        )}
-
-        {step === 3 && (
-          <Section title="Review and submit">
-            <div className="grid gap-4 sm:grid-cols-2 text-sm">
-              <Review label="Business" value={form.businessName} />
-              <Review label="Contact" value={`${form.contactName} · ${form.email}`} />
-              <Review label="Phone" value={form.phone || "—"} />
-              <Review label="Industry" value={form.industry || "—"} />
-              <Review label="Stack" value={form.channels.map((id) => CHANNELS.find((c) => c.id === id)?.label).filter(Boolean).join(", ") || "—"} />
-              <Review label="Go live" value={form.goLive} />
-              <Review label="Goals" value={form.goals || "—"} className="sm:col-span-2" />
-              {planId && <Review label="Plan" value={planId} />}
-            </div>
-          </Section>
-        )}
-
-        {error && (
-          <div className="mt-4 rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
-            {error}
+    <form onSubmit={submit} className="mt-12 grid gap-6">
+      <div className="glass-strong rounded-2xl p-6 sm:p-8">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-mono uppercase tracking-widest text-ink-dim">Step 1</p>
+            <h2 className="mt-2 text-2xl font-semibold tracking-tight">{setupTitle}</h2>
           </div>
-        )}
-
-        <div className="mt-8 flex items-center justify-between">
-          <button
-            type="button"
-            onClick={() => setStep((s) => Math.max(0, s - 1))}
-            disabled={step === 0 || submitting}
-            className="btn-ghost disabled:opacity-40 inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-medium text-white cursor-pointer"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back
-          </button>
-
-          {step < STEPS.length - 1 ? (
-            <button
-              type="button"
-              onClick={() => canAdvance() && setStep((s) => Math.min(STEPS.length - 1, s + 1))}
-              disabled={!canAdvance()}
-              className="btn-neon inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white cursor-pointer disabled:opacity-50"
-            >
-              Continue <ArrowRight className="h-4 w-4" />
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={submit}
-              disabled={submitting}
-              className="btn-neon inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-white cursor-pointer disabled:opacity-50"
-            >
-              {submitting ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" /> Submitting…
-                </>
-              ) : (
-                <>
-                  Submit onboarding <Sparkles className="h-4 w-4" />
-                </>
-              )}
-            </button>
-          )}
+          <p className="text-sm text-ink-muted">No passwords. No uploads. Just enough to start.</p>
         </div>
       </div>
-    </div>
+
+      <Section title="1. Business details">
+        <div className="grid sm:grid-cols-2 gap-4">
+          <Field label="Business name" required>
+            <Input value={form.businessName} onChange={(v) => update("businessName", v)} placeholder="Acme Plumbing" />
+          </Field>
+          <Field label="Contact name" required>
+            <Input value={form.contactName} onChange={(v) => update("contactName", v)} placeholder="Jordan" />
+          </Field>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <Field label="Email" required>
+            <Input type="email" value={form.email} onChange={(v) => update("email", v)} placeholder="you@business.com.au" />
+          </Field>
+          <Field label="Mobile" required>
+            <Input type="tel" value={form.mobile} onChange={(v) => update("mobile", v)} placeholder="+61 ..." />
+          </Field>
+        </div>
+        <Field label="Current website URL">
+          <Input value={form.currentWebsiteUrl} onChange={(v) => update("currentWebsiteUrl", v)} placeholder="https://yourbusiness.com.au" />
+        </Field>
+        <Field label="Short business summary" required>
+          <Textarea
+            value={form.businessSummary}
+            onChange={(v) => update("businessSummary", v)}
+            placeholder="What do you do, who do you help, and where do you operate?"
+          />
+        </Field>
+      </Section>
+
+      <Section title="2. Project type">
+        <p className="text-sm text-ink-muted -mt-2">Select everything that applies.</p>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {projectTypes.map((projectType) => (
+            <CheckboxCard
+              key={projectType}
+              checked={form.projectTypes.includes(projectType)}
+              onChange={(checked) => {
+                if (checked !== form.projectTypes.includes(projectType)) toggleProjectType(projectType);
+              }}
+            >
+              {projectType}
+            </CheckboxCard>
+          ))}
+        </div>
+      </Section>
+
+      <Section title="3. Website / domain access">
+        <div className="grid sm:grid-cols-3 gap-4">
+          <Field label="Website platform">
+            <Input value={form.websitePlatform} onChange={(v) => update("websitePlatform", v)} placeholder="WordPress, Wix, Shopify..." />
+          </Field>
+          <Field label="Domain registrar">
+            <Input value={form.domainProvider} onChange={(v) => update("domainProvider", v)} placeholder="GoDaddy, Crazy Domains..." />
+          </Field>
+          <Field label="Hosting provider">
+            <Input value={form.hostingProvider} onChange={(v) => update("hostingProvider", v)} placeholder="Vercel, cPanel, SiteGround..." />
+          </Field>
+        </div>
+        <Field label="Access method">
+          <Select
+            value={form.accessMethod}
+            onChange={(v) => update("accessMethod", v)}
+            options={[...ACCESS_METHODS]}
+          />
+        </Field>
+        <Field label="DNS / hosting management preference">
+          <Select
+            value={form.dosManageHostingDns}
+            onChange={(v) => update("dosManageHostingDns", v)}
+            options={["Yes", "No", "Not sure"]}
+          />
+        </Field>
+      </Section>
+
+      <Section title="4. Main goal">
+        <Field label="What do you want improved?" required>
+          <Textarea
+            value={form.mainGoal}
+            onChange={(v) => update("mainGoal", v)}
+            placeholder="Example: more bookings, fewer missed calls, cleaner quote requests, better follow-up."
+          />
+        </Field>
+        <Field label="Biggest issue with the current website or system">
+          <Textarea
+            value={form.biggestIssue}
+            onChange={(v) => update("biggestIssue", v)}
+            placeholder="What is slowing the business down right now?"
+          />
+        </Field>
+      </Section>
+
+      <Section title="5. Care plan">
+        <Field label="Interested in the DOS Website Care Plan?">
+          <Select
+            value={form.carePlanInterest}
+            onChange={(v) => update("carePlanInterest", v)}
+            options={["Yes", "No", "Not sure"]}
+          />
+        </Field>
+      </Section>
+
+      <Section title="6. Legal approval">
+        <div className="rounded-2xl border border-violet-400/20 bg-violet-500/10 p-4">
+          <p className="text-xs font-mono uppercase tracking-widest text-violet-200">
+            Review documents
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {LEGAL_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-violet-100 transition hover:border-violet-300/40 hover:bg-violet-400/10"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="grid gap-3">
+          {LEGAL_CHECKBOXES.map((item) => (
+            <CheckboxCard
+              key={item.id}
+              checked={form.accepted[item.id]}
+              onChange={(checked) => setAccepted(item.id, checked)}
+              required
+            >
+              {"href" in item ? (
+                <>
+                  {item.label.replace(/\.$/, "")}{" "}
+                  <Link href={item.href} className="text-violet-300 hover:text-violet-200 underline underline-offset-2">
+                    here
+                  </Link>
+                  .
+                </>
+              ) : (
+                item.label
+              )}
+            </CheckboxCard>
+          ))}
+        </div>
+        <p className="text-xs text-ink-dim">Policy version: {POLICY_VERSION}</p>
+      </Section>
+
+      {error && (
+        <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
+          {error}
+        </div>
+      )}
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-xs text-ink-dim">
+          Branding, content, socials, SEO, lead capture details and asset uploads come later in the Client Assets Request form after deposit.
+        </p>
+        <button
+          type="submit"
+          disabled={!canSubmit || submitting}
+          className="btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white cursor-pointer disabled:opacity-50"
+        >
+          {submitting ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" /> Submitting...
+            </>
+          ) : (
+            <>
+              Submit Setup Request <Sparkles className="h-4 w-4" />
+            </>
+          )}
+        </button>
+      </div>
+    </form>
   );
 }
 
-function Stepper({ step }: { step: number }) {
+function Section({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <ol className="grid grid-cols-4 gap-2">
-      {STEPS.map((s, i) => {
-        const done = i < step;
-        const active = i === step;
-        return (
-          <li key={s.id} className="flex flex-col gap-2">
-            <div
-              className={`h-1.5 rounded-full transition ${
-                done
-                  ? "bg-gradient-to-r from-violet-500 to-cyan-400"
-                  : active
-                    ? "bg-gradient-to-r from-violet-500 to-violet-500/40"
-                    : "bg-white/5"
-              }`}
-            />
-            <span className={`text-[11px] font-medium uppercase tracking-widest ${active || done ? "text-white" : "text-ink-dim"}`}>
-              {String(i + 1).padStart(2, "0")} · {s.label}
-            </span>
-          </li>
-        );
-      })}
-    </ol>
-  );
-}
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div className="grid gap-5">
+    <section className="glass-strong rounded-2xl p-6 sm:p-8 grid gap-5">
       <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
       {children}
-    </div>
+    </section>
   );
 }
 
-function Field({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+function Field({ label, required, children }: { label: string; required?: boolean; children: ReactNode }) {
   return (
     <label className="grid gap-2">
       <span className="text-xs font-medium uppercase tracking-widest text-ink-muted">
@@ -408,17 +497,57 @@ function Textarea({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      rows={4}
+      rows={3}
       className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm placeholder-ink-dim outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition resize-none"
     />
   );
 }
 
-function Review({ label, value, className = "" }: { label: string; value: string; className?: string }) {
+function Select({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+}) {
   return (
-    <div className={`glass rounded-xl px-4 py-3 ${className}`}>
-      <div className="text-[11px] font-mono uppercase tracking-widest text-ink-dim">{label}</div>
-      <div className="mt-1 text-sm font-medium break-words">{value}</div>
-    </div>
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
+    >
+      {options.map((option) => (
+        <option key={option} value={option} className="bg-[#0b0616] text-white">
+          {option}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function CheckboxCard({
+  checked,
+  onChange,
+  required,
+  children,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  required?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 hover:bg-white/[0.05] transition cursor-pointer">
+      <input
+        type="checkbox"
+        checked={checked}
+        required={required}
+        onChange={(e) => onChange(e.target.checked)}
+        className="mt-1 accent-violet-500"
+      />
+      <span className="text-sm text-white/90 leading-relaxed">{children}</span>
+    </label>
   );
 }

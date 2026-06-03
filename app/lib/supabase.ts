@@ -4,26 +4,87 @@ import type { CrmLeadSource, CrmLeadStatus } from "./crm";
 
 let cachedAdmin: SupabaseClient | null = null;
 
+/** Trim and strip accidental wrapping quotes from Vercel / .env paste mistakes. */
+function trimEnv(value: string | undefined): string | undefined {
+  if (value === undefined || value === "") return undefined;
+  let v = value.trim();
+  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+    v = v.slice(1, -1).trim();
+  }
+  return v === "" ? undefined : v;
+}
+
+/**
+ * Accepts Supabase REST URL from Dashboard → Settings → API ("Project URL").
+ * Tolerates bare host, quotes, accidental `.env` line paste, or host buried in text.
+ */
+function normalizeSupabaseUrl(raw: string | undefined): string | undefined {
+  let v = trimEnv(raw);
+  if (!v) return undefined;
+  // Whole value pasted as `NEXT_PUBLIC_SUPABASE_URL=https://...`
+  v = v.replace(/^NEXT_PUBLIC_SUPABASE_URL\s*=\s*/i, "").trim();
+  v = v.replace(/\s+/g, " ").trim();
+
+  const restHost = /^https:\/\/([\w.-]+\.supabase\.co)\/?$/i;
+  const mRest = v.match(restHost);
+  if (mRest) {
+    return `https://${mRest[1].toLowerCase()}`;
+  }
+
+  const bareHost = /^([\w.-]+\.supabase\.co)$/i;
+  const mBare = v.match(bareHost);
+  if (mBare) {
+    return `https://${mBare[1].toLowerCase()}`;
+  }
+
+  const embedded = v.match(/([\w.-]+\.supabase\.co)/i);
+  if (embedded) {
+    return `https://${embedded[1].toLowerCase()}`;
+  }
+
+  if (/^https?:\/\//i.test(v)) {
+    try {
+      const u = new URL(v);
+      if (u.hostname.endsWith(".supabase.co")) {
+        return `https://${u.hostname.toLowerCase()}`;
+      }
+    } catch {
+      return undefined;
+    }
+  }
+
+  return undefined;
+}
+
+/** Prefer Next.js public name; some dashboards export `SUPABASE_URL` only. */
+function readPublicSupabaseUrl(): string | undefined {
+  return trimEnv(process.env.NEXT_PUBLIC_SUPABASE_URL) ?? trimEnv(process.env.SUPABASE_URL);
+}
+
 /**
  * Server-side Supabase client using the service role key. Bypasses RLS — use
  * only in server contexts (route handlers, server components, server actions).
  */
 function getServiceRoleKey(): string | undefined {
-  return process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SERVICE_ROLE_KEY;
+  return trimEnv(process.env.SUPABASE_SERVICE_ROLE_KEY) ?? trimEnv(process.env.SERVICE_ROLE_KEY);
 }
 
 function getAnonKey(): string | undefined {
-  return process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.PUBLIC_SUPABASE_ANON_KEY;
+  return trimEnv(process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) ?? trimEnv(process.env.PUBLIC_SUPABASE_ANON_KEY);
 }
 
 export function getSupabaseAdmin(): SupabaseClient | null {
   if (cachedAdmin) return cachedAdmin;
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const url = normalizeSupabaseUrl(readPublicSupabaseUrl());
   const key = getServiceRoleKey();
   if (!url || !key) return null;
-  cachedAdmin = createClient(url, key, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
+  try {
+    cachedAdmin = createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+  } catch {
+    return null;
+  }
   return cachedAdmin;
 }
 
@@ -32,18 +93,20 @@ export function getSupabaseAdmin(): SupabaseClient | null {
  * server components that don't need to bypass RLS.
  */
 export function getSupabaseAnon(): SupabaseClient | null {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const url = normalizeSupabaseUrl(readPublicSupabaseUrl());
   const key = getAnonKey();
   if (!url || !key) return null;
-  return createClient(url, key, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
+  try {
+    return createClient(url, key, {
+      auth: { persistSession: false, autoRefreshToken: false },
+    });
+  } catch {
+    return null;
+  }
 }
 
 export function isSupabaseConfigured(): boolean {
-  return Boolean(
-    process.env.NEXT_PUBLIC_SUPABASE_URL && (getServiceRoleKey() || getAnonKey())
-  );
+  return Boolean(normalizeSupabaseUrl(readPublicSupabaseUrl()) && (getServiceRoleKey() || getAnonKey()));
 }
 
 export type TenantRow = {

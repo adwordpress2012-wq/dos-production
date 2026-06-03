@@ -1,15 +1,20 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  Briefcase,
   Calendar,
   CheckCircle2,
   Globe,
+  HardHat,
   HeadphonesIcon,
   LayoutDashboard,
   MessageSquare,
   PhoneCall,
+  Scissors,
   ShieldCheck,
   Sparkles,
+  Stethoscope,
+  UtensilsCrossed,
   Workflow,
   Zap,
 } from "lucide-react";
@@ -26,7 +31,7 @@ const PRODUCT_PILLARS = [
     icon: <Globe className="h-5 w-5" />,
     title: "Website Rebuilds",
     description:
-      "We rebuild your website on modern, lightning-fast infrastructure — then host, monitor and update it for you.",
+      "Modern sites that load fast, look professional, and turn visitors into enquiries — hosted and updated for you.",
     href: "/website-rebuilds",
     tone: "violet" as const,
   },
@@ -34,23 +39,23 @@ const PRODUCT_PILLARS = [
     icon: <PhoneCall className="h-5 w-5" />,
     title: "Micah AI Receptionist",
     description:
-      "Micah answers every call, qualifies leads and books jobs. 24/7. Never miss a customer again.",
+      "Your phone is always answered. Micah books jobs, captures details, and follows up so you stop losing work to voicemail.",
     href: "/micah",
     tone: "fuchsia" as const,
   },
   {
     icon: <MessageSquare className="h-5 w-5" />,
-    title: "COS Communication",
+    title: "Customer messaging",
     description:
-      "One AI inbox for SMS, email and web chat. Auto-responses, follow-ups and full conversation context.",
+      "SMS, WhatsApp, email and your website widget in one place — faster replies and fewer missed customers.",
     href: "/cos",
     tone: "cyan" as const,
   },
   {
     icon: <Calendar className="h-5 w-5" />,
-    title: "BOS Booking System",
+    title: "Booking automation",
     description:
-      "Smart, branded booking with reminders, deposits, calendar sync and waitlist — all done for you.",
+      "Online booking, reminders, and deposits without the back-and-forth — customers self-serve, you stay focused.",
     href: "/bos",
     tone: "emerald" as const,
   },
@@ -174,11 +179,13 @@ function WhatDosDoes() {
           eyebrow="What DOS does"
           title={
             <>
-              The <span className="text-gradient-purple">central hub</span>
-              <br />for your business systems.
+              More bookings.{" "}
+              <span className="text-gradient-purple">Faster replies.</span>
+              <br />
+              Fewer missed customers.
             </>
           }
-          description="DOS is the operating system underneath your website, phones, bookings and customer comms. We build it, host it, and run it for you — so you don't have to glue together a dozen apps."
+          description="We set up your website, receptionist, messaging and booking flows so customer enquiries are answered quickly — with done-for-you setup and ongoing support."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -204,42 +211,50 @@ function WhatDosDoes() {
 /* ─────────────────────────────────────────────────────────── */
 
 function WebsiteRebuildsSection() {
+  const industries = [
+    { label: "Restaurants", icon: <UtensilsCrossed className="h-5 w-5" />, tone: "violet" as const },
+    { label: "Salons", icon: <Scissors className="h-5 w-5" />, tone: "fuchsia" as const },
+    { label: "Tradies", icon: <HardHat className="h-5 w-5" />, tone: "cyan" as const },
+    { label: "Clinics", icon: <Stethoscope className="h-5 w-5" />, tone: "emerald" as const },
+    { label: "Service Businesses", icon: <Briefcase className="h-5 w-5" />, tone: "violet" as const },
+  ];
   return (
     <section className="relative py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-6">
             <span className="text-xs font-mono uppercase tracking-[0.25em] text-violet-300/80">
-              01 · Foundations
+              01 · Websites
             </span>
             <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.05]">
-              Modern <span className="text-gradient-purple">website rebuilds</span>{" "}
-              and managed hosting.
+              Custom <span className="text-gradient-purple">Website Rebuilds</span>
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              Most Australian small business sites are slow, ugly and impossible to update. We
-              rebuild yours from scratch on a modern stack — then host, monitor and keep it up to
-              date as part of your monthly DOS subscription.
+              Modern websites designed to help small businesses generate more enquiries, bookings,
+              and customer trust.
             </p>
-            <ul className="mt-7 space-y-3 text-sm text-ink-muted">
-              {[
-                "Custom design tuned to your brand",
-                "Lightning-fast performance and SEO foundations",
-                "Hosting, SSL and uptime monitoring included",
-                "Ongoing edits and content updates handled by us",
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-2.5">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-                  <span>{b}</span>
-                </li>
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {industries.map((ind) => (
+                <GlowCard key={ind.label} tone={ind.tone} className="p-4">
+                  <div className="flex items-center gap-3">
+                    <GlowIcon tone={ind.tone}>{ind.icon}</GlowIcon>
+                    <span className="text-sm font-semibold tracking-tight">{ind.label}</span>
+                  </div>
+                </GlowCard>
               ))}
-            </ul>
+            </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/website-rebuilds" className="btn-neon px-5 py-2.5 rounded-xl text-sm font-semibold text-white">
-                Explore website rebuilds
+              <Link
+                href="/contact"
+                className="btn-neon px-5 py-2.5 rounded-xl text-sm font-semibold text-white"
+              >
+                Request Custom Quote
               </Link>
-              <Link href="/onboarding" className="btn-ghost px-5 py-2.5 rounded-xl text-sm font-medium text-white">
-                Start onboarding
+              <Link
+                href="/contact"
+                className="btn-ghost px-5 py-2.5 rounded-xl text-sm font-medium text-white"
+              >
+                Book Free Consultation
               </Link>
             </div>
           </div>
@@ -673,11 +688,11 @@ function WhyDoneForYou() {
           eyebrow="Why Done-For-You"
           title={
             <>
-              You shouldn&apos;t have to be a{" "}
-              <span className="text-gradient-purple">systems integrator</span> to run your business.
+              You shouldn&apos;t need a{" "}
+              <span className="text-gradient-purple">tech project</span> to get modern customer service.
             </>
           }
-          description="DOS is the alternative to the 27-tool, 4-contractor, 18-month digital transformation. One subscription. One team. One operating system."
+          description="DOS is the alternative to juggling a dozen tools and contractors. One subscription, one team, and customer automation that actually gets switched on for you."
         />
 
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -727,31 +742,31 @@ function PricingCta() {
 
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">
             <Sparkles className="h-3.5 w-3.5 text-violet-300" />
-            One subscription. One team.
+            Done-for-you setup
           </span>
 
           <h2 className="relative mt-6 text-3xl sm:text-5xl font-semibold tracking-tight leading-[1.05]">
-            Replace your <span className="text-gradient-purple">website, phones,</span>
-            <br className="hidden sm:block" /> inbox and booking — for one flat monthly fee.
+            Turn more enquiries into <span className="text-gradient-purple">bookings</span>
+            <br className="hidden sm:block" /> — without hiring a full-time receptionist.
           </h2>
 
           <p className="relative mt-5 text-base sm:text-lg text-ink-muted max-w-2xl mx-auto leading-relaxed">
-            Plans start at $390/month. Setup, training, hosting and support included. No surprise
-            invoices, no &ldquo;professional services&rdquo; bills, no per-seat charges.
+            Plans start from $197/month for founding members, with simple usage and no huge upfront
+            build fee. We train the system, launch it, and support you as you grow.
           </p>
 
           <div className="relative mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
-              href="/pricing"
+              href="/contact"
               className="btn-neon inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
             >
-              See pricing <ArrowRight className="h-4 w-4" />
+              Book Your Free Demo <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/onboarding"
+              href="/pricing"
               className="btn-ghost inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white"
             >
-              Start onboarding
+              View plans
             </Link>
           </div>
         </div>
@@ -775,16 +790,15 @@ function CommandCentrePreview() {
               The <span className="text-gradient-purple">Command Centre.</span>
             </h2>
             <p className="mt-5 text-base text-ink-muted leading-relaxed max-w-xl">
-              One real-time dashboard for everything DOS runs. Calls, conversations, bookings,
-              leads, revenue — all in one place. Wired directly into Supabase, multi-tenant from day
-              one.
+              One simple dashboard for calls, customer messages, bookings and leads — so you can see
+              what&apos;s happening today without digging through five different apps.
             </p>
             <ul className="mt-7 space-y-3 text-sm text-ink-muted">
               {[
-                "Live activity from Micah, COS and BOS",
-                "Lead pipeline + status tracking",
-                "Multi-tenant with custom subdomains",
-                "Built on Supabase — your data, your control",
+                "Live activity from Micah, messaging and bookings",
+                "Lead pipeline and follow-up status",
+                "Clear numbers for busy owners and managers",
+                "Australian-operated support when you need a human",
               ].map((b) => (
                 <li key={b} className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
@@ -845,10 +859,10 @@ function CommandCentreMock() {
               <div className="mt-3 grid gap-2 text-[12px]">
                 {[
                   ["09:42", "Micah", "Booked Mike T. — 11:00 service", "violet"],
-                  ["09:36", "COS", "SMS reply sent — Sarah W.", "cyan"],
-                  ["09:28", "BOS", "Reminders dispatched · 22 attendees", "emerald"],
-                  ["09:14", "Micah", "Qualified inbound — Toowoomba", "violet"],
-                  ["09:02", "COS", "New web chat — quote request", "cyan"],
+                  ["09:36", "SMS", "Reply sent — Sarah W.", "cyan"],
+                  ["09:28", "Booking", "Reminders dispatched · 22 attendees", "emerald"],
+                  ["09:14", "Micah", "New enquiry — Toowoomba", "violet"],
+                  ["09:02", "Web", "New website message — quote request", "cyan"],
                 ].map(([t, who, what, tone], i) => (
                   <div key={i} className="flex items-center gap-3 py-1">
                     <span className="font-mono text-[10px] text-ink-dim w-12">{t}</span>

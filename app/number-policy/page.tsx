@@ -11,7 +11,8 @@ export default function Page() {
     <LegalShell title="Number Policy" effective="1 January 2026">
       <p>
         This Number Policy applies to any voice or SMS service operated by DOS on your behalf,
-        including Micah AI Receptionist (voice) and COS (SMS, MMS). It supplements our{" "}
+        including Micah, Smart Business Assistant, Smart Chat Widget, DOS Calendar, GuestMate,
+        AgentMate, QuoteOS and related communication workflows. It supplements our{" "}
         <a href="/terms">Terms</a> and <a href="/acceptable-use">Acceptable Use Policy</a>.
       </p>
 
@@ -24,6 +25,10 @@ export default function Page() {
         <li>
           Numbers are leased to you for the duration of your subscription. They cannot be ported
           out during the first 90 days.
+        </li>
+        <li>
+          DOS-provisioned numbers remain managed infrastructure assets unless transfer or porting is
+          approved in writing.
         </li>
       </ul>
 
@@ -43,8 +48,8 @@ export default function Page() {
 
       <h2>4. Opt-out</h2>
       <p>
-        Every outbound SMS sent through COS includes an opt-out keyword (default{" "}
-        <code>STOP</code>). When a recipient opts out, COS will:
+        Every outbound SMS sent through DOS communication systems includes an opt-out keyword (default{" "}
+        <code>STOP</code>). When a recipient opts out, DOS systems will:
       </p>
       <ul>
         <li>Immediately stop all marketing messages to that number.</li>

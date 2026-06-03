@@ -33,33 +33,47 @@ type Body = {
 const LEAD_COLUMNS =
   "id, business_name, contact_person, phone, email, website_url, business_type, source, interested_in, status, next_follow_up_date, notes, converted_client_id, created_at, updated_at" as const;
 
+function uncaughtErrorPayload(err: unknown) {
+  const message = err instanceof Error ? err.message : String(err);
+  let cause: string | undefined;
+  if (err instanceof Error && err.cause instanceof Error) {
+    cause = err.cause.message;
+  }
+  return { error: message, ...(cause ? { cause } : {}) };
+}
+
 export async function GET() {
-  const supabase = getSupabaseAdmin();
-  if (!supabase) {
-    return NextResponse.json(
-      {
-        error:
-          "Supabase admin client not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY.",
-      },
-      { status: 503 }
-    );
+  try {
+    const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return NextResponse.json(
+        {
+          error:
+            "Supabase admin client not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY.",
+        },
+        { status: 503 }
+      );
+    }
+
+    const { data, error } = await supabase.from("leads").select(LEAD_COLUMNS).order("created_at", { ascending: false });
+
+    if (error) {
+      return NextResponse.json(
+        {
+          error: error.message,
+          code: error.code,
+          details: error.details,
+          hint: error.hint,
+        },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ leads: data ?? [] });
+  } catch (err) {
+    console.error("[GET /api/admin/leads]", err);
+    return NextResponse.json(uncaughtErrorPayload(err), { status: 500 });
   }
-
-  const { data, error } = await supabase.from("leads").select(LEAD_COLUMNS).order("created_at", { ascending: false });
-
-  if (error) {
-    return NextResponse.json(
-      {
-        error: error.message,
-        code: error.code,
-        details: error.details,
-        hint: error.hint,
-      },
-      { status: 500 }
-    );
-  }
-
-  return NextResponse.json({ leads: data ?? [] });
 }
 
 export async function POST(req: NextRequest) {
@@ -107,49 +121,54 @@ export async function POST(req: NextRequest) {
     next_follow_up_date = d;
   }
 
-  const supabase = getSupabaseAdmin();
-  if (!supabase) {
-    return NextResponse.json(
-      {
-        error:
-          "Supabase admin client not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY.",
-      },
-      { status: 503 }
-    );
+  try {
+    const supabase = getSupabaseAdmin();
+    if (!supabase) {
+      return NextResponse.json(
+        {
+          error:
+            "Supabase admin client not configured. Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY.",
+        },
+        { status: 503 }
+      );
+    }
+
+    const { data, error } = await supabase
+      .from("leads")
+      .insert({
+        business_name,
+        contact_person,
+        email,
+        phone,
+        website_url,
+        business_type,
+        source: rawSource as CrmLeadSource,
+        interested_in: interested,
+        status: rawStatus as CrmLeadStatus,
+        next_follow_up_date,
+        notes,
+      })
+      .select(LEAD_COLUMNS)
+      .single();
+
+    if (error) {
+      return NextResponse.json(
+        {
+          error: error.message,
+          code: error.code,
+          details: error.details,
+          hint: error.hint,
+        },
+        { status: 500 }
+      );
+    }
+
+    revalidatePath("/admin/leads");
+    revalidatePath("/command-centre");
+
+    return NextResponse.json({ ok: true, lead: data });
+  } catch (err) {
+    console.error("[POST /api/admin/leads]", err);
+    return NextResponse.json(uncaughtErrorPayload(err), { status: 500 });
   }
-
-  const { data, error } = await supabase
-    .from("leads")
-    .insert({
-      business_name,
-      contact_person,
-      email,
-      phone,
-      website_url,
-      business_type,
-      source: rawSource as CrmLeadSource,
-      interested_in: interested,
-      status: rawStatus as CrmLeadStatus,
-      next_follow_up_date,
-      notes,
-    })
-    .select(LEAD_COLUMNS)
-    .single();
-
-  if (error) {
-    return NextResponse.json(
-      {
-        error: error.message,
-        code: error.code,
-        details: error.details,
-        hint: error.hint,
-      },
-      { status: 500 }
-    );
-  }
-
-  revalidatePath("/admin/leads");
-  revalidatePath("/command-centre");
-
-  return NextResponse.json({ ok: true, lead: data });
 }

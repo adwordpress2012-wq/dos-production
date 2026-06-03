@@ -12,7 +12,7 @@ export default function Page() {
     <LegalShell title="Cancellation Policy" effective="1 January 2026">
       <p>
         We don&apos;t lock anyone in long-term. This policy explains how to cancel, what happens
-        to your data, and how refunds work.
+        to your data, how overdue payments are handled, and how refunds work.
       </p>
 
       <h2>1. Initial 90-day commitment</h2>
@@ -48,7 +48,25 @@ export default function Page() {
         <li>An automatic Australian Consumer Law remedy applies.</li>
       </ul>
 
-      <h2>5. What happens at cancellation</h2>
+      <h2>5. Overdue payments and service pauses</h2>
+      <p>
+        If a payment fails or an invoice becomes overdue, we will usually start with soft reminders
+        and a practical request to fix the billing issue. Where appropriate, DOS may provide a
+        grace period of up to 14 days before pausing active services.
+      </p>
+      <p>
+        If the account remains overdue after reminders or any applicable grace period, DOS may
+        temporarily pause, limit, suspend or restrict websites, Website Care Plan work, Micah,
+        Smart Chat Widget, DOSLead, DOS Calendar, GuestMate, AgentMate, QuoteOS, integrations,
+        automations, support and related infrastructure until the account is brought up to date.
+      </p>
+      <p>
+        Reactivation may require payment of overdue amounts, current plan fees, third-party
+        reactivation charges, and reasonable administration or migration costs. We will try to keep
+        the process clear and human, but services cannot remain active indefinitely without payment.
+      </p>
+
+      <h2>6. What happens at cancellation</h2>
       <ul>
         <li>
           Your website continues serving for the remainder of the paid period; afterwards, we can
@@ -61,23 +79,33 @@ export default function Page() {
           Voice numbers may be ported to another carrier on request, subject to ACMA porting
           rules. Numbers cannot be ported in the first 90 days.
         </li>
+        <li>
+          If you want DOS to keep maintaining the website after cancelling another DOS product, you
+          may continue on a Website Care Plan where available and agreed in writing.
+        </li>
       </ul>
 
-      <h2>6. Your data</h2>
+      <h2>7. Your data and handover</h2>
       <p>
         For 90 days after cancellation, we keep your data on read-only access so you can export
         leads, conversations and bookings. After 90 days, we delete or anonymise your data unless
         we are legally required to keep it.
       </p>
+      <p>
+        Data exports, domain transfers, number porting, website files, DNS records, handover
+        support and migration assistance are subject to identity verification, settlement of
+        outstanding amounts, third-party platform rules and any agreed handover or administration
+        fees.
+      </p>
 
-      <h2>7. Pause instead of cancel</h2>
+      <h2>8. Pause instead of cancel</h2>
       <p>
         Seasonal business? You can pause your subscription for up to 60 days per year at 30% of
         the regular monthly fee. Email{" "}
         <a href="mailto:hello@directiveos.com">hello@directiveos.com</a> to arrange.
       </p>
 
-      <h2>8. Disputes</h2>
+      <h2>9. Disputes</h2>
       <p>
         We&apos;d rather sort it out. If something&apos;s wrong, talk to us first at{" "}
         <a href="mailto:hello@directiveos.com">hello@directiveos.com</a>. We commit to a written

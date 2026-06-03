@@ -21,18 +21,34 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="tracking-[0.16em] uppercase">LIVE AI VOICE + CHAT DEMO</span>
+              <span className="tracking-[0.16em] uppercase">Live demo — call or message</span>
             </div>
 
             <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[80px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
-              <span className="text-white">Modernise and</span>{" "}
-              <span className="text-gradient-purple">automate</span>{" "}
-              <span className="text-white">your business.</span>
+              <span className="text-white">Never Miss Another</span>{" "}
+              <span className="text-gradient-purple">Booking</span>{" "}
+              <span className="text-white">Again.</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-2xl leading-relaxed">
-              Experience Micah live — call our AI receptionist or try the website chat demo powered by COS.
+              DOS helps small businesses automate customer enquiries, bookings, and follow-ups through
+              AI receptionists, website conversations, SMS, WhatsApp, and modern website systems.
             </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-xl">
+              <Link
+                href="/contact"
+                className="btn-neon inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white"
+              >
+                Book Your Free Demo <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="#try-micah-live"
+                className="btn-ghost inline-flex w-full sm:w-auto items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white"
+              >
+                See Micah In Action
+              </Link>
+            </div>
 
             <div className="mt-9 grid w-full max-w-2xl gap-3 sm:grid-cols-2">
               <a
@@ -74,7 +90,7 @@ export default function Hero() {
                     <span className="inline-flex items-center gap-1.5 text-base font-semibold text-white">
                       Try Micah Chat Demo <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
                     </span>
-                    <span className="text-sm font-medium text-emerald-200">Powered by COS</span>
+                    <span className="text-sm font-medium text-emerald-200">Website conversation demo</span>
                   </span>
                 </span>
               </a>
@@ -85,13 +101,13 @@ export default function Hero() {
                 href="/pricing"
                 className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
               >
-                See Pricing
+                View plans
               </Link>
               <Link
                 href="/onboarding"
                 className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
               >
-                Start Onboarding
+                Start onboarding
               </Link>
             </div>
 
@@ -132,9 +148,9 @@ export default function Hero() {
                 </div>
 
                 <div className="grid grid-cols-12 gap-3 p-4">
-                  <DashStat label="Calls handled by Micah" value="1,284" delta="+18%" tone="violet" />
-                  <DashStat label="Bookings via BOS" value="312" delta="+9%" tone="emerald" />
-                  <DashStat label="COS conversations" value="4,902" delta="+24%" tone="cyan" />
+                  <DashStat label="Calls answered by Micah" value="1,284" delta="+18%" tone="violet" />
+                  <DashStat label="Bookings confirmed" value="312" delta="+9%" tone="emerald" />
+                  <DashStat label="Website conversations" value="4,902" delta="+24%" tone="cyan" />
 
                   <div className="col-span-12 lg:col-span-7 rounded-xl border border-white/5 bg-white/[0.02] p-4">
                     <div className="flex items-center justify-between">
@@ -148,8 +164,8 @@ export default function Hero() {
                     <span className="text-xs font-medium text-ink-muted">Live activity</span>
                     <ul className="mt-3 space-y-2.5 text-[12px]">
                       <ActivityRow tone="violet" who="Micah" what="Booked 9:30am with Sarah W." when="just now" />
-                      <ActivityRow tone="cyan" who="COS" what="Replied to SMS lead — Toowoomba" when="2m" />
-                      <ActivityRow tone="emerald" who="BOS" what="Reminder sent · 14 attendees" when="6m" />
+                      <ActivityRow tone="cyan" who="SMS" what="Replied to lead — Toowoomba" when="2m" />
+                      <ActivityRow tone="emerald" who="Booking" what="Reminder sent · 14 attendees" when="6m" />
                       <ActivityRow tone="violet" who="Micah" what="Qualified inbound call · 3:48" when="11m" />
                     </ul>
                   </div>

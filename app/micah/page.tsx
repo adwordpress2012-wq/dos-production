@@ -83,7 +83,7 @@ export default function Page() {
         },
         {
           q: "How is this priced?",
-          a: "Included in Growth and Scale plans. See pricing for monthly call volume tiers.",
+          a: "Micah is included on the Growth plan and above, with generous monthly voice usage. See pricing for what is included and how usage works.",
         },
       ]}
       illustration={

@@ -9,8 +9,23 @@ type Body = {
   contactName?: string;
   email?: string;
   phone?: string;
+  mobile?: string;
   industry?: string;
   channels?: string[];
+  currentWebsiteUrl?: string;
+  businessSummary?: string;
+  projectTypes?: string[];
+  websitePlatform?: string;
+  domainProvider?: string;
+  hostingProvider?: string;
+  dosManageHostingDns?: string;
+  accessMethod?: string;
+  mainGoal?: string;
+  biggestIssue?: string;
+  carePlanInterest?: string;
+  acceptedCheckboxes?: string[];
+  policyVersion?: string;
+  submittedAt?: string;
   goals?: string;
   planId?: string;
   stripeSessionId?: string;
@@ -75,12 +90,28 @@ export async function POST(req: NextRequest) {
   await supabase.from("tenant_leads").insert({
     tenant_id: tenant.id,
     name: body.contactName ?? businessName,
-    phone: body.phone ?? null,
+    phone: body.mobile ?? body.phone ?? null,
     summary: [
       `Onboarding from ${email}`,
+      body.submittedAt ? `Submitted: ${body.submittedAt}` : null,
       body.industry ? `Industry: ${body.industry}` : null,
+      body.businessSummary ? `Business summary: ${body.businessSummary}` : null,
+      body.currentWebsiteUrl ? `Current website: ${body.currentWebsiteUrl}` : null,
+      body.projectTypes?.length ? `Project type: ${body.projectTypes.join(", ")}` : null,
       body.channels?.length ? `Channels: ${body.channels.join(", ")}` : null,
+      body.websitePlatform ? `Website platform: ${body.websitePlatform}` : null,
+      body.domainProvider ? `Domain registrar: ${body.domainProvider}` : null,
+      body.hostingProvider ? `Hosting provider: ${body.hostingProvider}` : null,
+      body.dosManageHostingDns ? `DOS manage hosting/DNS: ${body.dosManageHostingDns}` : null,
+      body.accessMethod ? `Access method: ${body.accessMethod}` : null,
+      body.mainGoal ? `Main goal: ${body.mainGoal}` : null,
+      body.biggestIssue ? `Biggest issue: ${body.biggestIssue}` : null,
+      body.carePlanInterest ? `Care plan interest: ${body.carePlanInterest}` : null,
       body.goals ? `Goals: ${body.goals}` : null,
+      body.acceptedCheckboxes?.length
+        ? `Accepted checkboxes: ${body.acceptedCheckboxes.join(", ")}`
+        : null,
+      body.policyVersion ? `Policy version: ${body.policyVersion}` : null,
       body.planId ? `Plan: ${body.planId}` : null,
       body.stripeSessionId ? `Stripe session: ${body.stripeSessionId}` : null,
     ]

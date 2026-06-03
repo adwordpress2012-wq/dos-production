@@ -11,7 +11,8 @@ export default function Page() {
     <LegalShell title="Acceptable Use Policy" effective="1 January 2026">
       <p>
         This Acceptable Use Policy (AUP) governs how you and your end users may use the DOS
-        platform — including websites we host, Micah, COS, BOS and the Command Centre. It
+        platform — including websites we host, Micah, Smart Chat Widget, DOSLead, DOS Calendar,
+        GuestMate, AgentMate, QuoteOS, SMS, email, automations and the Command Centre. It
         complements our Terms of Service.
       </p>
 
@@ -26,6 +27,11 @@ export default function Page() {
       <p>You must not use DOS to:</p>
       <ul>
         <li>Send unsolicited commercial messages or calls.</li>
+        <li>
+          Use DOSLead, Micah, Smart Chat Widget, SMS, email or automation systems for spam,
+          unlawful outreach, misleading representation, harassment, scraped-list abuse,
+          impersonation, fraud or non-compliant marketing.
+        </li>
         <li>
           Impersonate any person, business or government agency, or misrepresent your identity.
         </li>
@@ -50,8 +56,10 @@ export default function Page() {
 
       <h2>3. AI and automation</h2>
       <p>
-        Micah and COS speak on your behalf. You are responsible for the configuration, scripts and
-        knowledge bases you provide. You must not configure DOS to:
+        Micah, Smart Chat Widget, DOSLead, DOS Calendar, GuestMate, AgentMate, QuoteOS and related
+        automation systems may act on your behalf. You are responsible for the configuration,
+        scripts, knowledge bases, lead sources and approval rules you provide. You must not
+        configure DOS to:
       </p>
       <ul>
         <li>Make legally binding statements, medical, legal or financial advice without human review.</li>
