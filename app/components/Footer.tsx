@@ -3,8 +3,18 @@ import Logo from "./Logo";
 
 const LIVE = [
   { href: "/#live-demos", label: "Live DOS Systems" },
+  { href: "/#dos-workflow", label: "DOS Workflow" },
   { href: "/discovery", label: "Operational Discovery" },
   { href: "/contact", label: "Book Discovery Call" },
+];
+
+const ECOSYSTEM = [
+  { href: "https://doscalendar.com", label: "DOS Calendar", external: true },
+  { href: "https://chatos.com.au", label: "Micah / ChatOS", external: true },
+  { href: "https://dossoos.com.au", label: "DOS SOOS", external: true },
+  { href: "https://dosworkspace.com", label: "DOS Workspace", external: true },
+  { href: "/#live-demos", label: "DOS Capabilities", external: false },
+  { href: "/#dos-workflow", label: "BookOS & frameworks", external: false },
 ];
 
 const COMPANY = [
@@ -58,6 +68,30 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-2">
+            <h4 className="text-xs font-semibold tracking-widest text-ink-muted uppercase">DOS Ecosystem</h4>
+            <ul className="mt-4 space-y-2.5 text-sm">
+              {ECOSYSTEM.map((l) => (
+                <li key={l.href}>
+                  {l.external ? (
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-ink-muted hover:text-white transition"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link href={l.href} className="text-ink-muted hover:text-white transition">
+                      {l.label}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-1">
             <h4 className="text-xs font-semibold tracking-widest text-ink-muted uppercase">Company</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               {COMPANY.map((l) => (
@@ -70,7 +104,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-3">
+          <div className="md:col-span-2">
             <h4 className="text-xs font-semibold tracking-widest text-ink-muted uppercase">Legal</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
               {LEGAL.map((l) => (

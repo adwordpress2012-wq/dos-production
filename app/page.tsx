@@ -1,97 +1,184 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  BookOpen,
   Building2,
   CalendarClock,
   ClipboardList,
   Compass,
-  ExternalLink,
   LayoutDashboard,
   MessageSquare,
   Pizza,
   Send,
+  ShoppingBag,
   Sparkles,
+  Users,
   UtensilsCrossed,
   Wrench,
 } from "lucide-react";
 import GlowCard, { GlowIcon } from "./components/GlowCard";
 import SectionHeader from "./components/SectionHeader";
 
-const LIVE_DOS_SYSTEMS = [
+type GlowTone = "cyan" | "fuchsia" | "violet" | "emerald" | "amber";
+
+type ShowroomCard = {
+  name: string;
+  label: string;
+  description?: string;
+  icon: ReactNode;
+  tone: GlowTone;
+  href?: string;
+  status?: string;
+  ctaLabel: string;
+  ctaKind: "external" | "anchor" | "static";
+  anchor?: string;
+};
+
+const PUBLIC_LIVE_SYSTEMS: ShowroomCard[] = [
   {
     name: "DOS Calendar",
     href: "https://doscalendar.com",
     label: "Operational Scheduling System",
     icon: <CalendarClock className="h-5 w-5" />,
-    tone: "cyan" as const,
+    tone: "cyan",
+    ctaLabel: "Open live demo",
+    ctaKind: "external",
   },
   {
     name: "Micah / ChatOS",
     href: "https://chatos.com.au",
     label: "Smart Chat Widget + Smart Business Assistant",
     icon: <MessageSquare className="h-5 w-5" />,
-    tone: "fuchsia" as const,
-  },
-  {
-    name: "DOSLead",
-    href: "https://doslead.com.au",
-    label: "Outreach & Follow-Up System",
-    icon: <Send className="h-5 w-5" />,
-    tone: "violet" as const,
-  },
-  {
-    name: "QuoteOS",
-    href: "https://quoteos.com.au",
-    label: "Tradie Operating System",
-    icon: <Wrench className="h-5 w-5" />,
-    tone: "emerald" as const,
+    tone: "fuchsia",
+    ctaLabel: "Open live demo",
+    ctaKind: "external",
   },
   {
     name: "DOS SOOS",
     href: "https://dossoos.com.au",
     label: "Restaurant Ordering System",
     icon: <UtensilsCrossed className="h-5 w-5" />,
-    tone: "amber" as const,
+    tone: "amber",
+    ctaLabel: "Open live demo",
+    ctaKind: "external",
   },
   {
     name: "DOS Workspace",
     href: "https://dosworkspace.com",
     label: "DOS Client Workspace",
     icon: <LayoutDashboard className="h-5 w-5" />,
-    tone: "cyan" as const,
-  },
-  {
-    name: "AgentMate",
-    href: "https://agentmateworkspace.com.au",
-    label: "Real Estate Operational Assistant",
-    icon: <Building2 className="h-5 w-5" />,
-    tone: "violet" as const,
-    status: "Preview / Paused" as const,
+    tone: "cyan",
+    ctaLabel: "Open live demo",
+    ctaKind: "external",
   },
 ];
 
-const CLIENT_BUILD_DEMOS = [
+const DOS_CAPABILITIES: ShowroomCard[] = [
   {
-    name: "Capital Recruitment",
-    href: "https://capitalrecruitment.com.au",
-    label: "Recruitment Website System",
-    icon: <Building2 className="h-5 w-5" />,
-    tone: "violet" as const,
+    name: "DOSLead",
+    label: "Outreach & Follow-Up System",
+    description:
+      "A DOS growth workflow for organising prospects, preparing outreach, tracking follow-ups and turning discovery conversations into new operational system projects.",
+    icon: <Send className="h-5 w-5" />,
+    tone: "violet",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
   },
   {
-    name: "Zio Pizza",
-    href: "https://ziopizza.com.au",
-    label: "Pizza / Restaurant Demo",
+    name: "QuoteOS",
+    label: "Tradie Operating System",
+    description: "Quote, job and follow-up workflows for trade businesses — scoped as part of a DOS operational build.",
+    icon: <Wrench className="h-5 w-5" />,
+    tone: "emerald",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+  {
+    name: "AgentMate",
+    label: "Real Estate Operational Assistant",
+    icon: <Building2 className="h-5 w-5" />,
+    tone: "violet",
+    status: "Preview / Paused",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+  {
+    name: "BookOS",
+    label: "Booking Workflow System",
+    description:
+      "A booking-focused DOS system for service businesses that need enquiries, scheduling, reminders and customer handover organised into one simple operational flow.",
+    icon: <BookOpen className="h-5 w-5" />,
+    tone: "cyan",
+    status: "Coming Soon / Framework",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+  {
+    name: "GuestMate",
+    label: "Guest Operations System",
+    description: "Guest bookings, arrival reminders, welcome packs and records shaped into one operational workflow.",
+    icon: <Users className="h-5 w-5" />,
+    tone: "fuchsia",
+    status: "Coming Soon / Client Build",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+  {
+    name: "RestaurantOS",
+    label: "Restaurant Operations Framework",
+    icon: <UtensilsCrossed className="h-5 w-5" />,
+    tone: "amber",
+    status: "Framework",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+  {
+    name: "ShopOS",
+    label: "Retail Operations Framework",
+    icon: <ShoppingBag className="h-5 w-5" />,
+    tone: "emerald",
+    status: "Framework",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+];
+
+const CLIENT_BUILD_DEMOS: ShowroomCard[] = [
+  {
+    name: "Capital Recruitment",
+    label: "Recruitment Website System",
+    icon: <Building2 className="h-5 w-5" />,
+    tone: "violet",
+    ctaLabel: "Read story",
+    ctaKind: "anchor",
+    anchor: "/case-studies/capital-recruitment",
+  },
+  {
+    name: "Zio Pizza & Pasta",
+    label: "Restaurant client build",
     icon: <Pizza className="h-5 w-5" />,
-    tone: "fuchsia" as const,
+    tone: "fuchsia",
+    status: "Private preview",
+    ctaLabel: "Coming soon",
+    ctaKind: "static",
   },
   {
     name: "Galactic Plumbing",
-    href: "https://galacticplumbing.com.au",
-    label: "Plumbing / QuoteOS Demo",
+    label: "Plumbing / QuoteOS workflow",
     icon: <Wrench className="h-5 w-5" />,
-    tone: "emerald" as const,
+    tone: "emerald",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
   },
 ];
 
@@ -128,22 +215,47 @@ const DOS_WORKFLOW = [
   },
 ];
 
-const CLIENT_STORIES = [
+type ClientStory = {
+  name: string;
+  business: string;
+  summary: string;
+  tone: GlowTone;
+  status?: string;
+  ctaLabel: string;
+  ctaKind: "internal" | "anchor" | "static";
+  href?: string;
+};
+
+const CLIENT_STORIES: ClientStory[] = [
   {
     name: "Luke",
     business: "Galactic Plumbing",
     summary:
       "Quote and enquiry workflow organised so job requests, follow-ups and booking handover stay out of scattered text threads.",
-    href: "https://galacticplumbing.com.au",
-    tone: "emerald" as const,
+    tone: "emerald",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    href: "#dos-workflow",
   },
   {
     name: "Jamie & Tanya",
-    business: "Zio Pizza",
+    business: "TJ's 4B Park",
     summary:
-      "Restaurant ordering, promotions and customer follow-up shaped into one operational flow the team can run daily.",
-    href: "https://ziopizza.com.au",
-    tone: "fuchsia" as const,
+      "Guest bookings, Hipcamp operations, arrival reminders, welcome packs and guest records shaped into one simple GuestMate workflow.",
+    tone: "cyan",
+    ctaLabel: "View workflow",
+    ctaKind: "anchor",
+    href: "#dos-workflow",
+  },
+  {
+    name: "Ziyad",
+    business: "Zio Pizza & Pasta",
+    summary:
+      "Restaurant ordering, customer records, promotions and follow-up workflows shaped into one operational flow.",
+    tone: "fuchsia",
+    status: "Private preview",
+    ctaLabel: "Coming soon",
+    ctaKind: "static",
   },
   {
     name: "Paul",
@@ -151,15 +263,16 @@ const CLIENT_STORIES = [
     summary:
       "Recruitment website, job listings, resume uploads and admin workflows modernised into one managed platform.",
     href: "/case-studies/capital-recruitment",
-    tone: "violet" as const,
-    internal: true,
+    tone: "violet",
+    ctaLabel: "Read story",
+    ctaKind: "internal",
   },
 ];
 
 const ECOSYSTEM_NODES = [
   { id: "enquiries", label: "Enquiries", detail: "Website, phone, chat, referrals", systems: ["Micah / ChatOS", "DOSLead"] },
-  { id: "scheduling", label: "Scheduling", detail: "Bookings, reminders, handoffs", systems: ["DOS Calendar"] },
-  { id: "operations", label: "Operations", detail: "Quotes, orders, jobs, follow-up", systems: ["QuoteOS", "DOS SOOS"] },
+  { id: "scheduling", label: "Scheduling", detail: "Bookings, reminders, handoffs", systems: ["DOS Calendar", "BookOS"] },
+  { id: "operations", label: "Operations", detail: "Quotes, orders, jobs, follow-up", systems: ["QuoteOS", "DOS SOOS", "GuestMate"] },
   { id: "workspace", label: "Client workspace", detail: "Care, hosting, visibility", systems: ["DOS Workspace", "AgentMate"] },
 ];
 
@@ -286,6 +399,92 @@ function OperationalMapMock() {
   );
 }
 
+function ShowroomCardBody({ card, showDescription = false }: { card: ShowroomCard; showDescription?: boolean }) {
+  return (
+    <GlowCard tone={card.tone} className="h-full transition group-hover:ring-1 group-hover:ring-white/10">
+      <div className="flex items-start justify-between gap-3">
+        <GlowIcon tone={card.tone}>{card.icon}</GlowIcon>
+        {card.ctaKind === "external" && (
+          <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-dim transition group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        )}
+      </div>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <h3 className="text-lg font-semibold tracking-tight text-white">{card.name}</h3>
+        {card.status && (
+          <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
+            {card.status}
+          </span>
+        )}
+      </div>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{card.label}</p>
+      {showDescription && card.description && (
+        <p className="mt-3 text-sm leading-relaxed text-ink-muted/90">{card.description}</p>
+      )}
+      <p className="mt-4 text-xs font-medium text-cyan-200/90">{card.ctaLabel}</p>
+    </GlowCard>
+  );
+}
+
+function resolveShowroomHref(target: string) {
+  if (target.startsWith("/")) return target;
+  if (target.startsWith("#")) return `/${target}`;
+  return target;
+}
+
+function ShowroomCardLink({ card, showDescription = false }: { card: ShowroomCard; showDescription?: boolean }) {
+  const body = <ShowroomCardBody card={card} showDescription={showDescription} />;
+
+  if (card.ctaKind === "external" && card.href) {
+    return (
+      <a href={card.href} target="_blank" rel="noreferrer" className="group block h-full">
+        {body}
+      </a>
+    );
+  }
+
+  if (card.ctaKind === "anchor" && card.anchor) {
+    return (
+      <Link href={resolveShowroomHref(card.anchor)} className="group block h-full">
+        {body}
+      </Link>
+    );
+  }
+
+  return <div className="group block h-full">{body}</div>;
+}
+
+function ClientBuildDemoRow({ demo }: { demo: ShowroomCard }) {
+  const content = (
+    <div className="glass flex h-full items-center justify-between gap-4 rounded-2xl px-5 py-4 transition hover:bg-white/[0.04]">
+      <div className="flex min-w-0 items-center gap-3">
+        <GlowIcon tone={demo.tone}>{demo.icon}</GlowIcon>
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-sm font-semibold text-white">{demo.name}</p>
+            {demo.status && (
+              <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
+                {demo.status}
+              </span>
+            )}
+          </div>
+          <p className="mt-0.5 truncate text-xs text-ink-muted">{demo.label}</p>
+        </div>
+      </div>
+      <span className="shrink-0 text-xs font-medium text-cyan-200/90">{demo.ctaLabel}</span>
+    </div>
+  );
+
+  if (demo.ctaKind === "anchor" && demo.anchor) {
+    return (
+      <Link href={resolveShowroomHref(demo.anchor)} className="group block">
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className="block">{content}</div>;
+}
+
 function LiveDosSystems() {
   return (
     <section id="live-demos" className="relative scroll-mt-28 py-20 sm:py-28">
@@ -297,62 +496,30 @@ function LiveDosSystems() {
               Try the <span className="text-gradient-neon">live demo systems.</span>
             </>
           }
-          description="directiveos.com.au is the DOS showroom. Open a system, see how it runs, then start discovery when you are ready to scope your build."
+          description="directiveos.com.au is the DOS showroom. Only confirmed public systems open externally — everything else stays on this page as workflow and capability cards."
         />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {LIVE_DOS_SYSTEMS.map((system) => (
-            <a
-              key={system.name}
-              href={system.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group block h-full"
-            >
-              <GlowCard tone={system.tone} className="h-full transition group-hover:ring-1 group-hover:ring-white/10">
-                <div className="flex items-start justify-between gap-3">
-                  <GlowIcon tone={system.tone}>{system.icon}</GlowIcon>
-                  <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-dim transition group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
-                <div className="mt-4 flex flex-wrap items-center gap-2">
-                  <h3 className="text-lg font-semibold tracking-tight text-white">{system.name}</h3>
-                  {"status" in system && system.status && (
-                    <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
-                      {system.status}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{system.label}</p>
-                <p className="mt-4 text-xs font-medium text-cyan-200/90">Open live demo</p>
-              </GlowCard>
-            </a>
+        <p className="mt-10 text-xs font-medium uppercase tracking-[0.2em] text-ink-dim">Public live systems</p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {PUBLIC_LIVE_SYSTEMS.map((system) => (
+            <ShowroomCardLink key={system.name} card={system} />
+          ))}
+        </div>
+
+        <p className="mt-14 text-xs font-medium uppercase tracking-[0.2em] text-ink-dim">DOS capabilities & frameworks</p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {DOS_CAPABILITIES.map((system) => (
+            <ShowroomCardLink key={system.name} card={system} showDescription={Boolean(system.description)} />
           ))}
         </div>
 
         <div className="mt-16">
           <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-ink-dim">
-            Client & industry demos
+            Client & industry builds
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {CLIENT_BUILD_DEMOS.map((demo) => (
-              <a
-                key={demo.name}
-                href={demo.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group block"
-              >
-                <div className="glass flex h-full items-center justify-between gap-4 rounded-2xl px-5 py-4 transition hover:bg-white/[0.04]">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <GlowIcon tone={demo.tone}>{demo.icon}</GlowIcon>
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-white">{demo.name}</p>
-                      <p className="mt-0.5 truncate text-xs text-ink-muted">{demo.label}</p>
-                    </div>
-                  </div>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-ink-dim group-hover:text-white" />
-                </div>
-              </a>
+              <ClientBuildDemoRow key={demo.name} demo={demo} />
             ))}
           </div>
         </div>
@@ -408,22 +575,29 @@ function ClientStories() {
           description="Examples of practical DOS builds — shaped after discovery, not forced into a package card."
         />
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {CLIENT_STORIES.map((story) => {
             const card = (
               <GlowCard tone={story.tone} className="h-full">
                 <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-dim">Client story</p>
                 <h3 className="mt-4 text-xl font-semibold tracking-tight">{story.name}</h3>
-                <p className="mt-1 text-sm font-medium text-violet-200/90">{story.business}</p>
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+                  <p className="text-sm font-medium text-violet-200/90">{story.business}</p>
+                  {story.status && (
+                    <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
+                      {story.status}
+                    </span>
+                  )}
+                </div>
                 <p className="mt-4 text-sm leading-relaxed text-ink-muted">{story.summary}</p>
                 <p className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-cyan-200/90">
-                  {story.internal ? "Read case study" : "View live build"}
-                  <ArrowUpRight className="h-3.5 w-3.5" />
+                  {story.ctaLabel}
+                  {story.ctaKind !== "static" && <ArrowUpRight className="h-3.5 w-3.5" />}
                 </p>
               </GlowCard>
             );
 
-            if (story.internal) {
+            if (story.ctaKind === "internal" && story.href) {
               return (
                 <Link key={story.name} href={story.href} className="group block h-full">
                   {card}
@@ -431,16 +605,18 @@ function ClientStories() {
               );
             }
 
+            if (story.ctaKind === "anchor" && story.href) {
+              return (
+                <Link key={story.name} href={resolveShowroomHref(story.href)} className="group block h-full">
+                  {card}
+                </Link>
+              );
+            }
+
             return (
-              <a
-                key={story.name}
-                href={story.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group block h-full"
-              >
+              <div key={story.name} className="block h-full">
                 {card}
-              </a>
+              </div>
             );
           })}
         </div>
@@ -463,7 +639,7 @@ function EcosystemMap() {
                   The right systems, only when the <span className="text-gradient-purple">workflow needs them.</span>
                 </>
               }
-              description="Micah, DOS Calendar, QuoteOS, DOSLead, DOS SOOS and DOS Workspace connect inside a broader operational build — components DOS selects after discovery, not the whole offer by themselves."
+              description="Micah, DOS Calendar, BookOS, QuoteOS, DOSLead, DOS SOOS, GuestMate and DOS Workspace connect inside a broader operational build — components DOS selects after discovery, not the whole offer by themselves."
             />
           </div>
 
