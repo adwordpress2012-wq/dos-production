@@ -23,11 +23,11 @@ export default function CapitalRecruitmentCaseStudyPage() {
     <main className="relative pt-32 sm:pt-40 pb-20">
       <div className="mx-auto max-w-3xl px-6">
         <Link
-          href="/#modern-systems-in-action"
+          href="/#client-stories"
           className="inline-flex items-center gap-2 text-sm font-medium text-violet-200/90 hover:text-violet-100 transition"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to homepage spotlight
+          Back to client stories
         </Link>
 
         <div className="mt-8 inline-flex rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2.5">

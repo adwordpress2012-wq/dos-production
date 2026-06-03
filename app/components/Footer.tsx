@@ -1,15 +1,14 @@
 import Link from "next/link";
 import Logo from "./Logo";
 
-const PRODUCTS = [
-  { href: "/website-rebuilds", label: "Website Rebuilds" },
-  { href: "/micah", label: "Micah AI Receptionist" },
-  { href: "/cos", label: "COS Communication" },
-  { href: "/bos", label: "BOS Booking" },
+const LIVE = [
+  { href: "/#live-demos", label: "Live DOS Systems" },
+  { href: "/discovery", label: "Operational Discovery" },
+  { href: "/contact", label: "Book Discovery Call" },
 ];
 
 const COMPANY = [
-  { href: "/pricing", label: "Pricing" },
+  { href: "/#client-stories", label: "Client Stories" },
   { href: "/onboarding", label: "Onboarding" },
   { href: "mailto:hello@directiveos.com", label: "Contact" },
 ];
@@ -36,8 +35,9 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted max-w-sm">
-              Done-For-You AI Business Systems. Websites, AI receptionists, booking systems,
-              automation and managed business infrastructure for modern Australian businesses.
+              Operational Systems Engineering + AI systems building for small business. DOS designs
+              practical systems to capture enquiries, organise workflows, reduce admin and buy back
+              time.
             </p>
             <p className="mt-6 text-xs text-ink-dim">
               Operated in Australia · ABN supplied on invoice · Built on Vercel + Supabase
@@ -45,9 +45,9 @@ export default function Footer() {
           </div>
 
           <div className="md:col-span-2">
-            <h4 className="text-xs font-semibold tracking-widest text-ink-muted uppercase">Products</h4>
+            <h4 className="text-xs font-semibold tracking-widest text-ink-muted uppercase">Showroom</h4>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {PRODUCTS.map((l) => (
+              {LIVE.map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="text-ink-muted hover:text-white transition">
                     {l.label}

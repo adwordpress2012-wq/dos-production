@@ -6,11 +6,11 @@ import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
 
 const NAV_LINKS = [
-  { href: "/website-rebuilds", label: "Websites" },
-  { href: "/micah", label: "Micah" },
-  { href: "/cos", label: "COS" },
-  { href: "/bos", label: "BOS" },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/", label: "Home" },
+  { href: "/#live-demos", label: "Live Demos" },
+  { href: "/#dos-workflow", label: "Solutions" },
+  { href: "/#client-stories", label: "Client Stories" },
+  { href: "/discovery", label: "Book Discovery" },
 ];
 
 export default function Nav() {
@@ -25,7 +25,7 @@ export default function Nav() {
             <span className="text-[15px] font-semibold tracking-tight">
               <span className="text-white">DOS</span>
               <span className="text-ink-muted hidden sm:inline ml-2 font-normal text-[13px]">
-                Done-For-You AI Business Systems
+                Operational Systems Engineering
               </span>
             </span>
           </Link>
@@ -44,16 +44,10 @@ export default function Nav() {
 
           <div className="flex items-center gap-2">
             <Link
-              href="/onboarding"
-              className="hidden sm:inline-flex btn-ghost text-[13px] font-medium px-3.5 py-2 rounded-xl"
-            >
-              Onboarding
-            </Link>
-            <Link
-              href="/pricing"
+              href="/discovery"
               className="hidden sm:inline-flex btn-neon text-[13px] font-semibold text-white px-4 py-2 rounded-xl"
             >
-              Get Started
+              Book Discovery
             </Link>
             <button
               onClick={() => setOpen((v) => !v)}
@@ -79,20 +73,13 @@ export default function Nav() {
                 </Link>
               ))}
             </div>
-            <div className="mt-2 grid grid-cols-2 gap-2">
+            <div className="mt-2">
               <Link
-                href="/onboarding"
+                href="/discovery"
                 onClick={() => setOpen(false)}
-                className="btn-ghost text-center text-sm font-medium px-3 py-2.5 rounded-xl"
+                className="btn-neon block text-center text-sm font-semibold text-white px-3 py-2.5 rounded-xl"
               >
-                Onboarding
-              </Link>
-              <Link
-                href="/pricing"
-                onClick={() => setOpen(false)}
-                className="btn-neon text-center text-sm font-semibold text-white px-3 py-2.5 rounded-xl"
-              >
-                Get Started
+                Book Discovery
               </Link>
             </div>
           </div>

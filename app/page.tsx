@@ -1,110 +1,176 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
   Building2,
   CalendarClock,
-  CheckCircle2,
   ClipboardList,
   Compass,
-  HeadphonesIcon,
-  Hotel,
+  ExternalLink,
   LayoutDashboard,
-  Map,
   MessageSquare,
   Pizza,
-  ShieldCheck,
+  Send,
   Sparkles,
+  UtensilsCrossed,
   Wrench,
 } from "lucide-react";
 import GlowCard, { GlowIcon } from "./components/GlowCard";
 import SectionHeader from "./components/SectionHeader";
 
-const HOW_DOS_WORKS = [
+const LIVE_DOS_SYSTEMS = [
   {
-    icon: <Compass className="h-5 w-5" />,
-    title: "Operational Discovery",
-    description:
-      "We learn how your business currently handles enquiries, bookings, orders, customers, follow-ups and admin.",
+    name: "DOS Calendar",
+    href: "https://doscalendar.com",
+    label: "Operational Scheduling System",
+    icon: <CalendarClock className="h-5 w-5" />,
+    tone: "cyan" as const,
+  },
+  {
+    name: "Micah / ChatOS",
+    href: "https://chatos.com.au",
+    label: "Smart Chat Widget + Smart Business Assistant",
+    icon: <MessageSquare className="h-5 w-5" />,
+    tone: "fuchsia" as const,
+  },
+  {
+    name: "DOSLead",
+    href: "https://doslead.com.au",
+    label: "Outreach & Follow-Up System",
+    icon: <Send className="h-5 w-5" />,
     tone: "violet" as const,
   },
   {
-    icon: <Map className="h-5 w-5" />,
-    title: "Workflow Map",
-    description:
-      "We identify what is slowing the business down, what gets missed, and where time or revenue leaks happen.",
+    name: "QuoteOS",
+    href: "https://quoteos.com.au",
+    label: "Tradie Operating System",
+    icon: <Wrench className="h-5 w-5" />,
+    tone: "emerald" as const,
+  },
+  {
+    name: "DOS SOOS",
+    href: "https://dossoos.com.au",
+    label: "Restaurant Ordering System",
+    icon: <UtensilsCrossed className="h-5 w-5" />,
+    tone: "amber" as const,
+  },
+  {
+    name: "DOS Workspace",
+    href: "https://dosworkspace.com",
+    label: "DOS Client Workspace",
+    icon: <LayoutDashboard className="h-5 w-5" />,
     tone: "cyan" as const,
+  },
+  {
+    name: "AgentMate",
+    href: "https://agentmateworkspace.com.au",
+    label: "Real Estate Operational Assistant",
+    icon: <Building2 className="h-5 w-5" />,
+    tone: "violet" as const,
+    status: "Preview / Paused" as const,
+  },
+];
+
+const CLIENT_BUILD_DEMOS = [
+  {
+    name: "Capital Recruitment",
+    href: "https://capitalrecruitment.com.au",
+    label: "Recruitment Website System",
+    icon: <Building2 className="h-5 w-5" />,
+    tone: "violet" as const,
+  },
+  {
+    name: "Zio Pizza",
+    href: "https://ziopizza.com.au",
+    label: "Pizza / Restaurant Demo",
+    icon: <Pizza className="h-5 w-5" />,
+    tone: "fuchsia" as const,
+  },
+  {
+    name: "Galactic Plumbing",
+    href: "https://galacticplumbing.com.au",
+    label: "Plumbing / QuoteOS Demo",
+    icon: <Wrench className="h-5 w-5" />,
+    tone: "emerald" as const,
+  },
+];
+
+const DOS_WORKFLOW = [
+  {
+    icon: <Compass className="h-5 w-5" />,
+    title: "Discovery",
+    description: "We learn how enquiries, bookings, orders and follow-ups actually move through the business today.",
+    tone: "violet" as const,
+  },
+  {
+    icon: <ClipboardList className="h-5 w-5" />,
+    title: "Pain Point",
+    description: "We map what gets missed, where admin piles up, and where time or revenue quietly leaks.",
+    tone: "fuchsia" as const,
   },
   {
     icon: <LayoutDashboard className="h-5 w-5" />,
-    title: "Custom System Build",
-    description:
-      "We build the website, forms, dashboards, communication flows, booking tools or operational system needed for that business.",
-    tone: "emerald" as const,
-  },
-  {
-    icon: <HeadphonesIcon className="h-5 w-5" />,
-    title: "Ongoing Support",
-    description:
-      "DOS manages hosting, care, improvements and future system upgrades.",
-    tone: "fuchsia" as const,
-  },
-];
-
-const SOLUTION_EXAMPLES = [
-  {
-    icon: <Pizza className="h-5 w-5" />,
-    title: "Pizza shop operating system",
-    description:
-      "Online ordering flow, local promotions, missed-call capture, customer follow-up and daily order visibility.",
-    tone: "fuchsia" as const,
-  },
-  {
-    icon: <Hotel className="h-5 w-5" />,
-    title: "Guest/tourism operations system",
-    description:
-      "Guest enquiries, bookings, check-in instructions, reminders and operator dashboards in one managed workflow.",
+    title: "Workflow",
+    description: "We design the practical path — capture, organise, hand off and follow up without chaos.",
     tone: "cyan" as const,
   },
   {
-    icon: <Wrench className="h-5 w-5" />,
-    title: "Tradie quoting workflow",
-    description:
-      "Lead intake, job details, quote requests, follow-ups and booking handover without losing work in text threads.",
+    icon: <ArrowRight className="h-5 w-5" />,
+    title: "Build Road",
+    description: "We build the website, forms, dashboards, messaging flows and operational tools the workflow needs.",
     tone: "emerald" as const,
   },
   {
-    icon: <Building2 className="h-5 w-5" />,
-    title: "Real estate follow-up system",
-    description:
-      "Buyer, vendor and rental enquiries organised into simple follow-up paths so no warm lead disappears.",
-    tone: "violet" as const,
+    icon: <CalendarClock className="h-5 w-5" />,
+    title: "Buy Back Time",
+    description: "DOS manages hosting, care and improvements so the system keeps working while you run the business.",
+    tone: "amber" as const,
   },
 ];
 
-const CAPABILITIES = [
-  "Operational Discovery",
-  "Pain point mapping",
-  "Workflow design",
-  "Custom business system build",
-  "Ongoing support and care",
+const CLIENT_STORIES = [
+  {
+    name: "Luke",
+    business: "Galactic Plumbing",
+    summary:
+      "Quote and enquiry workflow organised so job requests, follow-ups and booking handover stay out of scattered text threads.",
+    href: "https://galacticplumbing.com.au",
+    tone: "emerald" as const,
+  },
+  {
+    name: "Jamie & Tanya",
+    business: "Zio Pizza",
+    summary:
+      "Restaurant ordering, promotions and customer follow-up shaped into one operational flow the team can run daily.",
+    href: "https://ziopizza.com.au",
+    tone: "fuchsia" as const,
+  },
+  {
+    name: "Paul",
+    business: "Capital Recruitment",
+    summary:
+      "Recruitment website, job listings, resume uploads and admin workflows modernised into one managed platform.",
+    href: "/case-studies/capital-recruitment",
+    tone: "violet" as const,
+    internal: true,
+  },
 ];
 
-const SYSTEM_COMPONENTS = [
-  "Micah for call handling and enquiry capture",
-  "DOS Calendar for booking and reminders",
-  "QuoteOS for quoting workflows",
-  "GuestMate for guest and tourism operations",
-  "DOSLead for lead follow-up and visibility",
+const ECOSYSTEM_NODES = [
+  { id: "enquiries", label: "Enquiries", detail: "Website, phone, chat, referrals", systems: ["Micah / ChatOS", "DOSLead"] },
+  { id: "scheduling", label: "Scheduling", detail: "Bookings, reminders, handoffs", systems: ["DOS Calendar"] },
+  { id: "operations", label: "Operations", detail: "Quotes, orders, jobs, follow-up", systems: ["QuoteOS", "DOS SOOS"] },
+  { id: "workspace", label: "Client workspace", detail: "Care, hosting, visibility", systems: ["DOS Workspace", "AgentMate"] },
 ];
 
 export default function Home() {
   return (
     <>
       <HeroSection />
-      <CapabilityStrip />
-      <HowDosWorks />
-      <SolutionExamples />
-      <SystemComponents />
+      <LiveDosSystems />
+      <DosWorkflow />
+      <ClientStories />
+      <EcosystemMap />
       <DiscoveryCta />
     </>
   );
@@ -128,7 +194,7 @@ function HeroSection() {
             <div className="lg:col-span-7">
               <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">
                 <Sparkles className="h-3.5 w-3.5" />
-                Operational Intelligence Systems
+                Operational Systems Engineering
               </span>
 
               <h1 className="mt-7 max-w-4xl text-4xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[76px]">
@@ -137,7 +203,7 @@ function HeroSection() {
 
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg lg:text-xl">
                 DOS helps small businesses uncover what is slowing them down, then designs practical
-                systems to capture more enquiries, organise workflows, reduce admin and buy back time.
+                systems to capture enquiries, organise workflows, reduce admin and buy back time.
               </p>
 
               <div className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
@@ -156,8 +222,8 @@ function HeroSection() {
               </div>
 
               <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-muted">
-                No fixed package pricing on the homepage. Every DOS solution is scoped and custom
-                quoted after discovery.
+                Discovery-first. Explore live DOS systems below, then scope the right build for your
+                workflow.
               </p>
             </div>
 
@@ -220,39 +286,97 @@ function OperationalMapMock() {
   );
 }
 
-function CapabilityStrip() {
+function LiveDosSystems() {
   return (
-    <section className="relative py-10">
+    <section id="live-demos" className="relative scroll-mt-28 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-3 md:grid-cols-5">
-          {CAPABILITIES.map((item) => (
-            <div key={item} className="glass rounded-2xl px-4 py-4 text-sm font-medium text-white/90">
-              <CheckCircle2 className="mb-3 h-4 w-4 text-emerald-400" />
-              {item}
-            </div>
+        <SectionHeader
+          eyebrow="Live DOS Systems"
+          title={
+            <>
+              Try the <span className="text-gradient-neon">live demo systems.</span>
+            </>
+          }
+          description="directiveos.com.au is the DOS showroom. Open a system, see how it runs, then start discovery when you are ready to scope your build."
+        />
+
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {LIVE_DOS_SYSTEMS.map((system) => (
+            <a
+              key={system.name}
+              href={system.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group block h-full"
+            >
+              <GlowCard tone={system.tone} className="h-full transition group-hover:ring-1 group-hover:ring-white/10">
+                <div className="flex items-start justify-between gap-3">
+                  <GlowIcon tone={system.tone}>{system.icon}</GlowIcon>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-dim transition group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
+                <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <h3 className="text-lg font-semibold tracking-tight text-white">{system.name}</h3>
+                  {"status" in system && system.status && (
+                    <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
+                      {system.status}
+                    </span>
+                  )}
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">{system.label}</p>
+                <p className="mt-4 text-xs font-medium text-cyan-200/90">Open live demo</p>
+              </GlowCard>
+            </a>
           ))}
+        </div>
+
+        <div className="mt-16">
+          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-ink-dim">
+            Client & industry demos
+          </p>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {CLIENT_BUILD_DEMOS.map((demo) => (
+              <a
+                key={demo.name}
+                href={demo.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group block"
+              >
+                <div className="glass flex h-full items-center justify-between gap-4 rounded-2xl px-5 py-4 transition hover:bg-white/[0.04]">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <GlowIcon tone={demo.tone}>{demo.icon}</GlowIcon>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-white">{demo.name}</p>
+                      <p className="mt-0.5 truncate text-xs text-ink-muted">{demo.label}</p>
+                    </div>
+                  </div>
+                  <ExternalLink className="h-4 w-4 shrink-0 text-ink-dim group-hover:text-white" />
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function HowDosWorks() {
+function DosWorkflow() {
   return (
-    <section className="relative py-20 sm:py-28">
+    <section id="dos-workflow" className="relative scroll-mt-28 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
-          eyebrow="How DOS Works"
+          eyebrow="DOS Workflow"
           title={
             <>
               Discovery first. <span className="text-gradient-purple">System second.</span>
             </>
           }
-          description="We start with how the business actually runs, then design the right operating system around the owner, team and customers."
+          description="DOS is Operational Systems Engineering + AI systems building for small business — not a generic website agency or fixed SaaS bundle."
         />
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {HOW_DOS_WORKS.map((step, index) => (
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+          {DOS_WORKFLOW.map((step, index) => (
             <GlowCard key={step.title} tone={step.tone} className="h-full">
               <div className="flex items-center justify-between gap-4">
                 <GlowIcon tone={step.tone}>{step.icon}</GlowIcon>
@@ -270,63 +394,112 @@ function HowDosWorks() {
   );
 }
 
-function SolutionExamples() {
+function ClientStories() {
   return (
-    <section className="relative py-20 sm:py-28">
+    <section id="client-stories" className="relative scroll-mt-28 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
-          eyebrow="Example systems"
+          eyebrow="Client Stories"
           title={
             <>
-              Built around the <span className="text-gradient-neon">real job</span> your business does.
+              Systems built around <span className="text-gradient-purple">real operations.</span>
             </>
           }
-          description="DOS is not a single product bundle. These are examples of operational systems we can shape after discovery."
+          description="Examples of practical DOS builds — shaped after discovery, not forced into a package card."
         />
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {SOLUTION_EXAMPLES.map((example) => (
-            <GlowCard key={example.title} tone={example.tone} className="h-full">
-              <GlowIcon tone={example.tone}>{example.icon}</GlowIcon>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight">{example.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{example.description}</p>
-            </GlowCard>
-          ))}
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {CLIENT_STORIES.map((story) => {
+            const card = (
+              <GlowCard tone={story.tone} className="h-full">
+                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-dim">Client story</p>
+                <h3 className="mt-4 text-xl font-semibold tracking-tight">{story.name}</h3>
+                <p className="mt-1 text-sm font-medium text-violet-200/90">{story.business}</p>
+                <p className="mt-4 text-sm leading-relaxed text-ink-muted">{story.summary}</p>
+                <p className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-cyan-200/90">
+                  {story.internal ? "Read case study" : "View live build"}
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </p>
+              </GlowCard>
+            );
+
+            if (story.internal) {
+              return (
+                <Link key={story.name} href={story.href} className="group block h-full">
+                  {card}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={story.name}
+                href={story.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group block h-full"
+              >
+                {card}
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>
   );
 }
 
-function SystemComponents() {
+function EcosystemMap() {
   return (
-    <section className="relative py-20 sm:py-28">
+    <section id="ecosystem-map" className="relative scroll-mt-28 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div className="lg:col-span-5">
             <SectionHeader
               align="left"
-              eyebrow="DOS components"
+              eyebrow="DOS Ecosystem Map"
               title={
                 <>
-                  The right tools, only when the <span className="text-gradient-purple">workflow needs them.</span>
+                  The right systems, only when the <span className="text-gradient-purple">workflow needs them.</span>
                 </>
               }
-              description="Micah, DOS Calendar, QuoteOS, GuestMate and DOSLead are components DOS can use inside a broader operational system. They are not the main offer by themselves."
+              description="Micah, DOS Calendar, QuoteOS, DOSLead, DOS SOOS and DOS Workspace connect inside a broader operational build — components DOS selects after discovery, not the whole offer by themselves."
             />
           </div>
 
           <div className="lg:col-span-7">
-            <div className="grid gap-3">
-              {SYSTEM_COMPONENTS.map((item) => (
-                <div key={item} className="glass rounded-2xl px-5 py-4">
-                  <div className="flex items-start gap-3">
-                    <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />
-                    <p className="text-sm leading-relaxed text-ink-muted">{item}</p>
+            <div className="space-y-4">
+              {ECOSYSTEM_NODES.map((node, index) => (
+                <div key={node.id} className="glass rounded-2xl px-5 py-5">
+                  <div className="flex items-start gap-4">
+                    <span className="font-mono text-xs uppercase tracking-[0.24em] text-ink-dim">
+                      0{index + 1}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-white">{node.label}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-ink-muted">{node.detail}</p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {node.systems.map((system) => (
+                          <span
+                            key={system}
+                            className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-ink-muted"
+                          >
+                            {system}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
+
+            <Link
+              href="/#live-demos"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-cyan-200/90 hover:text-cyan-100 transition"
+            >
+              Explore all live demos <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </div>
@@ -352,14 +525,15 @@ function DiscoveryCta() {
             <div className="lg:col-span-7">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">
                 <ClipboardList className="h-3.5 w-3.5 text-violet-300" />
-                Operational Discovery Form
+                Next action
               </span>
               <h2 className="mt-6 text-3xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-                Show us where the business is leaking time, leads or momentum.
+                Book a Discovery Call
               </h2>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
-                Start with the discovery form and DOS will review the bottlenecks before recommending
-                a practical system build.
+                Show us where the business is leaking time, leads or momentum. DOS reviews the
+                bottlenecks and recommends a practical system build — scoped after discovery, not from
+                a pricing table.
               </p>
             </div>
 
@@ -377,11 +551,6 @@ function DiscoveryCta() {
                 >
                   Book a Discovery Call
                 </Link>
-                <div className="glass rounded-2xl px-5 py-4 text-sm leading-relaxed text-ink-muted">
-                  <CalendarClock className="mb-3 h-4 w-4 text-cyan-300" />
-                  Discovery helps DOS quote the right system instead of forcing your business into a
-                  package card.
-                </div>
                 <div className="glass rounded-2xl px-5 py-4 text-sm leading-relaxed text-ink-muted">
                   <MessageSquare className="mb-3 h-4 w-4 text-emerald-300" />
                   Jaze reviews each request and follows up with the next practical step.
