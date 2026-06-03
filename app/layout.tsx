@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import BackgroundFx from "./components/BackgroundFx";
 import ChromeGate from "./components/ChromeGate";
+import MicahDosWidget from "./components/MicahDosWidget";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -21,6 +22,16 @@ export const metadata: Metadata = {
   },
   description:
     "Modernise and automate your business. DOS delivers websites, AI receptionists, booking systems, automation and managed business infrastructure for modern Australian businesses.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/dos-favicon-v2.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
   keywords: [
     "AI receptionist",
     "AI booking system",
@@ -69,6 +80,7 @@ export default function RootLayout({
         <ChromeGate>
           <Footer />
         </ChromeGate>
+        <MicahDosWidget />
       </body>
     </html>
   );

@@ -6,7 +6,6 @@ const PRODUCTS = [
   { href: "/micah", label: "Micah AI Receptionist" },
   { href: "/cos", label: "COS Communication" },
   { href: "/bos", label: "BOS Booking" },
-  { href: "/command-centre", label: "Command Centre" },
 ];
 
 const COMPANY = [
