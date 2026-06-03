@@ -17,36 +17,40 @@ const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://directiveos.com.au";
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: "DOS — Done-For-You AI Business Systems",
-    template: "%s · DOS",
+    default: "DOS",
+    template: "DOS",
   },
   description:
-    "Modernise and automate your business. DOS delivers websites, AI receptionists, booking systems, automation and managed business infrastructure for modern Australian businesses.",
+    "DOS helps small businesses uncover what is slowing them down, then designs practical systems to capture enquiries, organise workflows, reduce admin and buy back time.",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/dos-favicon-v2.png", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/dos-favicon-v2.png", sizes: "512x512", type: "image/png" },
+      { url: "/dos-icon-v2.png", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    shortcut: [{ url: "/favicon.ico" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   keywords: [
-    "AI receptionist",
-    "AI booking system",
-    "Australian small business automation",
+    "Modern Smart Business Systems",
+    "Smart Communication Systems",
+    "Smart Business Assistant",
+    "Smart Chat Widget",
+    "Australian business infrastructure",
     "website rebuilds",
-    "done for you SaaS",
-    "Micah AI",
-    "COS communication system",
-    "BOS booking system",
+    "managed business systems",
+    "DOS Workspace",
     "DirectiveOS",
   ],
   openGraph: {
-    title: "DOS — Done-For-You AI Business Systems",
+    title: "DOS",
     description:
-      "Websites, AI receptionists, booking systems, automation and managed business infrastructure for modern Australian businesses.",
+      "Modern Smart Websites, Smart Communication Systems, Smart Business Assistants, and Done-For-You Business Infrastructure — built for Australian operators.",
     url: APP_URL,
     siteName: "DOS",
     type: "website",
@@ -54,9 +58,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "DOS — Done-For-You AI Business Systems",
+    title: "DOS",
     description:
-      "Modernise and automate your business with DOS. Websites, AI receptionists, booking systems and Command Centre — done for you.",
+      "Capture more enquiries, modernise communication, and run on dependable infrastructure — DOS builds and supports the full stack.",
   },
   robots: {
     index: true,

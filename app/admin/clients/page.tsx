@@ -23,8 +23,8 @@ async function loadProfiles(): Promise<{
       configured: false,
       profiles: [],
       error: url
-        ? "Set SUPABASE_SERVICE_ROLE_KEY or SERVICE_ROLE_KEY (server) so admin routes can read/write business_profiles (service role bypasses RLS)."
-        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SERVICE_ROLE_KEY).",
+        ? "Set SUPABASE_SERVICE_ROLE_KEY (server) so admin routes can read/write business_profiles (service role bypasses RLS)."
+        : "Set NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.",
     };
   }
 
@@ -61,7 +61,7 @@ export default async function AdminClientsPage() {
             className="inline-flex items-center gap-2 text-sm font-semibold text-violet-300 hover:text-violet-200 transition"
           >
             <LayoutDashboard className="h-4 w-4 shrink-0" />
-            Command Centre overview
+            DOS HUB overview
           </Link>
           <Link
             href="/"

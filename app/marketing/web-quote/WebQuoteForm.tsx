@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { readJsonOrNull } from "@/app/lib/safe-response-json";
 
 const SCOPE_OPTIONS = [
   "5–10 pages (most small businesses)",
@@ -32,27 +33,47 @@ export default function WebQuoteForm() {
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch("/api/onboarding", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          businessName: form.businessName,
-          contactName: form.name,
-          email: form.email,
-          phone: form.phone,
-          industry: "Website rebuild quote",
-          channels: ["website"],
-          goals: [
-            form.currentSite ? `Current site: ${form.currentSite}` : null,
-            `Scope: ${form.scope}`,
-            form.notes ? `Notes: ${form.notes}` : null,
-          ]
-            .filter(Boolean)
-            .join("\n"),
-          planId: "web-quote",
-        }),
-      });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
+      let res: Response;
+      try {
+        res = await fetch("/api/onboarding", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            businessName: form.businessName,
+            contactName: form.name,
+            email: form.email,
+            phone: form.phone,
+            industry: "Website rebuild quote",
+            channels: ["website"],
+            goals: [
+              form.currentSite ? `Current site: ${form.currentSite}` : null,
+              `Scope: ${form.scope}`,
+              form.notes ? `Notes: ${form.notes}` : null,
+            ]
+              .filter(Boolean)
+              .join("\n"),
+            planId: "web-quote",
+          }),
+        });
+      } catch (fetchErr) {
+        throw new Error(
+          fetchErr instanceof TypeError
+            ? "We could not reach the server. Check your connection and try again."
+            : fetchErr instanceof Error
+              ? fetchErr.message
+              : "Network error while submitting. Please try again."
+        );
+      }
+
+      const data = await readJsonOrNull<{ ok?: boolean; error?: string }>(res);
+
+      if (data == null) {
+        throw new Error(
+          res.ok
+            ? "We could not read the server response. Please try again or use the contact page."
+            : `Request failed (${res.status}). Please try again.`
+        );
+      }
       if (!res.ok || !data.ok) throw new Error(data.error ?? "Could not submit quote.");
       setDone(true);
     } catch (err) {

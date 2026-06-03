@@ -47,7 +47,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
               className="inline-flex items-center gap-2 min-w-0 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2 text-sm font-semibold text-white hover:border-violet-400/35 hover:bg-violet-500/10 transition"
             >
               <LayoutDashboard className="h-4 w-4 text-violet-300 shrink-0" />
-              <span className="truncate">DOS Command Centre</span>
+              <span className="truncate">DOS HUB</span>
             </Link>
             <button
               type="button"
@@ -59,7 +59,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             </button>
           </div>
 
-          <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5" aria-label="Command Centre">
+          <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5" aria-label="DOS HUB">
             {ADMIN_SIDEBAR_NAV.map((item) => {
               const active = navActive(pathname, item);
               return (
@@ -79,12 +79,20 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           </nav>
 
           <div className="p-3 border-t border-white/10 space-y-2">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-ink-dim px-1">Official URL</p>
-            <Link
-              href="/command-centre"
+            <p className="text-[10px] font-mono uppercase tracking-widest text-ink-dim px-1">Hub URL</p>
+            <a
+              href="https://doshub.com.au"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center rounded-lg px-2 py-2 text-[11px] font-mono text-cyan-200/90 hover:text-cyan-100 hover:bg-white/[0.04] transition break-all"
             >
-              <span className="truncate">directiveos.com.au/command-centre</span>
+              <span className="truncate">doshub.com.au</span>
+            </a>
+            <Link
+              href="/command-centre"
+              className="block text-[10px] font-mono text-ink-dim px-2 hover:text-ink-muted transition"
+            >
+              Open /command-centre
             </Link>
           </div>
         </aside>
@@ -101,7 +109,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
             >
               <Menu className="h-5 w-5" />
             </button>
-            <span className="text-sm font-semibold text-white truncate">Command Centre</span>
+            <span className="text-sm font-semibold text-white truncate">DOS HUB</span>
           </header>
           <div className="flex-1">{children}</div>
         </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Globe, Gauge, Search, Wrench, ShieldCheck, Zap } from "lucide-react";
 import ProductPage, { ProductIllustration } from "../components/ProductPage";
 
@@ -65,13 +66,23 @@ export default function Page() {
           icon: <Zap className="h-5 w-5" />,
           title: "Wired into your DOS",
           description:
-            "Booking, chat and lead capture all flow into BOS, COS and Command Centre — out of the box.",
+            "Booking, chat and lead capture all flow into BOS, COS and DOS HUB — out of the box.",
         },
       ]}
       faqs={[
         {
           q: "Do I lose my domain?",
-          a: "Never. We point your existing domain to the new site — no transfer required. Your domain stays yours.",
+          a: (
+            <>
+              Existing client-owned domains can stay with your current registrar while DOS manages
+              the technical DNS and hosting configuration. If DOS purchases or manages a domain for
+              you, transfer requests are handled under our{" "}
+              <Link href="/domain-management-policy" className="text-violet-300 hover:text-violet-200">
+                Domain Management & Ownership Policy
+              </Link>
+              .
+            </>
+          ),
         },
         {
           q: "What about my existing content?",

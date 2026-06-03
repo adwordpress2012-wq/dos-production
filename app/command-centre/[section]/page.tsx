@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const meta = SECTION_COPY[section];
   if (!meta) return { title: "Not found" };
   return {
-    title: `${meta.title} · Command Centre`,
+    title: `${meta.title} · DOS HUB`,
     description: meta.description,
   };
 }
@@ -72,7 +72,7 @@ export default async function CommandCentreSectionPage({ params }: Props) {
         <div className="glass-strong rounded-2xl border border-white/10 p-6 sm:p-8 space-y-4">
           <span className="inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-amber-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-amber-100">
             <Construction className="h-3.5 w-3.5 text-amber-300" />
-            Command Centre
+            DOS HUB
           </span>
           <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight">{meta.title}</h1>
           <p className="text-ink-muted leading-relaxed">{meta.description}</p>

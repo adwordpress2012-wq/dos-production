@@ -13,9 +13,6 @@ export function getStripe(): Stripe | null {
   return cached;
 }
 
-const USAGE_DISCLAIMER =
-  "Usage is calculated monthly and resets each billing cycle. Extra usage is added to your next invoice. Fair usage and anti-spam policies apply.";
-
 export type PlanCta =
   | { kind: "stripe"; label: string }
   | { kind: "link"; label: string; href: string };
@@ -29,6 +26,8 @@ export type PublicPlan = {
   cadence: string;
   /** Shown under price; omit or empty to hide */
   setupLabel: string;
+  /** One-line plan positioning for SMB audiences */
+  positioning: string;
   description: string;
   features: readonly string[];
   messagingTitle: string;
@@ -52,102 +51,114 @@ export const PLAN_CATALOG: readonly PublicPlan[] = [
     priceLabel: "$197",
     cadence: "/month",
     setupLabel: "$0 setup",
+    positioning: "A simple way to get online, capture enquiries and start modernising without a big upfront bill.",
     description:
-      "Perfect for small businesses wanting to modernise customer enquiries and bookings without large upfront costs.",
+      "Ideal if you want a modern foundation, enquiry capture and DOS Workspace access with hands-on onboarding from our Australian team.",
     features: [
-      "300 conversations included",
-      "Website Chat Widget",
-      "FAQ Automation",
-      "Booking Requests",
-      "Email Notifications",
-      "Basic Lead Capture",
+      "Modern website presence & managed hosting mindset",
+      "DOS Workspace — enquiry dashboard & lead tracking",
+      "Web chat + enquiry capture",
+      "Email notifications so you respond faster",
+      "Booking requests customers can complete easily",
+      "Australian-operated setup and support",
     ],
-    messagingTitle: "WhatsApp + SMS",
-    messagingLines: ["150 WhatsApp/SMS messages included"],
-    usageRateLines: ["Extra conversations: 15¢ each", "Extra WhatsApp/SMS messages: 8¢ each"],
-    disclaimer: USAGE_DISCLAIMER,
+    messagingTitle: "",
+    messagingLines: [],
+    usageRateLines: [],
+    disclaimer: "",
     highlight: false,
     cta: {
       kind: "link",
       label: "Apply Now",
-      href: "mailto:hello@directiveos.com?subject=Apply%20for%20Founding%20Member%20Access",
+      href: "/contact",
     },
   },
   {
     id: "starter",
-    name: "Starter",
+    name: "DOS Orbit",
     priceLabel: "$297",
     cadence: "/month",
     setupLabel: "",
+    positioning: "For businesses needing a modern online foundation.",
     description:
-      "Automate customer enquiries, bookings, and follow-ups while you focus on running your business.",
+      "A clean, professional online presence with enquiry capture and customer messaging — managed for you.",
     features: [
-      "1,000 conversations included",
-      "Website Chat Widget",
-      "SMS Ready",
-      "WhatsApp Ready",
-      "Booking Automation",
-      "Lead Capture",
+      "Modern website foundation tuned for Australian SMBs",
+      "DOS Workspace — enquiries, leads and activity in one place",
+      "Web chat + enquiry capture",
+      "SMS & WhatsApp-ready customer messaging",
+      "Booking requests & confirmations handled smoothly",
+      "Australian-operated support",
     ],
-    messagingTitle: "WhatsApp + SMS",
-    messagingLines: ["500 WhatsApp/SMS messages included"],
-    usageRateLines: ["Extra conversations: 12¢ each", "Extra WhatsApp/SMS messages: 7¢ each"],
-    disclaimer: USAGE_DISCLAIMER,
+    messagingTitle: "",
+    messagingLines: [],
+    usageRateLines: [],
+    disclaimer: "",
     highlight: false,
-    cta: { kind: "link", label: "Book Free Demo", href: "/contact" },
+    cta: { kind: "link", label: "Book Strategy Call", href: "/contact" },
   },
   {
     id: "growth",
-    name: "Growth",
+    name: "DOS Nexus",
     priceLabel: "$497",
     cadence: "/month",
     setupLabel: "",
+    positioning: "For businesses wanting AI receptionist, automation and faster customer response.",
     description:
-      "Perfect for businesses wanting stronger lead generation and multi-channel customer communication. Most businesses choose this plan.",
+      "Add Micah, stronger follow-up and faster response times — so more enquiries turn into booked work.",
     features: [
-      "3,000 conversations included",
-      "AI Voice Receptionist",
-      "SMS + WhatsApp",
-      "Booking Automation",
-      "High-Converting Landing Page",
-      "Priority Support",
+      "Everything in DOS Orbit",
+      "Micah AI Receptionist — calls answered 24/7",
+      "Faster responses across SMS, WhatsApp & web chat",
+      "Smarter booking flow with reminders customers actually see",
+      "Priority support from our Australian team",
+      "DOS Workspace — conversation & booking hub",
     ],
-    messagingTitle: "WhatsApp + SMS",
-    messagingLines: ["1,500 WhatsApp/SMS messages included"],
-    usageRateLines: ["Extra conversations: 10¢ each", "Extra WhatsApp/SMS messages: 6¢ each"],
-    disclaimer: USAGE_DISCLAIMER,
+    messagingTitle: "",
+    messagingLines: [],
+    usageRateLines: [],
+    disclaimer: "",
     highlight: true,
-    cta: { kind: "link", label: "Book Growth Demo", href: "/contact" },
+    cta: { kind: "link", label: "Book Strategy Call", href: "/contact" },
   },
   {
     id: "scale",
-    name: "Scale",
-    headline: "Scale Plan",
+    name: "DOS Titan",
     priceLabel: "Custom Quote",
     cadence: "",
     setupLabel: "Tailored to your business",
-    description: "Built for growing multi-location businesses.",
+    positioning: "Full DOS ecosystem with advanced automation, AI systems and premium business management tools.",
+    description: "For growing teams and multi-location operators who want advanced automation and premium oversight.",
     features: [
-      "Multi-location support",
-      "Multiple landing pages",
-      "CRM integration",
-      "AI lead qualification",
-      "Advanced workflows",
-      "Priority support",
+      "Everything in DOS Nexus",
+      "Multi-location & higher-volume operations support",
+      "Advanced automation tailored to your workflow",
+      "Premium onboarding and ongoing optimisation",
+      "Custom integrations where your business needs them",
+      "DOS Workspace — advanced reporting & operations layer",
     ],
-    messagingTitle: "WhatsApp + SMS",
-    messagingLines: ["Custom usage allocation based on business size"],
-    usageRateLines: [
-      "Custom volume-based usage rates",
-      "Multi-location bundled usage available",
-    ],
-    disclaimer: USAGE_DISCLAIMER,
+    messagingTitle: "",
+    messagingLines: [],
+    usageRateLines: [],
+    disclaimer: "",
     highlight: false,
-    cta: { kind: "link", label: "Book Strategy Call", href: "/contact" },
+    cta: { kind: "link", label: "Discuss your setup", href: "/contact" },
   },
 ] as const;
 
 export type PlanId = (typeof PLAN_CATALOG)[number]["id"];
+
+export const MAIN_PRICING_PLAN_IDS = ["starter", "growth", "scale"] as const satisfies readonly PlanId[];
+
+export function getMainPricingPlans(): readonly PublicPlan[] {
+  return MAIN_PRICING_PLAN_IDS.map((id) => PLAN_CATALOG.find((p) => p.id === id)!);
+}
+
+export function getFoundingPlan(): PublicPlan {
+  const p = PLAN_CATALOG.find((x) => x.id === "founding");
+  if (!p) throw new Error("Founding plan missing from catalog");
+  return p;
+}
 
 export function isStripeCheckoutPlan(id: PlanId): boolean {
   const plan = PLAN_CATALOG.find((p) => p.id === id);

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 /**
- * When the deployment is accessed via the admin hostname, send "/" to Command Centre.
+ * When the deployment is accessed via the admin hostname, send "/" to DOS HUB (/command-centre).
  * Add `admin.directiveos.com.au` in Vercel → Project → Domains and point DNS to Vercel.
  * Optional override: NEXT_PUBLIC_ADMIN_HOST (same host string).
  */

@@ -36,12 +36,15 @@ See `.env.example`. Key variables:
 
 | Var                              | Purpose                                |
 | -------------------------------- | -------------------------------------- |
-| `NEXT_PUBLIC_SUPABASE_URL`       | Command Centre + onboarding API        |
-| `SUPABASE_SERVICE_ROLE_KEY`      | Server-side writes (RLS bypass)        |
+| `NEXT_PUBLIC_SUPABASE_URL`       | Supabase project URL (https)           |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`  | Public anon key (browser-safe; Command Centre / client Supabase) |
+| `SUPABASE_SERVICE_ROLE_KEY`      | Server-only writes (RLS bypass)        |
 | `STRIPE_SECRET_KEY`              | Checkout session creation              |
 | `STRIPE_WEBHOOK_SECRET`          | `/api/stripe/webhook` signature verify |
 | `STRIPE_PRICE_STARTER` etc.      | Plan-to-price mapping                  |
 | `NEXT_PUBLIC_APP_URL`            | Used in metadata + Stripe redirects    |
+
+**Onboarding:** the amber configuration notice on `/onboarding` appears only when `NEXT_PUBLIC_SUPABASE_URL` or `SUPABASE_SERVICE_ROLE_KEY` is missing, invalid, or placeholder — i.e. when tenant persistence via the service role cannot run. It does **not** depend on `NEXT_PUBLIC_SUPABASE_ANON_KEY`; keep the anon key configured for full-stack and browser features per `.env.example`.
 
 If Supabase or Stripe env vars are missing, the app degrades gracefully:
 

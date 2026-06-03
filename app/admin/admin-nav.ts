@@ -1,5 +1,5 @@
 /**
- * Command Centre sidebar — canonical paths only (production domain routes, no preview URLs).
+ * DOS HUB sidebar — canonical paths only (production domain routes, no preview URLs).
  */
 export type AdminNavItem = {
   href: string;

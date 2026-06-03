@@ -22,7 +22,7 @@ const TILES = [
     href: "/marketing/proposal",
     title: "Full DOS proposal",
     description:
-      "Website, Micah, COS, BOS and Command Centre — bundled. We'll prepare a tailored DOS proposal.",
+      "Website, Micah, COS, BOS and DOS HUB — bundled. We'll prepare a tailored DOS proposal.",
     icon: <ArrowRight className="h-5 w-5" />,
     tone: "fuchsia" as const,
   },

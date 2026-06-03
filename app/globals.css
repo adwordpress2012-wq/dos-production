@@ -108,6 +108,78 @@ body {
   -webkit-backdrop-filter: blur(18px) saturate(160%);
 }
 
+/* Site header only — dense navy glass, readable over hero while scrolling */
+.glass-nav {
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.07) 0%, transparent 42%),
+    linear-gradient(180deg, rgba(34, 211, 238, 0.03) 0%, transparent 55%),
+    rgba(5, 8, 22, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  box-shadow:
+    0 0 0 1px rgba(168, 85, 247, 0.1) inset,
+    0 8px 36px -14px rgba(0, 0, 0, 0.45),
+    0 0 52px -22px rgba(139, 92, 246, 0.22);
+  transition:
+    background 240ms ease,
+    border-color 240ms ease,
+    box-shadow 280ms ease,
+    backdrop-filter 240ms ease;
+}
+
+.glass-nav--scrolled {
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.05) 0%, transparent 38%),
+    rgba(4, 6, 18, 0.94);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  box-shadow:
+    0 0 0 1px rgba(168, 85, 247, 0.14) inset,
+    0 12px 44px -12px rgba(0, 0, 0, 0.55),
+    0 0 60px -18px rgba(139, 92, 246, 0.28),
+    0 0 80px -28px rgba(34, 211, 238, 0.12);
+}
+
+.nav-link {
+  color: rgba(196, 208, 230, 0.95);
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+/* Mobile-only nav drawer: solid premium surface (paired with lg:hidden in Nav.tsx) */
+.nav-mobile-panel {
+  background: linear-gradient(165deg, #141022 0%, #0c0d18 42%, #060814 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.14) inset,
+    0 20px 52px -18px rgba(0, 0, 0, 0.62),
+    0 0 44px -20px rgba(139, 92, 246, 0.3);
+}
+
+.nav-mobile-link {
+  display: block;
+  color: rgba(218, 224, 236, 0.94);
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.nav-mobile-link:hover {
+  color: rgba(221, 214, 254, 0.98);
+  background-color: rgba(139, 92, 246, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(167, 139, 250, 0.12);
+}
+
+.nav-mobile-link:active {
+  color: rgba(245, 243, 255, 1);
+  background-color: rgba(139, 92, 246, 0.22);
+}
+
 .ring-glow {
   box-shadow:
     0 0 0 1px rgba(168, 85, 247, 0.25),
@@ -138,6 +210,69 @@ body {
     0 0 0 1px rgba(255, 255, 255, 0.2) inset,
     0 14px 50px -10px rgba(168, 85, 247, 0.7),
     0 0 80px -10px rgba(34, 211, 238, 0.45);
+}
+
+/* Primary Book Demo — violet → rose gradient, premium glow (not gaming/crypto) */
+.btn-book-demo {
+  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 38%, #a855f7 68%, #ec4899 100%);
+  background-size: 140% 140%;
+  background-position: 0% 50%;
+  border: 1px solid rgba(236, 72, 153, 0.38);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 0 24px rgba(236, 72, 153, 0.35),
+    0 0 40px rgba(124, 58, 237, 0.25),
+    0 0 0 1px rgba(124, 58, 237, 0.22);
+  transition:
+    background-position 420ms ease,
+    box-shadow 240ms ease,
+    filter 200ms ease,
+    border-color 200ms ease;
+}
+
+.btn-book-demo:hover {
+  background-position: 100% 50%;
+  border-color: rgba(244, 114, 182, 0.55);
+  filter: brightness(1.06);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.14) inset,
+    0 0 32px rgba(236, 72, 153, 0.48),
+    0 0 52px rgba(124, 58, 237, 0.38),
+    0 0 0 1px rgba(167, 139, 250, 0.35);
+}
+
+@keyframes workspace-cta-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.12) inset,
+      0 0 32px -8px rgba(124, 58, 237, 0.75),
+      0 0 64px -16px rgba(34, 211, 238, 0.38);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+      0 0 48px -6px rgba(168, 85, 247, 0.9),
+      0 0 88px -12px rgba(34, 211, 238, 0.52);
+  }
+}
+
+.btn-workspace-glow {
+  background: linear-gradient(135deg, #6d28d9 0%, #6366f1 42%, #0891b2 100%);
+  background-size: 200% 200%;
+  background-position: 0% 50%;
+  animation: workspace-cta-pulse 2.8s ease-in-out infinite;
+  transition:
+    transform 200ms ease,
+    filter 200ms ease,
+    background-position 600ms ease;
+}
+
+.btn-workspace-glow:hover {
+  background-position: 100% 50%;
+  transform: translateY(-1px);
+  filter: brightness(1.07);
 }
 
 .btn-ghost {

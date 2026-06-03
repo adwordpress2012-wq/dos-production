@@ -2,12 +2,19 @@ import Image from "next/image";
 
 type Props = {
   className?: string;
+  priority?: boolean;
 };
 
-export default function Logo({ className = "h-8 w-8" }: Props) {
+export default function Logo({ className = "h-16 w-auto", priority = false }: Props) {
   return (
-    <div className={`relative ${className}`}>
-      <Image src="/dos-icon-v2.png" alt="DOS" fill sizes="32px" className="object-contain" priority />
-    </div>
+    <Image
+      src="/dos-hub-logo.png"
+      alt="DOS HUB AI Business Solutions"
+      width={329}
+      height={153}
+      priority={priority}
+      className={`block object-contain ${className}`}
+      sizes="(max-width: 640px) 132px, 172px"
+    />
   );
 }
