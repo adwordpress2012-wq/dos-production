@@ -5,6 +5,7 @@ import { getFoundingPlan, getMainPricingPlans } from "../lib/stripe";
 import PricingPlans from "./PricingPlans";
 import CalendlyPopupLink from "../components/CalendlyPopupLink";
 import { CONTACT_PAGE_PATH } from "../blog/constants";
+import { DISCOVERY_CALL_HREF } from "../lib/booking";
 
 export const metadata: Metadata = {
   title: "Pricing",
@@ -12,7 +13,6 @@ export const metadata: Metadata = {
     "DOS Orbit, Nexus and Titan — done-for-you websites, Micah AI receptionist and DOS Workspace for Australian small businesses. Stop missing customers.",
 };
 
-const CALENDLY_URL = "https://calendly.com/adwordpress2012/dos-ai-business-system-demo";
 const MAIL_JAYSON = "mailto:jayson@directiveos.com.au?subject=Talk%20With%20Jayson%20—%20DOS";
 
 const WORKSPACE_VALUE = [
@@ -93,7 +93,7 @@ function PricingSecondaryActions() {
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-muted">Next steps</p>
       <div className="flex flex-col sm:flex-row flex-wrap items-stretch justify-center gap-3 w-full max-w-3xl">
         <CalendlyPopupLink className="btn-book-demo flex-1 min-w-[160px] inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white text-center">
-          Book Strategy Call
+          Book a Discovery Call
         </CalendlyPopupLink>
         <Link
           href={CONTACT_PAGE_PATH}
@@ -114,9 +114,9 @@ function PricingSecondaryActions() {
           Open the DOS Workspace demo
         </Link>{" "}
         or{" "}
-        <a href={CALENDLY_URL} className="text-violet-300 hover:text-violet-200 underline underline-offset-4">
-          book a live walkthrough
-        </a>
+        <Link href={DISCOVERY_CALL_HREF} className="text-violet-300 hover:text-violet-200 underline underline-offset-4">
+          book a discovery call
+        </Link>
         .
       </p>
     </div>

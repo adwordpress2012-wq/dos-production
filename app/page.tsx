@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import GlowCard, { GlowIcon } from "./components/GlowCard";
 import SectionHeader from "./components/SectionHeader";
+import { DISCOVERY_CALL_HREF } from "./lib/booking";
 
 type GlowTone = "cyan" | "fuchsia" | "violet" | "emerald" | "amber";
 
@@ -269,11 +270,66 @@ const CLIENT_STORIES: ClientStory[] = [
   },
 ];
 
-const ECOSYSTEM_NODES = [
-  { id: "enquiries", label: "Enquiries", detail: "Website, phone, chat, referrals", systems: ["Micah / ChatOS", "DOSLead"] },
-  { id: "scheduling", label: "Scheduling", detail: "Bookings, reminders, handoffs", systems: ["DOS Calendar", "BookOS"] },
-  { id: "operations", label: "Operations", detail: "Quotes, orders, jobs, follow-up", systems: ["QuoteOS", "DOS SOOS", "GuestMate"] },
-  { id: "workspace", label: "Client workspace", detail: "Care, hosting, visibility", systems: ["DOS Workspace", "AgentMate"] },
+type EcosystemProduct = {
+  name: string;
+  description: string;
+  icon: ReactNode;
+  tone: GlowTone;
+  href?: string;
+  ctaKind: "external" | "anchor" | "static";
+  anchor?: string;
+};
+
+const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
+  {
+    name: "Micah",
+    description: "Smart Business Assistant for enquiries, bookings and follow-ups.",
+    icon: <MessageSquare className="h-5 w-5" />,
+    tone: "fuchsia",
+    href: "https://chatos.com.au",
+    ctaKind: "external",
+  },
+  {
+    name: "TourismOS",
+    description:
+      "Guest Booking & Communication System for campgrounds, farm stays, glamping and accommodation operators.",
+    icon: <Users className="h-5 w-5" />,
+    tone: "cyan",
+    href: "https://tourismos.com.au",
+    ctaKind: "external",
+  },
+  {
+    name: "DOS SOOS",
+    description: "Direct online ordering system for restaurants and local food businesses.",
+    icon: <UtensilsCrossed className="h-5 w-5" />,
+    tone: "amber",
+    href: "https://dossoos.com.au",
+    ctaKind: "external",
+  },
+  {
+    name: "QuoteOS",
+    description: "Quoting and booking workflow for tradies.",
+    icon: <Wrench className="h-5 w-5" />,
+    tone: "emerald",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+  {
+    name: "AgentMate",
+    description: "Daily operational assistant for real estate agents.",
+    icon: <Building2 className="h-5 w-5" />,
+    tone: "violet",
+    ctaKind: "anchor",
+    anchor: "#dos-workflow",
+  },
+  {
+    name: "DOS Infrastructure",
+    description: "Powered by Command Centre, DOS Calendar, DOSLead and reusable workflow systems.",
+    icon: <LayoutDashboard className="h-5 w-5" />,
+    tone: "violet",
+    ctaKind: "anchor",
+    anchor: "#live-demos",
+  },
 ];
 
 export default function Home() {
@@ -283,7 +339,7 @@ export default function Home() {
       <LiveDosSystems />
       <DosWorkflow />
       <ClientStories />
-      <EcosystemMap />
+      <DosEcosystem />
       <DiscoveryCta />
     </>
   );
@@ -307,30 +363,30 @@ function HeroSection() {
             <div className="lg:col-span-7">
               <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">
                 <Sparkles className="h-3.5 w-3.5" />
-                Operational Systems Engineering
+                Practical Business Systems
               </span>
 
               <h1 className="mt-7 max-w-4xl text-4xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[76px]">
-                We Build the System Behind Your Business.
+                Helping Small Businesses Buy Back Their Time
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg lg:text-xl">
-                DOS helps small businesses uncover what is slowing them down, then designs practical
-                systems to capture enquiries, organise workflows, reduce admin and buy back time.
+                Directive OS builds practical business systems that help small operators manage
+                enquiries, bookings, follow-ups, customers, and day-to-day operations in one place.
               </p>
 
               <div className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
                 <Link
-                  href="/discovery"
+                  href={DISCOVERY_CALL_HREF}
                   className="btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white"
                 >
-                  Start Your Operational Discovery <ArrowRight className="h-4 w-4" />
+                  Book a Discovery Call <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/#live-demos"
                   className="btn-ghost inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white"
                 >
-                  Book a Discovery Call
+                  Explore DOS Systems
                 </Link>
               </div>
 
@@ -625,59 +681,60 @@ function ClientStories() {
   );
 }
 
-function EcosystemMap() {
+function EcosystemProductCard({ product }: { product: EcosystemProduct }) {
+  const card = (
+    <GlowCard tone={product.tone} className="h-full transition group-hover:ring-1 group-hover:ring-white/10">
+      <GlowIcon tone={product.tone}>{product.icon}</GlowIcon>
+      <h3 className="mt-4 text-lg font-semibold tracking-tight text-white">{product.name}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{product.description}</p>
+    </GlowCard>
+  );
+
+  if (product.ctaKind === "external" && product.href) {
+    return (
+      <a href={product.href} target="_blank" rel="noreferrer" className="group block h-full">
+        {card}
+      </a>
+    );
+  }
+
+  if (product.ctaKind === "anchor" && product.anchor) {
+    return (
+      <Link href={resolveShowroomHref(product.anchor)} className="group block h-full">
+        {card}
+      </Link>
+    );
+  }
+
+  return <div className="block h-full">{card}</div>;
+}
+
+function DosEcosystem() {
   return (
-    <section id="ecosystem-map" className="relative scroll-mt-28 py-20 sm:py-28">
+    <section id="dos-ecosystem" className="relative scroll-mt-28 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-          <div className="lg:col-span-5">
-            <SectionHeader
-              align="left"
-              eyebrow="DOS Ecosystem Map"
-              title={
-                <>
-                  The right systems, only when the <span className="text-gradient-purple">workflow needs them.</span>
-                </>
-              }
-              description="Micah, DOS Calendar, BookOS, QuoteOS, DOSLead, DOS SOOS, GuestMate and DOS Workspace connect inside a broader operational build — components DOS selects after discovery, not the whole offer by themselves."
-            />
-          </div>
+        <SectionHeader
+          eyebrow="DOS Ecosystem"
+          title={
+            <>
+              Practical systems for <span className="text-gradient-purple">real operations.</span>
+            </>
+          }
+          description="Micah, TourismOS, DOS SOOS, QuoteOS, AgentMate and DOS Infrastructure connect inside broader workflow builds — components DOS selects after discovery, not a fixed bundle."
+        />
 
-          <div className="lg:col-span-7">
-            <div className="space-y-4">
-              {ECOSYSTEM_NODES.map((node, index) => (
-                <div key={node.id} className="glass rounded-2xl px-5 py-5">
-                  <div className="flex items-start gap-4">
-                    <span className="font-mono text-xs uppercase tracking-[0.24em] text-ink-dim">
-                      0{index + 1}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold text-white">{node.label}</p>
-                      <p className="mt-1 text-xs leading-relaxed text-ink-muted">{node.detail}</p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {node.systems.map((system) => (
-                          <span
-                            key={system}
-                            className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-medium text-ink-muted"
-                          >
-                            {system}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <Link
-              href="/#live-demos"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-cyan-200/90 hover:text-cyan-100 transition"
-            >
-              Explore all live demos <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {ECOSYSTEM_PRODUCTS.map((product) => (
+            <EcosystemProductCard key={product.name} product={product} />
+          ))}
         </div>
+
+        <Link
+          href="/#live-demos"
+          className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-cyan-200/90 transition hover:text-cyan-100"
+        >
+          Explore all live demos <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </section>
   );
@@ -716,16 +773,16 @@ function DiscoveryCta() {
             <div className="lg:col-span-5">
               <div className="grid gap-3">
                 <Link
-                  href="/discovery"
+                  href={DISCOVERY_CALL_HREF}
                   className="btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white"
                 >
-                  Start Your Operational Discovery <ArrowRight className="h-4 w-4" />
+                  Book a Discovery Call <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/#live-demos"
                   className="btn-ghost inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white"
                 >
-                  Book a Discovery Call
+                  Explore DOS Systems
                 </Link>
                 <div className="glass rounded-2xl px-5 py-4 text-sm leading-relaxed text-ink-muted">
                   <MessageSquare className="mb-3 h-4 w-4 text-emerald-300" />

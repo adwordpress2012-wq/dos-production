@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "./Logo";
+import { DISCOVERY_CALL_HREF } from "../lib/booking";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
   { href: "/#live-demos", label: "Live Demos" },
   { href: "/#dos-workflow", label: "Solutions" },
   { href: "/#client-stories", label: "Client Stories" },
-  { href: "/discovery", label: "Book Discovery" },
+  { href: DISCOVERY_CALL_HREF, label: "Book Discovery" },
 ];
 
 export default function Nav() {
@@ -44,7 +45,7 @@ export default function Nav() {
 
           <div className="flex items-center gap-2">
             <Link
-              href="/discovery"
+              href={DISCOVERY_CALL_HREF}
               className="hidden sm:inline-flex btn-neon text-[13px] font-semibold text-white px-4 py-2 rounded-xl"
             >
               Book Discovery
@@ -75,7 +76,7 @@ export default function Nav() {
             </div>
             <div className="mt-2">
               <Link
-                href="/discovery"
+                href={DISCOVERY_CALL_HREF}
                 onClick={() => setOpen(false)}
                 className="btn-neon block text-center text-sm font-semibold text-white px-3 py-2.5 rounded-xl"
               >

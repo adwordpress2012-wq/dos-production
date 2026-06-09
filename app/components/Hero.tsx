@@ -24,28 +24,28 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              <span className="tracking-[0.12em] uppercase">Modern Smart Business Systems</span>
+              <span className="tracking-[0.12em] uppercase">Practical Business Systems</span>
             </div>
 
             <h1 className="mt-7 text-4xl sm:text-6xl lg:text-[76px] font-semibold tracking-tight leading-[1.02] max-w-5xl">
-              <span className="text-white">Anyone can build a website. </span>
-              <span className="text-gradient-purple">DOS builds systems that help businesses get more customers.</span>
+              <span className="text-white">Helping Small Businesses </span>
+              <span className="text-gradient-purple">Buy Back Their Time</span>
             </h1>
 
             <p className="mt-6 text-base sm:text-lg lg:text-xl text-ink-muted max-w-4xl leading-relaxed">
-              AI-powered customer enquiry systems designed for small business — from bookings and lead capture to
-              operational automation.
+              Directive OS builds practical business systems that help small operators manage enquiries,
+              bookings, follow-ups, customers, and day-to-day operations in one place.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-lg">
               <CalendlyPopupLink className="btn-neon inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-semibold text-white w-full sm:w-auto min-w-[200px]">
-                Book Strategy Call
+                Book a Discovery Call
               </CalendlyPopupLink>
               <Link
-                href="/#systems"
+                href="/#live-demos"
                 className="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl text-sm font-medium text-white w-full sm:w-auto min-w-[200px] border border-white/15 hover:border-white/25"
               >
-                Explore Systems
+                Explore DOS Systems
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

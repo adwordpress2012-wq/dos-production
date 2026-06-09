@@ -45,9 +45,8 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted max-w-sm">
-              Operational Systems Engineering + AI systems building for small business. DOS designs
-              practical systems to capture enquiries, organise workflows, reduce admin and buy back
-              time.
+              Directive OS builds practical business systems that help small operators manage
+              enquiries, bookings, follow-ups, customers, and day-to-day operations in one place.
             </p>
             <p className="mt-6 text-xs text-ink-dim">
               Operated in Australia · ABN supplied on invoice · Built on Vercel + Supabase

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "DOS",
   },
   description:
-    "DOS helps small businesses uncover what is slowing them down, then designs practical systems to capture enquiries, organise workflows, reduce admin and buy back time.",
+    "Directive OS builds practical business systems that help small operators manage enquiries, bookings, follow-ups, customers, and day-to-day operations in one place.",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
