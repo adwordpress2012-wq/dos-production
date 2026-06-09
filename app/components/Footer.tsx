@@ -18,6 +18,7 @@ const ECOSYSTEM = [
 ];
 
 const COMPANY = [
+  { href: "/der", label: "DER / Prime Directive" },
   { href: "/#client-stories", label: "Client Stories" },
   { href: "/onboarding", label: "Onboarding" },
   { href: "mailto:hello@directiveos.com", label: "Contact" },
