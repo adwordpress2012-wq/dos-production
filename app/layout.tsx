@@ -1,18 +1,21 @@
+
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import Script from "next/script";
+
 import "./globals.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import BackgroundFx from "./components/BackgroundFx";
 import ChromeGate from "./components/ChromeGate";
-import MicahDosWidget from "./components/MicahDosWidget";
 
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://directiveos.com.au";
+const APP_URL =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://directiveos.com.au";
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
@@ -33,7 +36,11 @@ export const metadata: Metadata = {
     ],
     shortcut: [{ url: "/favicon.ico" }],
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
   },
   keywords: [
@@ -80,11 +87,20 @@ export default function RootLayout({
           <BackgroundFx />
           <Nav />
         </ChromeGate>
+
         {children}
+
         <ChromeGate>
           <Footer />
         </ChromeGate>
-        <MicahDosWidget />
+
+        <Script
+          id="micah-dos-chat-widget"
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6a56225582c5a91e7f5e4f3e"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
