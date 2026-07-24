@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Check, MessageSquareText } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Check, MessageSquareText } from "lucide-react";
 import PublicPageHero from "@/app/components/PublicPageHero";
 import PageCta from "@/app/components/PageCta";
 import { createPageMetadata } from "@/app/lib/seo";
@@ -12,7 +13,15 @@ export const metadata: Metadata = createPageMetadata({
   path: "/solutions",
 });
 
-const GROUPS = [
+type SolutionGroup = {
+  id: string;
+  title: string;
+  copy: string;
+  outcomes: string[];
+  href?: string;
+};
+
+const GROUPS: SolutionGroup[] = [
   {
     id: "micah",
     title: "Micah Smart Business Assistant",
@@ -24,6 +33,13 @@ const GROUPS = [
     title: "Smart Chat Widget",
     copy: "Guide website visitors toward the right answer or action while capturing useful customer context.",
     outcomes: ["Website enquiry capture", "Guided customer journeys", "Faster first response"],
+  },
+  {
+    id: "smart-intake-follow-up",
+    title: "DOS Smart Intake & Follow-Up System",
+    copy: "Turn website enquiries, walk-ins, referrals, phone leads and campaigns into organised opportunities with reliable acknowledgement and follow-up.",
+    outcomes: ["Customised branded intake", "Organised CRM opportunities", "Automatic follow-up"],
+    href: "/solutions/smart-intake-follow-up",
   },
   {
     id: "communication",
@@ -111,6 +127,11 @@ export default function SolutionsPage() {
                   </li>
                 ))}
               </ul>
+              {group.href ? (
+                <Link href={group.href} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+                  Explore the full solution <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>
+              ) : null}
             </article>
           ))}
         </div>
@@ -122,10 +143,14 @@ export default function SolutionsPage() {
           <h2 className="section-heading mt-5">A connected system, tailored to the business outcome.</h2>
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {SOLUTIONS.map((solution) => (
-              <div key={`${solution.label}-${solution.href}`} className="rounded-2xl border border-violet-950/10 bg-white/65 p-5">
+              <Link
+                key={`${solution.label}-${solution.href}`}
+                href={solution.href}
+                className="rounded-2xl border border-violet-950/10 bg-white/65 p-5 transition hover:-translate-y-0.5 hover:border-violet-700/25 hover:bg-white"
+              >
                 <h3 className="font-semibold">{solution.label}</h3>
                 <p className="mt-2 text-sm leading-relaxed">{solution.description}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

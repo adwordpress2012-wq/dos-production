@@ -5,15 +5,6 @@ import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { readJsonOrNull } from "@/app/lib/safe-response-json";
 import { trackDosEvent } from "@/app/lib/analytics";
 
-function isFormspreeHttpsFormAction(raw: string): boolean {
-  try {
-    const u = new URL(raw);
-    return u.protocol === "https:" && u.hostname === "formspree.io" && /^\/f\/[^/]+\/?$/i.test(u.pathname);
-  } catch {
-    return false;
-  }
-}
-
 type FormState = {
   businessName: string;
   contactName: string;
@@ -54,8 +45,6 @@ export default function DiscoveryForm({
 }: {
   sourcePage?: string;
 }) {
-  const rawAction = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION?.trim();
-  const formAction = rawAction && isFormspreeHttpsFormAction(rawAction) ? rawAction : undefined;
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
@@ -65,49 +54,25 @@ export default function DiscoveryForm({
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((current) => ({ ...current, [key]: value }));
 
-  if (!formAction) {
-    return (
-      <div className="mt-6 rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-4 text-sm text-amber-100">
-        <p className="font-medium text-white">The online form is temporarily unavailable.</p>
-        <p className="mt-2 leading-relaxed text-ink-muted">
-          Please call <a className="font-semibold text-white underline" href="tel:0485071000">0485 071 000</a> or email{" "}
-          <a className="font-semibold text-white underline" href="mailto:hello@directiveos.com.au">hello@directiveos.com.au</a>.
-        </p>
-      </div>
-    );
-  }
-
-  const discoveryFormPostUrl: string = formAction;
-
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
 
     try {
-      const fd = new FormData();
-      fd.append("Business name", form.businessName);
-      fd.append("Contact name", form.contactName);
-      fd.append("Email", form.email);
-      fd.append("Mobile", form.mobile);
-      fd.append("Business type", form.businessType);
-      fd.append("Website URL", form.websiteUrl);
-      fd.append("Main challenge", form.mainChallenge);
-      fd.append("Where enquiries come from", form.enquirySources);
-      fd.append("What gets missed", form.missedMostOften);
-      fd.append("Workflow/admin pain point", form.workflowPainPoint);
-      fd.append("What DOS should fix first", form.firstFix);
-      fd.append("Best time to call", form.bestTimeToCall);
-      fd.append("form_type", "Operational Discovery Form");
-      fd.append("source_page", sourcePage);
-      fd.append("project_context", "DOS Operational Discovery");
-
       let res: Response;
       try {
-        res = await fetch(discoveryFormPostUrl, {
+        res = await fetch("/api/start-here", {
           method: "POST",
-          body: fd,
-          headers: { Accept: "application/json" },
+          body: JSON.stringify({
+            ...form,
+            sourcePage,
+            projectContext: "DOS Operational Discovery",
+          }),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         });
       } catch (fetchErr) {
         throw new Error(
@@ -119,9 +84,8 @@ export default function DiscoveryForm({
         );
       }
 
-      const payload = await readJsonOrNull<{ ok?: boolean; error?: string; errors?: string[] }>(res);
-      const formErrors = payload?.errors?.filter(Boolean).join(" ");
-      if (res.ok && (payload === null || payload.ok !== false) && !formErrors) {
+      const payload = await readJsonOrNull<{ ok?: boolean; error?: string }>(res);
+      if (res.ok && payload?.ok === true) {
         setDone(true);
         setForm(initialForm);
         trackDosEvent("start_here_form_submit", { source: sourcePage });
@@ -129,7 +93,6 @@ export default function DiscoveryForm({
       }
 
       const msg =
-        formErrors ||
         payload?.error ||
         (res.status >= 400 ? `Could not send discovery request (${res.status}).` : "Could not send discovery request.");
       throw new Error(msg);

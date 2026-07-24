@@ -43,6 +43,11 @@ See `.env.example`. Key variables:
 | `STRIPE_WEBHOOK_SECRET`          | `/api/stripe/webhook` signature verify |
 | `STRIPE_PRICE_STARTER` etc.      | Plan-to-price mapping                  |
 | `NEXT_PUBLIC_APP_URL`            | Used in metadata + Stripe redirects    |
+| `GHL_PRIVATE_INTEGRATION_TOKEN`  | Server-only Start Here CRM access      |
+| `GHL_LOCATION_ID`                | DOS GHL sub-account                    |
+| `GHL_DOS_PIPELINE_ID`            | DOS sales pipeline                     |
+| `GHL_DOS_PIPELINE_STAGE_ID`      | Initial Start Here opportunity stage   |
+| `GHL_START_HERE_CUSTOM_FIELD_MAP`| Start Here field-to-GHL ID mapping     |
 
 **Onboarding:** the amber configuration notice on `/onboarding` appears only when `NEXT_PUBLIC_SUPABASE_URL` or `SUPABASE_SERVICE_ROLE_KEY` is missing, invalid, or placeholder — i.e. when tenant persistence via the service role cannot run. It does **not** depend on `NEXT_PUBLIC_SUPABASE_ANON_KEY`; keep the anon key configured for full-stack and browser features per `.env.example`.
 
@@ -51,6 +56,19 @@ If Supabase or Stripe env vars are missing, the app degrades gracefully:
 - Command Centre falls back to demo data and shows a "Connect Supabase" banner.
 - Pricing page surfaces a clear error message when checkout is hit without Stripe configured.
 - Onboarding queues submissions in memory and emails the team if Supabase isn't reachable.
+
+### Start Here CRM
+
+`/start-here` keeps the DOS-owned form and sends submissions to `/api/start-here`.
+The server upserts the GHL contact, adds the Start Here/source/industry tags, then
+updates an existing opportunity for that contact in the DOS pipeline or creates one.
+
+Create the nine Contact custom fields listed in `.env.example`, copy their IDs into
+`GHL_START_HERE_CUSTOM_FIELD_MAP`, and give the private integration token
+`contacts.write`, `opportunities.readonly`, and `opportunities.write` scopes. Until
+all GHL values are configured, or whenever GHL returns an error, the server uses the
+existing Formspree action as the fallback. GHL credentials are only read by the
+server-only integration module.
 
 ## Routes
 
@@ -63,6 +81,8 @@ If Supabase or Stripe env vars are missing, the app degrades gracefully:
 | `/bos`                     | BOS booking system                           |
 | `/pricing`                 | Plans + Stripe Checkout                      |
 | `/onboarding`              | Multi-step onboarding (writes to Supabase)   |
+| `/start-here`              | Universal DOS Intake System                  |
+| `/discovery`               | Permanent redirect to `/start-here`          |
 | `/command-centre`          | Live dashboard wired to Supabase             |
 | `/terms`                   | Terms of Service                             |
 | `/privacy`                 | Privacy Policy                               |
@@ -72,6 +92,7 @@ If Supabase or Stripe env vars are missing, the app degrades gracefully:
 | `/api/stripe/checkout`     | Creates a Stripe Checkout Session            |
 | `/api/stripe/webhook`      | Handles `checkout.session.completed` etc.    |
 | `/api/onboarding`          | Persists onboarding into Supabase            |
+| `/api/start-here`          | Secure GHL intake with Formspree fallback     |
 
 ## Deploying
 

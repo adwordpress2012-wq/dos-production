@@ -89,6 +89,18 @@ export default async function IndustryPage({ params }: Props) {
                 </li>
               ))}
             </ul>
+            <Link
+              href="/solutions/smart-intake-follow-up"
+              className="group mt-7 block rounded-2xl border border-violet-400/15 bg-violet-500/[0.06] p-5 transition hover:border-violet-400/30"
+            >
+              <span className="flex items-center justify-between gap-3 font-semibold text-white">
+                Smart Intake &amp; Follow-Up
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+              </span>
+              <span className="mt-2 block text-sm leading-relaxed text-ink-muted">
+                Capture {industry.shortName.toLowerCase()} enquiries, organise each opportunity and keep the next step moving automatically.
+              </span>
+            </Link>
           </article>
         </div>
       </section>

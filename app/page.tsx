@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
 import {
   ArrowRight,
   Bot,
@@ -8,6 +9,7 @@ import {
   CalendarCheck2,
   Check,
   ClipboardCheck,
+  ClipboardList,
   Clock3,
   ContactRound,
   Globe2,
@@ -62,9 +64,22 @@ const PAIN_POINTS = [
   { title: "Scale the business", copy: "Build repeatable systems for more demand, people and locations.", href: "/solutions#growth" },
 ];
 
-const SOLUTION_CARDS = [
+const SOLUTION_CARDS: {
+  id: string;
+  title: string;
+  copy: string;
+  icon: LucideIcon;
+  href?: string;
+}[] = [
   { id: "communication", title: "Customer Communication", copy: "Respond faster and keep customer conversations connected.", icon: MessagesSquare },
   { id: "micah", title: "Micah Smart Business Assistant", copy: "Give customers a useful first response at any time of day.", icon: Bot },
+  {
+    id: "smart-intake-follow-up",
+    title: "DOS Smart Intake & Follow-Up System",
+    copy: "Turn every enquiry into an organised opportunity with acknowledgement, booking prompts and automatic follow-up.",
+    icon: ClipboardList,
+    href: "/solutions/smart-intake-follow-up",
+  },
   { id: "websites", title: "Website Systems", copy: "Build trust, capture intent and guide visitors toward action.", icon: Globe2 },
   { id: "bookings", title: "Booking and Appointment Systems", copy: "Reduce booking friction with clearer reminders and follow-up.", icon: CalendarCheck2 },
   { id: "automation", title: "Business Automation", copy: "Save time by moving repetitive work into practical workflows.", icon: Workflow },
@@ -76,15 +91,15 @@ const SOLUTION_CARDS = [
 const OUTCOME_GROUPS = [
   {
     title: "Communication",
-    items: ["Website conversations", "SMS", "WhatsApp", "Email", "Missed-call follow-up", "Customer notifications"],
+    items: ["Website conversations", "SMS", "WhatsApp", "Email", "Missed-call follow-up", "Customer notifications", "Conditional acknowledgements"],
   },
   {
     title: "Operations",
-    items: ["CRM", "Pipelines", "Opportunities", "Contacts", "Appointments", "Calendars", "Tasks", "Forms and surveys"],
+    items: ["CRM", "Pipelines", "Opportunities", "Contacts", "Appointments", "Calendars", "Tasks", "Customised intake forms", "Duplicate prevention"],
   },
   {
     title: "Automation",
-    items: ["Lead follow-up", "Booking reminders", "Customer confirmations", "Workflow automation", "Reactivation", "Onboarding workflows"],
+    items: ["Lead follow-up", "Booking reminders", "Customer confirmations", "Workflow automation", "Reactivation", "Onboarding workflows", "Pipeline stage updates"],
   },
   {
     title: "Reputation",
@@ -92,7 +107,7 @@ const OUTCOME_GROUPS = [
   },
   {
     title: "Growth",
-    items: ["Landing pages", "Lead capture", "Conversion tracking", "Reporting", "Campaign follow-up"],
+    items: ["Landing pages", "Lead capture", "Lead-source tracking", "Industry and service tagging", "Conversion tracking", "Reporting", "Campaign follow-up", "Workflow monitoring"],
   },
 ];
 
@@ -308,14 +323,14 @@ function Solutions() {
         <h2 className="section-heading mt-5">Business systems built around real problems.</h2>
         <p className="section-copy mt-6">Practical systems selected around the outcome the business needs, without forcing every business into the same package.</p>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {SOLUTION_CARDS.map(({ id, title, copy, icon: Icon }) => (
+          {SOLUTION_CARDS.map(({ id, title, copy, icon: Icon, href }) => (
             <article key={id} id={id} className="surface-card scroll-mt-32 rounded-[1.6rem] p-7">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-500/12 text-violet-200">
                 <Icon className="h-5 w-5" aria-hidden />
               </span>
               <h3 className="mt-6 text-xl font-semibold text-white">{title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-muted">{copy}</p>
-              <Link href={`/solutions#${id}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+              <Link href={href ?? `/solutions#${id}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
                 Explore Solution <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </article>
@@ -340,6 +355,25 @@ function Capabilities() {
       <div className="site-container">
         <p className="eyebrow">Connected outcomes</p>
         <h2 className="section-heading mt-5">Bring communication, operations and growth into one practical flow.</h2>
+        <Link
+          href="/solutions/smart-intake-follow-up"
+          className="surface-card group mt-10 flex flex-col gap-5 rounded-[1.75rem] p-7 transition hover:border-violet-400/30 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <span className="flex items-start gap-4">
+            <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-violet-500/12 text-violet-200">
+              <ClipboardList className="h-6 w-6" aria-hidden />
+            </span>
+            <span>
+              <strong className="block text-xl text-white">DOS Smart Intake &amp; Follow-Up System</strong>
+              <span className="mt-2 block max-w-3xl text-sm leading-relaxed text-ink-muted">
+                Connect branded intake, organised opportunities, automatic acknowledgements, appointment prompts and monitored follow-up.
+              </span>
+            </span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-violet-200">
+            Explore the system <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+          </span>
+        </Link>
         <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           {OUTCOME_GROUPS.map((group) => (
             <article key={group.title} className="surface-card rounded-2xl p-6">

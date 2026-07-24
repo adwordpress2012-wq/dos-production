@@ -9,6 +9,7 @@ type Props = {
   description: string;
   secondaryHref?: string;
   secondaryLabel?: string;
+  breadcrumbs?: { label: string; href?: string }[];
 };
 
 export default function PublicPageHero({
@@ -17,11 +18,30 @@ export default function PublicPageHero({
   description,
   secondaryHref = "/start-here",
   secondaryLabel = "Start Here",
+  breadcrumbs,
 }: Props) {
   return (
     <section className="relative overflow-hidden pb-20 pt-36 sm:pt-44">
       <div aria-hidden className="absolute left-1/2 top-0 h-[34rem] w-[60rem] -translate-x-1/2 rounded-full bg-violet-600/16 blur-[180px]" />
       <div className="site-container relative">
+        {breadcrumbs?.length ? (
+          <nav aria-label="Breadcrumb" className="mb-7">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-ink-muted">
+              {breadcrumbs.map((item, index) => (
+                <li key={`${item.label}-${item.href ?? "current"}`} className="flex items-center gap-2">
+                  {index > 0 ? <span aria-hidden>/</span> : null}
+                  {item.href ? (
+                    <Link href={item.href} className="font-medium text-violet-200 hover:text-white">
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span aria-current="page">{item.label}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+        ) : null}
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="mt-6 max-w-5xl text-[clamp(3rem,7vw,6.7rem)] font-semibold leading-[0.98] tracking-[-0.055em] text-white">
           {title}

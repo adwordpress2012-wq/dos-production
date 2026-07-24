@@ -28,6 +28,11 @@ export const SOLUTIONS: SiteLink[] = [
     description: "Guide website visitors and capture the details your team needs.",
   },
   {
+    href: "/solutions/smart-intake-follow-up",
+    label: "DOS Smart Intake & Follow-Up System",
+    description: "Turn every enquiry into an organised opportunity with automatic acknowledgement and follow-up.",
+  },
+  {
     href: "/solutions#communication",
     label: "Customer Communication",
     description: "Keep conversations clear, timely and connected across each customer channel.",
@@ -320,6 +325,11 @@ export const ECOSYSTEM_GROUPS: { title: string; links: SiteLink[] }[] = [
     title: "Infrastructure and public utilities",
     links: [
       { href: "https://doshub.com.au", label: "DOS Hub", external: true },
+      {
+        href: "/solutions/smart-intake-follow-up",
+        label: "Smart Intake & Follow-Up",
+        description: "Organised enquiry intake and automatic follow-up.",
+      },
       { href: "/onboarding/website-rebuild", label: "Website Onboarding" },
       { href: "https://chatos.com.au/onboarding", label: "Micah Onboarding", external: true },
       { href: "/start-here", label: "Business Discovery" },
