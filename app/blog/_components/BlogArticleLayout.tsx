@@ -1,6 +1,8 @@
 import Link from "next/link";
+import Script from "next/script";
 import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { SITE_URL } from "@/app/lib/seo";
 
 export type BlogArticleCta =
   | { kind: "book-demo"; label: string }
@@ -12,6 +14,7 @@ type Props = {
   title: string;
   category?: string;
   intro?: string;
+  slug?: string;
   children: ReactNode;
   cta: BlogArticleCta;
 };
@@ -23,9 +26,27 @@ function ctaButtonClass(style: "neon" | "ghost" | undefined) {
   return "btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white";
 }
 
-export default function BlogArticleLayout({ title, category, intro, children, cta }: Props) {
+export default function BlogArticleLayout({ title, category, intro, slug, children, cta }: Props) {
+  const articleSchema = slug
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: title,
+        description: intro,
+        mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+        publisher: { "@id": `${SITE_URL}/#organisation` },
+      }
+    : null;
+
   return (
     <main className="relative overflow-hidden pt-28 pb-24 sm:pt-36 sm:pb-32">
+      {articleSchema ? (
+        <Script
+          id={`article-schema-${slug}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c") }}
+        />
+      ) : null}
       <div aria-hidden className="absolute inset-0 bg-grid opacity-35" />
       <div
         aria-hidden

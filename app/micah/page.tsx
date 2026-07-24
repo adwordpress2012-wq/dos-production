@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { PhoneCall, Languages, Clock, Brain, FileText, Workflow } from "lucide-react";
-import ProductPage, { ProductIllustration } from "../components/ProductPage";
+import ProductPage from "../components/ProductPage";
+import OfficialMicahProfile from "../components/OfficialMicahProfile";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/micah" },
   title: "Micah · AI Receptionist",
   description:
     "Micah is your AI receptionist. She answers every call, qualifies leads and books jobs — 24/7. Trained on your business, sounds like a real person.",
@@ -82,31 +84,24 @@ export default function Page() {
           a: "She gracefully defers — captures contact details, sends a follow-up via COS, and flags the call for human review in Command Centre.",
         },
         {
-          q: "How is this priced?",
-          a: "Micah is included on the Growth plan and above, with generous monthly voice usage. See pricing for what is included and how usage works.",
+          q: "How is Micah scoped?",
+          a: "Every business is different. DOS uses a Price Value Fee approach based on the workflow, complexity, usage and value delivered. Book Business Discovery for a tailored proposal.",
         },
       ]}
       illustration={
-        <ProductIllustration tone="fuchsia">
-          <div className="p-5">
-            <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-ink-dim">
+        <>
+          <div>
+            <div className="hidden">
               <span>9:41</span>
               <span className="inline-flex items-center gap-1 text-emerald-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse-glow" />
                 live call · 02:48
               </span>
             </div>
-            <div className="mt-6 flex flex-col items-center text-center">
-              <div className="relative">
-                <div className="absolute inset-0 -m-3 rounded-full bg-gradient-to-br from-fuchsia-500/40 to-violet-500/40 blur-xl animate-pulse-glow" />
-                <div className="relative h-20 w-20 rounded-full bg-gradient-to-br from-violet-500 via-fuchsia-500 to-cyan-400 flex items-center justify-center text-2xl font-bold">
-                  M
-                </div>
-              </div>
-              <p className="mt-4 text-base font-semibold">Micah</p>
-              <p className="text-xs text-ink-muted">AI Receptionist</p>
+            <div>
+              <OfficialMicahProfile priority />
             </div>
-            <div className="mt-6 space-y-2.5 text-[12px]">
+            <div className="hidden">
               <div className="flex">
                 <div className="rounded-2xl rounded-bl-sm bg-white/[0.05] border border-white/5 px-3 py-2 max-w-[80%]">
                   Hi, do you have anyone for tomorrow morning?
@@ -129,7 +124,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-        </ProductIllustration>
+        </>
       }
     />
   );

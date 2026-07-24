@@ -93,7 +93,7 @@ export default function WebQuoteForm() {
           Quote request received.
         </h2>
         <p className="mt-3 text-ink-muted max-w-xl mx-auto">
-          We&apos;ll review and email a fixed-price quote within 1 business day. In the meantime,
+          We&apos;ll review the request and email the next practical step. In the meantime,
           start your full onboarding to lock in your launch slot.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -104,10 +104,10 @@ export default function WebQuoteForm() {
             Start onboarding <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="/pricing"
+            href="https://api.leadconnectorhq.com/widget/booking/QAKm8ZjgD7oceOc8nN0b"
             className="btn-ghost inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white"
           >
-            See pricing
+            Book Business Discovery
           </a>
         </div>
       </div>

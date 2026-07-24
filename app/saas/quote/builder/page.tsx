@@ -1,5 +1,5 @@
-import SaaSQuoteBuilder from "../../../marketing/saas-quote-builder/SaaSQuoteBuilder";
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <SaaSQuoteBuilder />;
+  redirect("https://command.directiveos.com.au");
 }

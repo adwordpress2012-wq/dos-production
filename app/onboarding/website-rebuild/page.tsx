@@ -3,6 +3,7 @@ import Link from "next/link";
 import OnboardingFlow, { WEBSITE_REBUILD_PROJECT_TYPES } from "../OnboardingFlow";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/onboarding/website-rebuild" },
   title: "Step 1 Website Rebuild Setup",
   description:
     "Submit a simple Step 1 setup request for a DOS website rebuild, new website, care plan or hosting/DNS support.",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import BlogArticleLayout, { BlogSection } from "../_components/BlogArticleLayout";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/why-small-businesses-miss-bookings" },
   title: "Why Small Businesses Miss Bookings — And How To Fix It | DOS Insights",
   description:
     "Missed calls, slow replies, and weak enquiry flow cost small businesses bookings. How Smart Chat Widgets, SMS, WhatsApp, and done-for-you DOS setup help.",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function WhySmallBusinessesMissBookingsPage() {
   return (
     <BlogArticleLayout
+      slug="why-small-businesses-miss-bookings"
       title="Why Small Businesses Miss Bookings — And How To Fix It"
       category="Customer Enquiries"
       intro="When the phone is busy, the inbox is quiet overnight, or your website does not tell people what to do next, bookings slip away. Here is what usually goes wrong — and how modern customer communication systems close the gap."

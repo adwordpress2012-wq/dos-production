@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LegalShell from "../components/LegalShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy Policy",
   description:
     "How DOS collects, uses, stores and shares personal information. Compliant with the Australian Privacy Principles.",

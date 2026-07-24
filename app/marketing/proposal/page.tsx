@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import ProposalAcceptanceNotice from "../../components/ProposalAcceptanceNotice";
+import { DISCOVERY_CALL_HREF } from "../../lib/booking";
 
 export const metadata: Metadata = {
   title: "DOS proposal",
@@ -33,7 +34,7 @@ export default function Page() {
           </h1>
           <p className="mt-5 text-base sm:text-lg text-ink-muted leading-relaxed">
             Website, Micah, COS, BOS and DOS HUB — bundled and configured to your
-            business. We&apos;ll prepare a proposal with fixed pricing within 2 business days.
+            business. We&apos;ll prepare a tailored proposal after understanding the required scope and outcomes.
           </p>
         </div>
 
@@ -49,7 +50,7 @@ export default function Page() {
               ))}
             </ul>
             <div className="mt-7 grid gap-2 text-xs text-ink-dim font-mono uppercase tracking-widest">
-              <div>· fixed pricing — no surprises</div>
+              <div>· tailored scope and outcomes</div>
               <div>· phased rollout · 7–14 day go-live</div>
               <div>· month-to-month after first 90 days</div>
             </div>
@@ -93,14 +94,14 @@ export default function Page() {
               </Link>
 
               <Link
-                href="/pricing"
+                href={DISCOVERY_CALL_HREF}
                 className="group rounded-2xl glass p-5 hover:bg-white/[0.06] transition"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="text-base font-semibold">Self-serve via pricing</h3>
+                    <h3 className="text-base font-semibold">Book Business Discovery</h3>
                     <p className="mt-1 text-sm text-ink-muted">
-                      Already know what you want? Pick a plan and check out via Stripe.
+                      Discuss the business bottleneck and define the right assessment pathway.
                     </p>
                   </div>
                   <ArrowRight className="mt-1 h-4 w-4 text-ink-muted group-hover:text-white transition" />

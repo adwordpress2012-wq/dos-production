@@ -1,795 +1,596 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import {
   ArrowRight,
-  ArrowUpRight,
-  BookOpen,
-  Building2,
-  CalendarClock,
-  ClipboardList,
-  Compass,
-  LayoutDashboard,
-  MessageSquare,
-  Pizza,
-  Send,
-  ShoppingBag,
+  Bot,
+  BriefcaseBusiness,
+  CalendarCheck2,
+  Check,
+  ClipboardCheck,
+  Clock3,
+  ContactRound,
+  Globe2,
+  HeartHandshake,
+  Layers3,
+  MessageCircle,
+  MessagesSquare,
+  Network,
+  PhoneCall,
+  Quote,
+  RefreshCcw,
+  Search,
+  ShieldCheck,
   Sparkles,
-  Users,
-  UtensilsCrossed,
-  Wrench,
+  Star,
+  TrendingUp,
+  UsersRound,
+  Workflow,
 } from "lucide-react";
-import GlowCard, { GlowIcon } from "./components/GlowCard";
-import SectionHeader from "./components/SectionHeader";
+import OfficialMicahProfile from "./components/OfficialMicahProfile";
+import TalkToMicahButton from "./components/TalkToMicahButton";
+import TrackedLink from "./components/TrackedLink";
 import { DISCOVERY_CALL_HREF } from "./lib/booking";
+import { createPageMetadata } from "./lib/seo";
+import { ECOSYSTEM_GROUPS, INDUSTRIES, INSIGHTS } from "./lib/site-data";
 
-type GlowTone = "cyan" | "fuchsia" | "violet" | "emerald" | "amber";
+export const metadata: Metadata = createPageMetadata({
+  title: "Directive OS | Simplify, Automate and Scale Your Business",
+  description:
+    "Directive OS builds practical business systems for growing businesses, including Micah, customer communication, booking automation, websites, CRM, reputation, and workflow automation.",
+});
 
-type ShowroomCard = {
-  name: string;
-  label: string;
-  description?: string;
-  icon: ReactNode;
-  tone: GlowTone;
-  href?: string;
-  status?: string;
-  ctaLabel: string;
-  ctaKind: "external" | "anchor" | "static";
-  anchor?: string;
-};
+const CAPABILITIES = [
+  { label: "Website Chat", icon: MessageCircle, href: "/solutions#smart-chat" },
+  { label: "Voice", icon: PhoneCall, href: "/solutions#communication" },
+  { label: "SMS", icon: MessagesSquare, href: "/solutions#communication" },
+  { label: "WhatsApp", icon: ContactRound, href: "/solutions#communication" },
+  { label: "Bookings", icon: CalendarCheck2, href: "/solutions#bookings" },
+  { label: "Follow-Up", icon: RefreshCcw, href: "/solutions#automation" },
+  { label: "CRM", icon: Network, href: "/solutions#pipelines" },
+  { label: "Reviews", icon: Star, href: "/solutions#reputation" },
+];
 
-const PUBLIC_LIVE_SYSTEMS: ShowroomCard[] = [
+const PAIN_POINTS = [
+  { title: "Capture more enquiries", copy: "Make it easier for customers to take the next step.", href: "/solutions#lead-capture" },
+  { title: "Save time every day", copy: "Reduce repetitive work that slows the team down.", href: "/solutions#automation" },
+  { title: "Improve customer communication", copy: "Respond clearly across the channels customers use.", href: "/solutions#communication" },
+  { title: "Automate repetitive work", copy: "Keep reminders, follow-up and notifications moving.", href: "/solutions#automation" },
+  { title: "Build a better website", copy: "Turn the website into a practical business pathway.", href: "/solutions#websites" },
+  { title: "Improve booking follow-up", copy: "Reduce friction before and after each appointment.", href: "/solutions#bookings" },
+  { title: "Organise disconnected systems", copy: "Create a clearer flow between people and information.", href: "/solutions#pipelines" },
+  { title: "Scale the business", copy: "Build repeatable systems for more demand, people and locations.", href: "/solutions#growth" },
+];
+
+const SOLUTION_CARDS = [
+  { id: "communication", title: "Customer Communication", copy: "Respond faster and keep customer conversations connected.", icon: MessagesSquare },
+  { id: "micah", title: "Micah Smart Business Assistant", copy: "Give customers a useful first response at any time of day.", icon: Bot },
+  { id: "websites", title: "Website Systems", copy: "Build trust, capture intent and guide visitors toward action.", icon: Globe2 },
+  { id: "bookings", title: "Booking and Appointment Systems", copy: "Reduce booking friction with clearer reminders and follow-up.", icon: CalendarCheck2 },
+  { id: "automation", title: "Business Automation", copy: "Save time by moving repetitive work into practical workflows.", icon: Workflow },
+  { id: "pipelines", title: "Lead and Pipeline Management", copy: "Keep opportunities organised from first enquiry to client.", icon: Network },
+  { id: "reputation", title: "Reputation Systems", copy: "Turn completed work into feedback, reviews and stronger trust.", icon: ShieldCheck },
+  { id: "growth", title: "Growth Infrastructure", copy: "Build repeatable systems for more customers, staff and locations.", icon: TrendingUp },
+];
+
+const OUTCOME_GROUPS = [
   {
-    name: "DOS Calendar",
-    href: "https://doscalendar.com",
-    label: "Operational Scheduling System",
-    icon: <CalendarClock className="h-5 w-5" />,
-    tone: "cyan",
-    ctaLabel: "Open live demo",
-    ctaKind: "external",
+    title: "Communication",
+    items: ["Website conversations", "SMS", "WhatsApp", "Email", "Missed-call follow-up", "Customer notifications"],
   },
   {
-    name: "Micah / ChatOS",
-    href: "https://chatos.com.au",
-    label: "Smart Chat Widget + Smart Business Assistant",
-    icon: <MessageSquare className="h-5 w-5" />,
-    tone: "fuchsia",
-    ctaLabel: "Open live demo",
-    ctaKind: "external",
+    title: "Operations",
+    items: ["CRM", "Pipelines", "Opportunities", "Contacts", "Appointments", "Calendars", "Tasks", "Forms and surveys"],
   },
   {
-    name: "DOS SOOS",
-    href: "https://dossoos.com.au",
-    label: "Restaurant Ordering System",
-    icon: <UtensilsCrossed className="h-5 w-5" />,
-    tone: "amber",
-    ctaLabel: "Open live demo",
-    ctaKind: "external",
+    title: "Automation",
+    items: ["Lead follow-up", "Booking reminders", "Customer confirmations", "Workflow automation", "Reactivation", "Onboarding workflows"],
   },
   {
-    name: "DOS Workspace",
-    href: "https://dosworkspace.com",
-    label: "DOS Client Workspace",
-    icon: <LayoutDashboard className="h-5 w-5" />,
-    tone: "cyan",
-    ctaLabel: "Open live demo",
-    ctaKind: "external",
+    title: "Reputation",
+    items: ["Google review requests", "Feedback collection", "Review follow-up", "Internal service alerts"],
+  },
+  {
+    title: "Growth",
+    items: ["Landing pages", "Lead capture", "Conversion tracking", "Reporting", "Campaign follow-up"],
   },
 ];
 
-const DOS_CAPABILITIES: ShowroomCard[] = [
-  {
-    name: "DOSLead",
-    label: "Outreach & Follow-Up System",
-    description:
-      "A DOS growth workflow for organising prospects, preparing outreach, tracking follow-ups and turning discovery conversations into new operational system projects.",
-    icon: <Send className="h-5 w-5" />,
-    tone: "violet",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "QuoteOS",
-    label: "Tradie Operating System",
-    description: "Quote, job and follow-up workflows for trade businesses — scoped as part of a DOS operational build.",
-    icon: <Wrench className="h-5 w-5" />,
-    tone: "emerald",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "AgentMate",
-    label: "Real Estate Operational Assistant",
-    icon: <Building2 className="h-5 w-5" />,
-    tone: "violet",
-    status: "Preview / Paused",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "BookOS",
-    label: "Booking Workflow System",
-    description:
-      "A booking-focused DOS system for service businesses that need enquiries, scheduling, reminders and customer handover organised into one simple operational flow.",
-    icon: <BookOpen className="h-5 w-5" />,
-    tone: "cyan",
-    status: "Coming Soon / Framework",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "GuestMate",
-    label: "Guest Operations System",
-    description: "Guest bookings, arrival reminders, welcome packs and records shaped into one operational workflow.",
-    icon: <Users className="h-5 w-5" />,
-    tone: "fuchsia",
-    status: "Coming Soon / Client Build",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "RestaurantOS",
-    label: "Restaurant Operations Framework",
-    icon: <UtensilsCrossed className="h-5 w-5" />,
-    tone: "amber",
-    status: "Framework",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "ShopOS",
-    label: "Retail Operations Framework",
-    icon: <ShoppingBag className="h-5 w-5" />,
-    tone: "emerald",
-    status: "Framework",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-];
-
-const CLIENT_BUILD_DEMOS: ShowroomCard[] = [
-  {
-    name: "Capital Recruitment",
-    label: "Recruitment Website System",
-    icon: <Building2 className="h-5 w-5" />,
-    tone: "violet",
-    ctaLabel: "Read story",
-    ctaKind: "anchor",
-    anchor: "/case-studies/capital-recruitment",
-  },
-  {
-    name: "Zio Pizza & Pasta",
-    label: "Restaurant client build",
-    icon: <Pizza className="h-5 w-5" />,
-    tone: "fuchsia",
-    status: "Private preview",
-    ctaLabel: "Coming soon",
-    ctaKind: "static",
-  },
-  {
-    name: "Galactic Plumbing",
-    label: "Plumbing / QuoteOS workflow",
-    icon: <Wrench className="h-5 w-5" />,
-    tone: "emerald",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-];
-
-const DOS_WORKFLOW = [
-  {
-    icon: <Compass className="h-5 w-5" />,
-    title: "Discovery",
-    description: "We learn how enquiries, bookings, orders and follow-ups actually move through the business today.",
-    tone: "violet" as const,
-  },
-  {
-    icon: <ClipboardList className="h-5 w-5" />,
-    title: "Pain Point",
-    description: "We map what gets missed, where admin piles up, and where time or revenue quietly leaks.",
-    tone: "fuchsia" as const,
-  },
-  {
-    icon: <LayoutDashboard className="h-5 w-5" />,
-    title: "Workflow",
-    description: "We design the practical path — capture, organise, hand off and follow up without chaos.",
-    tone: "cyan" as const,
-  },
-  {
-    icon: <ArrowRight className="h-5 w-5" />,
-    title: "Build Road",
-    description: "We build the website, forms, dashboards, messaging flows and operational tools the workflow needs.",
-    tone: "emerald" as const,
-  },
-  {
-    icon: <CalendarClock className="h-5 w-5" />,
-    title: "Buy Back Time",
-    description: "DOS manages hosting, care and improvements so the system keeps working while you run the business.",
-    tone: "amber" as const,
-  },
-];
-
-type ClientStory = {
-  name: string;
-  business: string;
-  summary: string;
-  tone: GlowTone;
-  status?: string;
-  ctaLabel: string;
-  ctaKind: "internal" | "anchor" | "static";
-  href?: string;
-};
-
-const CLIENT_STORIES: ClientStory[] = [
-  {
-    name: "Luke",
-    business: "Galactic Plumbing",
-    summary:
-      "Quote and enquiry workflow organised so job requests, follow-ups and booking handover stay out of scattered text threads.",
-    tone: "emerald",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    href: "#dos-workflow",
-  },
-  {
-    name: "Jamie & Tanya",
-    business: "TJ's 4B Park",
-    summary:
-      "Guest bookings, Hipcamp operations, arrival reminders, welcome packs and guest records shaped into one simple GuestMate workflow.",
-    tone: "cyan",
-    ctaLabel: "View workflow",
-    ctaKind: "anchor",
-    href: "#dos-workflow",
-  },
-  {
-    name: "Ziyad",
-    business: "Zio Pizza & Pasta",
-    summary:
-      "Restaurant ordering, customer records, promotions and follow-up workflows shaped into one operational flow.",
-    tone: "fuchsia",
-    status: "Private preview",
-    ctaLabel: "Coming soon",
-    ctaKind: "static",
-  },
-  {
-    name: "Paul",
-    business: "Capital Recruitment",
-    summary:
-      "Recruitment website, job listings, resume uploads and admin workflows modernised into one managed platform.",
-    href: "/case-studies/capital-recruitment",
-    tone: "violet",
-    ctaLabel: "Read story",
-    ctaKind: "internal",
-  },
-];
-
-type EcosystemProduct = {
-  name: string;
-  description: string;
-  icon: ReactNode;
-  tone: GlowTone;
-  href?: string;
-  ctaKind: "external" | "anchor" | "static";
-  anchor?: string;
-};
-
-const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
-  {
-    name: "Micah",
-    description: "Smart Business Assistant for enquiries, bookings and follow-ups.",
-    icon: <MessageSquare className="h-5 w-5" />,
-    tone: "fuchsia",
-    href: "https://chatos.com.au",
-    ctaKind: "external",
-  },
-  {
-    name: "TourismOS",
-    description:
-      "Guest Booking & Communication System for campgrounds, farm stays, glamping and accommodation operators.",
-    icon: <Users className="h-5 w-5" />,
-    tone: "cyan",
-    href: "https://tourismos.com.au",
-    ctaKind: "external",
-  },
-  {
-    name: "DOS SOOS",
-    description: "Direct online ordering system for restaurants and local food businesses.",
-    icon: <UtensilsCrossed className="h-5 w-5" />,
-    tone: "amber",
-    href: "https://dossoos.com.au",
-    ctaKind: "external",
-  },
-  {
-    name: "QuoteOS",
-    description: "Quoting and booking workflow for tradies.",
-    icon: <Wrench className="h-5 w-5" />,
-    tone: "emerald",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "AgentMate",
-    description: "Daily operational assistant for real estate agents.",
-    icon: <Building2 className="h-5 w-5" />,
-    tone: "violet",
-    ctaKind: "anchor",
-    anchor: "#dos-workflow",
-  },
-  {
-    name: "DOS Infrastructure",
-    description: "Powered by Command Centre, DOS Calendar, DOSLead and reusable workflow systems.",
-    icon: <LayoutDashboard className="h-5 w-5" />,
-    tone: "violet",
-    ctaKind: "anchor",
-    anchor: "#live-demos",
-  },
+const PROCESS = [
+  { title: "Discover", copy: "Understand the business, customer journey and current bottleneck.", icon: Search },
+  { title: "Evaluate", copy: "Identify the highest-value improvement opportunity.", icon: ClipboardCheck },
+  { title: "Refine", copy: "Remove unnecessary complexity and define the practical path.", icon: Layers3 },
+  { title: "Build the System", copy: "Configure the website, communication and workflows.", icon: Workflow },
+  { title: "Launch", copy: "Test, implement, train and activate the system.", icon: Sparkles },
+  { title: "Support", copy: "Monitor, improve and scale as the business grows.", icon: HeartHandshake },
 ];
 
 export default function Home() {
   return (
-    <>
-      <HeroSection />
-      <LiveDosSystems />
-      <DosWorkflow />
-      <ClientStories />
-      <DosEcosystem />
-      <DiscoveryCta />
-    </>
+    <main className="overflow-hidden">
+      <Hero />
+      <CapabilityRow />
+      <SocialProof />
+      <SimplifyAutomateScale />
+      <BusinessPain />
+      <BusinessBeforeTechnology />
+      <Solutions />
+      <Capabilities />
+      <IndustryPreview />
+      <BusinessSpotlight />
+      <Reputation />
+      <Process />
+      <Ecosystem />
+      <Resources />
+      <Insights />
+      <FinalMicah />
+    </main>
   );
 }
 
-function HeroSection() {
+function Hero() {
   return (
-    <section className="relative pt-32 sm:pt-40 pb-16 sm:pb-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="relative overflow-hidden rounded-[2rem] glass-strong px-6 py-14 sm:px-10 sm:py-18 lg:px-14 ring-glow">
-          <div
-            aria-hidden
-            className="absolute -top-32 left-1/2 h-80 w-[760px] -translate-x-1/2 rounded-full bg-violet-500/25 blur-[120px]"
-          />
-          <div
-            aria-hidden
-            className="absolute -bottom-40 right-0 h-80 w-[620px] rounded-full bg-cyan-400/20 blur-[120px]"
-          />
-
-          <div className="relative grid gap-12 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">
-                <Sparkles className="h-3.5 w-3.5" />
-                Practical Business Systems
-              </span>
-
-              <h1 className="mt-7 max-w-4xl text-4xl font-semibold leading-[1.02] tracking-tight sm:text-6xl lg:text-[76px]">
-                Helping Small Businesses Buy Back Their Time
-              </h1>
-
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg lg:text-xl">
-                Directive OS builds practical business systems that help small operators manage
-                enquiries, bookings, follow-ups, customers, and day-to-day operations in one place.
-              </p>
-
-              <div className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
-                <Link
-                  href={DISCOVERY_CALL_HREF}
-                  className="btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white"
-                >
-                  Book a Discovery Call <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/#live-demos"
-                  className="btn-ghost inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white"
-                >
-                  Explore DOS Systems
-                </Link>
-              </div>
-
-              <p className="mt-5 max-w-xl text-sm leading-relaxed text-ink-muted">
-                Discovery-first. Explore live DOS systems below, then scope the right build for your
-                workflow.
-              </p>
-            </div>
-
-            <div className="lg:col-span-5">
-              <OperationalMapMock />
-            </div>
+    <section className="relative pb-16 pt-32 sm:pt-40 lg:pb-24 lg:pt-36">
+      <div aria-hidden className="absolute left-[-15%] top-0 h-[44rem] w-[44rem] rounded-full bg-violet-600/15 blur-[170px]" />
+      <div className="site-container relative grid items-center gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
+        <div>
+          <p className="eyebrow">Simplify. Automate. Scale.</p>
+          <h1 className="mt-6 max-w-4xl text-[clamp(3.2rem,7.6vw,7.2rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-white">
+            Helping Small Businesses Buy Back Their Time.
+          </h1>
+          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
+            Directive OS builds practical business systems that help businesses improve customer communication, automate repetitive work, capture more opportunities, and scale with confidence.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <TrackedLink
+              href={DISCOVERY_CALL_HREF}
+              external
+              eventName="hero_cta_click"
+              eventSource="homepage-hero"
+              eventLabel="Book Business Discovery"
+              className="btn-primary rounded-2xl px-6 py-4 text-sm font-semibold"
+            >
+              Book Business Discovery <ArrowRight className="h-4 w-4" aria-hidden />
+            </TrackedLink>
+            <Link href="#simplify-automate-scale" className="btn-ghost inline-flex items-center justify-center rounded-2xl px-6 py-4 text-sm font-semibold text-white">
+              Explore DOS
+            </Link>
           </div>
+          <p className="mt-6 flex items-center gap-2 text-sm text-ink-muted">
+            <Clock3 className="h-4 w-4 text-teal-300" aria-hidden />
+            Business before technology. One useful system at a time.
+          </p>
+        </div>
+
+        <div className="relative lg:pl-4">
+          <OfficialMicahProfile priority context="homepage-hero" />
         </div>
       </div>
     </section>
   );
 }
 
-function OperationalMapMock() {
-  const rows = [
-    ["Enquiries", "Website, phone, social, referrals", "capture"],
-    ["Workflow", "Bookings, orders, quotes, follow-ups", "map"],
-    ["System", "Forms, dashboards, messages, calendar", "build"],
-    ["Care", "Hosting, support, improvements", "support"],
+function CapabilityRow() {
+  return (
+    <section aria-label="DOS capabilities" className="border-y border-white/[0.07] bg-white/[0.018]">
+      <div className="site-container grid grid-cols-2 gap-px py-4 sm:grid-cols-4 lg:grid-cols-8">
+        {CAPABILITIES.map(({ label, icon: Icon, href }) => (
+          <Link key={label} href={href} className="group flex min-h-20 flex-col items-center justify-center gap-2 rounded-xl px-2 text-center text-xs font-medium text-ink-muted transition hover:bg-white/[0.04] hover:text-white">
+            <Icon className="h-5 w-5 text-violet-300 transition group-hover:text-teal-200" aria-hidden />
+            {label}
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SocialProof() {
+  return (
+    <section className="py-12">
+      <div className="site-container flex flex-col items-center justify-between gap-7 rounded-3xl border border-white/[0.07] bg-white/[0.025] px-7 py-8 md:flex-row">
+        <div>
+          <p className="eyebrow">Verified client work</p>
+          <h2 className="mt-3 text-xl font-semibold text-white">Trusted by growing Australian businesses.</h2>
+        </div>
+        <TrackedLink
+          href="https://capitalrecruitment.com.au"
+          external
+          eventName="spotlight_click"
+          eventSource="homepage-social-proof"
+          eventLabel="Capital Recruitment"
+          className="flex items-center gap-4 rounded-2xl bg-white px-5 py-3 text-[#151122] transition hover:translate-y-[-1px]"
+        >
+          <Image
+            src="/clients/capital-recruitment-logo.png"
+            alt="Capital Recruitment"
+            width={180}
+            height={52}
+            sizes="180px"
+            className="h-10 w-auto object-contain"
+          />
+          <ArrowRight className="h-4 w-4" aria-hidden />
+        </TrackedLink>
+      </div>
+    </section>
+  );
+}
+
+function SimplifyAutomateScale() {
+  const stages = [
+    { title: "Simplify", copy: "Organise customer communication, remove unnecessary steps, and identify the biggest business bottleneck." },
+    { title: "Automate", copy: "Use smart workflows to handle repetitive enquiries, reminders, follow-up, notifications, and administration." },
+    { title: "Scale", copy: "Build systems that can support more customers, staff, locations, and operational complexity." },
   ];
 
   return (
-    <div className="relative">
-      <div
-        aria-hidden
-        className="absolute -inset-6 rounded-[28px] bg-gradient-to-br from-violet-500/30 via-fuchsia-500/10 to-cyan-400/15 opacity-70 blur-2xl"
-      />
-      <div className="relative rounded-3xl border border-white/10 bg-[#06080f]/90 p-4 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-white/5 pb-4">
-          <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-300/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/60" />
-          </div>
-          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-dim">
-            discovery map
-          </span>
+    <section id="simplify-automate-scale" className="site-section scroll-mt-28">
+      <div className="site-container">
+        <p className="eyebrow">Build a better business system</p>
+        <h2 className="section-heading mt-5">Start with the work that creates the most drag.</h2>
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {stages.map((stage, index) => (
+            <article key={stage.title} className="surface-card relative overflow-hidden rounded-[1.75rem] p-8">
+              <span className="text-xs font-semibold tracking-[0.2em] text-violet-300">0{index + 1}</span>
+              <h3 className="mt-8 text-3xl font-semibold tracking-tight text-white">{stage.title}</h3>
+              <p className="mt-4 leading-relaxed text-ink-muted">{stage.copy}</p>
+            </article>
+          ))}
         </div>
+        <p className="mt-8 text-center text-base font-medium text-white">
+          Start with one bottleneck. Build the simplest system that creates measurable value.
+        </p>
+      </div>
+    </section>
+  );
+}
 
-        <div className="mt-5 space-y-3">
-          {rows.map(([label, detail, status], index) => (
-            <div key={label} className="rounded-2xl border border-white/5 bg-white/[0.03] p-4">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-dim">
-                    0{index + 1}
-                  </div>
-                  <p className="mt-1 text-sm font-semibold text-white">{label}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-ink-muted">{detail}</p>
-                </div>
-                <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-emerald-300">
-                  {status}
-                </span>
-              </div>
+function BusinessPain() {
+  return (
+    <section className="pearl-section soft-wave site-section mt-10">
+      <div className="site-container relative">
+        <p className="eyebrow !text-violet-700">Find the starting point</p>
+        <h2 className="section-heading mt-5">What would you like to improve?</h2>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {PAIN_POINTS.map((item) => (
+            <Link key={item.title} href={item.href} className="group rounded-2xl border border-violet-950/10 bg-white/70 p-6 shadow-sm transition hover:-translate-y-1 hover:border-violet-600/25 hover:bg-white">
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed">{item.copy}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-violet-700">
+                Find the right system <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+              </span>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Link href="/start-here" className="btn-primary rounded-2xl px-7 py-4 text-sm font-semibold">
+            Let&apos;s find the right starting point
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BusinessBeforeTechnology() {
+  const principles = ["One bottleneck at a time", "Practical outcomes", "Done-for-you implementation", "Systems that grow with the business"];
+
+  return (
+    <section className="site-section">
+      <div className="site-container grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div>
+          <p className="eyebrow">The DOS philosophy</p>
+          <h2 className="section-heading mt-5">Business Before Technology.</h2>
+          <p className="section-copy mt-6">
+            Technology should adapt to your business — not the other way around. Every DOS solution begins by understanding the business, identifying the biggest bottleneck, and recommending the simplest practical path forward.
+          </p>
+        </div>
+        <div className="grid gap-3">
+          {principles.map((principle) => (
+            <div key={principle} className="surface-card flex items-center gap-4 rounded-2xl px-5 py-4">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-teal-400/10 text-teal-200">
+                <Check className="h-4 w-4" aria-hidden />
+              </span>
+              <p className="font-medium text-white">{principle}</p>
             </div>
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-function ShowroomCardBody({ card, showDescription = false }: { card: ShowroomCard; showDescription?: boolean }) {
-  return (
-    <GlowCard tone={card.tone} className="h-full transition group-hover:ring-1 group-hover:ring-white/10">
-      <div className="flex items-start justify-between gap-3">
-        <GlowIcon tone={card.tone}>{card.icon}</GlowIcon>
-        {card.ctaKind === "external" && (
-          <ArrowUpRight className="h-4 w-4 shrink-0 text-ink-dim transition group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        )}
-      </div>
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <h3 className="text-lg font-semibold tracking-tight text-white">{card.name}</h3>
-        {card.status && (
-          <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
-            {card.status}
-          </span>
-        )}
-      </div>
-      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{card.label}</p>
-      {showDescription && card.description && (
-        <p className="mt-3 text-sm leading-relaxed text-ink-muted/90">{card.description}</p>
-      )}
-      <p className="mt-4 text-xs font-medium text-cyan-200/90">{card.ctaLabel}</p>
-    </GlowCard>
-  );
-}
-
-function resolveShowroomHref(target: string) {
-  if (target.startsWith("/")) return target;
-  if (target.startsWith("#")) return `/${target}`;
-  return target;
-}
-
-function ShowroomCardLink({ card, showDescription = false }: { card: ShowroomCard; showDescription?: boolean }) {
-  const body = <ShowroomCardBody card={card} showDescription={showDescription} />;
-
-  if (card.ctaKind === "external" && card.href) {
-    return (
-      <a href={card.href} target="_blank" rel="noreferrer" className="group block h-full">
-        {body}
-      </a>
-    );
-  }
-
-  if (card.ctaKind === "anchor" && card.anchor) {
-    return (
-      <Link href={resolveShowroomHref(card.anchor)} className="group block h-full">
-        {body}
-      </Link>
-    );
-  }
-
-  return <div className="group block h-full">{body}</div>;
-}
-
-function ClientBuildDemoRow({ demo }: { demo: ShowroomCard }) {
-  const content = (
-    <div className="glass flex h-full items-center justify-between gap-4 rounded-2xl px-5 py-4 transition hover:bg-white/[0.04]">
-      <div className="flex min-w-0 items-center gap-3">
-        <GlowIcon tone={demo.tone}>{demo.icon}</GlowIcon>
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="text-sm font-semibold text-white">{demo.name}</p>
-            {demo.status && (
-              <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
-                {demo.status}
-              </span>
-            )}
-          </div>
-          <p className="mt-0.5 truncate text-xs text-ink-muted">{demo.label}</p>
-        </div>
-      </div>
-      <span className="shrink-0 text-xs font-medium text-cyan-200/90">{demo.ctaLabel}</span>
-    </div>
-  );
-
-  if (demo.ctaKind === "anchor" && demo.anchor) {
-    return (
-      <Link href={resolveShowroomHref(demo.anchor)} className="group block">
-        {content}
-      </Link>
-    );
-  }
-
-  return <div className="block">{content}</div>;
-}
-
-function LiveDosSystems() {
-  return (
-    <section id="live-demos" className="relative scroll-mt-28 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Live DOS Systems"
-          title={
-            <>
-              Try the <span className="text-gradient-neon">live demo systems.</span>
-            </>
-          }
-          description="directiveos.com.au is the DOS showroom. Only confirmed public systems open externally — everything else stays on this page as workflow and capability cards."
-        />
-
-        <p className="mt-10 text-xs font-medium uppercase tracking-[0.2em] text-ink-dim">Public live systems</p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PUBLIC_LIVE_SYSTEMS.map((system) => (
-            <ShowroomCardLink key={system.name} card={system} />
-          ))}
-        </div>
-
-        <p className="mt-14 text-xs font-medium uppercase tracking-[0.2em] text-ink-dim">DOS capabilities & frameworks</p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {DOS_CAPABILITIES.map((system) => (
-            <ShowroomCardLink key={system.name} card={system} showDescription={Boolean(system.description)} />
-          ))}
-        </div>
-
-        <div className="mt-16">
-          <p className="text-center text-xs font-medium uppercase tracking-[0.2em] text-ink-dim">
-            Client & industry builds
-          </p>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {CLIENT_BUILD_DEMOS.map((demo) => (
-              <ClientBuildDemoRow key={demo.name} demo={demo} />
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
 
-function DosWorkflow() {
+function Solutions() {
   return (
-    <section id="dos-workflow" className="relative scroll-mt-28 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="DOS Workflow"
-          title={
-            <>
-              Discovery first. <span className="text-gradient-purple">System second.</span>
-            </>
-          }
-          description="DOS is Operational Systems Engineering + AI systems building for small business — not a generic website agency or fixed SaaS bundle."
-        />
-
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-          {DOS_WORKFLOW.map((step, index) => (
-            <GlowCard key={step.title} tone={step.tone} className="h-full">
-              <div className="flex items-center justify-between gap-4">
-                <GlowIcon tone={step.tone}>{step.icon}</GlowIcon>
-                <span className="font-mono text-xs uppercase tracking-[0.24em] text-ink-dim">
-                  0{index + 1}
-                </span>
-              </div>
-              <h3 className="mt-5 text-lg font-semibold tracking-tight">{step.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{step.description}</p>
-            </GlowCard>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ClientStories() {
-  return (
-    <section id="client-stories" className="relative scroll-mt-28 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="Client Stories"
-          title={
-            <>
-              Systems built around <span className="text-gradient-purple">real operations.</span>
-            </>
-          }
-          description="Examples of practical DOS builds — shaped after discovery, not forced into a package card."
-        />
-
+    <section className="site-section bg-[#0b0d1c]/80">
+      <div className="site-container">
+        <p className="eyebrow">DOS solutions</p>
+        <h2 className="section-heading mt-5">Business systems built around real problems.</h2>
+        <p className="section-copy mt-6">Practical systems selected around the outcome the business needs, without forcing every business into the same package.</p>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {CLIENT_STORIES.map((story) => {
-            const card = (
-              <GlowCard tone={story.tone} className="h-full">
-                <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-ink-dim">Client story</p>
-                <h3 className="mt-4 text-xl font-semibold tracking-tight">{story.name}</h3>
-                <div className="mt-1 flex flex-wrap items-center gap-2">
-                  <p className="text-sm font-medium text-violet-200/90">{story.business}</p>
-                  {story.status && (
-                    <span className="rounded-full border border-amber-400/25 bg-amber-400/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-amber-200">
-                      {story.status}
-                    </span>
-                  )}
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-ink-muted">{story.summary}</p>
-                <p className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-cyan-200/90">
-                  {story.ctaLabel}
-                  {story.ctaKind !== "static" && <ArrowUpRight className="h-3.5 w-3.5" />}
-                </p>
-              </GlowCard>
-            );
-
-            if (story.ctaKind === "internal" && story.href) {
-              return (
-                <Link key={story.name} href={story.href} className="group block h-full">
-                  {card}
-                </Link>
-              );
-            }
-
-            if (story.ctaKind === "anchor" && story.href) {
-              return (
-                <Link key={story.name} href={resolveShowroomHref(story.href)} className="group block h-full">
-                  {card}
-                </Link>
-              );
-            }
-
-            return (
-              <div key={story.name} className="block h-full">
-                {card}
-              </div>
-            );
-          })}
+          {SOLUTION_CARDS.map(({ id, title, copy, icon: Icon }) => (
+            <article key={id} id={id} className="surface-card scroll-mt-32 rounded-[1.6rem] p-7">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-500/12 text-violet-200">
+                <Icon className="h-5 w-5" aria-hidden />
+              </span>
+              <h3 className="mt-6 text-xl font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{copy}</p>
+              <Link href={`/solutions#${id}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+                Explore Solution <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </article>
+          ))}
+        </div>
+        <div className="mt-9 flex flex-wrap gap-3">
+          <TalkToMicahButton context="solutions-section" className="btn-primary rounded-2xl px-6 py-3.5 text-sm font-semibold">
+            Talk to Micah
+          </TalkToMicahButton>
+          <TrackedLink href={DISCOVERY_CALL_HREF} external eventName="calendar_open" eventSource="solutions-section" eventLabel="Start Discovery" className="btn-ghost inline-flex items-center justify-center rounded-2xl px-6 py-3.5 text-sm font-semibold text-white">
+            Start Discovery
+          </TrackedLink>
         </div>
       </div>
     </section>
   );
 }
 
-function EcosystemProductCard({ product }: { product: EcosystemProduct }) {
-  const card = (
-    <GlowCard tone={product.tone} className="h-full transition group-hover:ring-1 group-hover:ring-white/10">
-      <GlowIcon tone={product.tone}>{product.icon}</GlowIcon>
-      <h3 className="mt-4 text-lg font-semibold tracking-tight text-white">{product.name}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{product.description}</p>
-    </GlowCard>
-  );
-
-  if (product.ctaKind === "external" && product.href) {
-    return (
-      <a href={product.href} target="_blank" rel="noreferrer" className="group block h-full">
-        {card}
-      </a>
-    );
-  }
-
-  if (product.ctaKind === "anchor" && product.anchor) {
-    return (
-      <Link href={resolveShowroomHref(product.anchor)} className="group block h-full">
-        {card}
-      </Link>
-    );
-  }
-
-  return <div className="block h-full">{card}</div>;
-}
-
-function DosEcosystem() {
+function Capabilities() {
   return (
-    <section id="dos-ecosystem" className="relative scroll-mt-28 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <SectionHeader
-          eyebrow="DOS Ecosystem"
-          title={
-            <>
-              Practical systems for <span className="text-gradient-purple">real operations.</span>
-            </>
-          }
-          description="Micah, TourismOS, DOS SOOS, QuoteOS, AgentMate and DOS Infrastructure connect inside broader workflow builds — components DOS selects after discovery, not a fixed bundle."
-        />
-
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {ECOSYSTEM_PRODUCTS.map((product) => (
-            <EcosystemProductCard key={product.name} product={product} />
+    <section className="site-section">
+      <div className="site-container">
+        <p className="eyebrow">Connected outcomes</p>
+        <h2 className="section-heading mt-5">Bring communication, operations and growth into one practical flow.</h2>
+        <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {OUTCOME_GROUPS.map((group) => (
+            <article key={group.title} className="surface-card rounded-2xl p-6">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-violet-200">{group.title}</h3>
+              <ul className="mt-5 space-y-3">
+                {group.items.map((item) => (
+                  <li key={item} className="flex gap-2 text-sm leading-relaxed text-ink-muted">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-teal-300" aria-hidden />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
 
-        <Link
-          href="/#live-demos"
-          className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-cyan-200/90 transition hover:text-cyan-100"
-        >
-          Explore all live demos <ArrowRight className="h-4 w-4" />
+function IndustryPreview() {
+  return (
+    <section className="site-section bg-gradient-to-b from-[#101225] to-[#0b0d1c]">
+      <div className="site-container">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="eyebrow">Industry systems</p>
+            <h2 className="section-heading mt-5">Built for businesses like yours.</h2>
+          </div>
+          <Link href="/industries" className="inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+            Explore all industries <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {INDUSTRIES.slice(0, 8).map((industry) => (
+            <TrackedLink key={industry.slug} href={`/industries/${industry.slug}`} eventName="industry_click" eventSource="homepage" eventLabel={industry.name} className="surface-card group rounded-2xl p-6">
+              <BriefcaseBusiness className="h-5 w-5 text-violet-300" aria-hidden />
+              <h3 className="mt-5 text-lg font-semibold text-white">{industry.name}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{industry.solution}</p>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-violet-200">
+                Learn More <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+              </span>
+            </TrackedLink>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BusinessSpotlight() {
+  return (
+    <section className="site-section">
+      <div className="site-container">
+        <div className="grid overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-[#17192e] to-[#0b0d1c] lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="flex min-h-[24rem] items-center justify-center bg-[#f7f4ff] p-10">
+            <Image
+              src="/clients/capital-recruitment-logo.png"
+              alt="Capital Recruitment"
+              width={390}
+              height={120}
+              sizes="(min-width: 1024px) 32vw, 70vw"
+              className="h-auto w-full max-w-sm object-contain"
+            />
+          </div>
+          <div className="p-8 sm:p-12">
+            <p className="eyebrow">Business Spotlight</p>
+            <h2 className="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Capital Recruitment</h2>
+            <p className="mt-5 text-lg leading-relaxed text-ink-muted">
+              A modern recruitment website designed around clear employer, candidate, and industry journeys.
+            </p>
+            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+              {["Responsive website", "Employer pathways", "Candidate pathways", "Industry pages", "Conversion-focused enquiries", "Hosting and ongoing care"].map((item) => (
+                <li key={item} className="flex gap-2 text-sm text-ink-muted">
+                  <Check className="h-4 w-4 shrink-0 text-teal-300" aria-hidden />
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <TrackedLink href="https://capitalrecruitment.com.au" external eventName="spotlight_click" eventSource="homepage-feature" eventLabel="View Capital Recruitment" className="btn-primary rounded-2xl px-6 py-3.5 text-sm font-semibold">
+                View Capital Recruitment <ArrowRight className="h-4 w-4" aria-hidden />
+              </TrackedLink>
+              <Link href="/business-spotlight" className="btn-ghost inline-flex items-center justify-center rounded-2xl px-6 py-3.5 text-sm font-semibold text-white">
+                Read Business Spotlight
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Reputation() {
+  return (
+    <section className="pearl-section site-section">
+      <div className="site-container grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <div>
+          <p className="eyebrow !text-violet-700">Reputation systems</p>
+          <h2 className="section-heading mt-5">Real businesses. Real systems. Real trust.</h2>
+          <p className="section-copy mt-6">
+            DOS helps businesses turn good customer experiences into stronger reputation through automated review requests, feedback collection, follow-up, and approved client proof.
+          </p>
+        </div>
+        <div className="rounded-[1.75rem] border border-violet-950/10 bg-white/70 p-8">
+          <Quote className="h-7 w-7 text-violet-700" aria-hidden />
+          <h3 className="mt-5 text-2xl font-semibold">Good service should create lasting trust.</h3>
+          <p className="mt-4 leading-relaxed">
+            Verified testimonials and review excerpts are published only after approval. No fabricated ratings, counts or customer claims.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Process() {
+  return (
+    <section className="site-section">
+      <div className="site-container">
+        <p className="eyebrow">How DOS works</p>
+        <h2 className="section-heading mt-5">Discovery first. System second.</h2>
+        <p className="section-copy mt-6">We identify the highest-value bottleneck, build the practical solution, and improve it as the business grows.</p>
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {PROCESS.map(({ title, copy, icon: Icon }, index) => (
+            <article key={title} className="surface-card rounded-2xl p-7">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-500/12 text-violet-200">
+                  <Icon className="h-5 w-5" aria-hidden />
+                </span>
+                <span className="text-xs font-semibold tracking-[0.2em] text-ink-dim">0{index + 1}</span>
+              </div>
+              <h3 className="mt-6 text-xl font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Ecosystem() {
+  return (
+    <section className="site-section bg-[#101225]/75">
+      <div className="site-container">
+        <p className="eyebrow">One connected ecosystem</p>
+        <h2 className="section-heading mt-5">The right system for the right business problem.</h2>
+        <p className="section-copy mt-6">DOS brings flagship products, industry systems and public infrastructure together without exposing private internal operations.</p>
+        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+          {ECOSYSTEM_GROUPS.map((group) => (
+            <article key={group.title} className="surface-card rounded-[1.75rem] p-7">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-200">{group.title}</h3>
+              <div className="mt-5 grid gap-2">
+                {group.links.map((item) => (
+                  <TrackedLink key={`${item.label}-${item.href}`} href={item.href} external={item.external} eventName={item.external ? "ecosystem_outbound_click" : "resource_click"} eventSource="homepage-ecosystem" eventLabel={item.label} className="flex items-center justify-between rounded-xl border border-white/[0.06] px-4 py-3 text-sm text-ink-muted transition hover:border-violet-400/25 hover:text-white">
+                    {item.label}
+                    <ArrowRight className="h-4 w-4" aria-hidden />
+                  </TrackedLink>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+        <Link href="/ecosystem" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+          View the DOS Ecosystem <ArrowRight className="h-4 w-4" aria-hidden />
         </Link>
       </div>
     </section>
   );
 }
 
-function DiscoveryCta() {
+function Resources() {
+  const resources = [
+    { title: "Business Discovery", copy: "Discuss the bottleneck that is holding the business back.", href: DISCOVERY_CALL_HREF, external: true, icon: CalendarCheck2 },
+    { title: "Start Here", copy: "Tell DOS what you would like to improve.", href: "/start-here", icon: ClipboardCheck },
+    { title: "Industry Guides", copy: "Explore pathways designed around different business operations.", href: "/industries", icon: UsersRound },
+    { title: "DOS Insights", copy: "Read practical thinking on systems, websites and communication.", href: "/insights", icon: Sparkles },
+  ];
+
   return (
-    <section className="relative py-24 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="relative overflow-hidden rounded-3xl glass-strong p-10 ring-glow sm:p-14">
-          <div
-            aria-hidden
-            className="absolute -top-20 left-1/2 h-72 w-[800px] -translate-x-1/2 rounded-full bg-violet-500/30 blur-[120px]"
-          />
-          <div
-            aria-hidden
-            className="absolute -bottom-24 right-0 h-72 w-[600px] rounded-full bg-cyan-400/20 blur-[120px]"
-          />
+    <section className="site-section">
+      <div className="site-container">
+        <p className="eyebrow">Public resources</p>
+        <h2 className="section-heading mt-5">Practical tools for better business decisions.</h2>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {resources.map(({ title, copy, href, external, icon: Icon }) => (
+            <TrackedLink key={title} href={href} external={external} eventName="resource_click" eventSource="homepage-resources" eventLabel={title} className="surface-card rounded-2xl p-6">
+              <Icon className="h-5 w-5 text-teal-300" aria-hidden />
+              <h3 className="mt-5 text-lg font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-ink-muted">{copy}</p>
+            </TrackedLink>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-          <div className="relative grid gap-10 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-7">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-ink-muted">
-                <ClipboardList className="h-3.5 w-3.5 text-violet-300" />
-                Next action
-              </span>
-              <h2 className="mt-6 text-3xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-                Book a Discovery Call
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-muted sm:text-lg">
-                Show us where the business is leaking time, leads or momentum. DOS reviews the
-                bottlenecks and recommends a practical system build — scoped after discovery, not from
-                a pricing table.
-              </p>
-            </div>
+function Insights() {
+  return (
+    <section className="site-section bg-[#0b0d1c]/85">
+      <div className="site-container">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="eyebrow">DOS Insights</p>
+            <h2 className="section-heading mt-5">Clear thinking for growing businesses.</h2>
+          </div>
+          <Link href="/insights" className="inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+            Read all Insights <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </div>
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {INSIGHTS.map((article) => (
+            <article key={article.slug} className="surface-card rounded-[1.75rem] p-7">
+              <p className="eyebrow">{article.category}</p>
+              <h3 className="mt-5 text-2xl font-semibold tracking-tight text-white">{article.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-ink-muted">{article.excerpt}</p>
+              <Link href={`/blog/${article.slug}`} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+                Read article <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
-            <div className="lg:col-span-5">
-              <div className="grid gap-3">
-                <Link
-                  href={DISCOVERY_CALL_HREF}
-                  className="btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white"
-                >
-                  Book a Discovery Call <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
-                  href="/#live-demos"
-                  className="btn-ghost inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white"
-                >
-                  Explore DOS Systems
-                </Link>
-                <div className="glass rounded-2xl px-5 py-4 text-sm leading-relaxed text-ink-muted">
-                  <MessageSquare className="mb-3 h-4 w-4 text-emerald-300" />
-                  Jaze reviews each request and follows up with the next practical step.
-                </div>
-              </div>
-            </div>
+function FinalMicah() {
+  return (
+    <section className="site-section">
+      <div className="site-container grid items-center gap-12 overflow-hidden rounded-[2.25rem] border border-white/[0.09] bg-gradient-to-br from-[#17192e] via-[#101225] to-[#0b0d1c] p-7 sm:p-12 lg:grid-cols-[0.75fr_1.25fr]">
+        <OfficialMicahProfile compact showCta={false} />
+        <div>
+          <p className="eyebrow">Available 24/7</p>
+          <h2 className="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-6xl">Not sure where to begin? Talk to Micah.</h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">
+            Micah can help identify the right starting point for your business, answer questions about DOS, and guide you toward the next practical step.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <TalkToMicahButton context="homepage-final" className="btn-micah inline-flex items-center justify-center rounded-2xl px-6 py-4 text-sm font-semibold text-white">
+              Talk to Micah Live
+            </TalkToMicahButton>
+            <TrackedLink href={DISCOVERY_CALL_HREF} external eventName="calendar_open" eventSource="homepage-final" eventLabel="Book Business Discovery" className="btn-ghost inline-flex items-center justify-center rounded-2xl px-6 py-4 text-sm font-semibold text-white">
+              Book Business Discovery
+            </TrackedLink>
+            <Link href="/start-here" className="btn-ghost inline-flex items-center justify-center rounded-2xl px-6 py-4 text-sm font-semibold text-white">
+              Start Here
+            </Link>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ const TILES = [
     href: "/quote-builder",
     title: "Get a website quote",
     description:
-      "Tell us about your business and we'll send a fixed-price quote for a modern DOS-managed rebuild.",
+      "Tell us about your business and we'll prepare a tailored assessment for a modern DOS-managed rebuild.",
     icon: <Globe className="h-5 w-5" />,
     tone: "violet" as const,
   },
@@ -25,14 +25,6 @@ const TILES = [
       "Website, Micah, COS, BOS and DOS HUB — bundled. We'll prepare a tailored DOS proposal.",
     icon: <ArrowRight className="h-5 w-5" />,
     tone: "fuchsia" as const,
-  },
-  {
-    href: "/marketing/saas-quote-builder",
-    title: "Website SaaS Quote Builder",
-    description:
-      "Interactive internal builder for client-ready Website + SaaS proposals, recurring plans, overages, and hosting.",
-    icon: <ArrowRight className="h-5 w-5" />,
-    tone: "violet" as const,
   },
   {
     href: "/micah",

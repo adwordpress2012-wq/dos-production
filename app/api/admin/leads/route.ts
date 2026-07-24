@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
+import { requireInternalApiAuth } from "@/app/lib/internal-access";
 import { getSupabaseAdmin } from "@/app/lib/supabase";
 import {
   CRM_INTEREST_OPTIONS,
@@ -42,7 +43,10 @@ function uncaughtErrorPayload(err: unknown) {
   return { error: message, ...(cause ? { cause } : {}) };
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const unauthorized = requireInternalApiAuth(req);
+  if (unauthorized) return unauthorized;
+
   try {
     const supabase = getSupabaseAdmin();
     if (!supabase) {
@@ -77,6 +81,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const unauthorized = requireInternalApiAuth(req);
+  if (unauthorized) return unauthorized;
+
   let body: Body = {};
   try {
     body = (await req.json()) as Body;

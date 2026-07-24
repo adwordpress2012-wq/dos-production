@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LegalShell from "../components/LegalShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/acceptable-use" },
   title: "Acceptable Use Policy",
   description: "What you can and can't do with the DOS platform, AI agents and communication channels.",
 };

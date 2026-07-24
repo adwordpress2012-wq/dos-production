@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
       const session = event.data.object as Stripe.Checkout.Session;
       const customerId =
         typeof session.customer === "string" ? session.customer : session.customer?.id ?? null;
-      const planId = (session.metadata?.plan_id as string | undefined) ?? null;
       const businessName = (session.metadata?.business_name as string | undefined) ?? null;
       const email = session.customer_details?.email ?? session.customer_email ?? null;
 

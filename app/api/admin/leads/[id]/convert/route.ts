@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
+import { requireInternalApiAuth } from "@/app/lib/internal-access";
 import { getSupabaseAdmin } from "@/app/lib/supabase";
 
 export const runtime = "nodejs";
@@ -17,7 +18,10 @@ function slugify(s: string): string {
 
 type Params = { params: Promise<{ id: string }> };
 
-export async function POST(_req: NextRequest, context: Params) {
+export async function POST(req: NextRequest, context: Params) {
+  const unauthorized = requireInternalApiAuth(req);
+  if (unauthorized) return unauthorized;
+
   const { id: leadId } = await context.params;
   if (!leadId) {
     return NextResponse.json({ error: "Missing lead id." }, { status: 400 });

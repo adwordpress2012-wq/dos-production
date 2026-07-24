@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Script from "next/script";
@@ -8,23 +7,27 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import BackgroundFx from "./components/BackgroundFx";
 import ChromeGate from "./components/ChromeGate";
+import { MicahExperienceProvider } from "./components/MicahExperienceProvider";
+import {
+  DEFAULT_DESCRIPTION,
+  organisationSchema,
+  serviceSchema,
+  SITE_NAME,
+  SITE_URL,
+} from "./lib/seo";
 
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const APP_URL =
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://directiveos.com.au";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(APP_URL),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "DOS",
-    template: "DOS",
+    default: "Directive OS | Simplify, Automate and Scale Your Business",
+    template: "%s | Directive OS",
   },
-  description:
-    "Directive OS builds practical business systems that help small operators manage enquiries, bookings, follow-ups, customers, and day-to-day operations in one place.",
+  description: DEFAULT_DESCRIPTION,
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -35,44 +38,31 @@ export const metadata: Metadata = {
       { url: "/dos-icon-v2.png", sizes: "512x512", type: "image/png" },
     ],
     shortcut: [{ url: "/favicon.ico" }],
-    apple: [
-      {
-        url: "/apple-touch-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-      },
-    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   keywords: [
-    "Modern Smart Business Systems",
-    "Smart Communication Systems",
+    "business systems Australia",
+    "customer communication systems",
+    "business automation",
     "Smart Business Assistant",
-    "Smart Chat Widget",
-    "Australian business infrastructure",
-    "website rebuilds",
-    "managed business systems",
-    "DOS Workspace",
-    "DirectiveOS",
+    "booking automation",
+    "workflow automation",
+    "Directive OS",
   ],
   openGraph: {
-    title: "DOS",
-    description:
-      "Modern Smart Websites, Smart Communication Systems, Smart Business Assistants, and Done-For-You Business Infrastructure — built for Australian operators.",
-    url: APP_URL,
-    siteName: "DOS",
+    title: "Directive OS | Simplify, Automate and Scale Your Business",
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: "website",
     locale: "en_AU",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DOS",
-    description:
-      "Capture more enquiries, modernise communication, and run on dependable infrastructure — DOS builds and supports the full stack.",
+    title: "Directive OS | Simplify, Automate and Scale Your Business",
+    description: DEFAULT_DESCRIPTION,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -83,16 +73,26 @@ export default function RootLayout({
   return (
     <html lang="en-AU" className={`${geist.variable} h-full antialiased`}>
       <body className="min-h-full text-ink">
-        <ChromeGate>
-          <BackgroundFx />
-          <Nav />
-        </ChromeGate>
+        <MicahExperienceProvider>
+          <ChromeGate>
+            <BackgroundFx />
+            <Nav />
+          </ChromeGate>
 
-        {children}
+          {children}
 
-        <ChromeGate>
-          <Footer />
-        </ChromeGate>
+          <ChromeGate>
+            <Footer />
+          </ChromeGate>
+        </MicahExperienceProvider>
+
+        <Script
+          id="directive-os-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([organisationSchema, serviceSchema]).replace(/</g, "\\u003c"),
+          }}
+        />
 
         <Script
           id="micah-dos-chat-widget"

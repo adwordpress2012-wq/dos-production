@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Globe, MessageSquare, PhoneCall, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog" },
   title: "DOS Insights",
   description:
     "Practical ideas for small businesses wanting better websites, faster customer replies, booking automation, and modern customer communication systems.",

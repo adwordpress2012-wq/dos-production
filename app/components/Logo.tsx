@@ -12,7 +12,8 @@ export default function Logo({ className = "h-16 w-auto", priority = false }: Pr
       alt="DOS HUB AI Business Solutions"
       width={329}
       height={153}
-      priority={priority}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : "auto"}
       className={`block object-contain ${className}`}
       sizes="(max-width: 640px) 132px, 172px"
     />

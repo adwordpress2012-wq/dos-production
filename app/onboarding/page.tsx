@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import OnboardingFlow from "./OnboardingFlow";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/onboarding" },
   title: "DOS onboarding",
   description:
     "Submit a simple Step 1 setup request for DOS websites, AI operating systems and operational software.",

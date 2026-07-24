@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/case-studies/capital-recruitment" },
   title: "Capital Recruitment — Case Study",
   description:
     "Capital Recruitment: a Modern Smart Recruitment Platform — website rebuild, job listings, resume uploads, admin workflows, and secure infrastructure by DOS.",

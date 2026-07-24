@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { revalidatePath } from "next/cache";
+import { requireInternalApiAuth } from "@/app/lib/internal-access";
 import { getSupabaseAdmin } from "@/app/lib/supabase";
 
 export const runtime = "nodejs";
@@ -27,6 +28,9 @@ function slugify(s: string): string {
 }
 
 export async function POST(req: NextRequest) {
+  const unauthorized = requireInternalApiAuth(req);
+  if (unauthorized) return unauthorized;
+
   let body: Body = {};
   try {
     body = (await req.json()) as Body;

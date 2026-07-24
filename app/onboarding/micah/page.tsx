@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Headphones, Phone } from "lucide-react";
 
 import MicahCosChatWidget from "@/app/components/MicahCosChatWidget";
+import OfficialMicahProfile from "@/app/components/OfficialMicahProfile";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/onboarding/micah" },
   title: "Micah onboarding",
   description:
     "Start your DOS stack with Micah AI Receptionist — then COS, BOS and web are layered on during onboarding.",
@@ -54,7 +56,11 @@ export default function MicahOnboardingEntryPage() {
           </div>
         </div>
 
-        <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+        <div className="mt-10">
+          <OfficialMicahProfile context="micah-onboarding" priority />
+        </div>
+
+        <div id="talk-to-micah-live" className="mt-10 scroll-mt-28 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
           <p className="text-xs font-mono uppercase tracking-widest text-ink-dim mb-4">Talk to Micah live</p>
           <a
             href={MICAH_PHONE_LINK}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LegalShell from "../components/LegalShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/cancellation-policy" },
   title: "Cancellation Policy",
   description:
     "How to cancel your DOS subscription, refund handling, data export and offboarding.",

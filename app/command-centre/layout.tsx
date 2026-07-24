@@ -1,5 +1,6 @@
-import AdminShell from "@/app/admin/AdminShell";
+import { redirect } from "next/navigation";
 
 export default function CommandCentreLayout({ children }: { children: React.ReactNode }) {
-  return <AdminShell>{children}</AdminShell>;
+  void children;
+  redirect("https://command.directiveos.com.au");
 }

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { readJsonOrNull } from "@/app/lib/safe-response-json";
+import { trackDosEvent } from "@/app/lib/analytics";
 
 function isFormspreeHttpsFormAction(raw: string): boolean {
   try {
@@ -48,14 +49,18 @@ const inputClass =
 
 const labelClass = "text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted";
 
-export default function DiscoveryForm() {
+export default function DiscoveryForm({
+  sourcePage = "directiveos.com.au discovery",
+}: {
+  sourcePage?: string;
+}) {
   const rawAction = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION?.trim();
   const formAction = rawAction && isFormspreeHttpsFormAction(rawAction) ? rawAction : undefined;
-  const misconfiguredAction = Boolean(rawAction && !formAction);
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const startedRef = useRef(false);
 
   const update = <K extends keyof FormState>(key: K, value: FormState[K]) =>
     setForm((current) => ({ ...current, [key]: value }));
@@ -63,22 +68,10 @@ export default function DiscoveryForm() {
   if (!formAction) {
     return (
       <div className="mt-6 rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-4 text-sm text-amber-100">
-        <p className="font-medium text-white">
-          {misconfiguredAction ? "Discovery form misconfigured" : "Discovery form unavailable"}
-        </p>
+        <p className="font-medium text-white">The online form is temporarily unavailable.</p>
         <p className="mt-2 leading-relaxed text-ink-muted">
-          {misconfiguredAction ? (
-            <>
-              <span className="font-mono text-xs text-amber-200/90">NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION</span>{" "}
-              must be a valid Formspree HTTPS URL.
-            </>
-          ) : (
-            <>
-              Set{" "}
-              <span className="font-mono text-xs text-amber-200/90">NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION</span>{" "}
-              to the existing DOS Formspree form URL.
-            </>
-          )}
+          Please call <a className="font-semibold text-white underline" href="tel:0485071000">0485 071 000</a> or email{" "}
+          <a className="font-semibold text-white underline" href="mailto:hello@directiveos.com.au">hello@directiveos.com.au</a>.
         </p>
       </div>
     );
@@ -106,7 +99,7 @@ export default function DiscoveryForm() {
       fd.append("What DOS should fix first", form.firstFix);
       fd.append("Best time to call", form.bestTimeToCall);
       fd.append("form_type", "Operational Discovery Form");
-      fd.append("source_page", "directiveos.com.au homepage");
+      fd.append("source_page", sourcePage);
       fd.append("project_context", "DOS Operational Discovery");
 
       let res: Response;
@@ -131,6 +124,7 @@ export default function DiscoveryForm() {
       if (res.ok && (payload === null || payload.ok !== false) && !formErrors) {
         setDone(true);
         setForm(initialForm);
+        trackDosEvent("start_here_form_submit", { source: sourcePage });
         return;
       }
 
@@ -161,7 +155,15 @@ export default function DiscoveryForm() {
   }
 
   return (
-    <form onSubmit={submit} className="mt-6 grid gap-5">
+    <form
+      onSubmit={submit}
+      onFocusCapture={() => {
+        if (startedRef.current) return;
+        startedRef.current = true;
+        trackDosEvent("start_here_form_start", { source: sourcePage });
+      }}
+      className="mt-6 grid gap-5"
+    >
       {error && (
         <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
           {error}
@@ -169,7 +171,7 @@ export default function DiscoveryForm() {
       )}
 
       <input type="hidden" name="form_type" value="Operational Discovery Form" />
-      <input type="hidden" name="source_page" value="directiveos.com.au homepage" />
+      <input type="hidden" name="source_page" value={sourcePage} />
       <input type="hidden" name="project_context" value="DOS Operational Discovery" />
 
       <div className="grid gap-4 sm:grid-cols-2">

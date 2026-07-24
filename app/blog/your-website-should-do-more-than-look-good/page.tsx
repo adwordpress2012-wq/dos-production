@@ -3,6 +3,7 @@ import BlogArticleLayout, { BlogSection } from "../_components/BlogArticleLayout
 import { CONTACT_PAGE_PATH } from "../constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/your-website-should-do-more-than-look-good" },
   title: "Your Website Should Do More Than Look Good | DOS Insights",
   description:
     "Trust, speed, enquiry capture, and booking automation — why DOS rebuilds websites around real business outcomes for Australian small businesses.",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function YourWebsiteShouldDoMorePage() {
   return (
     <BlogArticleLayout
+      slug="your-website-should-do-more-than-look-good"
       title="Your Website Should Do More Than Look Good"
       category="Website Rebuilds"
       intro="Design matters — but your website’s real job is to turn attention into enquiries and bookings. Here is what “more than look good” means in practice, and how DOS approaches website rebuilds."

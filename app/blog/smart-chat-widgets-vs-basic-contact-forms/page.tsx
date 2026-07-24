@@ -3,6 +3,7 @@ import BlogArticleLayout, { BlogSection } from "../_components/BlogArticleLayout
 import { CHAT_DEMO_URL } from "../constants";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/blog/smart-chat-widgets-vs-basic-contact-forms" },
   title: "Smart Chat Widgets vs Basic Contact Forms | DOS Insights",
   description:
     "Why passive contact forms lose enquiries and how Smart Chat Widgets guide customers, capture details, and connect with SMS and WhatsApp workflows.",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function SmartChatWidgetsVsFormsPage() {
   return (
     <BlogArticleLayout
+      slug="smart-chat-widgets-vs-basic-contact-forms"
       title="Smart Chat Widgets vs Basic Contact Forms"
       category="Smart Chat Widgets"
       intro="A contact form is fine for a simple message — but it does not guide, qualify, or respond. Smart Chat Widgets are built for how people actually browse: quick questions, instant structure, and a path toward booking or follow-up."

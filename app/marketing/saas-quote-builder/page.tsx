@@ -1,12 +1,5 @@
-import type { Metadata } from "next";
-import SaaSQuoteBuilder from "./SaaSQuoteBuilder";
-
-export const metadata: Metadata = {
-  title: "SaaS quote builder",
-  description:
-    "Internal Directive OS quote builder for Website + SaaS proposals, overages, hosting, and branded client-ready summaries.",
-};
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <SaaSQuoteBuilder />;
+  redirect("https://command.directiveos.com.au");
 }

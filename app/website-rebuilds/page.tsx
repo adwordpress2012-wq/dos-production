@@ -4,6 +4,7 @@ import { Globe, Gauge, Search, Wrench, ShieldCheck, Zap } from "lucide-react";
 import ProductPage, { ProductIllustration } from "../components/ProductPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/website-rebuilds" },
   title: "Website Rebuilds + Hosting",
   description:
     "Modern website rebuilds and managed hosting for Australian businesses. Designed, built, hosted and updated by DOS — included in your subscription.",

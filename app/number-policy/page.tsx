@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import LegalShell from "../components/LegalShell";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/number-policy" },
   title: "Number Policy",
   description: "DOS Number Policy — voice and SMS responsibilities, opt-in/opt-out, DNC and ACMA compliance.",
 };
