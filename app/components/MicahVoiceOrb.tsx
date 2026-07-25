@@ -1,162 +1,260 @@
 "use client";
 
-import Image from "next/image";
-import { CalendarDays, LoaderCircle, MessageCircle, Mic, PhoneOff } from "lucide-react";
+import { CalendarDays, MessageCircle } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { trackDosEvent } from "@/app/lib/analytics";
 import { DISCOVERY_CALL_HREF } from "@/app/lib/booking";
 
-const VOICE_WIDGET_ID = "6a63f6a120cc16c7919df9d7";
+const VOICE_WIDGET_ID = "6a6402f720cc16c7919fc5b9";
 const VOICE_WIDGET_LOADER = "https://widgets.leadconnectorhq.com/loader.js";
 const VOICE_WIDGET_RESOURCES =
   "https://widgets.leadconnectorhq.com/chat-widget/loader.js";
+const WIDGET_LOAD_TIMEOUT = 12000;
 
-const ORB_NODES = Array.from({ length: 42 }, (_, index) => {
-  const angle = index * 137.508 * (Math.PI / 180);
-  const radius = 11 + Math.sqrt(index / 41) * 39;
+type VoiceStatus =
+  | "loading"
+  | "ready"
+  | "connecting"
+  | "listening"
+  | "thinking"
+  | "speaking"
+  | "ended"
+  | "unavailable";
 
-  return {
-    left: Number((50 + Math.cos(angle) * radius).toFixed(3)),
-    top: Number((50 + Math.sin(angle) * radius * 0.76).toFixed(3)),
-    size: 2.4 + (index % 5) * 0.72,
-    delay: -(index % 9) * 0.42,
-  };
-});
+type VoiceWidgetElement = HTMLElement & {
+  widgetId?: string;
+};
 
-type VoiceStatus = "ready" | "connecting" | "active" | "unavailable";
-
-function findVoiceLauncher(root: Document | ShadowRoot): HTMLElement | null {
-  const selectors = [
-    'button[aria-label*="Voice AI" i]',
-    '[role="button"][aria-label*="Voice AI" i]',
-    'button[aria-label*="voice call" i]',
-    '[role="button"][aria-label*="voice call" i]',
-    'button[title*="voice call" i]',
-  ];
-
-  for (const selector of selectors) {
-    const element = root.querySelector<HTMLElement>(selector);
-    if (element && !element.dataset.dosVoiceControl) return element;
-  }
-
-  for (const element of Array.from(root.querySelectorAll<HTMLElement>("*"))) {
-    if (element.shadowRoot) {
-      const nested = findVoiceLauncher(element.shadowRoot);
-      if (nested) return nested;
-    }
-  }
-
-  return null;
-}
-
-function findChatLauncher(root: Document | ShadowRoot): HTMLElement | null {
-  const selectors = [
-    'button[aria-label*="chat" i]',
-    'button[title*="chat" i]',
-    '[role="button"][aria-label*="chat" i]',
-    ".lc_text-widget--btn",
-  ];
-
-  for (const selector of selectors) {
-    const element = root.querySelector<HTMLElement>(selector);
-    if (element && !element.closest("[data-dos-voice-widget]")) return element;
-  }
-
-  for (const element of Array.from(root.querySelectorAll<HTMLElement>("*"))) {
-    if (element.shadowRoot) {
-      const nested = findChatLauncher(element.shadowRoot);
-      if (nested) return nested;
-    }
-  }
-
-  return null;
-}
-
-function findChatPromptClose(root: Document | ShadowRoot): HTMLElement | null {
-  const close = root.querySelector<HTMLElement>(
-    'button[aria-label="Close prompt" i]'
-  );
-  if (close) return close;
-
-  for (const element of Array.from(root.querySelectorAll<HTMLElement>("*"))) {
-    if (element.shadowRoot) {
-      const nested = findChatPromptClose(element.shadowRoot);
-      if (nested) return nested;
-    }
-  }
-
-  return null;
-}
-
-function waitForVoiceLauncher(mount: HTMLElement, timeout = 12000) {
-  return new Promise<HTMLElement | null>((resolve) => {
-    const startedAt = Date.now();
-
-    const check = () => {
-      const widget = mount.querySelector<HTMLElement>("chat-widget");
-      const launcher = widget?.shadowRoot
-        ? findVoiceLauncher(widget.shadowRoot)
-        : null;
-
-      if (launcher) {
-        resolve(launcher);
-        return;
-      }
-
-      if (Date.now() - startedAt >= timeout) {
-        resolve(null);
-        return;
-      }
-
-      window.setTimeout(check, 180);
+declare global {
+  interface Window {
+    leadConnector?: {
+      chatWidget?: {
+        isLoaded?: boolean;
+        openWidget?: () => void;
+      };
     };
-
-    check();
-  });
+  }
 }
 
 export default function MicahVoiceOrb() {
   const widgetMountRef = useRef<HTMLDivElement>(null);
   const orbRef = useRef<HTMLDivElement>(null);
-  const [status, setStatus] = useState<VoiceStatus>("ready");
+  const voiceAttemptActiveRef = useRef(false);
+  const voiceWidgetLoadedRef = useRef(false);
+  const voiceConnectedTrackedRef = useRef(false);
+  const voiceFailureTrackedRef = useRef(false);
+  const nativeStateObserverRef = useRef<MutationObserver | null>(null);
+  const statusRef = useRef<VoiceStatus>("loading");
+  const [status, setStatus] = useState<VoiceStatus>("loading");
+  const [hasAttemptedVoice, setHasAttemptedVoice] = useState(false);
   const [orbVisible, setOrbVisible] = useState(true);
 
   useEffect(() => {
     const mount = widgetMountRef.current;
     if (!mount) return;
 
-    const existing = document.querySelector<HTMLScriptElement>(
+    const updateStatus = (nextStatus: VoiceStatus) => {
+      statusRef.current = nextStatus;
+      setStatus(nextStatus);
+    };
+
+    const failVoice = (context: string) => {
+      updateStatus("unavailable");
+      voiceAttemptActiveRef.current = false;
+
+      if (!voiceFailureTrackedRef.current) {
+        voiceFailureTrackedRef.current = true;
+        trackDosEvent("micah_voice_failed", {
+          source: "homepage-hero",
+          context,
+        });
+      }
+    };
+
+    const confirmWidgetReady = () => {
+      let widget = mount.querySelector<VoiceWidgetElement>("chat-widget");
+
+      if (!widget) {
+        widget = Array.from(
+          document.querySelectorAll<VoiceWidgetElement>("chat-widget")
+        ).find((candidate) => candidate.widgetId === VOICE_WIDGET_ID) ?? null;
+
+        if (widget) mount.appendChild(widget);
+      }
+
+      if (!widget || widget.widgetId !== VOICE_WIDGET_ID) return false;
+
+      if (!voiceWidgetLoadedRef.current) {
+        voiceWidgetLoadedRef.current = true;
+        updateStatus("ready");
+        trackDosEvent("micah_voice_widget_loaded", {
+          source: "homepage-hero",
+        });
+      }
+
+      if (loadTimeout) window.clearTimeout(loadTimeout);
+      return true;
+    };
+
+    const handleWidgetLoaded = () => {
+      window.requestAnimationFrame(confirmWidgetReady);
+    };
+
+    const handleCaptchaFailure = () => failVoice("security-check-failed");
+
+    const syncNativeState = (nativeControl: HTMLElement) => {
+      const label = nativeControl.getAttribute("aria-label")?.toLowerCase() ?? "";
+
+      if (label.includes("connecting")) {
+        updateStatus("connecting");
+        return;
+      }
+
+      if (label.includes("listening") || label.includes("speaking")) {
+        updateStatus(label.includes("speaking") ? "speaking" : "listening");
+
+        if (!voiceConnectedTrackedRef.current) {
+          voiceConnectedTrackedRef.current = true;
+          trackDosEvent("micah_voice_connected", {
+            source: "homepage-hero",
+          });
+        }
+        return;
+      }
+
+      if (label.includes("call ended")) {
+        updateStatus("ended");
+
+        if (voiceAttemptActiveRef.current) {
+          voiceAttemptActiveRef.current = false;
+          trackDosEvent("micah_voice_ended", {
+            source: "homepage-hero",
+            context: "native-call-ended",
+          });
+        }
+        return;
+      }
+
+      if (
+        label.includes("tap to talk") &&
+        voiceAttemptActiveRef.current &&
+        statusRef.current === "connecting"
+      ) {
+        failVoice("native-call-failed");
+      }
+    };
+
+    const observeNativeState = (nativeControl: HTMLElement) => {
+      nativeStateObserverRef.current?.disconnect();
+      nativeStateObserverRef.current = new MutationObserver(() =>
+        syncNativeState(nativeControl)
+      );
+      nativeStateObserverRef.current.observe(nativeControl, {
+        attributes: true,
+        attributeFilter: ["aria-label"],
+      });
+    };
+
+    const handleNativeInteraction = (event: Event) => {
+      if (!voiceWidgetLoadedRef.current) return;
+
+      const nativeControl = event
+        .composedPath()
+        .find(
+          (node): node is HTMLElement =>
+            node instanceof HTMLElement && node.getAttribute("role") === "button"
+        );
+
+      if (nativeControl) {
+        observeNativeState(nativeControl);
+        window.setTimeout(() => syncNativeState(nativeControl), 120);
+      }
+
+      if (voiceAttemptActiveRef.current) {
+        // The embedded widget owns the end action. Its accessible state reports
+        // the confirmed end before DOS updates its local UI or analytics.
+        return;
+      }
+
+      voiceAttemptActiveRef.current = true;
+      voiceConnectedTrackedRef.current = false;
+      voiceFailureTrackedRef.current = false;
+      setHasAttemptedVoice(true);
+      updateStatus("connecting");
+      trackDosEvent("micah_voice_started", {
+        source: "homepage-hero",
+      });
+
+      if (!navigator.permissions?.query) return;
+
+      void navigator.permissions
+        .query({ name: "microphone" as PermissionName })
+        .then((permission) => {
+          const handlePermissionChange = () => {
+            if (permission.state === "denied") {
+              failVoice("microphone-denied");
+            }
+          };
+
+          handlePermissionChange();
+          permission.addEventListener("change", handlePermissionChange, {
+            once: true,
+          });
+        })
+        .catch(() => {
+          // The Voice AI widget owns the permission request where the Permissions
+          // API is unavailable or restricted.
+        });
+    };
+
+    if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+      failVoice("browser-unsupported");
+      return;
+    }
+
+    mount.addEventListener("click", handleNativeInteraction, true);
+    window.addEventListener("LC_chatWidgetLoaded", handleWidgetLoaded);
+    window.addEventListener("lc-captcha-error", handleCaptchaFailure);
+    window.addEventListener("lc-captcha-failed", handleCaptchaFailure);
+
+    const observer = new MutationObserver(confirmWidgetReady);
+    observer.observe(mount, { childList: true, subtree: true });
+
+    const loadTimeout = window.setTimeout(() => {
+      if (!confirmWidgetReady()) failVoice("widget-load-timeout");
+    }, WIDGET_LOAD_TIMEOUT);
+
+    const existingWidget = Array.from(
+      document.querySelectorAll<VoiceWidgetElement>("chat-widget")
+    ).find((widget) => widget.widgetId === VOICE_WIDGET_ID);
+
+    const existingScript = document.querySelector<HTMLScriptElement>(
       `script[data-widget-id="${VOICE_WIDGET_ID}"]`
     );
 
-    if (existing) return;
+    if (existingWidget) {
+      confirmWidgetReady();
+    } else if (!existingScript) {
+      const script = document.createElement("script");
+      script.src = VOICE_WIDGET_LOADER;
+      script.async = true;
+      script.dataset.resourcesUrl = VOICE_WIDGET_RESOURCES;
+      script.dataset.widgetId = VOICE_WIDGET_ID;
+      script.addEventListener("error", () => failVoice("script-load-failed"), {
+        once: true,
+      });
+      mount.appendChild(script);
+    }
 
-    const script = document.createElement("script");
-    script.src = VOICE_WIDGET_LOADER;
-    script.async = true;
-    script.dataset.resourcesUrl = VOICE_WIDGET_RESOURCES;
-    script.dataset.widgetId = VOICE_WIDGET_ID;
-    script.addEventListener("error", () => setStatus("unavailable"), {
-      once: true,
-    });
-    mount.appendChild(script);
-  }, []);
-
-  useEffect(() => {
-    let attempts = 0;
-    const timer = window.setInterval(() => {
-      attempts += 1;
-      const closePrompt = findChatPromptClose(document);
-
-      if (closePrompt) {
-        closePrompt.click();
-        window.clearInterval(timer);
-      } else if (attempts >= 16) {
-        window.clearInterval(timer);
-      }
-    }, 300);
-
-    return () => window.clearInterval(timer);
+    return () => {
+      observer.disconnect();
+      nativeStateObserverRef.current?.disconnect();
+      mount.removeEventListener("click", handleNativeInteraction, true);
+      window.removeEventListener("LC_chatWidgetLoaded", handleWidgetLoaded);
+      window.removeEventListener("lc-captcha-error", handleCaptchaFailure);
+      window.removeEventListener("lc-captcha-failed", handleCaptchaFailure);
+      window.clearTimeout(loadTimeout);
+    };
   }, []);
 
   useEffect(() => {
@@ -172,98 +270,22 @@ export default function MicahVoiceOrb() {
     return () => observer.disconnect();
   }, []);
 
-  async function toggleVoice() {
-    if (status === "connecting") return;
-
-    if (!navigator.mediaDevices?.getUserMedia) {
-      setStatus("unavailable");
-      trackDosEvent("micah_voice_unavailable", {
-        source: "homepage-hero",
-        context: "browser-unsupported",
-      });
-      return;
-    }
-
-    setStatus("connecting");
-    const mount = widgetMountRef.current;
-    const launcher = mount ? await waitForVoiceLauncher(mount) : null;
-
-    if (!launcher) {
-      setStatus("unavailable");
-      trackDosEvent("micah_voice_unavailable", {
-        source: "homepage-hero",
-      });
-      return;
-    }
-
-    let microphonePermission: PermissionStatus | null = null;
-
-    try {
-      microphonePermission = await navigator.permissions?.query({
-        name: "microphone" as PermissionName,
-      });
-    } catch {
-      microphonePermission = null;
-    }
-
-    if (microphonePermission?.state === "denied") {
-      setStatus("unavailable");
-      trackDosEvent("micah_voice_unavailable", {
-        source: "homepage-hero",
-        context: "microphone-denied",
-      });
-      return;
-    }
-
-    if (microphonePermission?.state === "prompt") {
-      microphonePermission.addEventListener(
-        "change",
-        () => {
-          if (microphonePermission?.state === "denied") {
-            setStatus("unavailable");
-            trackDosEvent("micah_voice_unavailable", {
-              source: "homepage-hero",
-              context: "microphone-denied",
-            });
-          }
-        },
-        { once: true }
-      );
-    }
-
-    launcher.click();
-
-    if (status === "active") {
-      setStatus("ready");
-      trackDosEvent("micah_voice_end", { source: "homepage-hero" });
-      return;
-    }
-
-    setStatus("active");
-    trackDosEvent("micah_voice_start", { source: "homepage-hero" });
-  }
-
   function openChat() {
-    const launcher = findChatLauncher(document);
+    trackDosEvent("micah_voice_fallback_chat", {
+      source: "homepage-hero-fallback",
+    });
+    trackDosEvent("micah_chat_open", {
+      source: "homepage-hero-fallback",
+    });
 
-    trackDosEvent("micah_chat_open", { source: "homepage-hero-fallback" });
-
-    if (launcher) {
-      launcher.click();
+    const openWidget = window.leadConnector?.chatWidget?.openWidget;
+    if (typeof openWidget === "function") {
+      openWidget();
       return;
     }
 
     window.open("https://chatos.com.au", "_blank", "noopener,noreferrer");
   }
-
-  const statusCopy =
-    status === "connecting"
-      ? "Connecting to Micah…"
-      : status === "active"
-        ? "Micah is listening."
-        : status === "unavailable"
-          ? "Micah voice is temporarily unavailable."
-          : "Micah is online now";
 
   return (
     <div className="micah-voice-stage">
@@ -272,85 +294,19 @@ export default function MicahVoiceOrb() {
         className="micah-network-orb"
         data-orb-visible={orbVisible}
       >
-        <div className="micah-orb-halo" aria-hidden />
-        <div className="micah-orb-grid micah-orb-grid--outer" aria-hidden />
-        <div className="micah-orb-grid micah-orb-grid--inner" aria-hidden />
-        <div className="micah-orb-ring micah-orb-ring--one" aria-hidden />
-        <div className="micah-orb-ring micah-orb-ring--two" aria-hidden />
-        <div className="micah-orb-nodes" aria-hidden>
-          {ORB_NODES.map((node, index) => (
-            <span
-              key={index}
-              style={{
-                left: `${node.left}%`,
-                top: `${node.top}%`,
-                width: `${node.size}px`,
-                height: `${node.size}px`,
-                animationDelay: `${node.delay}s`,
-              }}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          onClick={toggleVoice}
-          data-dos-voice-control
-          className="micah-orb-portrait focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-violet-300/70"
-          aria-label="Talk to Micah using your microphone"
+        <div
+          className="micah-native-voice-frame"
+          data-voice-status={status}
         >
-          <Image
-            src="/micah/micah-official-profile.png"
-            alt="Micah, the Directive OS Smart Business Assistant"
-            fill
-            priority
-            loading="eager"
-            fetchPriority="high"
-            sizes="(min-width: 1024px) 29vw, (min-width: 640px) 58vw, 78vw"
-            className="object-cover object-[50%_26%]"
+          <div
+            ref={widgetMountRef}
+            data-dos-voice-widget
+            className="micah-native-voice-widget"
           />
-        </button>
-
-        <div className="micah-voice-controls">
-          <button
-            type="button"
-            onClick={toggleVoice}
-            data-dos-voice-control
-            className="micah-mic-button"
-            aria-label="Talk to Micah using your microphone"
-          >
-            {status === "connecting" ? (
-              <LoaderCircle className="h-8 w-8 animate-spin" aria-hidden />
-            ) : status === "active" ? (
-              <PhoneOff className="h-8 w-8" aria-hidden />
-            ) : (
-              <Mic className="h-8 w-8" aria-hidden />
-            )}
-          </button>
-          <button
-            type="button"
-            onClick={toggleVoice}
-            data-dos-voice-control
-            className="micah-tap-button"
-            aria-label="Talk to Micah using your microphone"
-          >
-            {status === "active" ? "End voice call" : "Tap to Talk"}
-          </button>
         </div>
       </div>
 
-      <p className="micah-online-status" aria-live="polite">
-        <span
-          className={`micah-status-dot ${status === "unavailable" ? "micah-status-dot--off" : ""}`}
-          aria-hidden
-        />
-        {statusCopy}
-      </p>
-      <p className="micah-voice-supporting">
-        Voice <span aria-hidden>•</span> Chat <span aria-hidden>•</span> Business Discovery
-      </p>
-
-      {status === "unavailable" ? (
+      {hasAttemptedVoice && status === "unavailable" ? (
         <div className="micah-voice-fallback" role="status">
           <p>
             Voice is unavailable right now. You can still chat with Micah or book
@@ -365,12 +321,16 @@ export default function MicahVoiceOrb() {
               href={DISCOVERY_CALL_HREF}
               target="_blank"
               rel="noreferrer"
-              onClick={() =>
+              onClick={() => {
+                trackDosEvent("micah_voice_fallback_calendar", {
+                  source: "homepage-hero-fallback",
+                  destination: DISCOVERY_CALL_HREF,
+                });
                 trackDosEvent("calendar_open", {
                   source: "homepage-hero-fallback",
                   destination: DISCOVERY_CALL_HREF,
-                })
-              }
+                });
+              }}
               className="btn-primary"
             >
               <CalendarDays className="h-4 w-4" aria-hidden />
@@ -379,13 +339,6 @@ export default function MicahVoiceOrb() {
           </div>
         </div>
       ) : null}
-
-      <div
-        ref={widgetMountRef}
-        data-dos-voice-widget
-        className="micah-native-voice-widget"
-        aria-hidden="true"
-      />
     </div>
   );
 }

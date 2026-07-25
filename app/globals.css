@@ -749,6 +749,19 @@ body {
   color: #b8b5c9;
 }
 
+.dos-hero-intro strong,
+.dos-hero-intro span {
+  display: block;
+}
+
+.dos-hero-intro strong {
+  color: #f8f7ff;
+}
+
+.dos-hero-intro span {
+  margin-top: 0.3rem;
+}
+
 .dos-hero-principles {
   display: grid;
   gap: 1.3rem;
@@ -796,225 +809,23 @@ body {
 .micah-voice-stage {
   position: relative;
   display: grid;
-  width: min(100%, 39rem);
+  width: min(100%, 43rem);
   place-items: center;
   text-align: center;
 }
 
 .micah-network-orb {
+  --micah-native-scale: 1.3;
+  --micah-native-size: 604px;
   position: relative;
-  width: min(100%, 36rem);
+  width: min(100%, 43rem);
   aspect-ratio: 1;
   animation: micah-orb-breathe 6.8s ease-in-out infinite;
-  transform-origin: 50% 55%;
+  transform-origin: 50% 50%;
 }
 
-.micah-orb-halo,
-.micah-orb-grid,
-.micah-orb-ring,
-.micah-orb-nodes {
-  position: absolute;
-  border-radius: 999px;
-  pointer-events: none;
-}
-
-.micah-orb-halo {
-  inset: 4%;
-  background:
-    radial-gradient(circle at 50% 48%, rgba(155, 92, 255, 0.17), transparent 48%),
-    radial-gradient(circle at 50% 50%, transparent 56%, rgba(124, 58, 237, 0.25) 72%, transparent 79%);
-  box-shadow:
-    0 0 90px rgba(124, 58, 237, 0.24),
-    inset 0 0 70px rgba(124, 58, 237, 0.16);
-}
-
-.micah-orb-grid {
-  inset: 1.5%;
-  background:
-    repeating-radial-gradient(
-      ellipse at center,
-      transparent 0 11.5%,
-      rgba(139, 92, 246, 0.26) 11.7% 12%,
-      transparent 12.3% 20%
-    ),
-    repeating-conic-gradient(
-      from 14deg,
-      rgba(155, 92, 255, 0.24) 0deg 0.65deg,
-      transparent 0.85deg 14deg
-    );
-  mask-image: radial-gradient(circle, transparent 8%, black 31%, black 70%, transparent 92%);
-  -webkit-mask-image: radial-gradient(circle, transparent 8%, black 31%, black 70%, transparent 92%);
-}
-
-.micah-orb-grid--outer {
-  animation: micah-orb-rotate 30s linear infinite;
-}
-
-.micah-orb-grid--inner {
-  inset: 8.5%;
-  opacity: 0.62;
-  transform: rotateX(62deg) rotateZ(18deg);
-  animation: micah-orb-rotate-reverse 35s linear infinite;
-}
-
-.micah-orb-ring {
-  border: 1px solid rgba(155, 92, 255, 0.34);
-  box-shadow: 0 0 18px rgba(124, 58, 237, 0.26);
-}
-
-.micah-orb-ring--one {
-  inset: 12%;
-  transform: rotateX(68deg) rotateZ(18deg);
-}
-
-.micah-orb-ring--two {
-  inset: 17% 8%;
-  transform: rotateY(68deg) rotateZ(-22deg);
-}
-
-.micah-orb-nodes {
-  inset: 0;
-  animation: micah-orb-rotate 28s linear infinite;
-}
-
-.micah-orb-nodes span {
-  position: absolute;
-  border-radius: 999px;
-  background: #9b5cff;
-  box-shadow:
-    0 0 7px rgba(155, 92, 255, 0.95),
-    0 0 15px rgba(124, 58, 237, 0.62);
-  animation: micah-node-pulse 5.8s ease-in-out infinite;
-}
-
-.micah-network-orb[data-orb-visible="false"],
-.micah-network-orb[data-orb-visible="false"] .micah-orb-grid,
-.micah-network-orb[data-orb-visible="false"] .micah-orb-nodes,
-.micah-network-orb[data-orb-visible="false"] .micah-orb-nodes span {
+.micah-network-orb[data-orb-visible="false"] {
   animation-play-state: paused;
-}
-
-.micah-orb-portrait {
-  position: absolute;
-  z-index: 3;
-  inset: 22%;
-  overflow: hidden;
-  border: 2px solid rgba(248, 247, 255, 0.88);
-  border-radius: 999px;
-  cursor: pointer;
-  background: #0b0d1c;
-  box-shadow:
-    0 0 0 10px rgba(124, 58, 237, 0.12),
-    0 0 52px rgba(124, 58, 237, 0.48),
-    0 24px 80px -28px rgba(0, 0, 0, 0.92);
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.micah-orb-portrait:hover {
-  transform: scale(1.012);
-  box-shadow:
-    0 0 0 10px rgba(124, 58, 237, 0.18),
-    0 0 65px rgba(155, 92, 255, 0.6),
-    0 24px 80px -28px rgba(0, 0, 0, 0.92);
-}
-
-.micah-voice-controls {
-  position: absolute;
-  z-index: 5;
-  left: 50%;
-  bottom: 6.5%;
-  display: grid;
-  min-width: 12rem;
-  justify-items: center;
-  transform: translateX(-50%);
-}
-
-.micah-mic-button {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  height: 4.7rem;
-  width: 4.7rem;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.56);
-  border-radius: 999px;
-  color: white;
-  cursor: pointer;
-  background: linear-gradient(145deg, #9b5cff, #6430d8);
-  box-shadow:
-    0 0 0 8px rgba(124, 58, 237, 0.18),
-    0 0 40px rgba(155, 92, 255, 0.68);
-  transition: transform 180ms ease, filter 180ms ease;
-}
-
-.micah-mic-button:hover,
-.micah-mic-button:focus-visible {
-  transform: translateY(-2px) scale(1.03);
-  filter: brightness(1.1);
-}
-
-.micah-tap-button {
-  min-height: 3.3rem;
-  width: 100%;
-  margin-top: -0.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  border-radius: 999px;
-  padding: 0.85rem 1.8rem;
-  font-size: 1rem;
-  font-weight: 760;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  color: white;
-  cursor: pointer;
-  background: linear-gradient(105deg, #7137ec, #7c3aed 48%, #9333ea);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
-    0 0 32px rgba(124, 58, 237, 0.52);
-  transition: transform 180ms ease, filter 180ms ease;
-}
-
-.micah-tap-button:hover,
-.micah-tap-button:focus-visible {
-  transform: translateY(-1px);
-  filter: brightness(1.12);
-}
-
-.micah-mic-button:focus-visible,
-.micah-tap-button:focus-visible {
-  outline: 3px solid rgba(196, 181, 253, 0.92);
-  outline-offset: 4px;
-}
-
-.micah-online-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  margin-top: -0.2rem;
-  font-size: 0.86rem;
-  font-weight: 650;
-  color: #f8f7ff;
-}
-
-.micah-status-dot {
-  height: 0.48rem;
-  width: 0.48rem;
-  border-radius: 999px;
-  background: #22d3c5;
-  box-shadow: 0 0 14px rgba(34, 211, 197, 0.92);
-}
-
-.micah-status-dot--off {
-  background: #d946ef;
-  box-shadow: 0 0 14px rgba(217, 70, 239, 0.78);
-}
-
-.micah-voice-supporting {
-  margin-top: 0.55rem;
-  font-size: 0.69rem;
-  font-weight: 650;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #8f8ba3;
 }
 
 .micah-voice-fallback {
@@ -1053,13 +864,26 @@ body {
   font-weight: 700;
 }
 
+.micah-native-voice-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--micah-native-size);
+  height: var(--micah-native-size);
+  overflow: hidden;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
 .micah-native-voice-widget {
   position: absolute;
+  top: 0;
+  left: 50%;
   height: 1px;
   width: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+  overflow: visible;
+  transform: scale(var(--micah-native-scale));
+  transform-origin: top center;
 }
 
 .dos-hero-trust {
@@ -1198,27 +1022,27 @@ body {
   }
 
   .micah-network-orb {
-    width: min(112vw, 31rem);
+    --micah-native-scale: 0.78;
+    --micah-native-size: 363px;
+    width: min(94vw, 23rem);
   }
 
-  .micah-orb-portrait {
-    inset: 21%;
+  .micah-native-voice-frame {
+    top: 50%;
   }
+}
 
-  .micah-voice-controls {
-    bottom: 4%;
-    min-width: 10.5rem;
+@media (max-width: 375px) {
+  .micah-network-orb {
+    --micah-native-scale: 0.72;
+    --micah-native-size: 335px;
   }
+}
 
-  .micah-mic-button {
-    height: 4rem;
-    width: 4rem;
-  }
-
-  .micah-tap-button {
-    min-height: 3rem;
-    padding-inline: 1.3rem;
-    font-size: 0.92rem;
+@media (max-width: 340px) {
+  .micah-network-orb {
+    --micah-native-scale: 0.65;
+    --micah-native-size: 302px;
   }
 }
 
