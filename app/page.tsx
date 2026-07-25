@@ -207,9 +207,8 @@ function Hero() {
               </strong>
             </h1>
             <p className="dos-hero-intro">
-              Directive OS builds practical business systems that help small
-              businesses improve communication, automate repetitive work, capture
-              more opportunities, and scale with confidence.
+              <strong>Imagine getting your time back.</strong>
+              <span>One smart business assistant. Unlimited possibilities.</span>
             </p>
 
             <ul className="dos-hero-principles" aria-label="Directive OS principles">

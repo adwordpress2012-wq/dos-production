@@ -4,6 +4,11 @@ import {
   sendStartHereToGhl,
   type StartHereSubmission,
 } from "@/app/lib/ghl-start-here";
+import {
+  START_HERE_SUCCESS_COOKIE,
+  START_HERE_SUCCESS_MAX_AGE_SECONDS,
+  START_HERE_SUCCESS_VALUE,
+} from "@/app/lib/start-here-success";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -112,63 +117,6 @@ function isAllowedRequest(req: NextRequest): boolean {
   }
 }
 
-function getFormspreeAction(): string | null {
-  const raw =
-    process.env.FORMSPREE_CONTACT_ACTION?.trim() ||
-    process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ACTION?.trim();
-  if (!raw) return null;
-
-  try {
-    const url = new URL(raw);
-    if (
-      url.protocol === "https:" &&
-      url.hostname === "formspree.io" &&
-      /^\/f\/[^/]+\/?$/i.test(url.pathname)
-    ) {
-      return url.toString();
-    }
-  } catch {
-    // Invalid fallback configuration is treated as unavailable.
-  }
-
-  return null;
-}
-
-async function sendToFormspree(submission: StartHereSubmission): Promise<boolean> {
-  const action = getFormspreeAction();
-  if (!action) return false;
-
-  const formData = new FormData();
-  formData.append("Business name", submission.businessName);
-  formData.append("Contact name", submission.contactName);
-  formData.append("Email", submission.email);
-  formData.append("Mobile", submission.mobile);
-  formData.append("Business type", submission.businessType);
-  formData.append("Website URL", submission.websiteUrl);
-  formData.append("Main challenge", submission.mainChallenge);
-  formData.append("Where enquiries come from", submission.enquirySources);
-  formData.append("What gets missed", submission.missedMostOften);
-  formData.append("Workflow/admin pain point", submission.workflowPainPoint);
-  formData.append("What DOS should fix first", submission.firstFix);
-  formData.append("Best time to call", submission.bestTimeToCall);
-  formData.append("form_type", "Operational Discovery Form");
-  formData.append("source_page", submission.sourcePage);
-  formData.append("project_context", submission.projectContext);
-
-  try {
-    const response = await fetch(action, {
-      method: "POST",
-      body: formData,
-      headers: { Accept: "application/json" },
-      cache: "no-store",
-      signal: AbortSignal.timeout(12_000),
-    });
-    return response.ok;
-  } catch {
-    return false;
-  }
-}
-
 export async function POST(req: NextRequest) {
   if (!isAllowedRequest(req)) {
     return NextResponse.json({ ok: false, error: "Request origin is not allowed." }, { status: 403 });
@@ -202,28 +150,43 @@ export async function POST(req: NextRequest) {
   }
 
   const ghlConfig = getGhlStartHereConfig();
-  if (ghlConfig) {
-    try {
-      await sendStartHereToGhl(validated.data, ghlConfig);
-      return NextResponse.json({ ok: true });
-    } catch (error) {
-      console.error("[start-here] GHL submission failed; trying fallback.", error);
-    }
-  } else {
-    console.warn("[start-here] GHL is not fully configured; using fallback.");
+  if (!ghlConfig) {
+    console.error(
+      "[start-here] HighLevel handoff is unavailable because the private token or location is not configured."
+    );
+    return NextResponse.json(
+      {
+        ok: false,
+        error:
+          "We could not send your request right now. Your answers are still here, so please try again in a moment.",
+      },
+      { status: 503 }
+    );
   }
 
-  if (await sendToFormspree(validated.data)) {
-    return NextResponse.json({ ok: true });
+  try {
+    await sendStartHereToGhl(validated.data, ghlConfig);
+    const response = NextResponse.json({ ok: true });
+    response.cookies.set({
+      name: START_HERE_SUCCESS_COOKIE,
+      value: START_HERE_SUCCESS_VALUE,
+      httpOnly: true,
+      maxAge: START_HERE_SUCCESS_MAX_AGE_SECONDS,
+      path: "/start-here/thank-you",
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+    });
+    return response;
+  } catch (error) {
+    console.error("[start-here] HighLevel contact or tag handoff failed.", error);
   }
 
   return NextResponse.json(
     {
       ok: false,
       error:
-        "We could not send your request right now. Please try again, call 0485 071 000, or email hello@directiveos.com.au.",
+        "We could not send your request right now. Your answers are still here, so please try again in a moment.",
     },
     { status: 502 }
   );
 }
-

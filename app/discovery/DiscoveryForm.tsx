@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { readJsonOrNull } from "@/app/lib/safe-response-json";
 import { trackDosEvent } from "@/app/lib/analytics";
 
@@ -45,9 +46,9 @@ export default function DiscoveryForm({
 }: {
   sourcePage?: string;
 }) {
+  const router = useRouter();
   const [form, setForm] = useState<FormState>(initialForm);
   const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const startedRef = useRef(false);
 
@@ -86,9 +87,8 @@ export default function DiscoveryForm({
 
       const payload = await readJsonOrNull<{ ok?: boolean; error?: string }>(res);
       if (res.ok && payload?.ok === true) {
-        setDone(true);
-        setForm(initialForm);
         trackDosEvent("start_here_form_submit", { source: sourcePage });
+        router.replace("/start-here/thank-you");
         return;
       }
 
@@ -101,20 +101,6 @@ export default function DiscoveryForm({
     } finally {
       setSubmitting(false);
     }
-  }
-
-  if (done) {
-    return (
-      <div className="mt-6 rounded-xl border border-emerald-400/25 bg-emerald-400/10 px-4 py-6 text-center">
-        <div className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-cyan-400">
-          <CheckCircle2 className="h-6 w-6 text-white" />
-        </div>
-        <p className="mt-4 text-base font-semibold text-white">Discovery request received</p>
-        <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-          Thanks — your discovery request has been received. Jaze from DOS will review it and contact you shortly.
-        </p>
-      </div>
-    );
   }
 
   return (
