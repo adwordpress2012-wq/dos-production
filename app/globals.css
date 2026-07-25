@@ -651,6 +651,577 @@ body {
     0 0 80px -42px rgba(155, 92, 255, 0.45);
 }
 
+/* ---------- Homepage Micah voice hero ---------- */
+
+.dos-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(8rem, 11vw, 10rem) clamp(2.4rem, 5vw, 4.5rem);
+  background:
+    radial-gradient(ellipse at 67% 50%, rgba(100, 44, 226, 0.13), transparent 42%),
+    linear-gradient(180deg, rgba(7, 8, 21, 0.7), rgba(7, 8, 21, 0.98));
+}
+
+.dos-hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  opacity: 0.12;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.dos-hero-glow {
+  position: absolute;
+  z-index: -1;
+  border-radius: 999px;
+  filter: blur(130px);
+  pointer-events: none;
+}
+
+.dos-hero-glow--left {
+  left: -16rem;
+  top: 3rem;
+  height: 35rem;
+  width: 35rem;
+  background: rgba(124, 58, 237, 0.15);
+}
+
+.dos-hero-glow--right {
+  right: -10rem;
+  top: 9rem;
+  height: 34rem;
+  width: 34rem;
+  background: rgba(217, 70, 239, 0.1);
+}
+
+.dos-hero-grid {
+  display: grid;
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7rem);
+}
+
+.dos-hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.dos-hero-heading {
+  display: grid;
+  margin-top: 1.5rem;
+  max-width: 48rem;
+  font-size: clamp(2.8rem, 6.2vw, 6.65rem);
+  font-weight: 720;
+  letter-spacing: -0.058em;
+  line-height: 0.96;
+  color: #f8f7ff;
+}
+
+.dos-hero-heading > span {
+  display: block;
+}
+
+.dos-hero-heading strong {
+  display: block;
+  margin-top: 0.22em;
+  width: max-content;
+  max-width: 100%;
+  font-weight: 760;
+  line-height: 0.91;
+  color: transparent;
+  background: linear-gradient(145deg, #7442f4 3%, #9b5cff 52%, #d946ef 98%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 14px 30px rgba(124, 58, 237, 0.18));
+}
+
+.dos-hero-intro {
+  max-width: 45rem;
+  margin-top: 1.7rem;
+  font-size: clamp(1rem, 1.55vw, 1.24rem);
+  line-height: 1.65;
+  color: #b8b5c9;
+}
+
+.dos-hero-principles {
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 2.3rem;
+}
+
+.dos-hero-principle {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.dos-hero-principle > span {
+  display: grid;
+  height: 3.5rem;
+  width: 3.5rem;
+  place-items: center;
+  border: 1px solid rgba(155, 92, 255, 0.58);
+  border-radius: 999px;
+  color: #c4b5fd;
+  background: rgba(124, 58, 237, 0.09);
+  box-shadow: inset 0 0 22px rgba(124, 58, 237, 0.08);
+}
+
+.dos-hero-principle h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8f7ff;
+}
+
+.dos-hero-principle p {
+  margin-top: 0.15rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: #a9a6ba;
+}
+
+.dos-hero-micah {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+}
+
+.micah-voice-stage {
+  position: relative;
+  display: grid;
+  width: min(100%, 39rem);
+  place-items: center;
+  text-align: center;
+}
+
+.micah-network-orb {
+  position: relative;
+  width: min(100%, 36rem);
+  aspect-ratio: 1;
+  animation: micah-orb-breathe 6.8s ease-in-out infinite;
+  transform-origin: 50% 55%;
+}
+
+.micah-orb-halo,
+.micah-orb-grid,
+.micah-orb-ring,
+.micah-orb-nodes {
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.micah-orb-halo {
+  inset: 4%;
+  background:
+    radial-gradient(circle at 50% 48%, rgba(155, 92, 255, 0.17), transparent 48%),
+    radial-gradient(circle at 50% 50%, transparent 56%, rgba(124, 58, 237, 0.25) 72%, transparent 79%);
+  box-shadow:
+    0 0 90px rgba(124, 58, 237, 0.24),
+    inset 0 0 70px rgba(124, 58, 237, 0.16);
+}
+
+.micah-orb-grid {
+  inset: 1.5%;
+  background:
+    repeating-radial-gradient(
+      ellipse at center,
+      transparent 0 11.5%,
+      rgba(139, 92, 246, 0.26) 11.7% 12%,
+      transparent 12.3% 20%
+    ),
+    repeating-conic-gradient(
+      from 14deg,
+      rgba(155, 92, 255, 0.24) 0deg 0.65deg,
+      transparent 0.85deg 14deg
+    );
+  mask-image: radial-gradient(circle, transparent 8%, black 31%, black 70%, transparent 92%);
+  -webkit-mask-image: radial-gradient(circle, transparent 8%, black 31%, black 70%, transparent 92%);
+}
+
+.micah-orb-grid--outer {
+  animation: micah-orb-rotate 30s linear infinite;
+}
+
+.micah-orb-grid--inner {
+  inset: 8.5%;
+  opacity: 0.62;
+  transform: rotateX(62deg) rotateZ(18deg);
+  animation: micah-orb-rotate-reverse 35s linear infinite;
+}
+
+.micah-orb-ring {
+  border: 1px solid rgba(155, 92, 255, 0.34);
+  box-shadow: 0 0 18px rgba(124, 58, 237, 0.26);
+}
+
+.micah-orb-ring--one {
+  inset: 12%;
+  transform: rotateX(68deg) rotateZ(18deg);
+}
+
+.micah-orb-ring--two {
+  inset: 17% 8%;
+  transform: rotateY(68deg) rotateZ(-22deg);
+}
+
+.micah-orb-nodes {
+  inset: 0;
+  animation: micah-orb-rotate 28s linear infinite;
+}
+
+.micah-orb-nodes span {
+  position: absolute;
+  border-radius: 999px;
+  background: #9b5cff;
+  box-shadow:
+    0 0 7px rgba(155, 92, 255, 0.95),
+    0 0 15px rgba(124, 58, 237, 0.62);
+  animation: micah-node-pulse 5.8s ease-in-out infinite;
+}
+
+.micah-network-orb[data-orb-visible="false"],
+.micah-network-orb[data-orb-visible="false"] .micah-orb-grid,
+.micah-network-orb[data-orb-visible="false"] .micah-orb-nodes,
+.micah-network-orb[data-orb-visible="false"] .micah-orb-nodes span {
+  animation-play-state: paused;
+}
+
+.micah-orb-portrait {
+  position: absolute;
+  z-index: 3;
+  inset: 22%;
+  overflow: hidden;
+  border: 2px solid rgba(248, 247, 255, 0.88);
+  border-radius: 999px;
+  cursor: pointer;
+  background: #0b0d1c;
+  box-shadow:
+    0 0 0 10px rgba(124, 58, 237, 0.12),
+    0 0 52px rgba(124, 58, 237, 0.48),
+    0 24px 80px -28px rgba(0, 0, 0, 0.92);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.micah-orb-portrait:hover {
+  transform: scale(1.012);
+  box-shadow:
+    0 0 0 10px rgba(124, 58, 237, 0.18),
+    0 0 65px rgba(155, 92, 255, 0.6),
+    0 24px 80px -28px rgba(0, 0, 0, 0.92);
+}
+
+.micah-voice-controls {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 6.5%;
+  display: grid;
+  min-width: 12rem;
+  justify-items: center;
+  transform: translateX(-50%);
+}
+
+.micah-mic-button {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  height: 4.7rem;
+  width: 4.7rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  border-radius: 999px;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(145deg, #9b5cff, #6430d8);
+  box-shadow:
+    0 0 0 8px rgba(124, 58, 237, 0.18),
+    0 0 40px rgba(155, 92, 255, 0.68);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.micah-mic-button:hover,
+.micah-mic-button:focus-visible {
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.1);
+}
+
+.micah-tap-button {
+  min-height: 3.3rem;
+  width: 100%;
+  margin-top: -0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 999px;
+  padding: 0.85rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 760;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(105deg, #7137ec, #7c3aed 48%, #9333ea);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 32px rgba(124, 58, 237, 0.52);
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.micah-tap-button:hover,
+.micah-tap-button:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.12);
+}
+
+.micah-mic-button:focus-visible,
+.micah-tap-button:focus-visible {
+  outline: 3px solid rgba(196, 181, 253, 0.92);
+  outline-offset: 4px;
+}
+
+.micah-online-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: -0.2rem;
+  font-size: 0.86rem;
+  font-weight: 650;
+  color: #f8f7ff;
+}
+
+.micah-status-dot {
+  height: 0.48rem;
+  width: 0.48rem;
+  border-radius: 999px;
+  background: #22d3c5;
+  box-shadow: 0 0 14px rgba(34, 211, 197, 0.92);
+}
+
+.micah-status-dot--off {
+  background: #d946ef;
+  box-shadow: 0 0 14px rgba(217, 70, 239, 0.78);
+}
+
+.micah-voice-supporting {
+  margin-top: 0.55rem;
+  font-size: 0.69rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8f8ba3;
+}
+
+.micah-voice-fallback {
+  width: min(100%, 31rem);
+  margin-top: 1.2rem;
+  border: 1px solid rgba(217, 70, 239, 0.22);
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: left;
+  background: rgba(23, 25, 46, 0.86);
+}
+
+.micah-voice-fallback p {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #c5c1d4;
+}
+
+.micah-voice-fallback > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 0.8rem;
+}
+
+.micah-voice-fallback a,
+.micah-voice-fallback button {
+  display: inline-flex;
+  min-height: 2.8rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.micah-native-voice-widget {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.dos-hero-trust {
+  display: grid;
+  gap: 0;
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  overflow: hidden;
+  border: 1px solid rgba(155, 92, 255, 0.18);
+  border-radius: 1.5rem;
+  background: linear-gradient(100deg, rgba(23, 25, 46, 0.82), rgba(12, 13, 31, 0.84));
+  box-shadow: 0 28px 75px -50px rgba(124, 58, 237, 0.9);
+}
+
+.dos-hero-trust-item {
+  display: flex;
+  min-height: 6.3rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+
+.dos-hero-trust-item + .dos-hero-trust-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.dos-hero-trust-item > svg {
+  flex: 0 0 auto;
+  color: #8b5cf6;
+  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.48));
+}
+
+.dos-hero-trust-item p {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.83rem;
+  line-height: 1.35;
+  color: #b8b5c9;
+}
+
+.dos-hero-trust-item strong {
+  font-size: 0.88rem;
+  color: #f8f7ff;
+}
+
+@keyframes micah-orb-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes micah-orb-rotate-reverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes micah-orb-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.045);
+  }
+}
+
+@keyframes micah-node-pulse {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 640px) {
+  .dos-hero-principles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .dos-hero-principle {
+    grid-template-columns: 3.5rem 1fr;
+    padding-right: 1.1rem;
+  }
+
+  .dos-hero-principle + .dos-hero-principle {
+    border-left: 1px solid rgba(255, 255, 255, 0.09);
+    padding-left: 1.1rem;
+  }
+
+  .dos-hero-trust {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dos-hero-trust-item:nth-child(2) {
+    border-top: 0;
+  }
+
+  .dos-hero-trust-item:nth-child(even) {
+    border-left: 1px solid rgba(255, 255, 255, 0.07);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dos-hero-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(27rem, 0.92fr);
+  }
+
+  .dos-hero-heading {
+    font-size: clamp(3.6rem, 5.05vw, 6.35rem);
+  }
+
+  .dos-hero-trust {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .dos-hero-trust-item + .dos-hero-trust-item {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.07);
+  }
+}
+
+@media (max-width: 639px) {
+  .dos-hero {
+    padding-top: 7.5rem;
+  }
+
+  .dos-hero-heading {
+    font-size: clamp(2.65rem, 14vw, 4rem);
+  }
+
+  .dos-hero-intro {
+    font-size: 0.98rem;
+  }
+
+  .micah-network-orb {
+    width: min(112vw, 31rem);
+  }
+
+  .micah-orb-portrait {
+    inset: 21%;
+  }
+
+  .micah-voice-controls {
+    bottom: 4%;
+    min-width: 10.5rem;
+  }
+
+  .micah-mic-button {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .micah-tap-button {
+    min-height: 3rem;
+    padding-inline: 1.3rem;
+    font-size: 0.92rem;
+  }
+}
+
 .choice-card {
   display: grid;
   grid-template-columns: 2.75rem 1fr;

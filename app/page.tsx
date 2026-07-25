@@ -29,6 +29,7 @@ import {
   UsersRound,
   Workflow,
 } from "lucide-react";
+import MicahVoiceOrb from "./components/MicahVoiceOrb";
 import OfficialMicahProfile from "./components/OfficialMicahProfile";
 import TalkToMicahButton from "./components/TalkToMicahButton";
 import TrackedLink from "./components/TrackedLink";
@@ -144,42 +145,104 @@ export default function Home() {
 }
 
 function Hero() {
+  const principles = [
+    {
+      title: "Simplify",
+      copy: "Remove complexity. Focus on what matters.",
+      icon: Check,
+    },
+    {
+      title: "Automate",
+      copy: "Save time with smart workflows and Micah.",
+      icon: Workflow,
+    },
+    {
+      title: "Scale",
+      copy: "Grow with practical systems that work.",
+      icon: TrendingUp,
+    },
+  ];
+
+  const trustPoints = [
+    {
+      title: "Trusted by",
+      copy: "Australian Businesses",
+      icon: ShieldCheck,
+    },
+    {
+      title: "Proven Systems",
+      copy: "Built for Real Results",
+      icon: Check,
+    },
+    {
+      title: "Save Time",
+      copy: "Every Single Day",
+      icon: Clock3,
+    },
+    {
+      title: "Scale with Confidence",
+      copy: "Sustainable Growth",
+      icon: TrendingUp,
+    },
+  ];
+
   return (
-    <section className="relative pb-16 pt-32 sm:pt-40 lg:pb-24 lg:pt-36">
-      <div aria-hidden className="absolute left-[-15%] top-0 h-[44rem] w-[44rem] rounded-full bg-violet-600/15 blur-[170px]" />
-      <div className="site-container relative grid items-center gap-14 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
-        <div>
-          <p className="eyebrow">Simplify. Automate. Scale.</p>
-          <h1 className="mt-6 max-w-4xl text-[clamp(3.2rem,7.6vw,7.2rem)] font-semibold leading-[0.94] tracking-[-0.06em] text-white">
-            Helping Small Businesses Buy Back Their Time.
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
-            Directive OS builds practical business systems that help businesses improve customer communication, automate repetitive work, capture more opportunities, and scale with confidence.
-          </p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <TrackedLink
-              href={DISCOVERY_CALL_HREF}
-              external
-              eventName="hero_cta_click"
-              eventSource="homepage-hero"
-              eventLabel="Book Business Discovery"
-              className="btn-primary rounded-2xl px-6 py-4 text-sm font-semibold"
-            >
-              Book Business Discovery <ArrowRight className="h-4 w-4" aria-hidden />
-            </TrackedLink>
-            <Link href="#simplify-automate-scale" className="btn-ghost inline-flex items-center justify-center rounded-2xl px-6 py-4 text-sm font-semibold text-white">
-              Explore DOS
-            </Link>
+    <section className="dos-hero">
+      <div aria-hidden className="dos-hero-glow dos-hero-glow--left" />
+      <div aria-hidden className="dos-hero-glow dos-hero-glow--right" />
+
+      <div className="site-container relative">
+        <div className="dos-hero-grid">
+          <div className="dos-hero-copy">
+            <p className="eyebrow">Directive OS</p>
+            <h1 className="dos-hero-heading">
+              <span>Smarter Systems.</span>
+              <span>Stronger Businesses.</span>
+              <strong>
+                Simplify.
+                <br />
+                Automate.
+                <br />
+                Scale.
+              </strong>
+            </h1>
+            <p className="dos-hero-intro">
+              Directive OS builds practical business systems that help small
+              businesses improve communication, automate repetitive work, capture
+              more opportunities, and scale with confidence.
+            </p>
+
+            <ul className="dos-hero-principles" aria-label="Directive OS principles">
+              {principles.map(({ title, copy, icon: Icon }) => (
+                <li key={title} className="dos-hero-principle">
+                  <span>
+                    <Icon className="h-6 w-6" aria-hidden />
+                  </span>
+                  <div>
+                    <h2>{title}</h2>
+                    <p>{copy}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
-          <p className="mt-6 flex items-center gap-2 text-sm text-ink-muted">
-            <Clock3 className="h-4 w-4 text-teal-300" aria-hidden />
-            Business before technology. One useful system at a time.
-          </p>
+
+          <div className="dos-hero-micah">
+            <MicahVoiceOrb />
+          </div>
         </div>
 
-        <div className="relative lg:pl-4">
-          <OfficialMicahProfile priority context="homepage-hero" />
-        </div>
+        <ul className="dos-hero-trust" aria-label="Directive OS business outcomes">
+          {trustPoints.map(({ title, copy, icon: Icon }) => (
+            <li key={title} className="dos-hero-trust-item">
+              <Icon className="h-7 w-7" aria-hidden />
+              <p>
+                <span>{title}</span>
+                <strong>{copy}</strong>
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
