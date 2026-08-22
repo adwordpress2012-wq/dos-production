@@ -5,6 +5,7 @@ import { DISCOVERY_CALL_HREF } from "@/app/lib/booking";
 
 type BusinessSpotlight = {
   companyName: string;
+  identityLines: string[];
   industry: string;
   logo: {
     src: string;
@@ -27,6 +28,7 @@ type BusinessSpotlight = {
 const BUSINESS_SPOTLIGHTS: BusinessSpotlight[] = [
   {
     companyName: "Scaffolding Australia",
+    identityLines: ["Scaffolding", "Australia"],
     industry: "Construction / Scaffolding",
     logo: {
       src: "/clients/scaffolding-australia-logo.jpg",
@@ -78,23 +80,38 @@ export default function BusinessSpotlightSection() {
               className="business-spotlight-card overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-[#17192e] via-[#111329] to-[#0b0d1c]"
             >
               <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
-                <div className="business-spotlight-brand flex min-h-[20rem] flex-col justify-between gap-8 bg-[#f7f8f7] p-7 sm:min-h-[26rem] sm:p-10 lg:p-12">
-                  <span className="w-fit rounded-full border border-[#2cae7c]/25 bg-[#2cae7c]/[0.08] px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#176b4e]">
-                    Featured Business
-                  </span>
-                  <div className="flex flex-1 items-center justify-center rounded-[1.5rem] border border-slate-900/[0.06] bg-white px-7 py-12 shadow-[0_24px_70px_-48px_rgba(15,23,42,0.5)] sm:px-10">
-                    <Image
-                      src={spotlight.logo.src}
-                      alt={spotlight.logo.alt}
-                      width={spotlight.logo.width}
-                      height={spotlight.logo.height}
-                      sizes="(min-width: 1024px) 28vw, (min-width: 640px) 55vw, 72vw"
-                      className="h-auto w-full max-w-[19rem] object-contain"
-                    />
+                <div className="business-spotlight-brand relative flex min-h-[30rem] flex-col overflow-hidden border-b border-white/[0.08] bg-[radial-gradient(circle_at_18%_15%,rgba(45,212,191,0.15),transparent_34%),linear-gradient(155deg,#17192e_0%,#0b0d1c_72%)] p-7 sm:min-h-[34rem] sm:p-10 lg:min-h-full lg:border-r lg:border-b-0 lg:p-12">
+                  <div aria-hidden className="absolute -right-20 -bottom-24 h-72 w-72 rounded-full border border-violet-400/[0.12]" />
+                  <div className="relative">
+                    <span className="w-fit rounded-full border border-teal-300/25 bg-teal-300/[0.08] px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-teal-200">
+                      Featured Business
+                    </span>
+
+                    <p className="mt-10 text-[3.2rem] leading-[0.88] font-semibold tracking-[-0.055em] text-white sm:text-[4.5rem] lg:text-[4.75rem] xl:text-[5rem]" aria-label={spotlight.companyName}>
+                      {spotlight.identityLines.map((line, index) => (
+                        <span key={line} className={index === 0 ? "block" : "mt-2 block text-teal-300"}>
+                          {line}
+                        </span>
+                      ))}
+                    </p>
+
+                    <p className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                      {spotlight.industry}
+                    </p>
                   </div>
-                  <p className="text-sm font-medium text-slate-600">
-                    <span className="font-semibold text-slate-900">Industry:</span> {spotlight.industry}
-                  </p>
+
+                  <div className="relative mt-auto pt-10">
+                    <div className="w-fit rounded-2xl border border-white/[0.1] bg-white px-5 py-4 shadow-[0_22px_55px_-34px_rgba(0,0,0,0.75)]">
+                      <Image
+                        src={spotlight.logo.src}
+                        alt={spotlight.logo.alt}
+                        width={spotlight.logo.width}
+                        height={spotlight.logo.height}
+                        sizes="(min-width: 640px) 216px, 200px"
+                        className="h-auto w-[12.5rem] max-w-full object-contain sm:w-[13.5rem]"
+                      />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="p-7 sm:p-10 lg:p-12">
