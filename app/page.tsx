@@ -33,6 +33,7 @@ import MicahVoiceOrb from "./components/MicahVoiceOrb";
 import OfficialMicahProfile from "./components/OfficialMicahProfile";
 import TalkToMicahButton from "./components/TalkToMicahButton";
 import TrackedLink from "./components/TrackedLink";
+import BusinessSpotlightSection from "./components/BusinessSpotlightSection";
 import { DISCOVERY_CALL_HREF } from "./lib/booking";
 import { createPageMetadata } from "./lib/seo";
 import { ECOSYSTEM_GROUPS, INDUSTRIES, INSIGHTS } from "./lib/site-data";
@@ -132,8 +133,8 @@ export default function Home() {
       <BusinessBeforeTechnology />
       <Solutions />
       <Capabilities />
+      <BusinessSpotlightSection />
       <IndustryPreview />
-      <BusinessSpotlight />
       <Reputation />
       <Process />
       <Ecosystem />
@@ -480,50 +481,6 @@ function IndustryPreview() {
               </span>
             </TrackedLink>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BusinessSpotlight() {
-  return (
-    <section className="site-section">
-      <div className="site-container">
-        <div className="grid overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-[#17192e] to-[#0b0d1c] lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex min-h-[24rem] items-center justify-center bg-[#f7f4ff] p-10">
-            <Image
-              src="/clients/capital-recruitment-logo.png"
-              alt="Capital Recruitment"
-              width={390}
-              height={120}
-              sizes="(min-width: 1024px) 32vw, 70vw"
-              className="h-auto w-full max-w-sm object-contain"
-            />
-          </div>
-          <div className="p-8 sm:p-12">
-            <p className="eyebrow">Business Spotlight</p>
-            <h2 className="mt-5 text-4xl font-semibold tracking-tight text-white sm:text-5xl">Capital Recruitment</h2>
-            <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-              A modern recruitment website designed around clear employer, candidate, and industry journeys.
-            </p>
-            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
-              {["Responsive website", "Employer pathways", "Candidate pathways", "Industry pages", "Conversion-focused enquiries", "Hosting and ongoing care"].map((item) => (
-                <li key={item} className="flex gap-2 text-sm text-ink-muted">
-                  <Check className="h-4 w-4 shrink-0 text-teal-300" aria-hidden />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <TrackedLink href="https://capitalrecruitment.com.au" external eventName="spotlight_click" eventSource="homepage-feature" eventLabel="View Capital Recruitment" className="btn-primary rounded-2xl px-6 py-3.5 text-sm font-semibold">
-                View Capital Recruitment <ArrowRight className="h-4 w-4" aria-hidden />
-              </TrackedLink>
-              <Link href="/business-spotlight" className="btn-ghost inline-flex items-center justify-center rounded-2xl px-6 py-3.5 text-sm font-semibold text-white">
-                Read Business Spotlight
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </section>
