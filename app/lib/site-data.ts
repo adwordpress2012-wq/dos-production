@@ -33,6 +33,16 @@ export const SOLUTIONS: SiteLink[] = [
     description: "Turn every enquiry into an organised opportunity with automatic acknowledgement and follow-up.",
   },
   {
+    href: "/solutions/era",
+    label: "DOS ERA — Email Response Automation",
+    description: "Answer, capture and route inbound business email while your team keeps control.",
+  },
+  {
+    href: "/solutions/arc",
+    label: "DOS ARC — Accounts Receivable Control",
+    description: "Structured invoice follow-up before unpaid accounts become a collection problem.",
+  },
+  {
     href: "/solutions#communication",
     label: "Customer Communication",
     description: "Keep conversations clear, timely and connected across each customer channel.",
@@ -63,9 +73,9 @@ export const SOLUTIONS: SiteLink[] = [
     description: "Organise leads, customers and opportunities from first contact onward.",
   },
   {
-    href: "/solutions#reputation",
-    label: "Reputation Management",
-    description: "Turn good service into feedback, reviews and stronger business trust.",
+    href: "/solutions/reputation",
+    label: "DOS Reputation",
+    description: "Turn good service into genuine reviews, private feedback and stronger business trust.",
   },
   {
     href: "/solutions#automation",
@@ -313,6 +323,31 @@ export const ECOSYSTEM_GROUPS: { title: string; links: SiteLink[] }[] = [
     ],
   },
   {
+    title: "Business systems",
+    links: [
+      {
+        href: "/solutions/era",
+        label: "DOS ERA",
+        description: "Inbound email response, capture and routing.",
+      },
+      {
+        href: "/solutions/arc",
+        label: "DOS ARC",
+        description: "Receivables follow-up and escalation control.",
+      },
+      {
+        href: "/solutions/reputation",
+        label: "DOS Reputation",
+        description: "Review generation and private feedback capture.",
+      },
+      {
+        href: "/solutions/smart-intake-follow-up",
+        label: "Smart Intake & Follow-Up",
+        description: "Organised enquiry intake and automatic follow-up.",
+      },
+    ],
+  },
+  {
     title: "Industry systems",
     links: [
       { href: "https://realtyos.com.au", label: "RealtyOS", external: true },
@@ -325,11 +360,6 @@ export const ECOSYSTEM_GROUPS: { title: string; links: SiteLink[] }[] = [
     title: "Infrastructure and public utilities",
     links: [
       { href: "https://doshub.com.au", label: "DOS Hub", external: true },
-      {
-        href: "/solutions/smart-intake-follow-up",
-        label: "Smart Intake & Follow-Up",
-        description: "Organised enquiry intake and automatic follow-up.",
-      },
       { href: "/onboarding/website-rebuild", label: "Website Onboarding" },
       { href: "https://chatos.com.au/onboarding", label: "Micah Onboarding", external: true },
       { href: "/start-here", label: "Business Discovery" },

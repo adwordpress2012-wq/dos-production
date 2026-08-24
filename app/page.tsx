@@ -15,11 +15,13 @@ import {
   Globe2,
   HeartHandshake,
   Layers3,
+  Mail,
   MessageCircle,
   MessagesSquare,
   Network,
   PhoneCall,
   Quote,
+  ReceiptText,
   RefreshCcw,
   Search,
   ShieldCheck,
@@ -34,6 +36,7 @@ import OfficialMicahProfile from "./components/OfficialMicahProfile";
 import TalkToMicahButton from "./components/TalkToMicahButton";
 import TrackedLink from "./components/TrackedLink";
 import BusinessSpotlightSection from "./components/BusinessSpotlightSection";
+import EcosystemArchitecture from "./components/EcosystemArchitecture";
 import { DISCOVERY_CALL_HREF } from "./lib/booking";
 import { createPageMetadata } from "./lib/seo";
 import { ECOSYSTEM_GROUPS, INDUSTRIES, INSIGHTS } from "./lib/site-data";
@@ -82,11 +85,31 @@ const SOLUTION_CARDS: {
     icon: ClipboardList,
     href: "/solutions/smart-intake-follow-up",
   },
+  {
+    id: "era",
+    title: "DOS ERA — Email Response",
+    copy: "Answer, capture and route inbound business email while your team keeps control.",
+    icon: Mail,
+    href: "/solutions/era",
+  },
+  {
+    id: "arc",
+    title: "DOS ARC — Receivables Control",
+    copy: "Keep invoice follow-up consistent before unpaid accounts become collection problems.",
+    icon: ReceiptText,
+    href: "/solutions/arc",
+  },
   { id: "websites", title: "Website Systems", copy: "Build trust, capture intent and guide visitors toward action.", icon: Globe2 },
   { id: "bookings", title: "Booking and Appointment Systems", copy: "Reduce booking friction with clearer reminders and follow-up.", icon: CalendarCheck2 },
   { id: "automation", title: "Business Automation", copy: "Save time by moving repetitive work into practical workflows.", icon: Workflow },
   { id: "pipelines", title: "Lead and Pipeline Management", copy: "Keep opportunities organised from first enquiry to client.", icon: Network },
-  { id: "reputation", title: "Reputation Systems", copy: "Turn completed work into feedback, reviews and stronger trust.", icon: ShieldCheck },
+  {
+    id: "reputation",
+    title: "DOS Reputation",
+    copy: "Turn completed work into genuine reviews, private feedback and stronger trust.",
+    icon: ShieldCheck,
+    href: "/solutions/reputation",
+  },
   { id: "growth", title: "Growth Infrastructure", copy: "Build repeatable systems for more customers, staff and locations.", icon: TrendingUp },
 ];
 
@@ -132,6 +155,7 @@ export default function Home() {
       <BusinessPain />
       <BusinessBeforeTechnology />
       <Solutions />
+      <EcosystemArchitecture variant="compact" showLifecycle />
       <Capabilities />
       <BusinessSpotlightSection />
       <IndustryPreview />
@@ -387,13 +411,13 @@ function Solutions() {
         <p className="section-copy mt-6">Practical systems selected around the outcome the business needs, without forcing every business into the same package.</p>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {SOLUTION_CARDS.map(({ id, title, copy, icon: Icon, href }) => (
-            <article key={id} id={id} className="surface-card scroll-mt-32 rounded-[1.6rem] p-7">
+            <article key={id} id={id} className="surface-card flex scroll-mt-32 flex-col rounded-[1.6rem] p-7">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-500/12 text-violet-200">
                 <Icon className="h-5 w-5" aria-hidden />
               </span>
               <h3 className="mt-6 text-xl font-semibold text-white">{title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-muted">{copy}</p>
-              <Link href={href ?? `/solutions#${id}`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-violet-200 hover:text-white">
+              <Link href={href ?? `/solutions#${id}`} className="mt-auto inline-flex w-fit items-center gap-2 pt-6 text-sm font-semibold text-violet-200 hover:text-white">
                 Explore Solution <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </article>
@@ -497,6 +521,9 @@ function Reputation() {
           <p className="section-copy mt-6">
             DOS helps businesses turn good customer experiences into stronger reputation through automated review requests, feedback collection, follow-up, and approved client proof.
           </p>
+          <Link href="/solutions/reputation" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-violet-700 hover:text-violet-900">
+            Explore DOS Reputation <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
         </div>
         <div className="rounded-[1.75rem] border border-violet-950/10 bg-white/70 p-8">
           <Quote className="h-7 w-7 text-violet-700" aria-hidden />
@@ -540,10 +567,10 @@ function Ecosystem() {
   return (
     <section className="site-section bg-[#101225]/75">
       <div className="site-container">
-        <p className="eyebrow">One connected ecosystem</p>
-        <h2 className="section-heading mt-5">The right system for the right business problem.</h2>
-        <p className="section-copy mt-6">DOS brings flagship products, industry systems and public infrastructure together without exposing private internal operations.</p>
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        <p className="eyebrow">Brands and public infrastructure</p>
+        <h2 className="section-heading mt-5">Everything DOS runs, in one place.</h2>
+        <p className="section-copy mt-6">Flagship brands, business systems, industry systems and public infrastructure — without exposing private internal operations.</p>
+        <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {ECOSYSTEM_GROUPS.map((group) => (
             <article key={group.title} className="surface-card rounded-[1.75rem] p-7">
               <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-violet-200">{group.title}</h3>

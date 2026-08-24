@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ArrowRight, Layers3, LockKeyhole } from "lucide-react";
 import PublicPageHero from "@/app/components/PublicPageHero";
 import PageCta from "@/app/components/PageCta";
+import EcosystemArchitecture from "@/app/components/EcosystemArchitecture";
+import RevenueLifecycle from "@/app/components/RevenueLifecycle";
 import TrackedLink from "@/app/components/TrackedLink";
 import { createPageMetadata } from "@/app/lib/seo";
 import { ECOSYSTEM_GROUPS } from "@/app/lib/site-data";
@@ -9,7 +11,7 @@ import { ECOSYSTEM_GROUPS } from "@/app/lib/site-data";
 export const metadata: Metadata = createPageMetadata({
   title: "The DOS Ecosystem",
   description:
-    "Explore the connected Directive OS ecosystem: Micah, ChatOS, industry operating systems and approved public business utilities.",
+    "Explore the connected Directive OS ecosystem: Micah, DOS ERA, DOS ARC, DOS Reputation, ChatOS, industry operating systems and approved public business utilities.",
   path: "/ecosystem",
 });
 
@@ -19,36 +21,44 @@ export default function EcosystemPage() {
       <PublicPageHero
         eyebrow="The DOS Ecosystem"
         title="One connected ecosystem. Built around practical outcomes."
-        description="Directive OS brings customer communication, industry systems and approved public infrastructure together. Businesses use the parts that solve the real bottleneck."
+        description="Micah, DOS ERA, DOS ARC and DOS Reputation each control a different part of the customer and revenue journey. Businesses use the parts that solve the real bottleneck."
       />
 
-      <section className="site-section pt-6">
-        <div className="site-container grid gap-5 lg:grid-cols-3">
-          {ECOSYSTEM_GROUPS.map((group) => (
-            <article key={group.title} className="surface-card rounded-[1.75rem] p-8">
-              <Layers3 className="h-6 w-6 text-violet-300" aria-hidden />
-              <h2 className="mt-5 text-2xl font-semibold text-white">{group.title}</h2>
-              <div className="mt-6 grid gap-3">
-                {group.links.map((link) => (
-                  <TrackedLink
-                    key={`${link.label}-${link.href}`}
-                    href={link.href}
-                    external={link.external}
-                    eventName={link.external ? "ecosystem_outbound_click" : "resource_click"}
-                    eventSource="ecosystem-page"
-                    eventLabel={link.label}
-                    className="group rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 transition hover:border-violet-400/25"
-                  >
-                    <span className="flex items-center justify-between gap-3 font-semibold text-white">
-                      {link.label}
-                      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
-                    </span>
-                    {link.description ? <span className="mt-2 block text-sm text-ink-muted">{link.description}</span> : null}
-                  </TrackedLink>
-                ))}
-              </div>
-            </article>
-          ))}
+      <EcosystemArchitecture />
+
+      <RevenueLifecycle />
+
+      <section className="site-section">
+        <div className="site-container">
+          <p className="eyebrow">Everything in the ecosystem</p>
+          <h2 className="section-heading mt-5">Products, systems and public infrastructure.</h2>
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {ECOSYSTEM_GROUPS.map((group) => (
+              <article key={group.title} className="surface-card rounded-[1.75rem] p-8">
+                <Layers3 className="h-6 w-6 text-violet-300" aria-hidden />
+                <h3 className="mt-5 text-2xl font-semibold text-white">{group.title}</h3>
+                <div className="mt-6 grid gap-3">
+                  {group.links.map((link) => (
+                    <TrackedLink
+                      key={`${link.label}-${link.href}`}
+                      href={link.href}
+                      external={link.external}
+                      eventName={link.external ? "ecosystem_outbound_click" : "resource_click"}
+                      eventSource="ecosystem-page"
+                      eventLabel={link.label}
+                      className="group rounded-xl border border-white/[0.07] bg-white/[0.025] p-4 transition hover:border-violet-400/25"
+                    >
+                      <span className="flex items-center justify-between gap-3 font-semibold text-white">
+                        {link.label}
+                        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" aria-hidden />
+                      </span>
+                      {link.description ? <span className="mt-2 block text-sm text-ink-muted">{link.description}</span> : null}
+                    </TrackedLink>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

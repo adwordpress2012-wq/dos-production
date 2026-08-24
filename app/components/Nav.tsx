@@ -235,7 +235,7 @@ function DesktopMegaMenu({
       ) : null}
 
       {menu === "ecosystem" ? (
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-4 gap-6">
           {ECOSYSTEM_GROUPS.map((group) => (
             <div key={group.title}>
               <p className="eyebrow">{group.title}</p>

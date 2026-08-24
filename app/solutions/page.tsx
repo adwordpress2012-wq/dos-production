@@ -9,7 +9,7 @@ import { SOLUTIONS } from "@/app/lib/site-data";
 export const metadata: Metadata = createPageMetadata({
   title: "Practical Business System Solutions",
   description:
-    "Explore Directive OS solutions for customer communication, Micah, websites, booking automation, CRM, follow-up, reputation and scalable workflows.",
+    "Explore Directive OS solutions including Micah, DOS ERA email response automation, DOS ARC receivables control, DOS Reputation, websites, booking automation, CRM and scalable workflows.",
   path: "/solutions",
 });
 
@@ -40,6 +40,20 @@ const GROUPS: SolutionGroup[] = [
     copy: "Turn website enquiries, walk-ins, referrals, phone leads and campaigns into organised opportunities with reliable acknowledgement and follow-up.",
     outcomes: ["Customised branded intake", "Organised CRM opportunities", "Automatic follow-up"],
     href: "/solutions/smart-intake-follow-up",
+  },
+  {
+    id: "era",
+    title: "DOS ERA — Email Response Automation",
+    copy: "Answer inbound business email with approved responses, capture the details your team is missing, route each enquiry to the right person and escalate to a human when it matters.",
+    outcomes: ["Faster email response", "Enquiries routed correctly", "Human escalation when required"],
+    href: "/solutions/era",
+  },
+  {
+    id: "arc",
+    title: "DOS ARC — Accounts Receivable Control",
+    copy: "Structured invoice follow-up around your existing accounting system: reminders, escalation, human tasks and clear internal status before an account becomes a collection problem.",
+    outcomes: ["Less manual chasing", "Consistent follow-up", "Fewer overdue accounts"],
+    href: "/solutions/arc",
   },
   {
     id: "communication",
@@ -73,9 +87,10 @@ const GROUPS: SolutionGroup[] = [
   },
   {
     id: "reputation",
-    title: "Reputation Systems",
-    copy: "Request reviews, collect private feedback and make good service easier to recognise.",
-    outcomes: ["Review requests", "Feedback collection", "Service issue alerts"],
+    title: "DOS Reputation",
+    copy: "Request reviews at the right moment, guide happy customers toward a public Google review, and route negative feedback privately to a person who can act.",
+    outcomes: ["Genuine review growth", "Private feedback capture", "Internal human alerts"],
+    href: "/solutions/reputation",
   },
   {
     id: "lead-capture",
