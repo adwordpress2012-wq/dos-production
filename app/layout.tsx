@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import BackgroundFx from "./components/BackgroundFx";
 import ChromeGate from "./components/ChromeGate";
 import { MicahExperienceProvider } from "./components/MicahExperienceProvider";
+import MarketingChatWidgetScript from "./components/MarketingChatWidgetScript";
+import { SuperMicahLeadFormPopup } from "./components/SuperMicahLeadForm";
 import {
   DEFAULT_DESCRIPTION,
   organisationSchema,
@@ -94,13 +96,8 @@ export default function RootLayout({
           }}
         />
 
-        <Script
-          id="micah-dos-chat-widget"
-          src="https://widgets.leadconnectorhq.com/loader.js"
-          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-          data-widget-id="6a56225582c5a91e7f5e4f3e"
-          strategy="afterInteractive"
-        />
+        <MarketingChatWidgetScript />
+        <SuperMicahLeadFormPopup />
       </body>
     </html>
   );

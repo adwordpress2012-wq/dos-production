@@ -40,6 +40,7 @@ import EcosystemArchitecture from "./components/EcosystemArchitecture";
 import { DISCOVERY_CALL_HREF } from "./lib/booking";
 import { createPageMetadata } from "./lib/seo";
 import { ECOSYSTEM_GROUPS, INDUSTRIES, INSIGHTS } from "./lib/site-data";
+import { SuperMicahLeadFormButton } from "./components/SuperMicahLeadForm";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Directive OS | Simplify, Automate and Scale Your Business",
@@ -232,9 +233,14 @@ function Hero() {
               </strong>
             </h1>
             <p className="dos-hero-intro">
-              <strong>We find the bottlenecks costing your business time, leads and revenue</strong>
-              <span>— then build, deploy and manage the systems that fix them.</span>
+              <span>
+                We don&apos;t just build your system and hand it over. Through DMT — DOS Managed Technology, DOS continues
+                to manage, maintain, refine and evolve the technology behind your business, keeping your systems aligned
+                as your operations grow.
+              </span>
             </p>
+
+            <SuperMicahLeadFormButton className="mt-7 w-fit" />
 
             <ul className="dos-hero-principles" aria-label="Directive OS principles">
               {principles.map(({ title, copy, icon: Icon }) => (

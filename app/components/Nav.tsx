@@ -14,6 +14,7 @@ const DIRECT_LINKS = [
   { href: "/insights", label: "Insights" },
   { href: "/resources", label: "Resources" },
   { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Nav() {
