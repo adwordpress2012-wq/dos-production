@@ -29,17 +29,33 @@ export function openSuperMicahLeadForm() {
   window.dispatchEvent(new Event(OPEN_EVENT));
 }
 
-export function SuperMicahLeadFormButton({ className = "" }: { className?: string }) {
+export function SuperMicahLeadFormTrigger({
+  className,
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
   return (
     <button
       type="button"
       onClick={openSuperMicahLeadForm}
-      className={`btn-primary inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white ${className}`}
+      className={className}
       aria-haspopup="dialog"
+    >
+      {children}
+    </button>
+  );
+}
+
+export function SuperMicahLeadFormButton({ className = "" }: { className?: string }) {
+  return (
+    <SuperMicahLeadFormTrigger
+      className={`btn-primary inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-white ${className}`}
     >
       Let’s Chat
       <ArrowRight className="h-4 w-4" aria-hidden />
-    </button>
+    </SuperMicahLeadFormTrigger>
   );
 }
 

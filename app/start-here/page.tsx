@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { CalendarCheck2, Check, MessageCircle } from "lucide-react";
 import PendingGhlStartHereForm from "@/app/components/PendingGhlStartHereForm";
-import TalkToMicahButton from "@/app/components/TalkToMicahButton";
+import { SuperMicahLeadFormTrigger } from "@/app/components/SuperMicahLeadForm";
 import TrackedLink from "@/app/components/TrackedLink";
 import { DISCOVERY_CALL_HREF } from "@/app/lib/booking";
 import { createPageMetadata } from "@/app/lib/seo";
@@ -38,10 +38,10 @@ export default function StartHerePage() {
             </ul>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-              <TalkToMicahButton context="start-here" className="btn-micah inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-semibold text-white">
+              <SuperMicahLeadFormTrigger className="btn-micah inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-4 text-sm font-semibold text-white">
                 <MessageCircle className="h-4 w-4" aria-hidden />
-                Talk to Micah
-              </TalkToMicahButton>
+                Let’s Chat
+              </SuperMicahLeadFormTrigger>
               <TrackedLink
                 href={DISCOVERY_CALL_HREF}
                 external
