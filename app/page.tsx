@@ -232,8 +232,8 @@ function Hero() {
               </strong>
             </h1>
             <p className="dos-hero-intro">
-              <strong>Imagine getting your time back.</strong>
-              <span>One smart business assistant. Unlimited possibilities.</span>
+              <strong>We find the bottlenecks costing your business time, leads and revenue</strong>
+              <span>— then build, deploy and manage the systems that fix them.</span>
             </p>
 
             <ul className="dos-hero-principles" aria-label="Directive OS principles">
