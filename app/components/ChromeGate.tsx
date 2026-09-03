@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-const STANDALONE_ROUTE_PREFIXES = ["/saas/quote/builder"];
+const STANDALONE_ROUTE_PREFIXES = ["/saas/quote/builder", "/arc-era", "/pricing"];
 
 function isStandaloneRoute(pathname: string | null): boolean {
   if (!pathname) return false;
@@ -14,5 +14,5 @@ function isStandaloneRoute(pathname: string | null): boolean {
 export default function ChromeGate({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   if (isStandaloneRoute(pathname)) return null;
-  return <>{children}</>;
+  return <div className="contents" data-site-chrome>{children}</div>;
 }

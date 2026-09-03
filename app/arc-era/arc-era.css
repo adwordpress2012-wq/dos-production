@@ -1,0 +1,36 @@
+@theme inline {
+  --color-muted-foreground: var(--arc-muted-foreground);
+  --color-primary: var(--arc-primary);
+  --color-primary-foreground: var(--arc-primary-foreground);
+  --color-card: var(--arc-card);
+  --color-card-foreground: var(--arc-card-foreground);
+  --color-border: var(--arc-border);
+  --color-input: var(--arc-input);
+  --color-muted: var(--arc-muted);
+}
+
+.arc-era-demo {
+  --arc-muted-foreground: #94a3b8;
+  --arc-primary: #e5a951;
+  --arc-primary-foreground: #071019;
+  --arc-card: #0c1721;
+  --arc-card-foreground: #f8fafc;
+  --arc-border: rgba(255, 255, 255, 0.15);
+  --arc-input: rgba(255, 255, 255, 0.15);
+  --arc-muted: rgba(255, 255, 255, 0.08);
+  isolation: isolate;
+  background: #071019;
+  color: #f8fafc;
+}
+
+body:has(.arc-era-demo) {
+  background: #071019;
+}
+
+body:has(.arc-era-demo) [data-site-chrome] {
+  display: none;
+}
+
+.arc-era-demo :focus-visible {
+  outline-color: rgba(94, 234, 212, 0.8);
+}

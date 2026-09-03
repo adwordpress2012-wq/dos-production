@@ -11,7 +11,7 @@ import { ECOSYSTEM_GROUPS } from "@/app/lib/site-data";
 export const metadata: Metadata = createPageMetadata({
   title: "The DOS Ecosystem",
   description:
-    "Explore the connected Directive OS ecosystem: Micah, DOS ERA, DOS ARC, DOS Reputation, ChatOS, industry operating systems and approved public business utilities.",
+    "Explore the connected Directive OS ecosystem: Micah, DOS ERA, DOS CPA, DOS ARC, DOS Reputation, ChatOS, industry operating systems and approved public business utilities.",
   path: "/ecosystem",
 });
 
@@ -21,7 +21,7 @@ export default function EcosystemPage() {
       <PublicPageHero
         eyebrow="The DOS Ecosystem"
         title="One connected ecosystem. Built around practical outcomes."
-        description="Micah, DOS ERA, DOS ARC and DOS Reputation each control a different part of the customer and revenue journey. Businesses use the parts that solve the real bottleneck."
+        description="Micah, DOS ERA, DOS CPA, DOS ARC and DOS Reputation each control a different operational workflow. Businesses use the parts that solve the real bottleneck."
       />
 
       <EcosystemArchitecture />

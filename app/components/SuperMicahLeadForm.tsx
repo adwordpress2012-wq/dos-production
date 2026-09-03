@@ -32,16 +32,18 @@ export function openSuperMicahLeadForm() {
 export function SuperMicahLeadFormTrigger({
   className,
   children,
+  ...buttonProps
 }: {
   className?: string;
   children: React.ReactNode;
-}) {
+} & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type" | "onClick">) {
   return (
     <button
       type="button"
       onClick={openSuperMicahLeadForm}
       className={className}
       aria-haspopup="dialog"
+      {...buttonProps}
     >
       {children}
     </button>

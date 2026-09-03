@@ -7,6 +7,7 @@ const PUBLIC_ROUTES = [
   "/about",
   "/solutions",
   "/solutions/era",
+  "/solutions/cpa",
   "/solutions/arc",
   "/solutions/reputation",
   "/solutions/smart-intake-follow-up",

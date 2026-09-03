@@ -9,7 +9,7 @@ import { SOLUTIONS } from "@/app/lib/site-data";
 export const metadata: Metadata = createPageMetadata({
   title: "Practical Business System Solutions",
   description:
-    "Explore Directive OS solutions including Micah, DOS ERA email response automation, DOS ARC receivables control, DOS Reputation, websites, booking automation, CRM and scalable workflows.",
+    "Explore Directive OS solutions including Micah, DOS ERA email response automation, DOS CPA candidate placement workflows, DOS ARC receivables control, DOS Reputation, websites, booking automation, CRM and scalable workflows.",
   path: "/solutions",
 });
 
@@ -47,6 +47,13 @@ const GROUPS: SolutionGroup[] = [
     copy: "Answer inbound business email with approved responses, capture the details your team is missing, route each enquiry to the right person and escalate to a human when it matters.",
     outcomes: ["Faster email response", "Enquiries routed correctly", "Human escalation when required"],
     href: "/solutions/era",
+  },
+  {
+    id: "cpa",
+    title: "DOS CPA — Candidate Placement Accelerator",
+    copy: "Turn candidate applications into an organised placement workflow. Capture and qualify candidates, score placement readiness, organise Smart Lists and recruitment pipelines, automate follow-up, and keep talent moving toward shortlist, interview, offer and placement.",
+    outcomes: ["Placement Readiness scoring", "Priority candidate follow-up", "Managed continuously through DMT"],
+    href: "/solutions/cpa",
   },
   {
     id: "arc",

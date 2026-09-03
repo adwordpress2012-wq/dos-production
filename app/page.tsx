@@ -28,6 +28,7 @@ import {
   Sparkles,
   Star,
   TrendingUp,
+  UserRoundSearch,
   UsersRound,
   Workflow,
 } from "lucide-react";
@@ -92,6 +93,13 @@ const SOLUTION_CARDS: {
     copy: "Answer, capture and route inbound business email while your team keeps control.",
     icon: Mail,
     href: "/solutions/era",
+  },
+  {
+    id: "cpa",
+    title: "DOS CPA — Candidate Placement Accelerator",
+    copy: "Turn candidate applications into an organised placement workflow.",
+    icon: UserRoundSearch,
+    href: "/solutions/cpa",
   },
   {
     id: "arc",

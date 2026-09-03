@@ -4,6 +4,8 @@ import type { NextRequest } from "next/server";
 const SECURE_COMMAND_CENTRE_URL = "https://command.directiveos.com.au";
 const BUSINESS_DISCOVERY_URL =
   "https://api.leadconnectorhq.com/widget/booking/QAKm8ZjgD7oceOc8nN0b";
+const ARC_ERA_HOST = "arc.directiveos.com.au";
+const SHELTON_LAW_HOST = "sl.directiveos.com.au";
 
 const INTERNAL_PAGE_PREFIXES = [
   "/admin",
@@ -30,6 +32,12 @@ export function proxy(req: NextRequest) {
   const configuredAdminHost =
     process.env.NEXT_PUBLIC_ADMIN_HOST?.toLowerCase().trim() || "admin.directiveos.com.au";
 
+  if (host === ARC_ERA_HOST && pathname === "/") {
+    const destination = req.nextUrl.clone();
+    destination.pathname = "/arc-era";
+    return NextResponse.rewrite(destination);
+  }
+
   if (host && host === configuredAdminHost && pathname === "/") {
     return noIndexRedirect(SECURE_COMMAND_CENTRE_URL);
   }
@@ -43,6 +51,11 @@ export function proxy(req: NextRequest) {
   }
 
   if (pathname === "/pricing" || pathname.startsWith("/pricing/")) {
+    if (host === SHELTON_LAW_HOST || host === "localhost" || host === "127.0.0.1") {
+      const response = NextResponse.next();
+      response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+      return response;
+    }
     return noIndexRedirect(BUSINESS_DISCOVERY_URL);
   }
 

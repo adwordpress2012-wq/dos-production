@@ -19,6 +19,7 @@ const GROUPS = [
     links: [
       { href: "/solutions#micah", label: "Micah" },
       { href: "/solutions/era", label: "DOS ERA" },
+      { href: "/solutions/cpa", label: "DOS CPA" },
       { href: "/solutions/arc", label: "DOS ARC" },
       { href: "/solutions/reputation", label: "DOS Reputation" },
       { href: "/solutions#smart-chat", label: "Smart Chat Widget" },

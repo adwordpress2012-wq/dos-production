@@ -9,6 +9,7 @@ import {
   Network,
   ReceiptText,
   Star,
+  UserRoundSearch,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import RevenueLifecycle from "./RevenueLifecycle";
@@ -30,6 +31,14 @@ const SYSTEMS: System[] = [
     compactCopy: "Answers approved questions, captures missing details and routes each enquiry to the right person.",
     href: "/solutions/era",
     icon: Mail,
+  },
+  {
+    name: "DOS CPA",
+    purpose: "Candidates qualified, prioritised and progressed",
+    copy: "Captures and qualifies candidates, scores placement readiness, and keeps priority talent moving through recruitment pipelines.",
+    compactCopy: "Qualifies and prioritises candidates, then keeps talent moving toward interview, offer and placement.",
+    href: "/solutions/cpa",
+    icon: UserRoundSearch,
   },
   {
     name: "DOS ARC",
@@ -107,7 +116,7 @@ export default function EcosystemArchitecture({ variant = "full", showLifecycle 
           Powers the DOS business systems
         </p>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {SYSTEMS.map(({ name, purpose, copy, compactCopy, href, icon: Icon }) => (
             <Link key={name} href={href} className="surface-card group flex flex-col rounded-[1.6rem] p-7">
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-violet-500/12 text-violet-200">

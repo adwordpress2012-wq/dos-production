@@ -38,6 +38,11 @@ export const SOLUTIONS: SiteLink[] = [
     description: "Answer, capture and route inbound business email while your team keeps control.",
   },
   {
+    href: "/solutions/cpa",
+    label: "DOS CPA — Candidate Placement Accelerator",
+    description: "A managed candidate placement workflow system for recruitment agencies.",
+  },
+  {
     href: "/solutions/arc",
     label: "DOS ARC — Accounts Receivable Control",
     description: "Structured invoice follow-up before unpaid accounts become a collection problem.",
@@ -329,6 +334,11 @@ export const ECOSYSTEM_GROUPS: { title: string; links: SiteLink[] }[] = [
         href: "/solutions/era",
         label: "DOS ERA",
         description: "Inbound email response, capture and routing.",
+      },
+      {
+        href: "/solutions/cpa",
+        label: "DOS CPA",
+        description: "Candidate qualification, prioritisation and placement workflows.",
       },
       {
         href: "/solutions/arc",
