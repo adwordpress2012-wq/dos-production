@@ -1307,8 +1307,14 @@ body {
   padding-block: 1.55rem;
 }
 
+.dmt-systems-block {
+  padding-block: 1.55rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .dmt-tier-content h2,
-.dmt-tier-content h3 {
+.dmt-tier-content h3,
+.dmt-systems-block h2 {
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -1317,14 +1323,16 @@ body {
 }
 
 .dmt-check-list,
-.dmt-secondary-list ul {
+.dmt-secondary-list ul,
+.dmt-systems-list {
   display: grid;
   gap: 0.68rem;
   margin-top: 1rem;
 }
 
 .dmt-check-list li,
-.dmt-secondary-list li {
+.dmt-secondary-list li,
+.dmt-systems-list li {
   display: grid;
   grid-template-columns: 1rem 1fr;
   align-items: start;
@@ -1337,6 +1345,52 @@ body {
 .dmt-check-list svg {
   margin-top: 0.12rem;
   color: #a78bfa;
+}
+
+.dmt-systems-list li {
+  font-weight: 650;
+  color: #f0edf8;
+}
+
+.dmt-systems-list svg {
+  margin-top: 0.12rem;
+  color: #a78bfa;
+}
+
+.dmt-systems-list .dmt-system-excluded {
+  font-weight: 500;
+  color: #777287;
+}
+
+.dmt-systems-list .dmt-system-excluded svg,
+.dmt-exclusion-list svg {
+  margin-top: 0.12rem;
+  color: #777287;
+}
+
+.dmt-management-level {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 1.35rem;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 0.8rem;
+  padding: 0.9rem;
+  background: rgba(124, 58, 237, 0.08);
+}
+
+.dmt-management-level span {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #918b9e;
+}
+
+.dmt-management-level strong {
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #f8f7ff;
 }
 
 .dmt-secondary-list {
