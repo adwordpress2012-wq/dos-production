@@ -6,7 +6,6 @@ const BUSINESS_DISCOVERY_URL =
   "https://api.leadconnectorhq.com/widget/booking/QAKm8ZjgD7oceOc8nN0b";
 const ARC_ERA_HOST = "arc.directiveos.com.au";
 const SHELTON_LAW_HOST = "sl.directiveos.com.au";
-const FLR_HOST = "flr.directiveos.com.au";
 
 const INTERNAL_PAGE_PREFIXES = [
   "/admin",
@@ -46,31 +45,6 @@ export function proxy(req: NextRequest) {
     return NextResponse.rewrite(destination);
   }
 
-  if (host === FLR_HOST && pathname === "/") {
-    const destination = req.nextUrl.clone();
-    destination.pathname = "/real-estate/";
-    destination.search = "";
-    return NextResponse.redirect(destination, 307);
-  }
-
-  if (host === FLR_HOST && pathname === "/real-estate") {
-    const destination = req.nextUrl.clone();
-    destination.pathname = "/flr/real-estate";
-    return NextResponse.rewrite(destination);
-  }
-
-  if (
-    (pathname === "/flr/real-estate" || pathname.startsWith("/flr/real-estate/")) &&
-    host !== FLR_HOST &&
-    host !== "localhost" &&
-    host !== "127.0.0.1"
-  ) {
-    const response = new NextResponse("Not Found", { status: 404 });
-    response.headers.set("Cache-Control", "private, no-store");
-    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
-    return response;
-  }
-
   if (host && host === configuredAdminHost && pathname === "/") {
     return noIndexRedirect(SECURE_COMMAND_CENTRE_URL);
   }
@@ -103,7 +77,5 @@ export const config = {
     "/marketing/saas-quote-builder/:path*",
     "/saas/quote/builder/:path*",
     "/pricing/:path*",
-    "/flr/real-estate/:path*",
-    "/real-estate",
   ],
 };
