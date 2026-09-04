@@ -4,8 +4,16 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 
-const STANDALONE_ROUTE_PREFIXES = ["/saas/quote/builder", "/arc-era", "/pricing"];
+const STANDALONE_ROUTE_PREFIXES = [
+  "/saas/quote/builder",
+  "/marketing/saas-quote-builder",
+  "/arc-era",
+  "/pricing",
+  "/flr",
+];
 const ARC_ERA_HOST = "arc.directiveos.com.au";
+const FLR_HOST = "flr.directiveos.com.au";
+const SMART_QUOTE_HOST = "smart.directiveos.com.au";
 
 function isStandalonePath(pathname: string | null) {
   if (!pathname) return false;
@@ -22,7 +30,13 @@ export default function MarketingChatWidgetScript() {
     setHostname(window.location.hostname.toLowerCase());
   }, []);
 
-  if (hostname === null || hostname === ARC_ERA_HOST || isStandalonePath(pathname)) {
+  if (
+    hostname === null ||
+    hostname === ARC_ERA_HOST ||
+    hostname === FLR_HOST ||
+    hostname === SMART_QUOTE_HOST ||
+    isStandalonePath(pathname)
+  ) {
     return null;
   }
 
