@@ -6,6 +6,7 @@ const BUSINESS_DISCOVERY_URL =
   "https://api.leadconnectorhq.com/widget/booking/QAKm8ZjgD7oceOc8nN0b";
 const ARC_ERA_HOST = "arc.directiveos.com.au";
 const SHELTON_LAW_HOST = "sl.directiveos.com.au";
+const FLR_HOST = "flr.directiveos.com.au";
 
 const INTERNAL_PAGE_PREFIXES = [
   "/admin",
@@ -32,9 +33,22 @@ export function proxy(req: NextRequest) {
   const configuredAdminHost =
     process.env.NEXT_PUBLIC_ADMIN_HOST?.toLowerCase().trim() || "admin.directiveos.com.au";
 
+  if (host === SHELTON_LAW_HOST && pathname === "/") {
+    const destination = req.nextUrl.clone();
+    destination.pathname = "/pricing";
+    destination.search = "";
+    return noIndexRedirect(destination.toString());
+  }
+
   if (host === ARC_ERA_HOST && pathname === "/") {
     const destination = req.nextUrl.clone();
     destination.pathname = "/arc-era";
+    return NextResponse.rewrite(destination);
+  }
+
+  if (host === FLR_HOST && pathname === "/real-estate") {
+    const destination = req.nextUrl.clone();
+    destination.pathname = "/flr/real-estate";
     return NextResponse.rewrite(destination);
   }
 
@@ -70,5 +84,6 @@ export const config = {
     "/marketing/saas-quote-builder/:path*",
     "/saas/quote/builder/:path*",
     "/pricing/:path*",
+    "/real-estate",
   ],
 };
