@@ -17,6 +17,26 @@ const DIRECT_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+const ECOSYSTEM_MENU_GROUPS = ECOSYSTEM_GROUPS.map((group) => ({
+  ...group,
+  links:
+    group.title === "Business systems"
+      ? group.links.flatMap((item) =>
+          item.label === "DOS ARC"
+            ? [
+                item,
+                {
+                  href: "https://flr.doshub.com.au/real-estate/",
+                  label: "DOS FLR",
+                  description: "Facebook lead recovery, follow-up and human handover.",
+                  external: true,
+                },
+              ]
+            : [item]
+        )
+      : group.links,
+}));
+
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<MenuName | null>(null);
@@ -132,7 +152,7 @@ export default function Nav() {
                 <Link href="/ecosystem" onClick={() => setMobileOpen(false)} className="mobile-sub-link font-semibold text-white">
                   View the DOS Ecosystem
                 </Link>
-                {ECOSYSTEM_GROUPS.flatMap((group) => group.links).map((item) =>
+                {ECOSYSTEM_MENU_GROUPS.flatMap((group) => group.links).map((item) =>
                   item.external ? (
                     <a key={`${item.label}-${item.href}`} href={item.href} target="_blank" rel="noreferrer" className="mobile-sub-link">
                       {item.label}
@@ -237,7 +257,7 @@ function DesktopMegaMenu({
 
       {menu === "ecosystem" ? (
         <div className="grid grid-cols-4 gap-6">
-          {ECOSYSTEM_GROUPS.map((group) => (
+          {ECOSYSTEM_MENU_GROUPS.map((group) => (
             <div key={group.title}>
               <p className="eyebrow">{group.title}</p>
               <div className="mt-3 grid gap-1">
