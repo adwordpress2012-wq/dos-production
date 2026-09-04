@@ -130,6 +130,23 @@
   color: #62536f;
 }
 
+.flr-improvement-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.flr-improvement-list li {
+  border: 1px solid #d8cdec;
+  border-radius: 999px;
+  padding: 0.42rem 0.68rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4c356d;
+  background: rgba(255, 255, 255, 0.62);
+}
+
 .flr-audience-section {
   margin-top: clamp(5rem, 9vw, 8rem);
 }
@@ -206,6 +223,20 @@
 
 .flr-tier-grid .dmt-tier-top {
   min-height: 0;
+}
+
+.flr-team-label {
+  display: block;
+  margin-top: 1.25rem;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: #8f8a9e;
+}
+
+.flr-team-label + .dmt-tier-label {
+  margin-top: 0.35rem;
 }
 
 .flr-tier-grid .dmt-systems-block h3,

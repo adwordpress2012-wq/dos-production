@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   description:
     "DOS FLR helps real estate agencies respond faster, follow up consistently and recover more opportunities from Facebook and Meta leads.",
   alternates: {
-    canonical: "https://flr.directiveos.com.au/real-estate/",
+    canonical: "https://directiveos.com.au/flr/real-estate",
   },
   openGraph: {
     title: "Facebook Lead Recovery for Real Estate | Directive OS",
     description:
       "DOS FLR helps real estate agencies respond faster, follow up consistently and recover more opportunities from Facebook and Meta leads.",
-    url: "https://flr.directiveos.com.au/real-estate/",
+    url: "https://directiveos.com.au/flr/real-estate",
     siteName: "Directive OS",
     type: "website",
     locale: "en_AU",
@@ -60,7 +60,7 @@ const tiers: readonly FlrTier[] = [
     setup: "A$1,997",
     mrr: "A$497",
     description:
-      "For smaller real estate teams that need a reliable Facebook lead recovery system without complex team routing.",
+      "For smaller real estate teams that need reliable Facebook lead recovery without complex team routing.",
     systemIncludes: [
       "Facebook / Meta lead connection",
       "DOS FLR CRM environment",
@@ -80,19 +80,18 @@ const tiers: readonly FlrTier[] = [
       "Basic qualification updates",
       "Standard troubleshooting",
       "Operational fault support",
-      "Human escalation for genuine system failures",
     ],
     notIncluded: [
       "Large team routing",
       "Multi-office logic",
       "Advanced campaign architecture",
       "Complex qualification structures",
-      "Proactive campaign optimisation",
-      "New automation products",
-      "Major new integrations",
-      "Unlimited usage",
       "Database reactivation",
-      "Buyer nurture automation outside FLR",
+      "Buyer nurture automation",
+      "New DOS BAS products",
+      "Major new integrations",
+      "Unlimited development",
+      "Unlimited usage",
     ],
   },
   {
@@ -161,7 +160,6 @@ const tiers: readonly FlrTier[] = [
       "Workflow performance review",
       "Higher-priority support",
       "Quarterly FLR review",
-      "Human escalation when required",
     ],
     notIncluded: [
       "Unlimited campaign architecture",
@@ -199,7 +197,6 @@ const tiers: readonly FlrTier[] = [
       "Higher-priority support",
       "Management reporting review",
       "Quarterly operational review",
-      "Human escalation where required",
     ],
     notIncluded: [
       "Unlimited offices",
@@ -241,7 +238,6 @@ const tiers: readonly FlrTier[] = [
       "Multi-office workflow oversight",
       "Advanced reporting review",
       "Quarterly FLR operational review",
-      "Human escalation where required",
     ],
     notIncluded: [
       "Unlimited new automation development",
@@ -260,8 +256,9 @@ const tiers: readonly FlrTier[] = [
 const responseFlow = [
   "Facebook / Meta Lead",
   "CRM Contact Created",
-  "Immediate SMS / Email",
-  "Micah Reply Detection",
+  "Immediate Response",
+  "Micah SMS Follow-Up",
+  "Reply Detection",
   "Qualification",
   "Human Handover",
   "No-Response Recovery",
@@ -286,20 +283,30 @@ const industries = [
   "Growing sales teams",
   "Multi-agent offices",
   "Property groups",
-  "Multi-office real estate businesses",
+  "Multi-office agencies",
   "Buyer campaigns",
   "Seller / appraisal campaigns",
   "Landlord campaigns",
   "Project marketing teams",
 ] as const;
 
+const flrImprovements = [
+  "Response speed",
+  "Consistency",
+  "Follow-up",
+  "Qualification",
+  "Visibility",
+  "Human handover",
+] as const;
+
 const howItWorks = [
   ["Facebook lead enters", "A new Facebook or Meta form enquiry enters the approved FLR environment."],
-  ["FLR responds", "The lead receives the approved immediate SMS and email response."],
-  ["Micah qualifies the reply", "Micah detects the response and asks the approved qualification questions."],
-  ["The human team takes over", "An interested, qualified opportunity is handed to the appropriate sales team member."],
-  ["Recovery continues", "When there is no reply, the approved recovery sequence continues within plan limits."],
-  ["DOS keeps FLR operational", "DOS monitors and maintains the FLR system at the management level included in the plan."],
+  ["FLR responds quickly", "The lead receives the approved immediate response."],
+  ["Micah detects the reply", "Micah identifies when the lead responds."],
+  ["Micah performs approved qualification", "Micah asks the approved qualification questions in plain, consistent language."],
+  ["Genuine opportunities are handed to the human sales team", "An interested, qualified opportunity is handed to the appropriate sales team member."],
+  ["No-response recovery continues within approved limits", "When there is no reply, the approved recovery sequence continues within the selected plan's limits."],
+  ["DOS monitors and maintains the FLR system", "DOS keeps the FLR system operational at the management level included in the plan."],
 ] as const;
 
 const managementLevels = [
@@ -311,11 +318,11 @@ const managementLevels = [
 ] as const;
 
 const globalExclusions = [
-  "SCW — Smart Communication Widget",
-  "Web Call or Voice SBA",
-  "SCP — Smart Connect Phone",
-  "SRW — Smart Revenue Website",
-  "New DOS BAS products",
+  "Website Smart Chat",
+  "Web Call",
+  "Voice SBA",
+  "SCP",
+  "SRW",
   "Database Reactivation",
   "Buyer Follow-Up Automation",
   "New major automation projects",
@@ -331,7 +338,7 @@ const globalExclusions = [
 const faqs = [
   [
     "What is DOS FLR?",
-    "DOS FLR is a standalone Facebook Lead Recovery system for responding to, following up and qualifying Facebook and Meta leads before genuine opportunities are handed to the human sales team.",
+    "DOS FLR is a Facebook Lead Recovery system for responding to, following up and qualifying Facebook and Meta leads before genuine opportunities are handed to the human sales team.",
   ],
   [
     "Does DOS FLR replace my agents?",
@@ -363,7 +370,7 @@ const faqs = [
   ],
   [
     "Does FLR include website chat?",
-    "No. Website chat / SCW is a separate DOS BAS product.",
+    "No. Website Smart Chat is a separate DOS BAS product.",
   ],
   [
     "Does FLR include Web Call or Voice SBA?",
@@ -371,19 +378,19 @@ const faqs = [
   ],
   [
     "Does FLR include database reactivation?",
-    "No. Database Reactivation is a separate DOS BAS product with its own setup, CRM environment and ongoing MRR.",
+    "No. Database Reactivation is separately scoped and priced.",
   ],
   [
     "Are usage charges unlimited?",
-    "No. Normal usage within the agreed FLR scope is managed under the plan. Exceptional, high-volume or materially increased AI / SMS usage may require additional usage charges or a plan adjustment.",
+    "No. Normal usage within the agreed FLR scope is managed under the plan. Exceptional or materially increased usage may require an additional usage charge or plan adjustment.",
   ],
   [
-    "Does choosing Enterprise give me every DOS product?",
-    "No. Enterprise refers to the scale and management level of DOS FLR only. Other DOS BAS products remain separately scoped.",
+    "Does Enterprise include every DOS product?",
+    "No. Enterprise refers to the scale and management level of DOS FLR only.",
   ],
   [
     "Do you guarantee sales?",
-    "No. DOS FLR improves lead response speed, follow-up consistency and visibility. Sales outcomes depend on factors including lead quality, offer, pricing, market conditions and the client's sales team.",
+    "No. DOS FLR improves response speed, follow-up consistency and visibility. Sales results still depend on lead quality, market conditions, offer, pricing and the client's sales process.",
   ],
   [
     "Can FLR work across multiple offices?",
@@ -496,8 +503,11 @@ export default function FlrRealEstatePage() {
           <div className="flr-agent-principle">
             <MessageSquareText className="h-7 w-7" aria-hidden />
             <div>
-              <h3>FLR does not replace the sales agent.</h3>
-              <p>It improves speed, consistency, follow-up, visibility and handover.</p>
+              <h3>FLR does not replace the real estate agent.</h3>
+              <p>FLR improves:</p>
+              <ul className="flr-improvement-list">
+                {flrImprovements.map((item) => <li key={item}>{item}</li>)}
+              </ul>
             </div>
           </div>
 
@@ -564,10 +574,11 @@ export default function FlrRealEstatePage() {
               {tier.badge ? <p className="dmt-popular">{tier.badge}</p> : null}
               <div className="dmt-tier-top">
                 <p className="dmt-tier-name">{tier.name}</p>
+                <span className="flr-team-label">Team size</span>
                 <p className="dmt-tier-label">{tier.teamSize}</p>
                 <div className="flr-prices">
                   <div>
-                    <span>Setup</span>
+                    <span>Setup fee</span>
                     <strong>{tier.setup}</strong>
                   </div>
                   <div>
@@ -606,8 +617,8 @@ export default function FlrRealEstatePage() {
       <section className="flr-light-section">
         <div className="site-container dmt-section-padding">
           <div className="dmt-section-heading flr-light-heading">
-            <p className="eyebrow">One FLR system</p>
-            <h2>The same proven core architecture at every tier.</h2>
+            <p className="eyebrow">Core FLR architecture</p>
+            <h2>The DOS FLR Frozen Pizza workflow.</h2>
             <p>
               Every plan operates from the approved DOS FLR Frozen Pizza workflow. Higher
               plans increase capacity, routing, scope and management rather than changing
@@ -627,8 +638,8 @@ export default function FlrRealEstatePage() {
 
       <section className="site-container dmt-section-padding">
         <div className="dmt-section-heading">
-          <p className="eyebrow">Management level</p>
-          <h2>More complexity requires more active management.</h2>
+          <p className="eyebrow">Plan management levels</p>
+          <h2>Management matched to each FLR plan.</h2>
           <p>
             The management entitlement rises with team size, campaign capacity, routing,
             lead volume and reporting requirements.
@@ -661,7 +672,7 @@ export default function FlrRealEstatePage() {
             </p>
           </div>
           <div className="dmt-review-details">
-            <p>Before a downgrade takes effect, DOS will confirm:</p>
+            <p>Before changing plan DOS reviews:</p>
             <CheckList
               items={[
                 "Team size",
