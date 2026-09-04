@@ -26,10 +26,10 @@ const ECOSYSTEM_MENU_GROUPS = ECOSYSTEM_GROUPS.map((group) => ({
             ? [
                 item,
                 {
-                  href: "https://flr.doshub.com.au/real-estate/",
-                  label: "DOS FLR",
-                  description: "Facebook lead recovery, follow-up and human handover.",
-                  external: true,
+                  href: "/contact",
+label: "DOS FLR",
+description: "Facebook lead recovery, follow-up and human handover.",
+external: false,
                 },
               ]
             : [item]
