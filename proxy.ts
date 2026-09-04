@@ -46,10 +46,29 @@ export function proxy(req: NextRequest) {
     return NextResponse.rewrite(destination);
   }
 
+  if (host === FLR_HOST && pathname === "/") {
+    const destination = req.nextUrl.clone();
+    destination.pathname = "/real-estate/";
+    destination.search = "";
+    return NextResponse.redirect(destination, 307);
+  }
+
   if (host === FLR_HOST && pathname === "/real-estate") {
     const destination = req.nextUrl.clone();
     destination.pathname = "/flr/real-estate";
     return NextResponse.rewrite(destination);
+  }
+
+  if (
+    (pathname === "/flr/real-estate" || pathname.startsWith("/flr/real-estate/")) &&
+    host !== FLR_HOST &&
+    host !== "localhost" &&
+    host !== "127.0.0.1"
+  ) {
+    const response = new NextResponse("Not Found", { status: 404 });
+    response.headers.set("Cache-Control", "private, no-store");
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+    return response;
   }
 
   if (host && host === configuredAdminHost && pathname === "/") {
@@ -84,6 +103,7 @@ export const config = {
     "/marketing/saas-quote-builder/:path*",
     "/saas/quote/builder/:path*",
     "/pricing/:path*",
+    "/flr/real-estate/:path*",
     "/real-estate",
   ],
 };
