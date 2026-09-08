@@ -11,14 +11,17 @@ const STANDALONE_ROUTE_PREFIXES = [
   "/pricing",
   "/flr",
 ];
+
 const ARC_ERA_HOST = "arc.directiveos.com.au";
 const FLR_HOST = "flr.directiveos.com.au";
 const SMART_QUOTE_HOST = "smart.directiveos.com.au";
 
 function isStandalonePath(pathname: string | null) {
   if (!pathname) return false;
+
   return STANDALONE_ROUTE_PREFIXES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+    (prefix) =>
+      pathname === prefix || pathname.startsWith(`${prefix}/`)
   );
 }
 
@@ -45,7 +48,7 @@ export default function MarketingChatWidgetScript() {
       id="micah-dos-chat-widget"
       src="https://widgets.leadconnectorhq.com/loader.js"
       data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-      data-widget-id="6a5d5b70b29959fc56f16bbc"
+      data-widget-id="6a56225582c5a91e7f5e4f3e"
       strategy="afterInteractive"
     />
   );
