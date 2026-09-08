@@ -48,7 +48,7 @@ export default function MarketingChatWidgetScript() {
       id="micah-dos-chat-widget"
       src="https://widgets.leadconnectorhq.com/loader.js"
       data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-      data-widget-id="6a56225582c5a91e7f5e4f3e"
+      data-widget-id="6a5d5b70b29959fc56f16bbc"
       strategy="afterInteractive"
     />
   );
