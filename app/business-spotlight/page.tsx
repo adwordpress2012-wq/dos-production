@@ -1,3 +1,4 @@
+import BusinessSpotlightSection from "@/app/components/BusinessSpotlightSection";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,7 +9,7 @@ import TrackedLink from "@/app/components/TrackedLink";
 import { createPageMetadata } from "@/app/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Business Spotlight",
+  title: "Case Studies",
   description:
     "See real Directive OS client work, practical business systems and approved implementation details, beginning with Capital Recruitment.",
   path: "/business-spotlight",
@@ -27,9 +28,9 @@ export default function BusinessSpotlightPage() {
   return (
     <main>
       <PublicPageHero
-        eyebrow="Business Spotlight"
+        eyebrow="Case Studies"
         title="Real businesses. Practical systems. Approved client work."
-        description="Business Spotlight shows how DOS turns a real operational need into a clear, useful system without unsupported claims or invented performance statistics."
+        description="Case Studies show how DOS turns a real operational need into a clear, useful system without unsupported claims or invented performance statistics."
       />
 
       <section className="site-section pt-6">
@@ -90,6 +91,7 @@ export default function BusinessSpotlightPage() {
         </div>
       </section>
 
+      <BusinessSpotlightSection />
       <PageCta source="business-spotlight" title="What could a clearer system change in your business?" />
     </main>
   );

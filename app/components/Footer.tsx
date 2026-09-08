@@ -8,9 +8,7 @@ const GROUPS = [
     links: [
       { href: "/", label: "Home" },
       { href: "/about", label: "About" },
-      { href: "/#simplify-automate-scale", label: "Simplify" },
-      { href: "/#simplify-automate-scale", label: "Automate" },
-      { href: "/#simplify-automate-scale", label: "Scale" },
+      { href: "/contact", label: "Contact" },
       { href: "/start-here", label: "Start Here" },
     ],
   },
@@ -63,7 +61,7 @@ const GROUPS = [
     title: "Resources",
     links: [
       { href: "/insights", label: "DOS Insights" },
-      { href: "/business-spotlight", label: "Business Spotlight" },
+      { href: "/business-spotlight", label: "Case Studies" },
       { href: "/industries", label: "Industry Guides" },
       { href: "/resources", label: "Business Resources" },
       { href: "https://api.leadconnectorhq.com/widget/booking/QAKm8ZjgD7oceOc8nN0b", label: "Business Discovery", external: true },

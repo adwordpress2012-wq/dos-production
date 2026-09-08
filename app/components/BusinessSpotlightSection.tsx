@@ -67,7 +67,7 @@ export default function BusinessSpotlightSection() {
     <section id="business-spotlight" className="site-section scroll-mt-28" aria-labelledby="business-spotlight-heading">
       <div className="site-container">
         <div className="max-w-3xl">
-          <p className="eyebrow">Business Spotlight</p>
+          <p className="eyebrow">Case Studies</p>
           <h2 id="business-spotlight-heading" className="section-heading mt-5">
             Real businesses. Practical systems. Better customer experiences.
           </h2>

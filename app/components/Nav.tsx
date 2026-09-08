@@ -4,38 +4,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import Logo from "./Logo";
-import TalkToMicahButton from "./TalkToMicahButton";
-import { ECOSYSTEM_GROUPS, INDUSTRIES, SOLUTIONS } from "@/app/lib/site-data";
+import { SuperMicahLeadFormTrigger } from "./SuperMicahLeadForm";
+import { INDUSTRIES, SOLUTIONS } from "@/app/lib/site-data";
 
-type MenuName = "solutions" | "industries" | "ecosystem";
+type MenuName = "solutions" | "industries";
 
-const DIRECT_LINKS = [
-  { href: "/business-spotlight", label: "Business Spotlight" },
-  { href: "/insights", label: "Insights" },
-  { href: "/resources", label: "Resources" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
-
-const ECOSYSTEM_MENU_GROUPS = ECOSYSTEM_GROUPS.map((group) => ({
-  ...group,
-  links:
-    group.title === "Business systems"
-      ? group.links.flatMap((item) =>
-          item.label === "DOS ARC"
-            ? [
-                item,
-                {
-                  href: "/contact",
-label: "DOS FLR",
-description: "Facebook lead recovery, follow-up and human handover.",
-external: false,
-                },
-              ]
-            : [item]
-        )
-      : group.links,
-}));
+const DIRECT_LINKS = [{ href: "/business-spotlight", label: "Case Studies" }, { href: "/about", label: "About" }];
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -90,11 +64,7 @@ export default function Nav() {
               open={openMenu === "industries"}
               onToggle={() => toggleMenu("industries")}
             />
-            <DesktopMenuButton
-              label="Ecosystem"
-              open={openMenu === "ecosystem"}
-              onToggle={() => toggleMenu("ecosystem")}
-            />
+
             {DIRECT_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className="nav-link rounded-lg px-2.5 py-2 text-[13px]">
                 {link.label}
@@ -103,13 +73,7 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link href="/start-here" className="btn-ghost hidden rounded-xl px-4 py-2.5 text-sm font-semibold text-white md:inline-flex">
-              Start Here
-            </Link>
-            <TalkToMicahButton
-              context="navbar"
-              className="btn-primary hidden rounded-xl px-4 py-2.5 text-sm font-semibold sm:inline-flex"
-            />
+            <SuperMicahLeadFormTrigger className="btn-primary hidden rounded-xl px-4 py-3 text-sm font-semibold sm:inline-flex">Find My Starting Point</SuperMicahLeadFormTrigger>
             <button
               type="button"
               onClick={() => setMobileOpen((value) => !value)}
@@ -148,22 +112,7 @@ export default function Nav() {
                   </Link>
                 ))}
               </MobileAccordion>
-              <MobileAccordion label="Ecosystem">
-                <Link href="/ecosystem" onClick={() => setMobileOpen(false)} className="mobile-sub-link font-semibold text-white">
-                  View the DOS Ecosystem
-                </Link>
-                {ECOSYSTEM_MENU_GROUPS.flatMap((group) => group.links).map((item) =>
-                  item.external ? (
-                    <a key={`${item.label}-${item.href}`} href={item.href} target="_blank" rel="noreferrer" className="mobile-sub-link">
-                      {item.label}
-                    </a>
-                  ) : (
-                    <Link key={`${item.label}-${item.href}`} href={item.href} onClick={() => setMobileOpen(false)} className="mobile-sub-link">
-                      {item.label}
-                    </Link>
-                  )
-                )}
-              </MobileAccordion>
+
 
               {DIRECT_LINKS.map((link) => (
                 <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="nav-mobile-link rounded-xl px-4 py-3 text-sm">
@@ -171,13 +120,7 @@ export default function Nav() {
                 </Link>
               ))}
 
-              <Link href="/start-here" onClick={() => setMobileOpen(false)} className="nav-mobile-link rounded-xl px-4 py-3 text-sm">
-                Start Here
-              </Link>
-              <TalkToMicahButton
-                context="mobile-navbar"
-                className="btn-primary mt-2 inline-flex w-full items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold"
-              />
+              <SuperMicahLeadFormTrigger className="btn-primary hidden rounded-xl px-4 py-3 text-sm font-semibold sm:inline-flex">Find My Starting Point</SuperMicahLeadFormTrigger>
             </nav>
           </div>
         ) : null}
@@ -255,30 +198,7 @@ function DesktopMegaMenu({
         </div>
       ) : null}
 
-      {menu === "ecosystem" ? (
-        <div className="grid grid-cols-4 gap-6">
-          {ECOSYSTEM_MENU_GROUPS.map((group) => (
-            <div key={group.title}>
-              <p className="eyebrow">{group.title}</p>
-              <div className="mt-3 grid gap-1">
-                {group.links.map((item) =>
-                  item.external ? (
-                    <a key={`${item.label}-${item.href}`} href={item.href} target="_blank" rel="noreferrer" className="mega-link compact">
-                      <strong>{item.label}</strong>
-                      {item.description ? <span>{item.description}</span> : null}
-                    </a>
-                  ) : (
-                    <Link key={`${item.label}-${item.href}`} href={item.href} onClick={onNavigate} className="mega-link compact">
-                      <strong>{item.label}</strong>
-                      {item.description ? <span>{item.description}</span> : null}
-                    </Link>
-                  )
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      ) : null}
+
     </div>
   );
 }
