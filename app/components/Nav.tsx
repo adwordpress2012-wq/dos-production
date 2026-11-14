@@ -7,7 +7,12 @@ import Logo from "./Logo";
 import { SuperMicahLeadFormTrigger } from "./SuperMicahLeadForm";
 import { INDUSTRIES, SOLUTIONS } from "@/app/lib/site-data";
 
-type MenuName = "solutions" | "industries";
+type MenuName = "solutions" | "industries" | "demos";
+
+const LIVE_DEMOS = [
+  { label: "RestoBook — Restaurant Booking System", href: "https://restobook.com.au/", classification: "Commercial product" },
+  { label: "Bridal SES — Smart Bridal Concierge", href: "https://bridal.shopos.com.au/", classification: "Interactive demonstration" },
+];
 
 const DIRECT_LINKS = [{ href: "/business-spotlight", label: "Case Studies" }, { href: "/about", label: "About" }];
 
@@ -64,6 +69,11 @@ export default function Nav() {
               open={openMenu === "industries"}
               onToggle={() => toggleMenu("industries")}
             />
+            <LiveDemosMenu
+              open={openMenu === "demos"}
+              onToggle={() => toggleMenu("demos")}
+              onClose={() => setOpenMenu(null)}
+            />
 
             {DIRECT_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className="nav-link rounded-lg px-2.5 py-2 text-[13px]">
@@ -113,6 +123,9 @@ export default function Nav() {
                 ))}
               </MobileAccordion>
 
+              <MobileAccordion label="Live Demos">
+                <LiveDemoLinks onNavigate={() => setMobileOpen(false)} />
+              </MobileAccordion>
 
               {DIRECT_LINKS.map((link) => (
                 <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="nav-mobile-link rounded-xl px-4 py-3 text-sm">
@@ -155,6 +168,59 @@ function DesktopMenuButton({
   );
 }
 
+function LiveDemoLinks({ onNavigate }: { onNavigate: () => void }) {
+  return LIVE_DEMOS.map((item) => (
+    <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" onClick={onNavigate} className="mega-link">
+      <strong>{item.label}</strong>
+      <span>{item.classification}</span>
+    </a>
+  ));
+}
+
+function LiveDemosMenu({ open, onToggle, onClose }: { open: boolean; onToggle: () => void; onClose: () => void }) {
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <div
+      className="relative"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) onClose();
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && open) {
+          event.preventDefault();
+          onClose();
+          triggerRef.current?.focus();
+        }
+      }}
+    >
+      <button
+        ref={triggerRef}
+        type="button"
+        className="nav-link inline-flex items-center gap-1 rounded-lg px-2.5 py-2 text-[13px]"
+        aria-expanded={open}
+        aria-controls="desktop-live-demos"
+        onClick={onToggle}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowDown") {
+            event.preventDefault();
+            if (!open) onToggle();
+            window.requestAnimationFrame(() => document.getElementById("desktop-live-demos")?.querySelector("a")?.focus());
+          }
+        }}
+      >
+        Live Demos
+        <ChevronDown className={`h-3.5 w-3.5 transition ${open ? "rotate-180" : ""}`} aria-hidden />
+      </button>
+      {open ? (
+        <div id="desktop-live-demos" className="glass-nav absolute left-0 top-full mt-2 w-96 rounded-2xl p-2 shadow-2xl">
+          <LiveDemoLinks onNavigate={onClose} />
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function DesktopMegaMenu({
   menu,
   onNavigate,
@@ -162,7 +228,7 @@ function DesktopMegaMenu({
   menu: MenuName | null;
   onNavigate: () => void;
 }) {
-  if (!menu) return null;
+  if (!menu || menu === "demos") return null;
 
   return (
     <div className="glass-nav mt-2 hidden rounded-2xl p-6 shadow-2xl xl:block">
