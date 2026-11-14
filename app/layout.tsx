@@ -30,18 +30,6 @@ export const metadata: Metadata = {
     template: "%s | Directive OS",
   },
   description: DEFAULT_DESCRIPTION,
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icon.png", sizes: "512x512", type: "image/png" },
-      { url: "/dos-favicon-v2.png", sizes: "512x512", type: "image/png" },
-      { url: "/dos-icon-v2.png", sizes: "512x512", type: "image/png" },
-    ],
-    shortcut: [{ url: "/favicon.ico" }],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-  },
   keywords: [
     "business systems Australia",
     "customer communication systems",
