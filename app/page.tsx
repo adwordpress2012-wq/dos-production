@@ -229,12 +229,12 @@ export default function Home() {
       >
         <div className={`${styles.container} ${styles.micahGrid}`}>
           <Image
-            src="/micah/micah-official-profile.png"
+            src="/micah/micah-standing-hero.webp"
             alt="Micah, the DOS business assistant"
             width={1254}
             height={1254}
             sizes="(max-width: 700px) 160px, 240px"
-            className={styles.micahImage}
+            className={`${styles.micahImage} aspect-square object-cover object-top`}
           />
 
           <div>
