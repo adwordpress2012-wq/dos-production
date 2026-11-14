@@ -87,7 +87,7 @@ const LEGAL = [
 
 export default function Footer() {
   return (
-    <footer className="relative mt-10 border-t border-white/[0.07] bg-[#070815]/90">
+    <footer className="relative mt-10 border-t border-white/[0.07] bg-[var(--dos-forest-950)]/90">
       <div className="divider-glow absolute inset-x-0 top-0" />
       <div className="mx-auto max-w-[1480px] px-6 py-16">
         <div className="grid gap-12 xl:grid-cols-[1.25fr_3fr]">

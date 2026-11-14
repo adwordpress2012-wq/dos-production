@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import TalkToMicahButton from "./components/TalkToMicahButton";
 import { SuperMicahLeadFormTrigger } from "./components/SuperMicahLeadForm";
-import MicahVoiceOrb from "./components/MicahVoiceOrb";
 import { createPageMetadata } from "./lib/seo";
 import styles from "./home.module.css";
 
@@ -35,13 +34,11 @@ export default function Home() {
             </p>
 
             <h1 id="hero-title">
-              Stop Losing Enquiries to Slow Follow-Up and Manual Work.
+              Your Business Deserves Better Systems.
             </h1>
 
             <p className={styles.intro}>
-              DOS builds and manages practical business automation systems that
-              help you capture more enquiries, respond faster and follow up
-              automatically.
+              Replace disconnected processes and repetitive administration with intelligent Business Automation Systems designed around how your company operates.
             </p>
 
             <div className={styles.actions}>
@@ -60,8 +57,15 @@ export default function Home() {
             </p>
           </div>
 
-          <div className={styles.heroOrb}>
-            <MicahVoiceOrb />
+          <div className={styles.heroImage}>
+            <Image
+              src="/micah/micah-standing-hero.webp"
+              alt="Micah welcoming visitors while holding a tablet"
+              width={1122}
+              height={1402}
+              preload
+              sizes="(max-width: 700px) 100vw, 50vw"
+            />
           </div>
         </div>
 
@@ -72,11 +76,11 @@ export default function Home() {
           aria-hidden
         >
           <path
-            fill="#c7abed"
+            fill="var(--dos-forest-200)"
             d="M0 5C360 105 830-45 1440 15V75H0Z"
           />
           <path
-            fill="#e4d5f7"
+            fill="var(--dos-forest-100)"
             d="M0 22C360 105 830-25 1440 32V75H0Z"
           />
           <path

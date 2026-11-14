@@ -117,7 +117,7 @@ function WorkflowSteps({
                   ? tone === 'amber'
                     ? 'border-amber-300/45 bg-amber-300/15 text-amber-200'
                     : 'border-teal-300/45 bg-teal-300/15 text-teal-200'
-                  : 'border-white/15 bg-[#101c26] text-slate-300',
+                  : 'border-white/15 bg-[var(--dos-forest-900)] text-slate-300',
               )}
             >
               {isFinal ? <CircleAlert className="size-3.5" /> : <Check className="size-3.5" />}
@@ -134,7 +134,7 @@ function WorkflowSteps({
 
 function OutcomePanel({ title, outcomes, tone }: { title: string; outcomes: string[]; tone: 'amber' | 'teal' }) {
   return (
-    <aside className="rounded-2xl border border-white/[0.08] bg-[#0a141d]/80 p-5 sm:p-6">
+    <aside className="rounded-2xl border border-white/[0.08] bg-[var(--dos-forest-950)]/80 p-5 sm:p-6">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
       <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
         {outcomes.map((outcome) => (
@@ -157,7 +157,7 @@ function FlowLine({ label, steps, tone }: { label: string; steps: string[]; tone
       <div className="flex flex-wrap items-center gap-2 sm:gap-3">
         {steps.map((step, index) => (
           <div key={step} className="contents">
-            <span className="rounded-lg border border-white/10 bg-[#0a141d] px-3 py-2 text-sm text-slate-200">{step}</span>
+            <span className="rounded-lg border border-white/10 bg-[var(--dos-forest-950)] px-3 py-2 text-sm text-slate-200">{step}</span>
             {index < steps.length - 1 && <ArrowRight className="size-4 text-slate-600" aria-hidden="true" />}
           </div>
         ))}
@@ -201,7 +201,7 @@ export default function Home() {
 
   return (
     <main className="arc-era-demo min-h-screen overflow-hidden bg-background text-foreground">
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_78%_8%,rgba(44,168,156,0.10),transparent_32%),radial-gradient(circle_at_12%_20%,rgba(213,156,67,0.08),transparent_28%)]" />
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_78%_8%,rgb(var(--dos-forest-600-rgb)/0.10),transparent_32%),radial-gradient(circle_at_12%_20%,rgb(var(--dos-forest-300-rgb)/0.08),transparent_28%)]" />
 
       <nav className="relative mx-auto flex w-full max-w-[1180px] items-center justify-between gap-4 px-5 py-5 sm:px-6 md:px-10 md:py-6">
         <div className="flex items-center gap-3">
@@ -266,7 +266,7 @@ export default function Home() {
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(280px,0.7fr)]">
-            <Card className="border-white/10 bg-[#0c1721]/90 py-0 shadow-[0_28px_80px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+            <Card className="border-white/10 bg-[var(--dos-forest-950)]/90 py-0 shadow-[0_28px_80px_rgba(0,0,0,0.22)] backdrop-blur-xl">
               <CardContent className="p-5 sm:p-7">
                 <div className="flex flex-wrap items-start justify-between gap-5 border-b border-white/[0.08] pb-6">
                   <div className="flex items-start gap-4">
@@ -368,7 +368,7 @@ export default function Home() {
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(280px,0.7fr)]">
-            <Card className="border-white/10 bg-[#0c1721]/90 py-0 shadow-[0_28px_80px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+            <Card className="border-white/10 bg-[var(--dos-forest-950)]/90 py-0 shadow-[0_28px_80px_rgba(0,0,0,0.22)] backdrop-blur-xl">
               <CardContent className="p-5 sm:p-7">
                 <div className="flex flex-wrap items-start justify-between gap-5 border-b border-white/[0.08] pb-6">
                   <div className="flex items-start gap-4">
@@ -407,7 +407,7 @@ export default function Home() {
                         aria-label="Edit sample Micah draft"
                         value={draft}
                         onChange={(event) => setDraft(event.target.value)}
-                        className="mt-4 min-h-36 resize-none border-white/15 bg-[#071019]/70 text-base leading-7 text-slate-100"
+                        className="mt-4 min-h-36 resize-none border-white/15 bg-[var(--dos-forest-950)]/70 text-base leading-7 text-slate-100"
                       />
                     ) : (
                       <p className="mt-4 text-base leading-7 text-slate-200">“{draft}”</p>
@@ -471,7 +471,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-14 rounded-3xl border border-white/10 bg-[linear-gradient(135deg,rgba(229,169,81,0.10),rgba(44,168,156,0.08))] p-6 sm:p-9 lg:flex lg:items-center lg:justify-between lg:gap-10">
+          <div className="mt-14 rounded-3xl border border-white/10 bg-[linear-gradient(135deg,rgb(var(--dos-forest-300-rgb)/0.10),rgb(var(--dos-forest-600-rgb)/0.08))] p-6 sm:p-9 lg:flex lg:items-center lg:justify-between lg:gap-10">
             <div className="max-w-3xl">
               <p className="text-2xl font-medium tracking-tight">Turn one meaningful bottleneck into a managed workflow.</p>
               <p className="mt-3 text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">

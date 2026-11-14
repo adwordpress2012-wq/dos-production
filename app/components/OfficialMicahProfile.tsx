@@ -18,7 +18,7 @@ export default function OfficialMicahProfile({
 }: Props) {
   return (
     <div className={`mx-auto w-full ${compact ? "max-w-[390px]" : "max-w-[560px]"}`}>
-      <div className="micah-frame relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#090b12]">
+      <div className="micah-frame relative overflow-hidden rounded-[2rem] border border-white/10 bg-[var(--dos-forest-950)]">
         <Image
           src={OFFICIAL_MICAH_PROFILE_SRC}
           alt="Micah, the Directive OS Smart Business Assistant"

@@ -202,7 +202,7 @@ export default function SmartIntakeFollowUpPage() {
         </div>
       </section>
 
-      <section className="site-section bg-[#0b0d1c]/80">
+      <section className="site-section bg-[var(--dos-forest-950)]/80">
         <div className="site-container">
           <p className="eyebrow">System capabilities</p>
           <h2 className="section-heading mt-5">Built around the complete enquiry journey.</h2>

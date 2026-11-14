@@ -56,7 +56,7 @@ const TONE_STYLES = {
   },
   rose: {
     glow: "from-fuchsia-500/30 via-pink-500/15 to-violet-500/0",
-    icon: "from-[#7C3AED] via-[#A855F7] to-[#EC4899]",
+    icon: "from-[var(--dos-forest-400)] via-[var(--dos-forest-300)] to-[var(--dos-forest-400)]",
     text: "text-pink-200",
     border: "group-hover:border-pink-300/45",
     category: "text-pink-200/90 border-pink-400/25 bg-fuchsia-500/10",
@@ -160,7 +160,7 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
       />
       <Link
         href={href}
-        className={`relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-7 text-left backdrop-blur transition duration-300 outline-none focus-visible:ring-2 focus-visible:ring-violet-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#04060c] ${tone.border} group-hover:bg-white/[0.055]`}
+        className={`relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.035] p-7 text-left backdrop-blur transition duration-300 outline-none focus-visible:ring-2 focus-visible:ring-violet-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--dos-forest-950)] ${tone.border} group-hover:bg-white/[0.055]`}
       >
         <div
           aria-hidden

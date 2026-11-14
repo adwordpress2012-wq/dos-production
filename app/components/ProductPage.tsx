@@ -162,7 +162,7 @@ export function ProductIllustration({
         className={`absolute -inset-6 rounded-[28px] bg-gradient-to-br ${glow[tone]} blur-2xl opacity-70`}
       />
       <div className="relative glass-strong rounded-2xl p-2 ring-glow-soft">
-        <div className="rounded-xl bg-[#06080f] border border-white/5 overflow-hidden">{children}</div>
+        <div className="rounded-xl bg-[var(--dos-forest-950)] border border-white/5 overflow-hidden">{children}</div>
       </div>
     </div>
   );

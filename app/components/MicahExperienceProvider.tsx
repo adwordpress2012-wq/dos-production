@@ -126,7 +126,7 @@ export function MicahExperienceProvider({ children }: { children: React.ReactNod
 
       {open ? (
         <div
-          className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[#050611]/85 px-4 py-8 backdrop-blur-md"
+          className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-[var(--dos-forest-950)]/85 px-4 py-8 backdrop-blur-md"
           role="presentation"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) closeModal();

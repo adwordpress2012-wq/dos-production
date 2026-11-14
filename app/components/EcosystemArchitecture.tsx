@@ -74,7 +74,7 @@ export default function EcosystemArchitecture({ variant = "full", showLifecycle 
   const compact = variant === "compact";
 
   return (
-    <section className={compact ? "site-section bg-[#101225]/75" : "site-section"}>
+    <section className={compact ? "site-section bg-[var(--dos-forest-900)]/75" : "site-section"}>
       <div className="site-container">
         <p className="eyebrow">The DOS operating architecture</p>
         <h2 className="section-heading mt-5">
