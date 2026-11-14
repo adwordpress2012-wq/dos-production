@@ -72,11 +72,11 @@ export default function Home() {
           aria-hidden
         >
           <path
-            fill="#c7abed"
+            fill="var(--dos-forest-200)"
             d="M0 5C360 105 830-45 1440 15V75H0Z"
           />
           <path
-            fill="#e4d5f7"
+            fill="var(--dos-forest-100)"
             d="M0 22C360 105 830-25 1440 32V75H0Z"
           />
           <path

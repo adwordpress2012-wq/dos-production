@@ -1,5 +1,5 @@
 .flr-pricing {
-  --flr-ink: #171321;
+  --flr-ink: var(--dos-forest-900);
   --flr-muted: #625d6d;
 }
 
@@ -16,7 +16,7 @@
   margin: 1rem auto 0;
   font-size: 0.9rem;
   line-height: 1.7;
-  color: #8f8a9e;
+  color: var(--dos-forest-400);
 }
 
 .flr-hero-actions {
@@ -41,19 +41,19 @@
   padding: 0.8rem 1rem;
   font-size: 0.82rem;
   font-weight: 700;
-  color: #f8f7ff;
+  color: var(--dos-forest-50);
   background: rgba(255, 255, 255, 0.035);
   transition: border-color 160ms ease, background 160ms ease;
 }
 
 .flr-secondary-button:hover {
-  border-color: rgba(196, 181, 253, 0.35);
-  background: rgba(124, 58, 237, 0.08);
+  border-color: rgb(var(--dos-forest-100-rgb)/0.35);
+  background: rgb(var(--dos-forest-400-rgb)/0.08);
 }
 
 .flr-light-section {
   color: var(--flr-ink);
-  background: linear-gradient(180deg, #f7f5fb, #eeebf6);
+  background: linear-gradient(180deg, var(--dos-forest-50), var(--dos-forest-50));
 }
 
 .flr-light-heading > p:last-child {
@@ -73,11 +73,11 @@
   align-items: center;
   gap: 0.85rem;
   min-width: 0;
-  border: 1px solid #ddd7e8;
+  border: 1px solid var(--dos-forest-100);
   border-radius: 1rem;
   padding: 1rem;
   background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 22px 55px -44px rgba(54, 31, 91, 0.5);
+  box-shadow: 0 22px 55px -44px rgb(var(--dos-forest-800-rgb)/0.5);
 }
 
 .flr-response-flow li > span,
@@ -92,8 +92,8 @@
   font-size: 0.67rem;
   font-weight: 800;
   letter-spacing: 0.07em;
-  color: #6d28d9;
-  background: #eee8ff;
+  color: var(--dos-forest-700);
+  background: var(--dos-forest-50);
 }
 
 .flr-response-flow strong {
@@ -107,15 +107,15 @@
   gap: 1rem;
   max-width: 58rem;
   margin-top: 2rem;
-  border: 1px solid #d9d1e8;
+  border: 1px solid var(--dos-forest-100);
   border-radius: 1.15rem;
   padding: 1.25rem;
-  color: #3b2163;
-  background: rgba(235, 229, 249, 0.9);
+  color: var(--dos-forest-700);
+  background: rgb(var(--dos-forest-50-rgb)/0.9);
 }
 
 .flr-agent-principle svg {
-  color: #7c3aed;
+  color: var(--dos-forest-400);
 }
 
 .flr-agent-principle h3 {
@@ -127,7 +127,7 @@
   margin-top: 0.35rem;
   font-size: 0.85rem;
   line-height: 1.55;
-  color: #62536f;
+  color: var(--dos-forest-600);
 }
 
 .flr-improvement-list {
@@ -138,12 +138,12 @@
 }
 
 .flr-improvement-list li {
-  border: 1px solid #d8cdec;
+  border: 1px solid var(--dos-forest-100);
   border-radius: 999px;
   padding: 0.42rem 0.68rem;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #4c356d;
+  color: var(--dos-forest-700);
   background: rgba(255, 255, 255, 0.62);
 }
 
@@ -161,18 +161,18 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  border: 1px solid #dfdae8;
+  border: 1px solid var(--dos-forest-100);
   border-radius: 0.9rem;
   padding: 1rem;
   font-size: 0.84rem;
   font-weight: 650;
-  color: #332b3d;
+  color: var(--dos-forest-800);
   background: rgba(255, 255, 255, 0.65);
 }
 
 .flr-audience-grid svg {
   flex: 0 0 auto;
-  color: #7c3aed;
+  color: var(--dos-forest-400);
 }
 
 .flr-how-grid {
@@ -194,14 +194,14 @@
 .flr-how-grid h3 {
   font-size: 1rem;
   font-weight: 680;
-  color: #f8f7ff;
+  color: var(--dos-forest-50);
 }
 
 .flr-how-grid p {
   margin-top: 0.45rem;
   font-size: 0.84rem;
   line-height: 1.65;
-  color: #aaa6bb;
+  color: var(--dos-forest-300);
 }
 
 .flr-plans-section {
@@ -232,7 +232,7 @@
   font-weight: 800;
   letter-spacing: 0.11em;
   text-transform: uppercase;
-  color: #8f8a9e;
+  color: var(--dos-forest-400);
 }
 
 .flr-team-label + .dmt-tier-label {
@@ -246,7 +246,7 @@
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #ddd6fe;
+  color: var(--dos-forest-100);
 }
 
 .flr-prices {
@@ -270,7 +270,7 @@
   font-weight: 800;
   letter-spacing: 0.11em;
   text-transform: uppercase;
-  color: #8f8a9e;
+  color: var(--dos-forest-400);
 }
 
 .flr-prices strong {
@@ -288,7 +288,7 @@
   display: block;
   margin-top: 0.3rem;
   font-size: 0.64rem;
-  color: #8f8a9e;
+  color: var(--dos-forest-400);
 }
 
 .flr-architecture-flow {
@@ -302,7 +302,7 @@
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: 0.75rem;
-  border: 1px solid #ddd7e8;
+  border: 1px solid var(--dos-forest-100);
   border-radius: 0.9rem;
   padding: 0.9rem;
   background: rgba(255, 255, 255, 0.68);
@@ -320,10 +320,10 @@
 }
 
 .flr-management-grid article {
-  border: 1px solid rgba(167, 139, 250, 0.18);
+  border: 1px solid rgb(var(--dos-forest-200-rgb)/0.18);
   border-radius: 1rem;
   padding: 1.2rem;
-  background: linear-gradient(145deg, rgba(24, 26, 48, 0.9), rgba(11, 13, 29, 0.95));
+  background: linear-gradient(145deg, rgb(var(--dos-forest-900-rgb)/0.9), rgb(var(--dos-forest-950-rgb)/0.95));
 }
 
 .flr-management-grid article > span {
@@ -331,7 +331,7 @@
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
-  color: #a78bfa;
+  color: var(--dos-forest-200);
 }
 
 .flr-management-grid h3 {
@@ -339,14 +339,14 @@
   font-size: 0.95rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #f8f7ff;
+  color: var(--dos-forest-50);
 }
 
 .flr-management-grid p {
   margin-top: 0.65rem;
   font-size: 0.8rem;
   line-height: 1.6;
-  color: #aaa6bb;
+  color: var(--dos-forest-300);
 }
 
 .flr-plan-flexibility {
@@ -371,12 +371,12 @@
   gap: 0.65rem;
   font-size: 0.82rem;
   line-height: 1.45;
-  color: #b9b5c7;
+  color: var(--dos-forest-300);
 }
 
 .flr-scope-grid .dmt-exclusion-list svg {
   margin-top: 0.12rem;
-  color: #777287;
+  color: var(--dos-text-dim);
 }
 
 .flr-payment-section {
@@ -417,7 +417,7 @@
   margin-top: 0.55rem;
   font-size: 0.82rem;
   line-height: 1.65;
-  color: #aaa6bb;
+  color: var(--dos-forest-300);
 }
 
 .flr-final-cta {
@@ -429,7 +429,7 @@
 
 .flr-final-cta > svg {
   margin-bottom: 1.25rem;
-  color: #a78bfa;
+  color: var(--dos-forest-200);
 }
 
 .flr-final-cta h2 {
@@ -446,7 +446,7 @@
   max-width: 38rem;
   margin-top: 1.25rem;
   line-height: 1.7;
-  color: #aaa6bb;
+  color: var(--dos-forest-300);
 }
 
 .flr-final-cta .dmt-button {
@@ -459,7 +459,7 @@
   margin-top: 1.25rem;
   font-size: 0.75rem;
   line-height: 1.65;
-  color: #777287;
+  color: var(--dos-text-dim);
 }
 
 @media (min-width: 560px) {
@@ -503,7 +503,7 @@
     top: 50%;
     right: -0.72rem;
     content: "→";
-    color: #8b5cf6;
+    color: var(--dos-forest-300);
     transform: translateY(-50%);
   }
 
@@ -559,7 +559,7 @@
     bottom: -0.8rem;
     left: 50%;
     content: "↓";
-    color: #8b5cf6;
+    color: var(--dos-forest-300);
     transform: translateX(-50%);
   }
 }

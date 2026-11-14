@@ -10,21 +10,21 @@
 }
 
 .arc-era-demo {
-  --arc-muted-foreground: #94a3b8;
-  --arc-primary: #e5a951;
-  --arc-primary-foreground: #071019;
-  --arc-card: #0c1721;
-  --arc-card-foreground: #f8fafc;
+  --arc-muted-foreground: var(--dos-forest-300);
+  --arc-primary: var(--dos-forest-300);
+  --arc-primary-foreground: var(--dos-forest-950);
+  --arc-card: var(--dos-forest-950);
+  --arc-card-foreground: var(--dos-forest-50);
   --arc-border: rgba(255, 255, 255, 0.15);
   --arc-input: rgba(255, 255, 255, 0.15);
   --arc-muted: rgba(255, 255, 255, 0.08);
   isolation: isolate;
-  background: #071019;
-  color: #f8fafc;
+  background: var(--dos-forest-950);
+  color: var(--dos-forest-50);
 }
 
 body:has(.arc-era-demo) {
-  background: #071019;
+  background: var(--dos-forest-950);
 }
 
 body:has(.arc-era-demo) [data-site-chrome] {
@@ -32,5 +32,5 @@ body:has(.arc-era-demo) [data-site-chrome] {
 }
 
 .arc-era-demo :focus-visible {
-  outline-color: rgba(94, 234, 212, 0.8);
+  outline-color: rgb(var(--dos-forest-400-rgb)/0.8);
 }

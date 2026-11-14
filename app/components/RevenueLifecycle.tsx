@@ -101,7 +101,7 @@ export default function RevenueLifecycle({ variant = "full" }: Props) {
   }
 
   return (
-    <section className="site-section bg-[#0b0d1c]/80">
+    <section className="site-section bg-[var(--dos-forest-950)]/80">
       <div className="site-container">
         <p className="eyebrow">The revenue lifecycle</p>
         <h2 className="section-heading mt-5">Every stage between a first enquiry and a paid, reviewed job.</h2>

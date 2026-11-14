@@ -17,7 +17,7 @@ export default function PageCta({
 }: Props) {
   return (
     <section className="site-section">
-      <div className="site-container overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-[#17192e] via-[#101225] to-[#0b0d1c] p-8 sm:p-12">
+      <div className="site-container overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-[var(--dos-forest-900)] via-[var(--dos-forest-900)] to-[var(--dos-forest-950)] p-8 sm:p-12">
         <p className="eyebrow">The next practical step</p>
         <h2 className="mt-5 max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-6xl">{title}</h2>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{copy}</p>

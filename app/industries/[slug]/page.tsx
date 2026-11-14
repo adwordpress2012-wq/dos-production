@@ -133,7 +133,7 @@ export default async function IndustryPage({ params }: Props) {
 
       {industry.slug === "recruitment" ? (
         <section className="site-section">
-          <div className="site-container rounded-[1.75rem] border border-white/[0.09] bg-[#101225] p-8 sm:p-10">
+          <div className="site-container rounded-[1.75rem] border border-white/[0.09] bg-[var(--dos-forest-900)] p-8 sm:p-10">
             <p className="eyebrow">Relevant Business Spotlight</p>
             <h2 className="mt-5 text-3xl font-semibold tracking-tight text-white">Capital Recruitment</h2>
             <p className="mt-4 max-w-2xl leading-relaxed text-ink-muted">

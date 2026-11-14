@@ -81,7 +81,7 @@ export default function Hero() {
               className="absolute -inset-x-10 -top-10 -bottom-10 rounded-[36px] bg-gradient-to-br from-violet-500/30 via-fuchsia-500/10 to-cyan-400/20 opacity-50 blur-2xl"
             />
             <div className="relative glass-strong rounded-3xl p-3 ring-glow">
-              <div className="rounded-2xl bg-[#06080f] border border-white/5 overflow-hidden">
+              <div className="rounded-2xl bg-[var(--dos-forest-950)] border border-white/5 overflow-hidden">
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/[0.02]">
                   <div className="flex gap-1.5">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400/60" />
@@ -179,12 +179,12 @@ function Sparkline() {
     <svg viewBox={`0 0 ${w} ${h}`} className="mt-3 h-20 w-full" preserveAspectRatio="none">
       <defs>
         <linearGradient id="spark" x1="0" y1="0" x2={w} y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#a855f7" />
-          <stop offset="100%" stopColor="#22d3ee" />
+          <stop offset="0%" stopColor="var(--dos-forest-300)" />
+          <stop offset="100%" stopColor="var(--dos-forest-500)" />
         </linearGradient>
         <linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2={h} gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#a855f7" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
+          <stop offset="0%" stopColor="var(--dos-forest-300)" stopOpacity="0.35" />
+          <stop offset="100%" stopColor="var(--dos-forest-300)" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d={`${path} L ${w} ${h} L 0 ${h} Z`} fill="url(#spark-fill)" />

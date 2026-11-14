@@ -35,13 +35,13 @@ export default async function CommandCentreOverviewPage() {
           <h2 className="text-[11px] font-mono uppercase tracking-widest text-ink-dim mb-3">Quick actions</h2>
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             <QuickAction
-              href="/admin/leads#add-lead"
+              href="/admin/leadsvar(--dos-forest-200)-lead"
               title="Add Lead"
               hint="Create a pipeline prospect"
               icon={<UserPlus className="h-5 w-5" />}
             />
             <QuickAction
-              href="/admin/clients#add-client"
+              href="/admin/clientsvar(--dos-forest-200)-client"
               title="Add Client"
               hint="Paying customer profile"
               icon={<Users className="h-5 w-5" />}
@@ -111,7 +111,7 @@ export default async function CommandCentreOverviewPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-3">
             <h2 className="text-[11px] font-mono uppercase tracking-widest text-ink-dim">At a glance</h2>
             <Link
-              href="/admin/leads#add-lead"
+              href="/admin/leadsvar(--dos-forest-200)-lead"
               className="btn-neon inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-xs font-semibold text-white shrink-0 self-start sm:self-auto"
             >
               <UserPlus className="h-4 w-4" />
@@ -149,7 +149,7 @@ export default async function CommandCentreOverviewPage() {
           {dash.activeClients.length === 0 ? (
             <div className="px-5 py-12 text-center text-sm text-ink-muted">
               No active clients yet — convert a lead or{" "}
-              <Link href="/admin/clients#add-client" className="text-violet-300 hover:underline">
+              <Link href="/admin/clientsvar(--dos-forest-200)-client" className="text-violet-300 hover:underline">
                 add a client
               </Link>
               .
@@ -208,7 +208,7 @@ export default async function CommandCentreOverviewPage() {
           {dash.recentLeads.length === 0 ? (
             <div className="px-5 py-12 text-center text-sm text-ink-muted">
               No leads yet —{" "}
-              <Link href="/admin/leads#add-lead" className="text-violet-300 hover:underline">
+              <Link href="/admin/leadsvar(--dos-forest-200)-lead" className="text-violet-300 hover:underline">
                 add your first lead
               </Link>
               .

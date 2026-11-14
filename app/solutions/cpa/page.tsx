@@ -102,7 +102,7 @@ export default function CpaPage() {
         </div>
       </section>
 
-      <section className="site-section bg-[#0b0d1c]/80">
+      <section className="site-section bg-[var(--dos-forest-950)]/80">
         <div className="site-container">
           <p className="eyebrow">What DOS CPA combines</p>
           <h2 className="section-heading mt-5">One managed layer around the candidate journey.</h2>

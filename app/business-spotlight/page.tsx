@@ -34,9 +34,9 @@ export default function BusinessSpotlightPage() {
       />
 
       <section className="site-section pt-6">
-        <div className="site-container overflow-hidden rounded-[2.25rem] border border-white/[0.09] bg-[#101225]">
+        <div className="site-container overflow-hidden rounded-[2.25rem] border border-white/[0.09] bg-[var(--dos-forest-900)]">
           <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="flex min-h-[25rem] items-center justify-center bg-[#f7f4ff] p-10">
+            <div className="flex min-h-[25rem] items-center justify-center bg-[var(--dos-forest-50)] p-10">
               <Image
                 src="/clients/capital-recruitment-logo.png"
                 alt="Capital Recruitment"

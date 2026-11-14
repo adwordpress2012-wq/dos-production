@@ -519,7 +519,7 @@ function Select({
       className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm text-white outline-none focus:border-violet-400/50 focus:bg-white/[0.07] transition"
     >
       {options.map((option) => (
-        <option key={option} value={option} className="bg-[#0b0616] text-white">
+        <option key={option} value={option} className="bg-[var(--dos-forest-950)] text-white">
           {option}
         </option>
       ))}

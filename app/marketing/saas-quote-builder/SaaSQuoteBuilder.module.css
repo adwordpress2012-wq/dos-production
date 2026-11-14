@@ -1,20 +1,20 @@
 .shell {
-  --bg: #07090e;
-  --panel: #11151d;
-  --panel-soft: #171c25;
+  --bg: var(--dos-forest-950);
+  --panel: var(--dos-forest-950);
+  --panel-soft: var(--dos-forest-900);
   --line: rgba(255, 255, 255, 0.09);
-  --line-strong: rgba(168, 85, 247, 0.4);
-  --text: #f8fafc;
-  --muted: #98a2b3;
-  --dim: #667085;
-  --violet: #a855f7;
-  --violet-soft: rgba(168, 85, 247, 0.12);
-  --green: #34d399;
+  --line-strong: rgb(var(--dos-forest-300-rgb)/0.4);
+  --text: var(--dos-forest-50);
+  --muted: var(--dos-forest-400);
+  --dim: var(--dos-text-dim);
+  --violet: var(--dos-forest-300);
+  --violet-soft: rgb(var(--dos-forest-300-rgb)/0.12);
+  --green: var(--dos-forest-500);
   min-height: 100vh;
   overflow-x: clip;
   background:
-    radial-gradient(circle at 8% 0%, rgba(124, 58, 237, 0.12), transparent 30rem),
-    radial-gradient(circle at 95% 20%, rgba(14, 165, 233, 0.06), transparent 28rem),
+    radial-gradient(circle at 8% 0%, rgb(var(--dos-forest-400-rgb)/0.12), transparent 30rem),
+    radial-gradient(circle at 95% 20%, rgb(var(--dos-forest-500-rgb)/0.06), transparent 28rem),
     var(--bg);
   color: var(--text);
   padding: 32px clamp(18px, 4vw, 64px) 72px;
@@ -39,7 +39,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #d0d5dd;
+  color: var(--dos-forest-200);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -50,19 +50,19 @@
   place-items: center;
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(168, 85, 247, 0.45);
+  border: 1px solid rgb(var(--dos-forest-300-rgb)/0.45);
   border-radius: 10px;
   color: white;
-  background: rgba(168, 85, 247, 0.14);
+  background: rgb(var(--dos-forest-300-rgb)/0.14);
   letter-spacing: 0.04em;
 }
 
 .internalBadge {
-  border: 1px solid rgba(52, 211, 153, 0.3);
+  border: 1px solid rgb(var(--dos-forest-500-rgb)/0.3);
   border-radius: 999px;
   padding: 5px 8px;
-  color: #a7f3d0;
-  background: rgba(52, 211, 153, 0.08);
+  color: var(--dos-forest-200);
+  background: rgb(var(--dos-forest-500-rgb)/0.08);
   font-size: 9px;
 }
 
@@ -108,7 +108,7 @@
 .secondaryButton,
 .resetButton {
   border: 1px solid var(--line);
-  color: #d0d5dd;
+  color: var(--dos-forest-200);
   background: rgba(255, 255, 255, 0.03);
 }
 
@@ -124,20 +124,20 @@
 
 .printButton,
 .summaryPrintButton {
-  border: 1px solid rgba(168, 85, 247, 0.55);
+  border: 1px solid rgb(var(--dos-forest-300-rgb)/0.55);
   color: white;
-  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  background: linear-gradient(135deg,var(--dos-forest-800),var(--dos-forest-700));
 }
 
 .printButton:hover,
 .summaryPrintButton:hover {
-  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  background: linear-gradient(135deg,var(--dos-forest-900),var(--dos-forest-800));
 }
 
 .statusMessage {
   width: min(1440px, 100%);
   margin: -10px auto 18px;
-  color: #c4b5fd;
+  color: var(--dos-forest-100);
   font-size: 12px;
   text-align: right;
 }
@@ -169,7 +169,7 @@
 }
 
 .sectionHeading > span {
-  color: #c084fc;
+  color: var(--dos-forest-200);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
   padding-top: 4px;
@@ -199,7 +199,7 @@
   display: flex;
   flex-direction: column;
   gap: 7px;
-  color: #b9c0cc;
+  color: var(--dos-forest-200);
   font-size: 11px;
   font-weight: 650;
 }
@@ -243,8 +243,8 @@
 .field select:focus,
 .fieldWide textarea:focus,
 .moneyInput:focus-within {
-  border-color: rgba(168, 85, 247, 0.65);
-  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+  border-color: rgb(var(--dos-forest-300-rgb)/0.65);
+  box-shadow: 0 0 0 3px rgb(var(--dos-forest-300-rgb)/0.1);
 }
 
 .moneyInput {
@@ -282,7 +282,7 @@
   min-height: 44px;
   display: flex;
   align-items: center;
-  color: #b9c0cc;
+  color: var(--dos-forest-200);
   cursor: pointer;
   padding: 0 14px;
   font-size: 12px;
@@ -316,8 +316,8 @@
 }
 
 .moduleSelected {
-  border-color: rgba(168, 85, 247, 0.28);
-  background: linear-gradient(180deg, rgba(168, 85, 247, 0.08), rgba(255, 255, 255, 0.025));
+  border-color: rgb(var(--dos-forest-300-rgb)/0.28);
+  background: linear-gradient(180deg, rgb(var(--dos-forest-300-rgb)/0.08), rgba(255, 255, 255, 0.025));
 }
 
 .moduleToggle {
@@ -349,7 +349,7 @@
 
 .moduleSelected .checkmark {
   border-color: var(--violet);
-  background: #7c3aed;
+  background: var(--dos-forest-400);
 }
 
 .moduleIdentity {
@@ -367,7 +367,7 @@
 
 .moduleIdentity > span {
   overflow: hidden;
-  color: #d0d5dd;
+  color: var(--dos-forest-200);
   font-size: 12px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -390,7 +390,7 @@
 }
 
 .modulePrice strong {
-  color: #d0d5dd;
+  color: var(--dos-forest-200);
   font-size: 11px;
 }
 
@@ -463,9 +463,9 @@
 }
 
 .segmented button.segmentActive {
-  border-color: rgba(168, 85, 247, 0.48);
+  border-color: rgb(var(--dos-forest-300-rgb)/0.48);
   color: white;
-  background: rgba(168, 85, 247, 0.14);
+  background: rgb(var(--dos-forest-300-rgb)/0.14);
 }
 
 .optionGrid {
@@ -480,14 +480,14 @@
   align-items: center;
   gap: 8px;
   min-height: 38px;
-  color: #b9c0cc;
+  color: var(--dos-forest-200);
   font-size: 10px;
 }
 
 .optionGrid input {
   width: 16px;
   height: 16px;
-  accent-color: #8b5cf6;
+  accent-color: var(--dos-forest-300);
 }
 
 .recommendationRow {
@@ -498,7 +498,7 @@
   margin-top: 15px;
   border-top: 1px solid var(--line);
   padding-top: 13px;
-  color: #b9c0cc;
+  color: var(--dos-forest-200);
   font-size: 11px;
 }
 
@@ -509,8 +509,8 @@
 
 .textButton {
   min-height: 36px;
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  color: #d8b4fe;
+  border: 1px solid rgb(var(--dos-forest-300-rgb)/0.35);
+  color: var(--dos-forest-100);
   background: var(--violet-soft);
 }
 
@@ -546,14 +546,14 @@
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 12px;
-  color: #d0d5dd;
+  color: var(--dos-forest-200);
   background: rgba(255, 255, 255, 0.025);
   text-align: left;
   cursor: pointer;
 }
 
 .dmtActive {
-  border-color: rgba(168, 85, 247, 0.52);
+  border-color: rgb(var(--dos-forest-300-rgb)/0.52);
   color: white;
   background: var(--violet-soft);
 }
@@ -598,7 +598,7 @@
 .warningTags span {
   border-radius: 999px;
   padding: 5px 8px;
-  color: #b9c0cc;
+  color: var(--dos-forest-200);
   background: rgba(255, 255, 255, 0.05);
   font-size: 9px;
   font-weight: 700;
@@ -611,12 +611,12 @@
   gap: 20px;
   align-items: center;
   margin-top: 20px;
-  border-left: 2px solid rgba(168, 85, 247, 0.5);
+  border-left: 2px solid rgb(var(--dos-forest-300-rgb)/0.5);
   padding: 10px 0 10px 14px;
 }
 
 .sheltonTitle {
-  color: #d8b4fe;
+  color: var(--dos-forest-100);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -640,10 +640,10 @@
 }
 
 .summaryCard {
-  border: 1px solid rgba(168, 85, 247, 0.25);
+  border: 1px solid rgb(var(--dos-forest-300-rgb)/0.25);
   border-radius: 18px;
   padding: 22px;
-  background: rgba(17, 21, 29, 0.88);
+  background: rgb(var(--dos-forest-950-rgb)/0.88);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
   backdrop-filter: blur(18px);
 }
@@ -656,7 +656,7 @@
 }
 
 .summaryHeader span {
-  color: #c084fc;
+  color: var(--dos-forest-200);
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -668,11 +668,11 @@
 }
 
 .summaryHeader .liveDot {
-  border: 1px solid rgba(52, 211, 153, 0.25);
+  border: 1px solid rgb(var(--dos-forest-500-rgb)/0.25);
   border-radius: 999px;
   padding: 5px 7px;
-  color: #6ee7b7;
-  background: rgba(52, 211, 153, 0.07);
+  color: var(--dos-forest-300);
+  background: rgb(var(--dos-forest-500-rgb)/0.07);
   letter-spacing: 0.07em;
 }
 
@@ -702,7 +702,7 @@
   justify-content: space-between;
   gap: 14px;
   margin: 8px 0;
-  color: #d0d5dd;
+  color: var(--dos-forest-200);
   font-size: 11px;
 }
 
@@ -732,8 +732,8 @@
   margin-top: 18px;
   border-radius: 12px;
   padding: 15px;
-  color: #e9d5ff;
-  background: rgba(168, 85, 247, 0.12);
+  color: var(--dos-forest-100);
+  background: rgb(var(--dos-forest-300-rgb)/0.12);
 }
 
 .heroTotal span,
@@ -751,7 +751,7 @@
 
 .heroTotalSecondary {
   margin-top: 7px;
-  color: #d0d5dd;
+  color: var(--dos-forest-200);
   background: rgba(255, 255, 255, 0.035);
 }
 
@@ -784,7 +784,7 @@
 }
 
 .usageEstimate {
-  border-left: 2px solid rgba(52, 211, 153, 0.4);
+  border-left: 2px solid rgb(var(--dos-forest-500-rgb)/0.4);
   padding-left: 10px;
 }
 
@@ -938,7 +938,7 @@
     overflow: visible;
     padding: 0;
     background: white;
-    color: #111827;
+    color: var(--dos-forest-900);
   }
 
   .shell > :not(.printQuote) {
@@ -947,7 +947,7 @@
 
   .printQuote {
     display: block;
-    color: #111827;
+    color: var(--dos-forest-900);
     background: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10pt;
@@ -957,7 +957,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 2px solid #111827;
+    border-bottom: 2px solid var(--dos-forest-900);
     padding-bottom: 8mm;
   }
 
@@ -973,7 +973,7 @@
   }
 
   .printQuote header span {
-    color: #6b7280;
+    color: var(--dos-forest-500);
     font-size: 8pt;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -992,13 +992,13 @@
   }
 
   .printQuote dt {
-    color: #6b7280;
+    color: var(--dos-forest-500);
   }
 
   .printQuote section,
   .printQuote footer {
     break-inside: avoid;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--dos-forest-100);
     padding: 7mm 0;
   }
 
@@ -1009,7 +1009,7 @@
 
   .printQuote h3 {
     margin: 0 0 4mm;
-    color: #6b7280;
+    color: var(--dos-forest-500);
     font-size: 8pt;
     letter-spacing: 0.12em;
   }
@@ -1018,7 +1018,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2mm 7mm;
-    color: #4b5563;
+    color: var(--dos-forest-700);
   }
 
   .printQuote table {
@@ -1029,14 +1029,14 @@
 
   .printQuote th,
   .printQuote td {
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--dos-forest-100);
     padding: 3mm 2mm;
     text-align: left;
     vertical-align: top;
   }
 
   .printQuote th {
-    color: #6b7280;
+    color: var(--dos-forest-500);
     font-size: 8pt;
   }
 
@@ -1058,7 +1058,7 @@
 
   .printQuote .summaryLine,
   .printQuote .summaryLineMuted {
-    color: #111827;
+    color: var(--dos-forest-900);
     font-size: 9pt;
   }
 
@@ -1069,7 +1069,7 @@
 
   .printQuote footer {
     border-bottom: 0;
-    color: #4b5563;
+    color: var(--dos-forest-700);
     font-size: 8.5pt;
   }
 }

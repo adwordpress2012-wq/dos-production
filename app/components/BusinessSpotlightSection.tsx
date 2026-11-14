@@ -77,10 +77,10 @@ export default function BusinessSpotlightSection() {
           {BUSINESS_SPOTLIGHTS.map((spotlight) => (
             <article
               key={spotlight.companyName}
-              className="business-spotlight-card overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-[#17192e] via-[#111329] to-[#0b0d1c]"
+              className="business-spotlight-card overflow-hidden rounded-[2rem] border border-white/[0.09] bg-gradient-to-br from-[var(--dos-forest-900)] via-[var(--dos-forest-900)] to-[var(--dos-forest-950)]"
             >
               <div className="grid lg:grid-cols-[0.78fr_1.22fr]">
-                <div className="business-spotlight-brand relative flex min-h-[30rem] flex-col overflow-hidden border-b border-white/[0.08] bg-[radial-gradient(circle_at_18%_15%,rgba(45,212,191,0.15),transparent_34%),linear-gradient(155deg,#17192e_0%,#0b0d1c_72%)] p-7 sm:min-h-[34rem] sm:p-10 lg:min-h-full lg:border-r lg:border-b-0 lg:p-12">
+                <div className="business-spotlight-brand relative flex min-h-[30rem] flex-col overflow-hidden border-b border-white/[0.08] bg-[radial-gradient(circle_at_18%_15%,rgb(var(--dos-forest-500-rgb)/0.15),transparent_34%),linear-gradient(155deg,var(--dos-forest-900)_0%,var(--dos-forest-950)_72%)] p-7 sm:min-h-[34rem] sm:p-10 lg:min-h-full lg:border-r lg:border-b-0 lg:p-12">
                   <div aria-hidden className="absolute -right-20 -bottom-24 h-72 w-72 rounded-full border border-violet-400/[0.12]" />
                   <div className="relative">
                     <span className="w-fit rounded-full border border-teal-300/25 bg-teal-300/[0.08] px-3 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-teal-200">

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function WorkspaceDemoPage() {
   return (
-    <main className="relative flex min-h-screen flex-col bg-[#03050a] pt-28 sm:pt-32">
+    <main className="relative flex min-h-screen flex-col bg-[var(--dos-forest-950)] pt-28 sm:pt-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-violet-500/15 to-transparent blur-3xl" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1600px] flex-1 px-3 sm:px-4 pb-6 flex flex-col">
@@ -29,11 +29,11 @@ export default function WorkspaceDemoPage() {
           Interactive preview. If the workspace does not appear below, open it directly — some browsers block embedded apps.
         </p>
 
-        <div className="mt-4 flex flex-1 min-h-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#06080f] shadow-[0_0_60px_-20px_rgba(139,92,246,0.45)] ring-1 ring-violet-500/20">
+        <div className="mt-4 flex flex-1 min-h-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-[var(--dos-forest-950)] shadow-[0_0_60px_-20px_rgba(139,92,246,0.45)] ring-1 ring-violet-500/20">
           <iframe
             title="DOS Workspace demo"
             src={DOS_WORKSPACE_LIVE_URL}
-            className="h-[min(78vh,900px)] w-full flex-1 border-0 bg-[#06080f] sm:h-[min(82vh,960px)]"
+            className="h-[min(78vh,900px)] w-full flex-1 border-0 bg-[var(--dos-forest-950)] sm:h-[min(82vh,960px)]"
             referrerPolicy="strict-origin-when-cross-origin"
             allow="clipboard-read; clipboard-write"
           />
